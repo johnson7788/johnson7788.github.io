@@ -16,22 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问题日常我们经常遇到表头是合并的单元格，如左侧表头，或者上测表头都是合并过的，而我们想读取使用pandas读取的excel后，每列都进行对应回原来的数据的结构，那么这时就需要进行填充了，因为读取后，只有合并的单元格的第一行或第一列是有值的，其它都是nan，我们需要用前向填充的方法，ffill()示例如图:   填充代码，可以给定超参数，填充表头，按行和按列填充1234567891011121314">
+    <meta name="description" content="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None123456789101112131415161718192021222324252627def index_partof_list(original, sublist):    &quot;&quot;&quot;    子列表查找, 也可以用于字符串的查找    :par">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对存在过合并的excel的单元格进行处理">
-<meta property="og:url" content="http://example.com/2022/02/22/pandas-na/index.html">
+<meta property="og:title" content="一个小的子列表位置查找函数">
+<meta property="og:url" content="http://example.com/2022/02/22/python-list/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="问题日常我们经常遇到表头是合并的单元格，如左侧表头，或者上测表头都是合并过的，而我们想读取使用pandas读取的excel后，每列都进行对应回原来的数据的结构，那么这时就需要进行填充了，因为读取后，只有合并的单元格的第一行或第一列是有值的，其它都是nan，我们需要用前向填充的方法，ffill()示例如图:   填充代码，可以给定超参数，填充表头，按行和按列填充1234567891011121314">
+<meta property="og:description" content="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None123456789101112131415161718192021222324252627def index_partof_list(original, sublist):    &quot;&quot;&quot;    子列表查找, 也可以用于字符串的查找    :par">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/02/22/pandas-na/shili1.png">
-<meta property="article:published_time" content="2022-02-22T08:21:17.000Z">
-<meta property="article:modified_time" content="2022-02-22T08:33:00.919Z">
+<meta property="article:published_time" content="2022-02-22T12:12:00.000Z">
+<meta property="article:modified_time" content="2022-02-22T12:15:26.237Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/02/22/pandas-na/shili1.png">
   
   
-  <title>对存在过合并的excel的单元格进行处理 - Be With you</title>
+  <title>一个小的子列表位置查找函数 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="对存在过合并的excel的单元格进行处理">
+          <span id="subtitle" title="一个小的子列表位置查找函数">
             
           </span>
         </div>
@@ -199,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-02-22 16:21" pubdate>
-          2022年2月22日 下午
+        <time datetime="2022-02-22 20:12" pubdate>
+          2022年2月22日 晚上
         </time>
       </span>
     
@@ -222,7 +220,7 @@
         
         
         
-          9 分钟
+          10 分钟
         
       </span>
     
@@ -260,14 +258,11 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">对存在过合并的excel的单元格进行处理</h1>
+            <h1 style="display: none">一个小的子列表位置查找函数</h1>
             
             <div class="markdown-body">
               
-              <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>日常我们经常遇到表头是合并的单元格，如左侧表头，或者上测表头都是合并过的，而我们想读取使用pandas读取的excel后，每列都进行对应回原来的数据的结构，那么这时就需要进行填充了，因为读取后，只有合并的单元格的第一行或第一列是有值的，其它都是nan，我们需要用前向填充的方法，ffill()<br>示例如图:</p>
-<img src="/2022/02/22/pandas-na/shili1.png" srcset="/img/loading.gif" lazyload class="">
-
-<h1 id="填充代码，可以给定超参数，填充表头，按行和按列填充"><a href="#填充代码，可以给定超参数，填充表头，按行和按列填充" class="headerlink" title="填充代码，可以给定超参数，填充表头，按行和按列填充"></a>填充代码，可以给定超参数，填充表头，按行和按列填充</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">fill_pdna</span>(<span class="hljs-params">df, row=[], col=[]</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    当excel的表头的行或列有合并单元格的情况时，只有第一个单元格是正确的，值，这时候需要使用前向填充ffill，即使用上一个单元格的内容填充当前为nan的单元格</span><br><span class="hljs-string">    但是填充的时候一般进行限制，只填充表头的前几行，或前几列</span><br><span class="hljs-string">    :param df:</span><br><span class="hljs-string">    :type df:</span><br><span class="hljs-string">    :param row: [] 表示所有行都使用前面的值进行填充，1表示第一行, eg: [1,2] 表示第1，2行用前面的值填充</span><br><span class="hljs-string">    :param col: []表示，所有列都使用前面的值填充， 0表示第一列, 注意行和列的其实索引位置不一样</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    :rtype:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-comment"># 首先对行进行填充，填充哪些行</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> row:<br>        <span class="hljs-comment"># 如果为空，先按行进行填充，行空的时候使用前一个单元格填充</span><br>        df = df.ffill(axis=<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> col:<br>        <span class="hljs-comment"># 然后对列进行填充</span><br>        df = df.ffill(axis=<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">if</span> col:<br>        <span class="hljs-keyword">for</span> col_num <span class="hljs-keyword">in</span> col:<br>            df[col_num] = df[col_num].ffill(axis=<span class="hljs-number">0</span>)<br>    <span class="hljs-keyword">if</span> row:<br>        <span class="hljs-keyword">for</span> row_num <span class="hljs-keyword">in</span> row:<br>            df[:row_num] = df[:row_num].ffill(axis=<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> df<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">read_excel</span>(<span class="hljs-params">excel_file</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">    读取excel内容</span><br><span class="hljs-string">    :param excel_file:</span><br><span class="hljs-string">    :type excel_file:</span><br><span class="hljs-string">    :return:</span><br><span class="hljs-string">    :rtype:</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;开始读取<span class="hljs-subst">&#123;excel_file&#125;</span>&quot;</span>)<br>    df = pd.read_excel(excel_file, header=<span class="hljs-literal">None</span>)<br>    newdf = fill_pdna(df, row=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], col=[<span class="hljs-number">0</span>])<br>    <span class="hljs-built_in">print</span>(newdf)<br></code></pre></td></tr></table></figure>
+              <h1 id="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None"><a href="#sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None" class="headerlink" title="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None"></a>sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs vim">def index_partof_list(original, sublist):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    子列表查找, 也可以用于字符串的查找<br>    :param original: 一个列表<br>    :<span class="hljs-built_in">type</span> original:<br>    :param sublist: sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否<br>则返回None<br>    :<span class="hljs-built_in">type</span> sublist:<br>    :<span class="hljs-keyword">return</span>: 返回<span class="hljs-number">2</span>个值，bool值和查找到的索引值，如果没查找到返回[] 如果找到一个或找到多个，返回 [(x1,y1),(x2,y2)]<br>    :rtype:<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    ori_len = <span class="hljs-built_in">len</span>(original)<br>    sub_len = <span class="hljs-built_in">len</span>(sublist)<br>    find_indexes = []<br>    <span class="hljs-keyword">if</span> ori_len &lt; sub_len:<br>        <span class="hljs-keyword">return</span> find_indexes<br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">index</span> in <span class="hljs-built_in">range</span>(ori_len-sub_len+<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">if</span> original[<span class="hljs-built_in">index</span>:<span class="hljs-built_in">index</span> + sub_len] == sublist:<br>            find_indexes.<span class="hljs-keyword">append</span>((<span class="hljs-built_in">index</span>, <span class="hljs-built_in">index</span>+ sub_len))<br>    <span class="hljs-keyword">return</span> find_indexes<br><br>ori = [<span class="hljs-string">&#x27;《&#x27;</span>, <span class="hljs-string">&#x27;邪&#x27;</span>, <span class="hljs-string">&#x27;少&#x27;</span>, <span class="hljs-string">&#x27;兵&#x27;</span>, <span class="hljs-string">&#x27;王&#x27;</span>, <span class="hljs-string">&#x27;》&#x27;</span>, <span class="hljs-string">&#x27;是&#x27;</span>, <span class="hljs-string">&#x27;冰&#x27;</span>, <span class="hljs-string">&#x27;火&#x27;</span>, <span class="hljs-string">&#x27;未&#x27;</span>, <span class="hljs-string">&#x27;央&#x27;</span>, <span class="hljs-string">&#x27;写&#x27;</span>, <span class="hljs-string">&#x27;的&#x27;</span>, <span class="hljs-string">&#x27;网&#x27;</span>, <span class="hljs-string">&#x27;络&#x27;</span>, <span class="hljs-string">&#x27;小&#x27;</span>, <span class="hljs-string">&#x27;说&#x27;</span>, <span class="hljs-string">&#x27;连&#x27;</span>, <span class="hljs-string">&#x27;载&#x27;</span>, <span class="hljs-string">&#x27;于&#x27;</span>, <span class="hljs-string">&#x27;旗&#x27;</span>, <span class="hljs-string">&#x27;峰&#x27;</span>, <span class="hljs-string">&#x27;天&#x27;</span>, <span class="hljs-string">&#x27;下&#x27;</span>]<br>sub = [<span class="hljs-string">&#x27;网&#x27;</span>, <span class="hljs-string">&#x27;络&#x27;</span>, <span class="hljs-string">&#x27;小&#x27;</span>, <span class="hljs-string">&#x27;说&#x27;</span>]<br><span class="hljs-keyword">res</span> = index_partof_list(ori,sub)<br><span class="hljs-keyword">print</span>(<span class="hljs-keyword">res</span>)<br>------&gt;<br>[(<span class="hljs-number">13</span>, <span class="hljs-number">17</span>)]<br></code></pre></td></tr></table></figure>
 
               
             </div>
@@ -284,8 +279,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>对存在过合并的excel的单元格进行处理</div>
-      <div>http://example.com/2022/02/22/pandas-na/</div>
+      <div>一个小的子列表位置查找函数</div>
+      <div>http://example.com/2022/02/22/python-list/</div>
     </div>
     <div class="license-meta">
       
@@ -327,18 +322,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/22/python-list/" title="一个小的子列表位置查找函数">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一个小的子列表位置查找函数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/18/shap-explore2/" title="shap值的探索，判断shap值是否符合基本单调递增">
-                        <span class="hidden-mobile">shap值的探索，判断shap值是否符合基本单调递增</span>
+                      <a href="/2022/02/22/pandas-na/" title="对存在过合并的excel的单元格进行处理">
+                        <span class="hidden-mobile">对存在过合并的excel的单元格进行处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
