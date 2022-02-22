@@ -16,20 +16,22 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None123456789101112131415161718192021222324252627def index_partof_list(original, sublist):    &quot;&quot;&quot;    子列表查找, 也可以用于字符串的查找    :par">
+    <meta name="description" content="NLP项目的一般解决思路">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个小的子列表位置查找函数">
-<meta property="og:url" content="http://example.com/2022/02/22/python-list/index.html">
+<meta property="og:title" content="NLP项目和论文搜索">
+<meta property="og:url" content="http://example.com/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None123456789101112131415161718192021222324252627def index_partof_list(original, sublist):    &quot;&quot;&quot;    子列表查找, 也可以用于字符串的查找    :par">
+<meta property="og:description" content="NLP项目的一般解决思路">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-22T12:12:00.000Z">
-<meta property="article:modified_time" content="2022-02-22T12:15:26.237Z">
+<meta property="og:image" content="http://example.com/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AAAI%E9%A1%B9%E7%9B%AE.png">
+<meta property="article:published_time" content="2022-02-22T12:23:42.000Z">
+<meta property="article:modified_time" content="2022-02-22T12:26:59.793Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AAAI%E9%A1%B9%E7%9B%AE.png">
   
   
-  <title>一个小的子列表位置查找函数 - Be With you</title>
+  <title>NLP项目和论文搜索 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="一个小的子列表位置查找函数">
+          <span id="subtitle" title="NLP项目和论文搜索">
             
           </span>
         </div>
@@ -197,7 +199,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-02-22 20:12" pubdate>
+        <time datetime="2022-02-22 20:23" pubdate>
           2022年2月22日 晚上
         </time>
       </span>
@@ -209,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          12 字
         
       </span>
     
@@ -220,7 +222,7 @@
         
         
         
-          10 分钟
+          1 分钟
         
       </span>
     
@@ -258,11 +260,11 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一个小的子列表位置查找函数</h1>
+            <h1 style="display: none">NLP项目和论文搜索</h1>
             
             <div class="markdown-body">
               
-              <h1 id="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None"><a href="#sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None" class="headerlink" title="sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None"></a>sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否则返回None</h1><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs vim">def index_partof_list(original, sublist):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    子列表查找, 也可以用于字符串的查找<br>    :param original: 一个列表<br>    :<span class="hljs-built_in">type</span> original:<br>    :param sublist: sublist是original列表中的一部分，即子列表，如果存在sublist，那么就返回起始和结束位置，否<br>则返回None<br>    :<span class="hljs-built_in">type</span> sublist:<br>    :<span class="hljs-keyword">return</span>: 返回<span class="hljs-number">2</span>个值，bool值和查找到的索引值，如果没查找到返回[] 如果找到一个或找到多个，返回 [(x1,y1),(x2,y2)]<br>    :rtype:<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    ori_len = <span class="hljs-built_in">len</span>(original)<br>    sub_len = <span class="hljs-built_in">len</span>(sublist)<br>    find_indexes = []<br>    <span class="hljs-keyword">if</span> ori_len &lt; sub_len:<br>        <span class="hljs-keyword">return</span> find_indexes<br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">index</span> in <span class="hljs-built_in">range</span>(ori_len-sub_len+<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">if</span> original[<span class="hljs-built_in">index</span>:<span class="hljs-built_in">index</span> + sub_len] == sublist:<br>            find_indexes.<span class="hljs-keyword">append</span>((<span class="hljs-built_in">index</span>, <span class="hljs-built_in">index</span>+ sub_len))<br>    <span class="hljs-keyword">return</span> find_indexes<br><br>ori = [<span class="hljs-string">&#x27;《&#x27;</span>, <span class="hljs-string">&#x27;邪&#x27;</span>, <span class="hljs-string">&#x27;少&#x27;</span>, <span class="hljs-string">&#x27;兵&#x27;</span>, <span class="hljs-string">&#x27;王&#x27;</span>, <span class="hljs-string">&#x27;》&#x27;</span>, <span class="hljs-string">&#x27;是&#x27;</span>, <span class="hljs-string">&#x27;冰&#x27;</span>, <span class="hljs-string">&#x27;火&#x27;</span>, <span class="hljs-string">&#x27;未&#x27;</span>, <span class="hljs-string">&#x27;央&#x27;</span>, <span class="hljs-string">&#x27;写&#x27;</span>, <span class="hljs-string">&#x27;的&#x27;</span>, <span class="hljs-string">&#x27;网&#x27;</span>, <span class="hljs-string">&#x27;络&#x27;</span>, <span class="hljs-string">&#x27;小&#x27;</span>, <span class="hljs-string">&#x27;说&#x27;</span>, <span class="hljs-string">&#x27;连&#x27;</span>, <span class="hljs-string">&#x27;载&#x27;</span>, <span class="hljs-string">&#x27;于&#x27;</span>, <span class="hljs-string">&#x27;旗&#x27;</span>, <span class="hljs-string">&#x27;峰&#x27;</span>, <span class="hljs-string">&#x27;天&#x27;</span>, <span class="hljs-string">&#x27;下&#x27;</span>]<br>sub = [<span class="hljs-string">&#x27;网&#x27;</span>, <span class="hljs-string">&#x27;络&#x27;</span>, <span class="hljs-string">&#x27;小&#x27;</span>, <span class="hljs-string">&#x27;说&#x27;</span>]<br><span class="hljs-keyword">res</span> = index_partof_list(ori,sub)<br><span class="hljs-keyword">print</span>(<span class="hljs-keyword">res</span>)<br>------&gt;<br>[(<span class="hljs-number">13</span>, <span class="hljs-number">17</span>)]<br></code></pre></td></tr></table></figure>
+              <h1 id="NLP项目的一般解决思路"><a href="#NLP项目的一般解决思路" class="headerlink" title="NLP项目的一般解决思路"></a>NLP项目的一般解决思路</h1><img src="/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/%E5%A6%82%E4%BD%95%E5%81%9A%E4%B8%80%E4%B8%AAAI%E9%A1%B9%E7%9B%AE.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>
@@ -279,8 +281,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一个小的子列表位置查找函数</div>
-      <div>http://example.com/2022/02/22/python-list/</div>
+      <div>NLP项目和论文搜索</div>
+      <div>http://example.com/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/</div>
     </div>
     <div class="license-meta">
       
@@ -322,18 +324,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/" title="NLP项目和论文搜索">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NLP项目和论文搜索</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/22/pandas-na/" title="对存在过合并的excel的单元格进行处理">
-                        <span class="hidden-mobile">对存在过合并的excel的单元格进行处理</span>
+                      <a href="/2022/02/22/python-list/" title="一个小的子列表位置查找函数">
+                        <span class="hidden-mobile">一个小的子列表位置查找函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
