@@ -16,20 +16,22 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="paddlepaddle代码和torch的模型代码相互转换, 其实只需要关注这些api的不同，进行相应替换即可paddlepaddle 封装了类似torch， huggingface transformers 和datasets的接口形式 123456789101112131415161718192021222324252627torch包和paddle包的对比, 只列出不同的地方PyTorch">
+    <meta name="description" content="知识图谱 众所周知，计算机的计算能力比人类强，但是推理能力远不如人类，所以构建知识图谱是为了解决计算机的推理能力。。 计算机的常识的使用能力也远不如人类，所以经常可以看到构建常识的知识图谱。 知识图谱在专业领域一般应用较多，例如医疗行业等。 知识图谱分为构建和应用，其中构建又包括设计本体，知识获取（结构化，非结构化，半结构化）知识存储，知识表示和知识融合等。如今构建知识图谱的技术已经很成熟，部分应">
 <meta property="og:type" content="article">
-<meta property="og:title" content="torch和paddlepaddle的部分API对比">
-<meta property="og:url" content="http://example.com/2022/02/23/torch-paddle/index.html">
+<meta property="og:title" content="知识图谱的构建思路">
+<meta property="og:url" content="http://example.com/2022/02/24/knowledge-graph/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="paddlepaddle代码和torch的模型代码相互转换, 其实只需要关注这些api的不同，进行相应替换即可paddlepaddle 封装了类似torch， huggingface transformers 和datasets的接口形式 123456789101112131415161718192021222324252627torch包和paddle包的对比, 只列出不同的地方PyTorch">
+<meta property="og:description" content="知识图谱 众所周知，计算机的计算能力比人类强，但是推理能力远不如人类，所以构建知识图谱是为了解决计算机的推理能力。。 计算机的常识的使用能力也远不如人类，所以经常可以看到构建常识的知识图谱。 知识图谱在专业领域一般应用较多，例如医疗行业等。 知识图谱分为构建和应用，其中构建又包括设计本体，知识获取（结构化，非结构化，半结构化）知识存储，知识表示和知识融合等。如今构建知识图谱的技术已经很成熟，部分应">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-02-23T05:23:13.000Z">
-<meta property="article:modified_time" content="2022-02-23T05:25:42.459Z">
+<meta property="og:image" content="http://example.com/2022/02/24/knowledge-graph/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
+<meta property="article:published_time" content="2022-02-24T03:57:37.000Z">
+<meta property="article:modified_time" content="2022-02-24T04:03:58.397Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2022/02/24/knowledge-graph/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png">
   
   
-  <title>torch和paddlepaddle的部分API对比 - Be With you</title>
+  <title>知识图谱的构建思路 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="torch和paddlepaddle的部分API对比">
+          <span id="subtitle" title="知识图谱的构建思路">
             
           </span>
         </div>
@@ -197,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-02-23 13:23" pubdate>
-          2022年2月23日 下午
+        <time datetime="2022-02-24 11:57" pubdate>
+          2022年2月24日 中午
         </time>
       </span>
     
@@ -209,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          223 字
         
       </span>
     
@@ -220,7 +222,7 @@
         
         
         
-          12 分钟
+          2 分钟
         
       </span>
     
@@ -258,12 +260,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">torch和paddlepaddle的部分API对比</h1>
+            <h1 style="display: none">知识图谱的构建思路</h1>
             
             <div class="markdown-body">
               
-              <h1 id="paddlepaddle代码和torch的模型代码相互转换-其实只需要关注这些api的不同，进行相应替换即可"><a href="#paddlepaddle代码和torch的模型代码相互转换-其实只需要关注这些api的不同，进行相应替换即可" class="headerlink" title="paddlepaddle代码和torch的模型代码相互转换, 其实只需要关注这些api的不同，进行相应替换即可"></a>paddlepaddle代码和torch的模型代码相互转换, 其实只需要关注这些api的不同，进行相应替换即可</h1><p>paddlepaddle 封装了类似torch， huggingface transformers 和datasets的接口形式</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">torch</span>包和paddle包的对比, 只列出不同的地方<br><span class="hljs-type">PyTorch</span> <span class="hljs-type">PaddlePaddle</span>    说明<br><span class="hljs-title">torch</span>.nn    paddle.nn   包括了神经网络相关的大部分函数<br><span class="hljs-title">nn</span>.<span class="hljs-type">Module</span>   nn.<span class="hljs-type">Layer</span>    搭建网络时集成的父类，包含了初始化等基本功能<br><span class="hljs-title">torch</span>.optim paddle.optimizer    训练优化器<br><span class="hljs-title">torch</span>.optim.<span class="hljs-type">AdamW</span>   paddle.optimizer.<span class="hljs-type">AdamW</span>  参数也不一样<br><span class="hljs-title">torchvision</span>.transforms  paddle.vision.transforms    数据预处理、图片处理<br><span class="hljs-title">torchvision</span>.datasets    paddle.vision.datasets  数据集的加载与处理<br><span class="hljs-title">nn</span>.<span class="hljs-type">Conv2d</span>   nn.<span class="hljs-type">Conv2D</span>   <span class="hljs-number">2</span>维卷积层<br><span class="hljs-title">nn</span>.<span class="hljs-type">BatchNorm2d</span>  nn.<span class="hljs-type">BatchNorm2D</span>  <span class="hljs-type">Batch</span> <span class="hljs-type">Normalization</span> 归一化<br><span class="hljs-title">nn</span>.<span class="hljs-type">MaxPool2d</span>    nn.<span class="hljs-type">MaxPool2D</span>    二维最大池化层<br><span class="hljs-title">nn</span>.<span class="hljs-type">AdaptiveAvgPool2d</span>    nn.<span class="hljs-type">AdaptiveAvgPool2D</span>    自适应二维平均池化（只用给定输出形状即可）<br><span class="hljs-title">torch</span>.flatten   paddle.flatten  展平处理<br><span class="hljs-title">torch</span>.softmax   paddle.softmax  softmax层<br><span class="hljs-title">datasets</span>.<span class="hljs-type">ImageFolder</span>    datasets.<span class="hljs-type">DatasetFolder</span>  指定数据集文件夹<br><span class="hljs-title">torch</span>.utils.<span class="hljs-class"><span class="hljs-keyword">data</span>.<span class="hljs-type">DataLoader</span> paddle.io.<span class="hljs-type">DataLoader</span>    加载数据集, 参数也不一样</span><br>(optimizer).no_grad (optimizer).zero_grad   梯度清零<br><span class="hljs-title">torch</span>.save  paddle.jit.save 说实话，这两个还是有点区别的，使用请看官方文档<br><span class="hljs-title">torch</span>.device    paddle.set_device   指定设备<br><span class="hljs-title">torch</span>.utils.<span class="hljs-class"><span class="hljs-keyword">data</span>.<span class="hljs-type">Dataset</span>    paddle.io.<span class="hljs-type">Dataset</span>   数据集</span><br><span class="hljs-title">torch</span>.utils.<span class="hljs-class"><span class="hljs-keyword">data</span>.<span class="hljs-type">RandomSampler</span>  paddle.io.<span class="hljs-type">RandomSampler</span></span><br><span class="hljs-title">torch</span>.utils.<span class="hljs-class"><span class="hljs-keyword">data</span>.<span class="hljs-type">BatchSampler</span>   paddle.io.<span class="hljs-type">BatchSampler</span>   参数也不一样</span><br><span class="hljs-title">torch</span>.utils.<span class="hljs-class"><span class="hljs-keyword">data</span>.<span class="hljs-type">DataLoader</span> paddle.io.<span class="hljs-type">DataLoader</span>  数据集加载</span><br><span class="hljs-title">tensor</span>.<span class="hljs-class"><span class="hljs-keyword">type</span>(<span class="hljs-title">torch</span>.<span class="hljs-title">float32</span>)  paddle.cast(<span class="hljs-title">mask</span>, &#x27;<span class="hljs-title">float32&#x27;</span>)  数据类型变更</span><br><span class="hljs-title">tensor</span>.cpu().item() tensor.numpy().item()  # 取出数据<br><span class="hljs-title">transformers</span>.get_linear_schedule_with_warmup    paddlenlp.transformers.<span class="hljs-type">LinearDecayWithWarmup</span>   # warmup 函数<br>也不一样<br></code></pre></td></tr></table></figure>
+              <h1 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h1><ol>
+<li>众所周知，计算机的计算能力比人类强，但是推理能力远不如人类，所以构建知识图谱是为了解决计算机的推理能力。。</li>
+<li>计算机的常识的使用能力也远不如人类，所以经常可以看到构建常识的知识图谱。</li>
+<li>知识图谱在专业领域一般应用较多，例如医疗行业等。</li>
+<li>知识图谱分为构建和应用，其中构建又包括设计本体，知识获取（结构化，非结构化，半结构化）知识存储，知识表示和知识融合等。如今构建知识图谱的技术已经很成熟，部分应用知识图谱的技术也已经成熟，例如利用知识图谱的问题等。</li>
+</ol>
+<img src="/2022/02/24/knowledge-graph/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>
@@ -280,8 +287,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>torch和paddlepaddle的部分API对比</div>
-      <div>http://example.com/2022/02/23/torch-paddle/</div>
+      <div>知识图谱的构建思路</div>
+      <div>http://example.com/2022/02/24/knowledge-graph/</div>
     </div>
     <div class="license-meta">
       
@@ -293,7 +300,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年2月23日</div>
+          <div>2022年2月24日</div>
         </div>
       
       
@@ -323,18 +330,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/24/knowledge-graph/" title="知识图谱的构建思路">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">知识图谱的构建思路</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/22/NLP%E9%A1%B9%E7%9B%AE%E5%92%8C%E8%AE%BA%E6%96%87%E6%90%9C%E7%B4%A2/" title="NLP项目和论文搜索">
-                        <span class="hidden-mobile">NLP项目和论文搜索</span>
+                      <a href="/2022/02/23/torch-paddle/" title="torch和paddlepaddle的部分API对比">
+                        <span class="hidden-mobile">torch和paddlepaddle的部分API对比</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

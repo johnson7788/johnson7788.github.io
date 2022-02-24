@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>知识图谱的构建思路</title>
+    <link href="/2022/02/24/knowledge-graph/"/>
+    <url>/2022/02/24/knowledge-graph/</url>
+    
+    <content type="html"><![CDATA[<h1 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h1><ol><li>众所周知，计算机的计算能力比人类强，但是推理能力远不如人类，所以构建知识图谱是为了解决计算机的推理能力。。</li><li>计算机的常识的使用能力也远不如人类，所以经常可以看到构建常识的知识图谱。</li><li>知识图谱在专业领域一般应用较多，例如医疗行业等。</li><li>知识图谱分为构建和应用，其中构建又包括设计本体，知识获取（结构化，非结构化，半结构化）知识存储，知识表示和知识融合等。如今构建知识图谱的技术已经很成熟，部分应用知识图谱的技术也已经成熟，例如利用知识图谱的问题等。</li></ol><img src="/2022/02/24/knowledge-graph/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" class="">]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>torch和paddlepaddle的部分API对比</title>
     <link href="/2022/02/23/torch-paddle/"/>
     <url>/2022/02/23/torch-paddle/</url>
