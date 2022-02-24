@@ -1,0 +1,660 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="一些论文中的专有名词的或缩写low-resource:低资源:有标签或者无标签的训练的数据资源不足Distant supervision:远端监督:大多数机器学习技术都需要一组训练数据。收集训练数据的传统方法是让人们标签一组文档。例如，对于婚姻关系，人类标注者可以将“比尔·克林顿”和“希拉里·克林顿”对标签为正的训练样本。这种方法在时间和金钱上都是昂贵的，并且如果我们的语料库很大，将无法产生足够的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些论文中的专有名词">
+<meta property="og:url" content="http://example.com/2022/02/24/paper-word/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="一些论文中的专有名词的或缩写low-resource:低资源:有标签或者无标签的训练的数据资源不足Distant supervision:远端监督:大多数机器学习技术都需要一组训练数据。收集训练数据的传统方法是让人们标签一组文档。例如，对于婚姻关系，人类标注者可以将“比尔·克林顿”和“希拉里·克林顿”对标签为正的训练样本。这种方法在时间和金钱上都是昂贵的，并且如果我们的语料库很大，将无法产生足够的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-24T09:56:43.000Z">
+<meta property="article:modified_time" content="2022-02-24T09:57:38.697Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>一些论文中的专有名词 - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Johnson的小站</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="一些论文中的专有名词">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-02-24 17:56" pubdate>
+          2022年2月24日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          78 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">一些论文中的专有名词</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="一些论文中的专有名词的或缩写"><a href="#一些论文中的专有名词的或缩写" class="headerlink" title="一些论文中的专有名词的或缩写"></a>一些论文中的专有名词的或缩写</h1><p>low-resource:低资源:有标签或者无标签的训练的数据资源不足<br>Distant supervision:远端监督:大多数机器学习技术都需要一组训练数据。收集训练数据的传统方法是让人们标签一组文档。例如，对于婚姻关系，人类标注者可以将“比尔·克林顿”和“希拉里·克林顿”对标签为正的训练样本。这种方法在时间和金钱上都是昂贵的，并且如果我们的语料库很大，将无法产生足够的数据供我们的算法使用。而且由于人为错误，因此产生的训练数据极有可能是噪音的。生成训练数据的另一种方法是远距离监督(远程监督)。在远距离监督中，我们利用一个已经存在的数据库来收集要提取的关系的样本。然后，我们使用这些样本自动生成我们的训练数据。例如，包含巴拉克·奥巴马和米歇尔·奥巴马已婚的事实。我们考虑到这一事实，然后将出现在同一句子中的每对“巴拉克·奥巴马”和“米歇尔·奥巴马”都标签为我们婚姻关系的一个正例子。这样，我们可以轻松生成大量(可能是噪音的)训练数据。运用远距离监督来获得特定关系的正样本很容易，但是产生负样本比较难.即用知识库KG来获取2个实体之间的关系。<br>tokenization:分词器:原始raw text叫语料，字典中的单独词叫token，可能是单词，也可能是词语，取决于字典，tokenization是把raw text变成token的过程，假如英语就是把句子用空格切分，每个单词就叫token<br>detokenization:分词还原: 就是还原，把分词还原成句子，或者把分词后得到的id还原成原来的句子。<br>soft label:软标签:是一个teacher模型预测出来的，类似logits的概率值，是浮点数<br>hard label:硬标签:硬标签直接就是整数，就是对应概率最大的位置的索引，例如soft是0.82, hard就是1, <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1511.06335">https://arxiv.org/abs/1511.06335</a><br>SOTA:state-of-the-art:业界最新的性能，达到最新的模型性能<br>FLOPS:floating point operations per second:每秒浮动计算数, 是衡量计算机计算性能的一个指标<br>MLM:Masked language modeling, 掩盖语言建模, 也被叫做完形填空测试,cloze test,MLM的任务是根据占位符预测序列中的丢失token<br>T5: Text-to-Text Transfer Transformer<br>warm-up: 调整学习率的方式，在warm-up步数之前的学习率是恒定或者按照一定规则变大，warm-up之后的步数指数方式衰减和线性衰减<br>corruption损坏: 破坏一个原有的句子，例如BERT的MLM的无监督目标，可以对一个句子进行丢弃，替换，交换，添加操作，改变原有语句，然后让模型预测原有句子或改变的部分<br>域内数据: 就是一个领域的数据，例如新闻领域的文章和论文领域里的文章是不一样的,他们就是不同的域<br>pre-train-then-ﬁne-tune: 首先预训练模型，然后微调模型，预训练模型一般用大量数据做无监督训练，微调模型是用少量数据有监督训练<br>零样本学习(zero-shot learning): 即使训练时没有看到目标训练集，也能进行进行模型预测,零次训练或推理,无须训练，直接进行预测或推理。是一种训练策略，它允许机器学习模型预测新的类别，而不需要为新的类别提供任何标注的样本。<br>Few-Shot: 少量训练样本进行学习，然后预测，类似于low-resource<br>图灵完备性（Turing Completeness）:是针对一套数据操作规则而言的概念。数据操作规则可以是一门编程语言，也可以是计算机里具体实现了的指令集。当这套规则可以实现图灵机模型里的全部功能时，就称它具有图灵完备性。直白一点说，图灵完备性就是我给你一工具箱的东西，包括无限内存、if&#x2F;else 控制流、while 循环; 简单来讲，一切可计算的问题都能计算，这样的虚拟机或者编程语言就叫图灵完备的;举个例子，如果有人说，我的东西是图灵完备的，也就意味着理论上它能够用来解决任何计算性的问题。<br>有限状态机（英语：finite-state machine，缩写：FSM）又称有限状态自动机（英语：finite-state automation，缩写：FSA），简称状态机，是表示有限个状态以及在这些状态之间的转移和动作等行为的数学计算模型。<br>RE:relation extraction,neural relation extraction (NRE),  从一个句子中判断两个entity是否有关系，一般是一个二分类问题，指定某种关系。<br>Entity Mentions: 实体提及,就是句子中的实体, “New York City is good”  New York City就是实体，或者实体提及, 就是实体的名字<br>KGs: Knowledge Graph, 知识图谱<br>Autograd: 自动微分是训练神经网络的一种机制,自动求导，计算梯度<br>Segment: 片段，或者称为句子a，句子b等，例如训练BERT时结构如,“[CLS] x1 [SEP] x2 [SEP]”，x1表示片段1，或句子a，x2表示片段2或句子b。<br>Intrinsic tasks vs Downstream Tasks: 固有任务和下游任务，固有任务意思是预训练语言模型时的任务，下游任务是微调模型时的任务。<br>WordPiece: 是在自然语言处理中使用的子词分割算法。BERT用的此方法。子词分词的一种方法。 用该语言中的各个字符初始化单词表，然后将单词表中最常见的符号组合迭代添加到单词表中。 该过程是：1.用文本中的所有字符初始化单词清单。2.使用来自上一步的清单在训练数据上构建语言模型。 3. 通过组合当前单词清单中的两个单元, 将单词组装一个单词单元。 在添加到模型中时，从所有可能增加训练数据可能性中选择一个新的词单元。 4. 转到2，直到达到预定义的词单元限制或可能性增加低于某个特定阈值。<br>NMT:  Neural machine translation,神经机器翻译, 利用深度神经网络执行的端到端的翻译，例如seq2seq的神经网络翻译。<br>SMT: statistical machine translation,传统机器翻译的方法。<br>non-segmented语言: 分段语言，即用空格分隔的语言，例如英语，非分段语言，例如中文，日语，韩语。<br>NFD:Normalization Form Canonical Decomposition标准化形式规范分解,Unicode字符串标准化的一种算法,字符通过规范等价分解，并且多个组合字符按特定顺序排列<br>NFC:Normalization Form Canonical Composition 标准化形式规范组合,Unicode字符串标准化的一种算法, 字符被分解，然后通过规范对等重新组合。<br>NFKD: Normalization Form Compatibility Decomposition: 标准化形式兼容性分解,字符通过兼容性分解，并且多个组合字符按特定顺序排列。<br>NFKC: Normalization Form Compatibility Composition: 标准化形式兼容性组成,字符通过兼容性分解，然后通过规范对等重组。所有这些算法都是幂等转换，这意味着如果以相同算法再次处理，已经处于这些标准化形式之一的字符串将不会被修改。<br>RBT3：由RoBERTa-wwm-ext 3层进行初始化，继续训练了1M步,RBT的名字是RoBERTa三个音节首字母组成，L代表large模型<br>RBTL3: 3层RoBERTa-wwm-ext-base&#x2F;large,由RoBERTa-wwm-ext-large 3层进行初始化，继续训练了1M步<br>ONNX: Open Neural Network Exchange format,开放式神经网络交换格式,提高模型推理速度的中间模型格式，最高实现4倍的推理加速。<br>ABSA: Aspect-based Sentiment Analysis, 给定句子中关心的情感的术语(aspect),即某个词在句子中表达的情感。等同于ALSC, Aspect level sentiment classification<br>Sentiment Analysis (SA): 也称为Opinion Mining (OM)<br>self-supervised: 类似于BERT的预训练模型的方式，也可以成为无监督,无监督表明我们确实没给BERT提供人工打标签，自监督表明它是用自己随机MASK部分token，然后预测被Mask的方式，所以叫做自监督。<br>context-gloss: 上下文的连贯性<br>LA-MLM: label-aware masked language model, 标签感知masked语言模型,分2个阶段Early Fusion早期融合和Late Supervision后期监督，它们的主要区别是早期融合阶段是把句子情感也作为输入，后期监督是把句子情感作为预测标签，监督训练句子情感。早期融合和后期监督的目的是让模型能够理解句子级情感和单词级情感和词性之间的内在联系。<br>parse tree: 分析树, 具体语法树（concrete syntax tree）,是一个反映某种形式语言字符串的语法关系的有根有序树。分析树一般按照两种相反的法则生成，一种是依存语法,一种是短语结构语法。二分类选举树,binary constituency tree<br>PLM: Pre-trained Language Models 预训练语言模型； 排列语言模型(Permutation Language Model) PLM, XLNet使用排列语言模型(PLM)<br>DRL: deep reinforcement learning<br>市场摩擦（英文：Market Friction）:是指金融资产在交易中存在的难度。它可由交易一定数量某金融资产的最佳占用时间来测定，也可由即时交易所需要的价格让步(Price concession)来测定。<br>inductive: 归纳式学习,transductive和inductive的区别在于我们想要预测的样本，是不是我们在训练的时候已经见（用）过的。inductive learning就是只根据现有的ABC，用比如kNN距离算法来预测，在来一个新的数据的时候，还是只根据5个ABC来预测。<br>transductive: 直推式学习,transductive learning直接以某种算法观察出数据的分布，这里呈现三个cluster，就根据cluster判定，不会建立一个预测的模型，如果一个新的数据加进来 就必须重新算一遍整个算法，新加的数据也会导致旧的已预测问号的结果改变<br>NRE: Neural Relation Extraction Models 神经网络的关系抽取模型<br>PCNN: PCNN（Piece-Wise-CNN）<br>OMR: 光学音乐识别(OPTICAL MUSIC Recognition，OMR)是将乐谱的扫描图像转换为像MusicXML[9]或MIDI这样的符号代表的问题。这种解决方案有很多明显的实际应用。<br>on-policy: 强化学习可以分为off-policy和on-policy的方法。off-policy RL算法意味着用于选择动作的行为策略与学习策略不同。相反，在on-policy RL算法中，行为策略与学习策略是相同的。此外，强化学习还可以分为基于价值的方法和基于策略的方法。在基于价值的RL中，agent更新价值函数来学习合适的策略，而基于策略的RL agent直接学习策略。<br>Hierarchical reinforcement learning (HRL): 分层强化学习<br>ALE: Atari Learning Environment<br>rollout:（就相当于在一个棋局时尝试多次不同路径的走子）类似右图产生多条路径<br>Imitation Learning: IL 模仿学习，模仿学习的思想很直观(intuitive)。我们在前面所介绍的Model-free, Model-based强化学习方法都是从零开始(from scratch)探索并学习一个使累计回报最大的策略(policy) [公式] 。 Imitation Learning的想法是，借助人类给出的示范(demonstration)，可以快速地达到这个目的。<br>• Forward model: (st, at) → st+1. 前向模型。(st, at) → st+1. 这是在给定当前状态和所选动作的情况下预测下一个状态。这是目前最常见的模型类型，可用于前向规划。<br>• Backward&#x2F;reverse model: st+1 → (st, at).  反向模型：st+1 →（st，at）。这个模型预测了哪些状态是某一特定状态的可能前兆。因此，我们可以在反向的方向上进行规划，例如，在prioritized sweeping中就使用了这种方法（Moore和Atkeson，1993）。<br>• Inverse model: (st, st+1) → at.  逆向模型。(st, st+1) → at. 逆向模型预测从一个状态到另一个状态需要哪种行动。例如，它被用于RRT规划中（LaValle，1998）。正如我们稍后将看到的那样，这个函数也可以作为表示学习的一部分。<br>NP-hard: NP是指非确定性多项式（non-deterministic polynomial，缩写NP）。所谓的非确定性是指，可用一定数量的运算去解决多项式时间内可解决的问题。例如，著名的推销员旅行问题（Travel Saleman Problem or TSP）：假设一个推销员需要从香港出发，经过广州，北京，上海，…，等 n 个城市， 最后返回香港。 任意两个城市之间都有飞机直达，但票价不等。假设公司只给报销 C 元钱，问是否存在一个行程安排，使得他能遍历所有城市，而且总的路费小于 C？ 推销员旅行问题显然是 NP 的。因为如果你任意给出一个行程安排，可以很容易算出旅行总开销。但是，要想知道一条总路费小于 C 的行程是否存在，在最坏情况下，必须检查所有可能的旅行安排！ 这将是个天文数字。<br>P类问题：可以找到一个多项式时间复杂度的算法去解决的问题；<br>NEXPTIME-complete:如果一个决策问题在NEXPTIME中，那么它就是NEXPTIME完整的，而且NEXPTIME中的每个问题都有一个多项式时间的多对一还原。换句话说，有一种多项式时间的算法可以将一个问题的实例转化为另一个问题的实例，而且答案相同。NEXPTIME-complete的问题可以被认为是NEXPTIME中最难的问题。我们知道NEXPTIME-complete问题不在NP中；根据时间层次定理，已经证明这些问题不能在多项式时间内被验证。 一组重要的NEXPTIME-complete问题与简洁电路有关。简明电路是一种简单的机器，用于在指数级的空间内描述图形。它们接受两个顶点数字作为输入，并输出它们之间是否有一条边。如果在自然表示法（如邻接矩阵）中解决一个图的问题是NP-完全的，那么在简洁电路表示法中解决同样的问题是NEXPTIME-完全的，因为输入是指数级的小（在一些温和的条件下，NP-完全性的减少是通过 “投影 “实现的）。[2][3] 作为一个简单的例子，为一个如此编码的图寻找一个汉密尔顿路径是NEXPTIME-完全的。<br>MARL: Multi-Agent Reinforcement Learning 多agent强化学习<br>annealed: 退火，意思是超参数随着时间的逐渐变小，参数越来越小。例如强化学习中的Qleanring的Greedy系数。<br>优势函数:advantage function , 强化学习 优势函数(Advantage Function),优势函数表达在状态s下，某动作a相对于平均而言的优势。 从数量关系来看，就是随机变量相对均值的偏差。 使用优势函数是深度强化学习极其重要的一种策略，尤其对于基于policy的学习。优势函数其实就是将Q-Value“归一化”到Value baseline上，如上讨论的，这样有助于提高学习效率，同时使学习更加稳定；同时经验表明，优势函数也有助于减小方差，而方差过大导致过拟合的重要因素。Aπ(s,a)&#x3D;Qπ(s,a) - Vπ(s)<br>bitext: bidirectional text, 双向语料，即翻译的平行语料，例如中英文翻译语料库<br>Dec-POMDP: 一个完全合作的多agent任务可以被描述为一个分散的部分可观察马尔可夫决策过程（Dec-POMDP）<br>CTDE: 集中训练和分散执行（CTDE）Kraemer和Banerjee[2016]的范式允许学习过程利用额外的状态信息。CTDE允许学习算法访问所有局部行动观察直方图和全局状态，并共享梯度和参数。然后，在执行阶段，每个单独的agent只能访问其局部行动观察历史τi。<br>tile-coding: 强化学习理论扩展到了连续空间（连续空间的泛化）。tile-coding是连续空间强化学习问题中最实用和计算效率最高的工具。本质上，tile-coding是连续状态空间中的特征表示,tile-coding的主要优势之一是其计算效率。一个tiling的意思是一张大网，里面有划分成不同的小网，观察的像素会落到这个tiling中的小网内，就可以用这个小网内的坐标表示这个特征，多个tiling就是用多个小网内的坐标表示这个特征，就像self-attention的多头和卷积中的多个卷积核一样。<a target="_blank" rel="noopener" href="https://towardsdatascience.com/reinforcement-learning-tile-coding-implementation-7974b600762b">https://towardsdatascience.com/reinforcement-learning-tile-coding-implementation-7974b600762b</a><br>domain adaptation for machine translation (DAMT): 半监督领域适应翻译<br>ROUGE-N:系统和参考摘要之间N-grams的重叠。<br>ROUGE-1:指的是系统和参考摘要之间的unigram（每个字）的重叠情况。<br>ROUGE-2:指的是系统和参考摘要之间的bigram重叠。<br>ROUGE-L:基于最长共同子序列（LCS）的统计。最长共同子序列问题自然考虑到了句子层面的结构相似性，并自动识别序列中最长的共同出现的n-grams。<br>ROUGE-W:基于加权的LCS统计，倾向于连续的LCSs。<br>ROUGE-S:基于 Skip-bigram 的共现统计。Skip-bigram是指任何一对词在其句子中的序列。<br>ROUGE-SU:基于 Skip-bigram 和 unigram 的共现统计。<br>MTL: Multi-task learning<br>SAN: 随机答案网络,用于问答系统，stochastic answer network, Stochastic answer networks for natural language inference<br>MTPE:  machine translation post-editing<br>MBRL: model-based的强化学习<br>CPM:Chinese Pretrained language Model 中文预训练模型<br>prompt-tuning:（p-tuning）<br>TrGCN: transformer图卷积网络<br>NED:命名实体消歧named entity disambiguation<br>ERD: Entity Relationship Diagram 实体关系图<br>ELBO:  Evidence Lower Bound，即证据下界,这里的证据指数据或可观测变量的概率密度。使用变分推断时，首先需要计算的便是ELBO。<a target="_blank" rel="noopener" href="https://blog.csdn.net/qy20115549/article/details/93074519">https://blog.csdn.net/qy20115549/article/details/93074519</a><br>New Words Discovery: 新词发现<br>ACSA: Aspect category sentiment analysis, 基于属性类别的情感分析<br>ABSA: Aspect Based Sentiment Analysis, 基于属性的情感分析<br>ATSA: 等同于ABSA，aspect术语情感分析<br>capsule Network: 胶囊神经网络,是相对于CNN的改进，综合了CNN的优点的同时，考虑了CNN缺失的相对位置、角度等其他信息，从而使得识别效果有所提升。<a target="_blank" rel="noopener" href="https://easyai.tech/ai-definition/capsule/">https://easyai.tech/ai-definition/capsule/</a><br>MRR: Mean Reciprocal Rank, 是一个国际上通用的对 搜索算法 进行评价的机制，即第一个结果匹配，分数为1，第二个匹配分数为0.5，第n个匹配分数为1&#x2F;n，如果没有匹配的句子分数为0,最终的分数为所有得分之和<br>ER: entity recognition 实体识别<br>EL: entity linking 实体链接<br>ED: entity disambiguation 实体消歧<br>EEs: emerging entities 新出现的实体<br>EED: emerging entity discovery 新实体发现,通过对知识库中现有的候选实体进行鉴别,KB外的实体称为新出现的实体。<br>BPR: Best Possible Recall<br>CMD: Central Moment Discrepancy, 最先进的分布相似度指标,过匹配两个表示的顺序矩差来衡量它们之间的差异,类似KL散度,可以执行高阶矩的明确匹配，而不需要昂贵的距离和核矩阵计算。CMD距离随着两个分布的相似性而变小。<br>平凡解: trivial solution, 编码器函数近似于一个不相关的但不具代表性的模态向量，就会出现平凡解的情况，防止平凡解, 经常用于结构非常简单的对象（比如群或拓扑空间），有时亦会用明显或乏趣这两个词代替，但对非数学工作者来说，它们有时可能比其他更复杂的对象更难想象或理解。例如： 明显因数：对于每个正整数 n 来说，1、-1、n 和 -n 都是它的明显因数。 空集：不包含任何元素的集合； 平凡群：只含单位元的群；<br>DETR: 端到端目标检测,End-to-end Object Detection with Transformer, 达到与Faster-RCNN等两阶段目标检测相当的性能。<br>FGM: Factor Graph Model, 因子图模型,是概率图模型的一种<br>IGL: Iterative Grid Labeling 迭代式网关标注方式<br>TSA: Text Similarity Approach 文本相似性技术<br>MLTC:multi-label text classification 多标签文本分类<br>XMC: Extreme multi-label text classification 极端多标签文本分类, 寻求从一个极端大的标签集合中为给定的文本输入找到相关的标签。许多现实世界的应用可以被表述为XMC问题，如推荐系统、文档tagging和语义搜索。<br>exposure bias: 暴露偏差:模型训练与预测过程之间的不匹配。在训练时每一个词输入都来自真实样本，但是在推断时当前输入用的却是上一个词的输入</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>一些论文中的专有名词</div>
+      <div>http://example.com/2022/02/24/paper-word/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年2月24日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/24/knowledge-graph/" title="知识图谱的构建思路">
+                        <span class="hidden-mobile">知识图谱的构建思路</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
