@@ -16,20 +16,22 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="pycharm debug可能卡住的原因有很多，其中之一是多进程导致的, 尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num_workers是否是0，即可123456789101112131415161718192021222324252627DataLoader(    dataset,    batch_size&#x3D;1,    shuffle&#x3D;False,">
+    <meta name="description" content="显存优化技术本思维导图总结了显存的占用的分为哪些部分，训练时的流程，和多GPU训练的分类。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一次pycharm在使用torch Dataloader进行debug时卡住">
-<meta property="og:url" content="http://example.com/2022/03/01/pycharm-debug/index.html">
+<meta property="og:title" content="显存优化技术盘点">
+<meta property="og:url" content="http://example.com/2022/03/04/gpu-optimizer/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="pycharm debug可能卡住的原因有很多，其中之一是多进程导致的, 尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num_workers是否是0，即可123456789101112131415161718192021222324252627DataLoader(    dataset,    batch_size&#x3D;1,    shuffle&#x3D;False,">
+<meta property="og:description" content="显存优化技术本思维导图总结了显存的占用的分为哪些部分，训练时的流程，和多GPU训练的分类。">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-01T03:36:10.000Z">
-<meta property="article:modified_time" content="2022-03-01T03:41:57.649Z">
+<meta property="og:image" content="http://example.com/2022/03/04/gpu-optimizer/%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF.png">
+<meta property="article:published_time" content="2022-03-04T08:32:59.000Z">
+<meta property="article:modified_time" content="2022-03-04T09:07:57.484Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2022/03/04/gpu-optimizer/%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF.png">
   
   
-  <title>一次pycharm在使用torch Dataloader进行debug时卡住 - Be With you</title>
+  <title>显存优化技术盘点 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="一次pycharm在使用torch Dataloader进行debug时卡住">
+          <span id="subtitle" title="显存优化技术盘点">
             
           </span>
         </div>
@@ -197,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-03-01 11:36" pubdate>
-          2022年3月1日 中午
+        <time datetime="2022-03-04 16:32" pubdate>
+          2022年3月4日 下午
         </time>
       </span>
     
@@ -209,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          856 字
+          45 字
         
       </span>
     
@@ -220,7 +222,7 @@
         
         
         
-          8 分钟
+          1 分钟
         
       </span>
     
@@ -258,12 +260,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一次pycharm在使用torch Dataloader进行debug时卡住</h1>
+            <h1 style="display: none">显存优化技术盘点</h1>
             
             <div class="markdown-body">
               
-              <h1 id="pycharm-debug可能卡住的原因有很多，其中之一是多进程导致的-尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num-workers是否是0，即可"><a href="#pycharm-debug可能卡住的原因有很多，其中之一是多进程导致的-尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num-workers是否是0，即可" class="headerlink" title="pycharm debug可能卡住的原因有很多，其中之一是多进程导致的, 尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num_workers是否是0，即可"></a>pycharm debug可能卡住的原因有很多，其中之一是多进程导致的, 尤其是我们在使用torch的DataLoader时，如果发生卡住，那么只需检查num_workers是否是0，即可</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs routeros">DataLoader(<br>    dataset,<br>    <span class="hljs-attribute">batch_size</span>=1,<br>    <span class="hljs-attribute">shuffle</span>=<span class="hljs-literal">False</span>,<br>    <span class="hljs-attribute">sampler</span>=None,<br>    <span class="hljs-attribute">batch_sampler</span>=None,<br>    <span class="hljs-attribute">num_workers</span>=0,<br>    <span class="hljs-attribute">collate_fn</span>=None,<br>    <span class="hljs-attribute">pin_memory</span>=<span class="hljs-literal">False</span>,<br>    <span class="hljs-attribute">drop_last</span>=<span class="hljs-literal">False</span>,<br>    <span class="hljs-attribute">timeout</span>=0,<br>    <span class="hljs-attribute">worker_init_fn</span>=None,<br>    <span class="hljs-attribute">multiprocessing_context</span>=None,<br>)<br>参数:<br>- dataset : 数据集<br>- batch_size: 批次大小<br>- shuffle: 是否乱序<br>- sampler: 样本采样函数，一般无需设置。<br>- batch_sampler: 批次采样函数，一般无需设置。<br>- num_workers: 使用多进程读取数据，设置的进程数。<br>- collate_fn: 整理一个批次数据的函数。<br>- pin_memory: 是否设置为锁业内存。默认为<span class="hljs-literal">False</span>，锁业内存不会使用虚拟内存(硬盘)，从锁业内存拷贝<br>到GPU上速度会更快。<br>- drop_last: 是否丢弃最后一个样本数量不足batch_size批次数据。<br>- timeout: 加载一个数据批次的最长等待时间，一般无需设置。<br>- worker_init_fn: 每个worker中dataset的初始化函数，常用于 IterableDataset。一般不使用<br></code></pre></td></tr></table></figure>
-<p>根据API可知，num_workers是设置读取数据的并发进程数量，而根据pycharm的官方的issue，<a target="_blank" rel="noopener" href="https://youtrack.jetbrains.com/issue/PY-39489%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%91%E7%8E%B0pycharm%E5%A4%9A%E8%BF%9B%E7%A8%8B%E7%9A%84debug%E6%9C%89%E6%97%B6%E5%B9%B6%E4%B8%8D%E5%A4%AA%E6%96%B9%E4%BE%BF%EF%BC%8C%E6%89%80%E4%BB%A5%E5%8F%AA%E9%9C%80%E5%9C%A8debug%E6%97%B6%EF%BC%8C%E4%BF%AE%E6%94%B9num_workers%E5%8D%B3%E5%8F%AF%EF%BC%8C%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E5%9C%A8%E6%94%B9%E5%9B%9E%E6%9D%A5%E5%B0%B1%E8%A1%8C%E3%80%82">https://youtrack.jetbrains.com/issue/PY-39489，我们发现pycharm多进程的debug有时并不太方便，所以只需在debug时，修改num_workers即可，生产环境在改回来就行。</a></p>
+              <h1 id="显存优化技术"><a href="#显存优化技术" class="headerlink" title="显存优化技术"></a>显存优化技术</h1><p>本思维导图总结了显存的占用的分为哪些部分，训练时的流程，和多GPU训练的分类。</p>
+<img src="/2022/03/04/gpu-optimizer/%E6%98%BE%E5%AD%98%E4%BC%98%E5%8C%96%E6%8A%80%E6%9C%AF.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>
@@ -280,8 +282,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一次pycharm在使用torch Dataloader进行debug时卡住</div>
-      <div>http://example.com/2022/03/01/pycharm-debug/</div>
+      <div>显存优化技术盘点</div>
+      <div>http://example.com/2022/03/04/gpu-optimizer/</div>
     </div>
     <div class="license-meta">
       
@@ -293,7 +295,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年3月1日</div>
+          <div>2022年3月4日</div>
         </div>
       
       
@@ -323,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/04/gpu-optimizer/" title="显存优化技术盘点">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">显存优化技术盘点</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/28/multilabel/" title="多标签分类的2种简单实现">
-                        <span class="hidden-mobile">多标签分类的2种简单实现</span>
+                      <a href="/2022/03/01/pycharm-debug/" title="一次pycharm在使用torch Dataloader进行debug时卡住">
+                        <span class="hidden-mobile">一次pycharm在使用torch Dataloader进行debug时卡住</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
