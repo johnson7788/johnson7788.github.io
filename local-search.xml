@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>信息提取的方式总结</title>
+    <link href="/2022/03/08/%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96/"/>
+    <url>/2022/03/08/%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96/</url>
+    
+    <content type="html"><![CDATA[<h1 id="信息抽取"><a href="#信息抽取" class="headerlink" title="信息抽取"></a>信息抽取</h1><p>信息抽取是构建知识图谱的关键一环，目前已实现了3种抽取的方式测试，发现了一些注意事项，总结如下:</p><img src="/2022/03/08/%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96/%E4%BF%A1%E6%81%AF%E6%8A%BD%E5%8F%96%E6%80%BB%E7%BB%93.png" class="">]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>显存优化技术盘点</title>
     <link href="/2022/03/04/gpu-optimizer/"/>
     <url>/2022/03/04/gpu-optimizer/</url>
