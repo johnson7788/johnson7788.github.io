@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>ubuntu20.04的Realtek网卡驱动安装</title>
+    <link href="/2022/03/14/ubuntu20-04%E7%9A%84Realtek%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/"/>
+    <url>/2022/03/14/ubuntu20-04%E7%9A%84Realtek%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/</url>
+    
+    <content type="html"><![CDATA[<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>ubuntu的20.04版本对部分网卡的驱动没有默认集成，需要手动安装, 记录下安装流程</p><h2 id="查看网卡型号"><a href="#查看网卡型号" class="headerlink" title="查看网卡型号"></a>查看网卡型号</h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts">sudo lshw -C network<br>  *-network                 <br><span class="hljs-symbol">       description:</span> Ethernet interface<br><span class="hljs-symbol">       product:</span> RTL8125 <span class="hljs-number">2.5</span>GbE Controller<br><span class="hljs-symbol">       vendor:</span> Realtek Semiconductor Co., Ltd.<br></code></pre></td></tr></table></figure><h2 id="得知型号是RTL8125-2-5G，然后去官方网站下载对应的驱动"><a href="#得知型号是RTL8125-2-5G，然后去官方网站下载对应的驱动" class="headerlink" title="得知型号是RTL8125 2.5G，然后去官方网站下载对应的驱动"></a>得知型号是RTL8125 2.5G，然后去官方网站下载对应的驱动</h2><p><a href="https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software">https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software</a></p><h2 id="在你的机器上首先确保有make相关组件-新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装"><a href="#在你的机器上首先确保有make相关组件-新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装" class="headerlink" title="在你的机器上首先确保有make相关组件,新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装"></a>在你的机器上首先确保有make相关组件,新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装</h2><h3 id="首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下"><a href="#首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下" class="headerlink" title="首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下:"></a>首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下:</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#挂载镜像</span><br>mkdir <span class="hljs-regexp">/media/i</span>so<br>sudo mount  ~<span class="hljs-regexp">/Desktop/u</span>buntu-<span class="hljs-number">20.04</span>.<span class="hljs-number">2.0</span>-desktop-amd64.iso <span class="hljs-regexp">/media/i</span>so<br></code></pre></td></tr></table></figure><p>#focal是ubtunu20.04的版本的名称<br>sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list<br>deb file:&#x2F;media&#x2F;iso&#x2F; focal main contrib</p><p>#更新下包的缓存<br>sudo apt update</p><p>#安装make命令, build-essential是编译代码所需的包，iso镜像中自带了，其实可以在安装系统时安装上<br>sudo apt install build-essential 或者make</p><h2 id="然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9-005-06-tar-bz2"><a href="#然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9-005-06-tar-bz2" class="headerlink" title="然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9.005.06.tar.bz2"></a>然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9.005.06.tar.bz2</h2><p>解压<br>tar jxvf r8125-9.005.06.tar.bz2</p><h2 id="编译和安装"><a href="#编译和安装" class="headerlink" title="编译和安装"></a>编译和安装</h2><p>cd r8125-9.005.06<br>sudo make<br>sudo .&#x2F;autorun.sh</p><h2 id="正常查看网络，或者手动配置ip"><a href="#正常查看网络，或者手动配置ip" class="headerlink" title="正常查看网络，或者手动配置ip"></a>正常查看网络，或者手动配置ip</h2><p>ip a</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ubuntu远程桌面的三种实现方式</title>
     <link href="/2022/03/14/ubuntu%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/"/>
     <url>/2022/03/14/ubuntu%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/</url>
