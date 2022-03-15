@@ -19,30 +19,30 @@
     <meta name="description" content="查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="neo4j的构建的知识图谱的语法示例">
-<meta property="og:url" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/index.html">
+<meta property="og:url" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Be With you">
 <meta property="og:description" content="查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/fa.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/price.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pris.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/ou.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/same.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/smae.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xisi.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xiaozhong.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/liangtiao.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/yige.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/az.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png">
-<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/fa.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/price.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pris.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/ou.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/same.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/smae.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xisi.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xiaozhong.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/liangtiao.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/yige.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/az.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png">
 <meta property="article:published_time" content="2022-03-15T05:58:05.000Z">
 <meta property="article:modified_time" content="2022-03-15T06:13:22.256Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
+<meta name="twitter:image" content="https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
   
   
   <title>neo4j的构建的知识图谱的语法示例 - Be With you</title>
@@ -82,7 +82,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -340,7 +340,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>neo4j的构建的知识图谱的语法示例</div>
-      <div>http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/</div>
+      <div>https://johnson7788.github.io/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/</div>
     </div>
     <div class="license-meta">
       

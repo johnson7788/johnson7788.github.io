@@ -19,24 +19,24 @@
     <meta name="description" content="需求 构建一个模型，本示例用的XGBoost，然后构建shap解释模型，使用shap值对模型特征进行解释 按特征重要性，这里对应的是shap值的绝对值的均值，shap_values.abs.mean，进行排序 如果特征符合基本单调递增, 不一定是线性的，因为特征之间可能有相关性,打印对应shap值为0附近的原始特征数值，用原始特征的均值代替  意义我们构建的是一个客户满意度模型，使用的是用户对一个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="shap值的探索，判断shap值是否符合基本单调递增">
-<meta property="og:url" content="http://example.com/2022/02/18/shap-explore2/index.html">
+<meta property="og:url" content="https://johnson7788.github.io/2022/02/18/shap-explore2/index.html">
 <meta property="og:site_name" content="Be With you">
 <meta property="og:description" content="需求 构建一个模型，本示例用的XGBoost，然后构建shap解释模型，使用shap值对模型特征进行解释 按特征重要性，这里对应的是shap值的绝对值的均值，shap_values.abs.mean，进行排序 如果特征符合基本单调递增, 不一定是线性的，因为特征之间可能有相关性,打印对应shap值为0附近的原始特征数值，用原始特征的均值代替  意义我们构建的是一个客户满意度模型，使用的是用户对一个">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap1.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap2.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap3.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap4.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap5.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap6.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap7.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap8.png">
-<meta property="og:image" content="http://example.com/2022/02/18/shap-explore2/shap9.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap1.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap2.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap3.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap4.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap5.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap6.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap7.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap8.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap9.png">
 <meta property="article:published_time" content="2022-02-18T03:32:13.000Z">
 <meta property="article:modified_time" content="2022-02-22T10:03:29.917Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/2022/02/18/shap-explore2/shap1.png">
+<meta name="twitter:image" content="https://johnson7788.github.io/2022/02/18/shap-explore2/shap1.png">
   
   
   <title>shap值的探索，判断shap值是否符合基本单调递增 - Be With you</title>
@@ -76,7 +76,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -307,7 +307,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>shap值的探索，判断shap值是否符合基本单调递增</div>
-      <div>http://example.com/2022/02/18/shap-explore2/</div>
+      <div>https://johnson7788.github.io/2022/02/18/shap-explore2/</div>
     </div>
     <div class="license-meta">
       
