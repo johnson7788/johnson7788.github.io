@@ -16,12 +16,12 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="查询包含甘油的产品MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50   #查看2个品牌之间有什么共同点MATCH(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[">
+    <meta name="description" content="查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="neo4j的构建的知识图谱的语法示例">
 <meta property="og:url" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="查询包含甘油的产品MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50   #查看2个品牌之间有什么共同点MATCH(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[">
+<meta property="og:description" content="查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
 <meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png">
@@ -39,7 +39,7 @@
 <meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png">
 <meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png">
 <meta property="article:published_time" content="2022-03-15T05:58:05.000Z">
-<meta property="article:modified_time" content="2022-03-15T06:09:10.579Z">
+<meta property="article:modified_time" content="2022-03-15T06:13:22.256Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          12 分钟
+          14 分钟
         
       </span>
     
@@ -278,25 +278,26 @@
             
             <div class="markdown-body">
               
-              <h1 id="查询包含甘油的产品"><a href="#查询包含甘油的产品" class="headerlink" title="查询包含甘油的产品"></a>查询包含甘油的产品</h1><p>MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50</p>
+              <h1 id="查询包含甘油的产品"><a href="#查询包含甘油的产品" class="headerlink" title="查询包含甘油的产品"></a>查询包含甘油的产品</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">MATCH p=()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &#123;<span class="hljs-type">name</span>:&quot;甘油&quot;&#125;) <span class="hljs-keyword">return</span> p <span class="hljs-keyword">limit</span> <span class="hljs-number">50</span><br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png" srcset="/img/loading.gif" lazyload class="">
 
-<p>#查看2个品牌之间有什么共同点<br>MATCH<br>(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[*]-(b))<br>RETURN p </p>
+<p>#查看2个品牌之间有什么共同点</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">MATCH<br>(n:Brand &#123;name:<span class="hljs-string">&quot;希思黎&quot;</span>&#125;), (<span class="hljs-selector-tag">b</span>:Brand &#123;name:<span class="hljs-string">&#x27;欧莱雅&#x27;</span>&#125;), <span class="hljs-selector-tag">p</span> = <span class="hljs-built_in">allShortestPaths</span>((n)-<span class="hljs-selector-attr">[*]</span><span class="hljs-built_in">-</span>(b))<br>RETURN <span class="hljs-selector-tag">p</span> <br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="法国品牌"><a href="#法国品牌" class="headerlink" title="法国品牌"></a>法国品牌</h1><p>MATCH p&#x3D;()-[r:BRAND_COUNTRY_IS]-&gt;(c:Country {name:”法国”}) RETURN p LIMIT 25</p>
+<h1 id="法国品牌"><a href="#法国品牌" class="headerlink" title="法国品牌"></a>法国品牌</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">MATCH p=()-[r:BRAND_COUNTRY_IS]-&gt;(c:Country &#123;<span class="hljs-type">name</span>:&quot;法国&quot;&#125;) <span class="hljs-keyword">RETURN</span> p <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/fa.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="collect-统计-各个品牌关于手部护理的产品的价格统计"><a href="#collect-统计-各个品牌关于手部护理的产品的价格统计" class="headerlink" title="collect 统计, 各个品牌关于手部护理的产品的价格统计"></a>collect 统计, 各个品牌关于手部护理的产品的价格统计</h1><p>MATCH (:ProductCategory {name:”手部护理”})–&gt;(:ProductCategory)&lt;–(p:Product)–&gt;(b:Brand)<br>RETURN b.name as Brand, collect(distinct p.price) as Price</p>
+<h1 id="collect-统计-各个品牌关于手部护理的产品的价格统计"><a href="#collect-统计-各个品牌关于手部护理的产品的价格统计" class="headerlink" title="collect 统计, 各个品牌关于手部护理的产品的价格统计"></a>collect 统计, 各个品牌关于手部护理的产品的价格统计</h1><figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs livescript">MATCH <span class="hljs-function"><span class="hljs-params">(:ProductCategory &#123;name:<span class="hljs-string">&quot;手部护理&quot;</span>&#125;)</span>--&gt;</span><span class="hljs-function"><span class="hljs-params">(:ProductCategory)</span>&lt;--<span class="hljs-params">(p:Product)</span>--&gt;</span>(b:Brand)<br>RETURN b.name <span class="hljs-keyword">as</span> Brand, collect(distinct p.price) <span class="hljs-keyword">as</span> Price<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/price.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="价格在200-300之间"><a href="#价格在200-300之间" class="headerlink" title="价格在200-300之间"></a>价格在200-300之间</h1><p>MATCH (n:Product) WHERE n.price &gt;&#x3D; 200 AND n.price &lt; 300 RETURN n</p>
+<h1 id="价格在200-300之间"><a href="#价格在200-300之间" class="headerlink" title="价格在200-300之间"></a>价格在200-300之间</h1><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs fortran">MATCH (n:<span class="hljs-built_in">Product</span>) <span class="hljs-keyword">WHERE</span> n.price &gt;= <span class="hljs-number">200</span> AND n.price &lt; <span class="hljs-number">300</span> <span class="hljs-keyword">RETURN</span> n<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pris.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="欧莱雅商品"><a href="#欧莱雅商品" class="headerlink" title="欧莱雅商品"></a>欧莱雅商品</h1><p>MATCH (n:Brand {name:”欧莱雅”}) &lt;-[:PRODUCT_BRAND_IS]-(p) RETURN n,p LIMIT 25</p>
+<h1 id="欧莱雅商品"><a href="#欧莱雅商品" class="headerlink" title="欧莱雅商品"></a>欧莱雅商品</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">MATCH (n:Brand &#123;name:<span class="hljs-string">&quot;欧莱雅&quot;</span>&#125;) &lt;-<span class="hljs-selector-attr">[:PRODUCT_BRAND_IS]</span>-(<span class="hljs-selector-tag">p</span>) RETURN n,<span class="hljs-selector-tag">p</span> LIMIT <span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/ou.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="同样功效的产品"><a href="#同样功效的产品" class="headerlink" title="同样功效的产品"></a>同样功效的产品</h1><p>MATCH (n:Product {name:”欧莱雅强韧柔顺洗发露”})-[:PRODUCT_EFFECT_IS]-&gt;(m)&lt;-[:PRODUCT_EFFECT_IS]-(p) RETURN n,p</p>
+<h1 id="同样功效的产品"><a href="#同样功效的产品" class="headerlink" title="同样功效的产品"></a>同样功效的产品</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">MATCH (n:Product &#123;name:<span class="hljs-string">&quot;欧莱雅强韧柔顺洗发露&quot;</span>&#125;)-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-&gt;(m)&lt;-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-(<span class="hljs-selector-tag">p</span>) RETURN n,<span class="hljs-selector-tag">p</span><br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/same.png" srcset="/img/loading.gif" lazyload class="">
 
 <h1 id="同样功效，价格便宜"><a href="#同样功效，价格便宜" class="headerlink" title="同样功效，价格便宜"></a>同样功效，价格便宜</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">MATCH (n:Product &#123;name:<span class="hljs-string">&quot;倩碧水嫩保湿水精萃&quot;</span>&#125;)-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-&gt;(m)&lt;-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-(<span class="hljs-selector-tag">p</span>) WHERE <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.price</span> &lt;n<span class="hljs-selector-class">.price</span> RETURN n,<span class="hljs-selector-tag">p</span> Limit <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
@@ -305,22 +306,23 @@
 <h1 id="希思黎生产过哪些类型产品"><a href="#希思黎生产过哪些类型产品" class="headerlink" title="希思黎生产过哪些类型产品"></a>希思黎生产过哪些类型产品</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lisp">MATCH (<span class="hljs-name">c</span><span class="hljs-symbol">:Brand</span> &#123;name:<span class="hljs-string">&quot;希思黎&quot;</span>&#125;)&lt;--(<span class="hljs-symbol">:Product</span>)--&gt;(<span class="hljs-name">s</span><span class="hljs-symbol">:ProductCategory</span>)<br>RETURN DISTINCT s<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xisi.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="小众品牌"><a href="#小众品牌" class="headerlink" title="小众品牌"></a>小众品牌</h1><p>MATCH p&#x3D;()-[r:BRAND_POPULARITY_IS]-&gt;(b:BrandPopularity {name:”小众”}) RETURN p LIMIT 25</p>
+<h1 id="小众品牌"><a href="#小众品牌" class="headerlink" title="小众品牌"></a>小众品牌</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">MATCH p=()-[r:BRAND_POPULARITY_IS]-&gt;(b:BrandPopularity &#123;<span class="hljs-type">name</span>:&quot;小众&quot;&#125;) <span class="hljs-keyword">RETURN</span> p <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xiaozhong.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="找2个产品2跳以内的共同点"><a href="#找2个产品2跳以内的共同点" class="headerlink" title="找2个产品2跳以内的共同点"></a>找2个产品2跳以内的共同点</h1><p>MATCH p&#x3D;(<br>(n:Product {name:”倩碧水嫩保湿水精萃”})-[*1..2]-(m:Product {name:”蒂迩肌男士水油平衡洁面泡沫”})<br>)<br>RETURN p</p>
+<h1 id="找2个产品2跳以内的共同点"><a href="#找2个产品2跳以内的共同点" class="headerlink" title="找2个产品2跳以内的共同点"></a>找2个产品2跳以内的共同点</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">MATCH</span> p=(<br>(<span class="hljs-symbol">n:Pr</span>oduct &#123;<span class="hljs-built_in">na</span><span class="hljs-symbol">me:</span><span class="hljs-string">&quot;倩碧水嫩保湿水精萃&quot;</span>&#125;)-[*<span class="hljs-number">1</span>..<span class="hljs-number">2</span>]-(<span class="hljs-symbol">m:Pr</span>oduct &#123;<span class="hljs-built_in">na</span><span class="hljs-symbol">me:</span><span class="hljs-string">&quot;蒂迩肌男士水油平衡洁面泡沫&quot;</span>&#125;)<br>)<br>RETURN p<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/liangtiao.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="找2个产品的一个共同点"><a href="#找2个产品的一个共同点" class="headerlink" title="找2个产品的一个共同点"></a>找2个产品的一个共同点</h1><p>MATCH p&#x3D;shortestPath(<br>(n:Product {name:”倩碧水嫩保湿水精萃”})-[*]-(m:Product {name:”蒂迩肌男士水油平衡洁面泡沫”})<br>)<br>RETURN p</p>
+<h1 id="找2个产品的一个共同点"><a href="#找2个产品的一个共同点" class="headerlink" title="找2个产品的一个共同点"></a>找2个产品的一个共同点</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">MATCH</span> p=shortestPath(<br>(<span class="hljs-symbol">n:Pr</span>oduct &#123;<span class="hljs-built_in">na</span><span class="hljs-symbol">me:</span><span class="hljs-string">&quot;倩碧水嫩保湿水精萃&quot;</span>&#125;)-[*]-(<span class="hljs-symbol">m:Pr</span>oduct &#123;<span class="hljs-built_in">na</span><span class="hljs-symbol">me:</span><span class="hljs-string">&quot;蒂迩肌男士水油平衡洁面泡沫&quot;</span>&#125;)<br>)<br>RETURN p<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/yige.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="总产品数"><a href="#总产品数" class="headerlink" title="总产品数"></a>总产品数</h1><p>MATCH (n:Product)<br>RETURN count(n)</p>
+<h1 id="总产品数"><a href="#总产品数" class="headerlink" title="总产品数"></a>总产品数</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">MATCH</span> (<span class="hljs-symbol">n:Pr</span>oduct)<br>RETURN <span class="hljs-built_in">count</span>(<span class="hljs-built_in">n</span>)<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/az.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="总成分数"><a href="#总成分数" class="headerlink" title="总成分数"></a>总成分数</h1><p>MATCH (n:Component)<br>RETURN count(n)</p>
+<h1 id="总成分数"><a href="#总成分数" class="headerlink" title="总成分数"></a>总成分数</h1><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel"><span class="hljs-built_in">MATCH</span> (<span class="hljs-symbol">n:Co</span>mponent)<br>RETURN <span class="hljs-built_in">count</span>(<span class="hljs-built_in">n</span>)<br></code></pre></td></tr></table></figure>
 <img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="meta-graph，元图"><a href="#meta-graph，元图" class="headerlink" title="meta-graph，元图"></a>meta-graph，元图</h1><img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png" srcset="/img/loading.gif" lazyload class="">
+<h1 id="meta-graph，元图"><a href="#meta-graph，元图" class="headerlink" title="meta-graph，元图"></a>meta-graph，元图</h1><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CALL</span> db.<span class="hljs-keyword">schema</span>.visualization()<br></code></pre></td></tr></table></figure>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>

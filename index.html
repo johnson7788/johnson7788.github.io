@@ -222,7 +222,7 @@
       <p class="index-excerpt">
         <a href="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/" target="_self">
           
-          查询包含甘油的产品MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50   #查看2个品牌之间有什么共同点MATCH(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[
+          查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;
         </a>
       </p>
 
