@@ -16,20 +16,36 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="原因ubuntu的20.04版本对部分网卡的驱动没有默认集成，需要手动安装, 记录下安装流程 查看网卡型号12345sudo lshw -C network  *-network                        description: Ethernet interface       product: RTL8125 2.5GbE Controller       vendor:">
+    <meta name="description" content="查询包含甘油的产品MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50   #查看2个品牌之间有什么共同点MATCH(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu20.04的Realtek网卡驱动安装">
-<meta property="og:url" content="http://example.com/2022/03/14/ubuntu20-04%E7%9A%84Realtek%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/index.html">
+<meta property="og:title" content="neo4j的构建的知识图谱的语法示例">
+<meta property="og:url" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="原因ubuntu的20.04版本对部分网卡的驱动没有默认集成，需要手动安装, 记录下安装流程 查看网卡型号12345sudo lshw -C network  *-network                        description: Ethernet interface       product: RTL8125 2.5GbE Controller       vendor:">
+<meta property="og:description" content="查询包含甘油的产品MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50   #查看2个品牌之间有什么共同点MATCH(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-14T04:03:04.000Z">
-<meta property="article:modified_time" content="2022-03-14T04:11:25.943Z">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/fa.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/price.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pris.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/ou.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/same.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/smae.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xisi.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xiaozhong.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/liangtiao.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/yige.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/az.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png">
+<meta property="og:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png">
+<meta property="article:published_time" content="2022-03-15T05:58:05.000Z">
+<meta property="article:modified_time" content="2022-03-15T06:09:10.579Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png">
   
   
-  <title>ubuntu20.04的Realtek网卡驱动安装 - Be With you</title>
+  <title>neo4j的构建的知识图谱的语法示例 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +201,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="ubuntu20.04的Realtek网卡驱动安装">
+          <span id="subtitle" title="neo4j的构建的知识图谱的语法示例">
             
           </span>
         </div>
@@ -197,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-03-14 12:03" pubdate>
-          2022年3月14日 中午
+        <time datetime="2022-03-15 13:58" pubdate>
+          2022年3月15日 下午
         </time>
       </span>
     
@@ -209,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          880 字
+          1.4k 字
         
       </span>
     
@@ -220,7 +236,7 @@
         
         
         
-          8 分钟
+          12 分钟
         
       </span>
     
@@ -258,22 +274,53 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ubuntu20.04的Realtek网卡驱动安装</h1>
+            <h1 style="display: none">neo4j的构建的知识图谱的语法示例</h1>
             
             <div class="markdown-body">
               
-              <h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>ubuntu的20.04版本对部分网卡的驱动没有默认集成，需要手动安装, 记录下安装流程</p>
-<h2 id="查看网卡型号"><a href="#查看网卡型号" class="headerlink" title="查看网卡型号"></a>查看网卡型号</h2><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs dts">sudo lshw -C network<br>  *-network                 <br><span class="hljs-symbol">       description:</span> Ethernet interface<br><span class="hljs-symbol">       product:</span> RTL8125 <span class="hljs-number">2.5</span>GbE Controller<br><span class="hljs-symbol">       vendor:</span> Realtek Semiconductor Co., Ltd.<br></code></pre></td></tr></table></figure>
+              <h1 id="查询包含甘油的产品"><a href="#查询包含甘油的产品" class="headerlink" title="查询包含甘油的产品"></a>查询包含甘油的产品</h1><p>MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component {name:”甘油”}) return p limit 50</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/gan.png" srcset="/img/loading.gif" lazyload class="">
 
-<h2 id="得知型号是RTL8125-2-5G，然后去官方网站下载对应的驱动"><a href="#得知型号是RTL8125-2-5G，然后去官方网站下载对应的驱动" class="headerlink" title="得知型号是RTL8125 2.5G，然后去官方网站下载对应的驱动"></a>得知型号是RTL8125 2.5G，然后去官方网站下载对应的驱动</h2><p><a target="_blank" rel="noopener" href="https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software">https://www.realtek.com/en/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software</a></p>
-<h2 id="在你的机器上首先确保有make相关组件-新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装"><a href="#在你的机器上首先确保有make相关组件-新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装" class="headerlink" title="在你的机器上首先确保有make相关组件,新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装"></a>在你的机器上首先确保有make相关组件,新安装系统时需要安装好一些编译的包，也可以按下列方式重新安装</h2><h3 id="首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下"><a href="#首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下" class="headerlink" title="首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下:"></a>首先，你网卡没法联网，只能使用本地镜像，本地镜像的构建方式如下:</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#挂载镜像</span><br>mkdir <span class="hljs-regexp">/media/i</span>so<br>sudo mount  ~<span class="hljs-regexp">/Desktop/u</span>buntu-<span class="hljs-number">20.04</span>.<span class="hljs-number">2.0</span>-desktop-amd64.iso <span class="hljs-regexp">/media/i</span>so<br></code></pre></td></tr></table></figure>
+<p>#查看2个品牌之间有什么共同点<br>MATCH<br>(n:Brand {name:”希思黎”}), (b:Brand {name:’欧莱雅’}), p &#x3D; allShortestPaths((n)-[*]-(b))<br>RETURN p </p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pin.png" srcset="/img/loading.gif" lazyload class="">
 
-<p>#focal是ubtunu20.04的版本的名称<br>sudo vim &#x2F;etc&#x2F;apt&#x2F;sources.list<br>deb file:&#x2F;media&#x2F;iso&#x2F; focal main contrib</p>
-<p>#更新下包的缓存<br>sudo apt update</p>
-<p>#安装make命令, build-essential是编译代码所需的包，iso镜像中自带了，其实可以在安装系统时安装上<br>sudo apt install build-essential 或者make</p>
-<h2 id="然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9-005-06-tar-bz2"><a href="#然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9-005-06-tar-bz2" class="headerlink" title="然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9.005.06.tar.bz2"></a>然把你下载的驱动拷贝到服务器，我的对应驱动是r8125-9.005.06.tar.bz2</h2><p>解压<br>tar jxvf r8125-9.005.06.tar.bz2</p>
-<h2 id="编译和安装"><a href="#编译和安装" class="headerlink" title="编译和安装"></a>编译和安装</h2><p>cd r8125-9.005.06<br>sudo make<br>sudo .&#x2F;autorun.sh</p>
-<h2 id="正常查看网络，或者手动配置ip"><a href="#正常查看网络，或者手动配置ip" class="headerlink" title="正常查看网络，或者手动配置ip"></a>正常查看网络，或者手动配置ip</h2><p>ip a</p>
+<h1 id="法国品牌"><a href="#法国品牌" class="headerlink" title="法国品牌"></a>法国品牌</h1><p>MATCH p&#x3D;()-[r:BRAND_COUNTRY_IS]-&gt;(c:Country {name:”法国”}) RETURN p LIMIT 25</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/fa.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="collect-统计-各个品牌关于手部护理的产品的价格统计"><a href="#collect-统计-各个品牌关于手部护理的产品的价格统计" class="headerlink" title="collect 统计, 各个品牌关于手部护理的产品的价格统计"></a>collect 统计, 各个品牌关于手部护理的产品的价格统计</h1><p>MATCH (:ProductCategory {name:”手部护理”})–&gt;(:ProductCategory)&lt;–(p:Product)–&gt;(b:Brand)<br>RETURN b.name as Brand, collect(distinct p.price) as Price</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/price.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="价格在200-300之间"><a href="#价格在200-300之间" class="headerlink" title="价格在200-300之间"></a>价格在200-300之间</h1><p>MATCH (n:Product) WHERE n.price &gt;&#x3D; 200 AND n.price &lt; 300 RETURN n</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/pris.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="欧莱雅商品"><a href="#欧莱雅商品" class="headerlink" title="欧莱雅商品"></a>欧莱雅商品</h1><p>MATCH (n:Brand {name:”欧莱雅”}) &lt;-[:PRODUCT_BRAND_IS]-(p) RETURN n,p LIMIT 25</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/ou.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="同样功效的产品"><a href="#同样功效的产品" class="headerlink" title="同样功效的产品"></a>同样功效的产品</h1><p>MATCH (n:Product {name:”欧莱雅强韧柔顺洗发露”})-[:PRODUCT_EFFECT_IS]-&gt;(m)&lt;-[:PRODUCT_EFFECT_IS]-(p) RETURN n,p</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/same.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="同样功效，价格便宜"><a href="#同样功效，价格便宜" class="headerlink" title="同样功效，价格便宜"></a>同样功效，价格便宜</h1><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">MATCH (n:Product &#123;name:<span class="hljs-string">&quot;倩碧水嫩保湿水精萃&quot;</span>&#125;)-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-&gt;(m)&lt;-<span class="hljs-selector-attr">[:PRODUCT_EFFECT_IS]</span>-(<span class="hljs-selector-tag">p</span>) WHERE <span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.price</span> &lt;n<span class="hljs-selector-class">.price</span> RETURN n,<span class="hljs-selector-tag">p</span> Limit <span class="hljs-number">10</span><br></code></pre></td></tr></table></figure>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/smae.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="希思黎生产过哪些类型产品"><a href="#希思黎生产过哪些类型产品" class="headerlink" title="希思黎生产过哪些类型产品"></a>希思黎生产过哪些类型产品</h1><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lisp">MATCH (<span class="hljs-name">c</span><span class="hljs-symbol">:Brand</span> &#123;name:<span class="hljs-string">&quot;希思黎&quot;</span>&#125;)&lt;--(<span class="hljs-symbol">:Product</span>)--&gt;(<span class="hljs-name">s</span><span class="hljs-symbol">:ProductCategory</span>)<br>RETURN DISTINCT s<br></code></pre></td></tr></table></figure>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xisi.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="小众品牌"><a href="#小众品牌" class="headerlink" title="小众品牌"></a>小众品牌</h1><p>MATCH p&#x3D;()-[r:BRAND_POPULARITY_IS]-&gt;(b:BrandPopularity {name:”小众”}) RETURN p LIMIT 25</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/xiaozhong.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="找2个产品2跳以内的共同点"><a href="#找2个产品2跳以内的共同点" class="headerlink" title="找2个产品2跳以内的共同点"></a>找2个产品2跳以内的共同点</h1><p>MATCH p&#x3D;(<br>(n:Product {name:”倩碧水嫩保湿水精萃”})-[*1..2]-(m:Product {name:”蒂迩肌男士水油平衡洁面泡沫”})<br>)<br>RETURN p</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/liangtiao.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="找2个产品的一个共同点"><a href="#找2个产品的一个共同点" class="headerlink" title="找2个产品的一个共同点"></a>找2个产品的一个共同点</h1><p>MATCH p&#x3D;shortestPath(<br>(n:Product {name:”倩碧水嫩保湿水精萃”})-[*]-(m:Product {name:”蒂迩肌男士水油平衡洁面泡沫”})<br>)<br>RETURN p</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/yige.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="总产品数"><a href="#总产品数" class="headerlink" title="总产品数"></a>总产品数</h1><p>MATCH (n:Product)<br>RETURN count(n)</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/az.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="总成分数"><a href="#总成分数" class="headerlink" title="总成分数"></a>总成分数</h1><p>MATCH (n:Component)<br>RETURN count(n)</p>
+<img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/chf.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="meta-graph，元图"><a href="#meta-graph，元图" class="headerlink" title="meta-graph，元图"></a>meta-graph，元图</h1><img src="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/zitu.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>
@@ -290,8 +337,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>ubuntu20.04的Realtek网卡驱动安装</div>
-      <div>http://example.com/2022/03/14/ubuntu20-04%E7%9A%84Realtek%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/</div>
+      <div>neo4j的构建的知识图谱的语法示例</div>
+      <div>http://example.com/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/</div>
     </div>
     <div class="license-meta">
       
@@ -303,7 +350,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年3月14日</div>
+          <div>2022年3月15日</div>
         </div>
       
       
@@ -333,18 +380,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/" title="neo4j的构建的知识图谱的语法示例">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">neo4j的构建的知识图谱的语法示例</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/14/ubuntu%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2/" title="ubuntu远程桌面的三种实现方式">
-                        <span class="hidden-mobile">ubuntu远程桌面的三种实现方式</span>
+                      <a href="/2022/03/14/ubuntu20-04%E7%9A%84Realtek%E7%BD%91%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%AE%89%E8%A3%85/" title="ubuntu20.04的Realtek网卡驱动安装">
+                        <span class="hidden-mobile">ubuntu20.04的Realtek网卡驱动安装</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
