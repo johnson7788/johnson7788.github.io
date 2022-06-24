@@ -16,20 +16,22 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。以下在6台机器上实验，不设置随机数种子, 有的机器是torch相同的版本，有的不是,对比预测的logits分数和最终的预测结果。测试的是情感模型的预测结果.不同的torch版本，也会导致预测有一些差异，但是差异很小，预测的分数有14%的差异，但是数千条数据，预测">
+    <meta name="description" content="PCA和xlsxstat分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="torch版本和随机数">
-<meta property="og:url" content="https://johnson7788.github.io/2022/04/14/torch%E7%89%88%E6%9C%AC%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0/index.html">
+<meta property="og:title" content="PCA和xlstat">
+<meta property="og:url" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。以下在6台机器上实验，不设置随机数种子, 有的机器是torch相同的版本，有的不是,对比预测的logits分数和最终的预测结果。测试的是情感模型的预测结果.不同的torch版本，也会导致预测有一些差异，但是差异很小，预测的分数有14%的差异，但是数千条数据，预测">
+<meta property="og:description" content="PCA和xlsxstat分析">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-04-14T01:30:51.000Z">
-<meta property="article:modified_time" content="2022-04-14T01:40:47.816Z">
+<meta property="og:image" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png">
+<meta property="article:published_time" content="2022-06-24T09:20:52.000Z">
+<meta property="article:modified_time" content="2022-06-24T09:24:56.588Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png">
   
   
-  <title>torch版本和随机数 - Be With you</title>
+  <title>PCA和xlstat - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="torch版本和随机数">
+          <span id="subtitle" title="PCA和xlstat">
             
           </span>
         </div>
@@ -197,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-04-14 09:30" pubdate>
-          2022年4月14日 上午
+        <time datetime="2022-06-24 17:20" pubdate>
+          2022年6月24日 下午
         </time>
       </span>
     
@@ -209,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          14 字
         
       </span>
     
@@ -220,7 +222,7 @@
         
         
         
-          15 分钟
+          1 分钟
         
       </span>
     
@@ -258,51 +260,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">torch版本和随机数</h1>
+            <h1 style="display: none">PCA和xlstat</h1>
             
             <div class="markdown-body">
               
-              <h1 id="在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。"><a href="#在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。" class="headerlink" title="在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。"></a>在不同的PyTorch版本或不同的平台上，不保证完全可重复的结果。此外，即使使用相同的种子，在CPU和GPU的执行中，结果也可能无法重现。</h1><p>以下在6台机器上实验，不设置随机数种子, 有的机器是torch相同的版本，有的不是,对比预测的logits分数和最终的预测结果。测试的是情感模型的预测结果.<br>不同的torch版本，也会导致预测有一些差异，但是差异很小，预测的分数有14%的差异，但是数千条数据，预测的结果只有一条有差异</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">w69</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span><br><br><span class="hljs-attribute">w79</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span><br><br><span class="hljs-attribute">w19</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">8</span>.<span class="hljs-number">1</span><br><br><span class="hljs-attribute">w39</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">7</span>.<span class="hljs-number">0</span>+cu110<br><br><span class="hljs-attribute">w09</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">9</span>.<span class="hljs-number">0</span>+cu111<br><br><span class="hljs-attribute">w89</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">9</span>.<span class="hljs-number">0</span>+cu111<br><br><span class="hljs-attribute">w99</span> | CHANGED | rc=<span class="hljs-number">0</span> &gt;&gt;<br><span class="hljs-attribute">torch</span>==<span class="hljs-number">1</span>.<span class="hljs-number">9</span>.<span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
-
-<p>预测结果如下：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs stylus">主机<span class="hljs-number">19</span>的结果保存到: <span class="hljs-number">19</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">351</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">40</span>&#125;)<br>主机<span class="hljs-number">39</span>的结果保存到: <span class="hljs-number">39</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">351</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">40</span>&#125;)<br>主机<span class="hljs-number">69</span>的结果保存到: <span class="hljs-number">69</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">351</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">40</span>&#125;)<br>主机<span class="hljs-number">79</span>的结果保存到: <span class="hljs-number">79</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">351</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">40</span>&#125;)<br>主机<span class="hljs-number">89</span>的结果保存到: <span class="hljs-number">89</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">352</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">39</span>&#125;)<br>主机<span class="hljs-number">09</span>的结果保存到: <span class="hljs-number">09</span>_result<span class="hljs-selector-class">.xlsx</span>, 标签占比是<span class="hljs-built_in">Counter</span>(&#123;<span class="hljs-string">&#x27;积极&#x27;</span>: <span class="hljs-number">352</span>, <span class="hljs-string">&#x27;中性&#x27;</span>: <span class="hljs-number">109</span>, <span class="hljs-string">&#x27;消极&#x27;</span>: <span class="hljs-number">39</span>&#125;)<br></code></pre></td></tr></table></figure>
-
-<h1 id="对比预测结果和logits"><a href="#对比预测结果和logits" class="headerlink" title="对比预测结果和logits"></a>对比预测结果和logits</h1><p>相同的torch版本，预测结果相同</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus">diff <span class="hljs-number">09</span>_result<span class="hljs-selector-class">.xlsx</span><span class="hljs-selector-class">.json</span> <span class="hljs-number">89</span>_result<span class="hljs-selector-class">.xlsx</span>.json<br></code></pre></td></tr></table></figure>
-
-<p>不同的torch版本，预测结果不同</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs stylus">diff -<span class="hljs-selector-tag">q</span> <span class="hljs-number">09</span>_result<span class="hljs-selector-class">.xlsx</span><span class="hljs-selector-class">.json</span> <span class="hljs-number">19</span>_result<span class="hljs-selector-class">.xlsx</span><span class="hljs-selector-class">.json</span><br>Files <span class="hljs-number">09</span>_result<span class="hljs-selector-class">.xlsx</span><span class="hljs-selector-class">.json</span> and <span class="hljs-number">19</span>_result<span class="hljs-selector-class">.xlsx</span><span class="hljs-selector-class">.json</span> differ<br></code></pre></td></tr></table></figure>
-
-<h1 id="所以我们在复现实验的时候，最好设定随机数种子-例如"><a href="#所以我们在复现实验的时候，最好设定随机数种子-例如" class="headerlink" title="所以我们在复现实验的时候，最好设定随机数种子, 例如"></a>所以我们在复现实验的时候，最好设定随机数种子, 例如</h1><p>设置random_seed</p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs monkey"><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> numpy as np<br><span class="hljs-built_in">seed</span>=<span class="hljs-number">100</span><span class="hljs-meta"></span><br><span class="hljs-meta"># torch的随机数种子固定，torch.manual_seed已经是支持CPU和GPU了，不需要设置这个torch.cuda.manual_seed_all了</span><br>torch.manual_seed(<span class="hljs-built_in">seed</span>)<span class="hljs-meta"></span><br><span class="hljs-meta"># numpy的随机数种子</span><br>np.random.<span class="hljs-built_in">seed</span>(<span class="hljs-built_in">seed</span>)<span class="hljs-meta"></span><br><span class="hljs-meta"># python的随机数种子</span><br>random.<span class="hljs-built_in">seed</span>(<span class="hljs-built_in">seed</span>)<span class="hljs-meta"></span><br><span class="hljs-meta"># cuDNN的保证每次实验使用相同的算法</span><br>torch.backends.cudnn.benchmark = <span class="hljs-literal">False</span><span class="hljs-meta">   # 如果改为True，表示速度提升，但是不是同一算法</span><span class="hljs-meta"></span><br><span class="hljs-meta"># 保证每个算法的确定性</span><br>torch.backends.cudnn.deterministic = <span class="hljs-literal">True</span> 或torch.use_deterministic_algorithms(<span class="hljs-literal">True</span>)<br></code></pre></td></tr></table></figure>
+              <h1 id="PCA和xlsxstat分析"><a href="#PCA和xlsxstat分析" class="headerlink" title="PCA和xlsxstat分析"></a>PCA和xlsxstat分析</h1><img src="/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png" srcset="/img/loading.gif" lazyload class="">
 
               
             </div>
             <hr/>
             <div>
               <div class="post-metas my-3">
-  
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/torch/" class="category-chain-item">torch</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
   
   
 </div>
@@ -313,8 +281,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>torch版本和随机数</div>
-      <div>https://johnson7788.github.io/2022/04/14/torch%E7%89%88%E6%9C%AC%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0/</div>
+      <div>PCA和xlstat</div>
+      <div>https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +294,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年4月14日</div>
+          <div>2022年6月24日</div>
         </div>
       
       
@@ -356,18 +324,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/06/24/PCA%E5%92%8Cxlstat/" title="PCA和xlstat">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PCA和xlstat</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/12/apex%E6%8A%A5%E9%94%99/" title="apex报错">
-                        <span class="hidden-mobile">apex报错</span>
+                      <a href="/2022/04/14/torch%E7%89%88%E6%9C%AC%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0/" title="torch版本和随机数">
+                        <span class="hidden-mobile">torch版本和随机数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
