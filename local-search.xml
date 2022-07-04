@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>一个transformers报错</title>
+    <link href="/2022/07/04/%E4%B8%80%E4%B8%AAtransformers%E6%8A%A5%E9%94%99/"/>
+    <url>/2022/07/04/%E4%B8%80%E4%B8%AAtransformers%E6%8A%A5%E9%94%99/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>我们在使用huggiface transformers时, 有时会报错<br>transformers报错如下：</p><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">    <span class="hljs-keyword">raise</span> ValueError(&quot;got_ver is None&quot;)<br>ValueError: got_ver <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span><br></code></pre></td></tr></table></figure><h1 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h1><p>这是由于transformers使用时，会检查需要依赖的依赖包版本是否满足要求，使用的是importlib_metadata库，<br>没有获取到给定的包的名字的版本号，例如pkg是numpy，而numpy安装不正确，或者importlib_metadata有问题，获取numpy的版本为None，那么就报错如上，got_ver &#x3D; importlib_metadata.version(pkg)</p><h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>请查看是否混用了conda和pip，混用是没有问题的，但是有时它们还是会有部分兼容性问题，我报错的原因是importlib_metadata无法检查到conda安装的numpy的版本，改成使用pip重新安装numpy，然后手动测试是否能成功检查版本</p><figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python-repl">python<br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="language-python"><span class="hljs-keyword">import</span> importlib_metadata</span><br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="language-python">importlib_metadata.version(<span class="hljs-string">&#x27;numpy&#x27;</span>)</span><br>&#x27;1.23.0&#x27;<br><span class="hljs-meta">&gt;&gt;&gt;</span><br></code></pre></td></tr></table></figure><p>如果能够检查到，说明问题解决</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>满意度预测模型</title>
     <link href="/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/"/>
     <url>/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</url>
