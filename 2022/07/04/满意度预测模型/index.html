@@ -16,22 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="PCA和xlsxstat分析">
+    <meta name="description" content="参加公众号原文https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;IHcioj1-i0HzloSQ3gu7tw 实现意义结果： 应该把提升用户满意度的钱花在哪个方面，即产品的哪个属性上，然后再哪个属性上应该提升多少，为提升客户对某产品的整体满意度，对用户评论进行分析，判断出用户对产品的哪些属性的满意度较差，提升哪些属性的产品满意度，能显著影响产品的整体满意度。 实现思路主要分为4个模型 Aspe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PCA和xlstat">
-<meta property="og:url" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/index.html">
+<meta property="og:title" content="满意度预测模型">
+<meta property="og:url" content="https://johnson7788.github.io/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="PCA和xlsxstat分析">
+<meta property="og:description" content="参加公众号原文https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;IHcioj1-i0HzloSQ3gu7tw 实现意义结果： 应该把提升用户满意度的钱花在哪个方面，即产品的哪个属性上，然后再哪个属性上应该提升多少，为提升客户对某产品的整体满意度，对用户评论进行分析，判断出用户对产品的哪些属性的满意度较差，提升哪些属性的产品满意度，能显著影响产品的整体满意度。 实现思路主要分为4个模型 Aspe">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png">
-<meta property="article:published_time" content="2022-06-24T09:20:52.000Z">
-<meta property="article:modified_time" content="2022-06-24T09:24:56.588Z">
+<meta property="article:published_time" content="2022-07-04T05:46:43.000Z">
+<meta property="article:modified_time" content="2022-07-04T05:58:18.780Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png">
   
   
-  <title>PCA和xlstat - Be With you</title>
+  <title>满意度预测模型 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -187,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="PCA和xlstat">
+          <span id="subtitle" title="满意度预测模型">
             
           </span>
         </div>
@@ -199,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-06-24 17:20" pubdate>
-          2022年6月24日 下午
+        <time datetime="2022-07-04 13:46" pubdate>
+          2022年7月4日 下午
         </time>
       </span>
     
@@ -211,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14 字
+          874 字
         
       </span>
     
@@ -222,7 +220,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -260,11 +258,18 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">PCA和xlstat</h1>
+            <h1 style="display: none">满意度预测模型</h1>
             
             <div class="markdown-body">
               
-              <h1 id="PCA和xlsxstat分析"><a href="#PCA和xlsxstat分析" class="headerlink" title="PCA和xlsxstat分析"></a>PCA和xlsxstat分析</h1><img src="/2022/06/24/PCA%E5%92%8Cxlstat/PCA%E5%92%8Cxlstat.png" srcset="/img/loading.gif" lazyload class="">
+              <h1 id="参加公众号原文"><a href="#参加公众号原文" class="headerlink" title="参加公众号原文"></a>参加公众号原文</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/IHcioj1-i0HzloSQ3gu7tw">https://mp.weixin.qq.com/s/IHcioj1-i0HzloSQ3gu7tw</a></p>
+<h1 id="实现意义"><a href="#实现意义" class="headerlink" title="实现意义"></a>实现意义</h1><p>结果： 应该把提升用户满意度的钱花在哪个方面，即产品的哪个属性上，然后再哪个属性上应该提升多少，为提升客户对某产品的整体满意度，对用户评论进行分析，判断出用户对产品的哪些属性的满意度较差，提升哪些属性的产品满意度，能显著影响产品的整体满意度。</p>
+<h1 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h1><p>主要分为4个模型</p>
+<h2 id="Aspect情感模型"><a href="#Aspect情感模型" class="headerlink" title="Aspect情感模型"></a>Aspect情感模型</h2><p>预测属性词在句子中的情感, 标签:积极，消极，中性</p>
+<h2 id="整体情感模型"><a href="#整体情感模型" class="headerlink" title="整体情感模型"></a>整体情感模型</h2><p>表达对这个产品的整体情感， 标签:整体积极，整体消极，整体中性，无整体情感<br>   eg: 东西还不错，就是洗了脸有点干干的，也洗的很干净</p>
+<h2 id="贡献度模型"><a href="#贡献度模型" class="headerlink" title="贡献度模型"></a>贡献度模型</h2><p>预测每个aspect对整体情感的贡献度,使用普通线性回归模型，决策树和集成学习模型，深度学习模型分别进行实验<br>线性回归模型<br>    普通线性回归模型<br>    LASSO回归<br>    Ridge回归<br>    ElasticNet<br>    多项式回归<br>    Bayesian回归<br>    Bayesian ARD回归<br>    主成分回归<br>    偏最小二乘回归</p>
+<p>决策树和集成学习模型： 使用特征重要性作为系数, feature_importance_<br>        Decision Tree<br>        Random Forest<br>        GradientBoosting<br>        AdaBoost<br>        XGBRegressor<br>        LightGBM<br>深度学习</p>
+<h2 id="模型的可解释性"><a href="#模型的可解释性" class="headerlink" title="模型的可解释性"></a>模型的可解释性</h2><p>基于shapley值的可解释性，探讨属性的重要程度<br>特征重要性<br>    SHAP的特征重要性是shapley值的大小，或这说绝对值的大小，0表示这个特征可有可无，因为是加性归因，shapley值的特征重要性是累加思想，即每个特征的重要性是可以累加的。<br>        Shapley值是从整体考虑的特征重要性<br>    而原始的XGBoost树模型的特征重要性，是来自该特征在所有树的节点分割中使用的平均增益, 平均增益越大，那么就越重要<br>        表明每个特征在模型内构建提升决策树时的有用性或价值。一个属性特征越是用于决策树的关键决策，其相对重要性就越高<br>        重要性是通过每个属性分割点提高性能指标的量来计算的，性能指标衡量分割点“纯度”，例如信息增益<br>        集成树模型是从局部考虑特征重要性，然后做的加权平均</p>
 
               
             </div>
@@ -281,8 +286,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>PCA和xlstat</div>
-      <div>https://johnson7788.github.io/2022/06/24/PCA%E5%92%8Cxlstat/</div>
+      <div>满意度预测模型</div>
+      <div>https://johnson7788.github.io/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/</div>
     </div>
     <div class="license-meta">
       
@@ -294,7 +299,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年6月24日</div>
+          <div>2022年7月4日</div>
         </div>
       
       
@@ -324,18 +329,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/" title="满意度预测模型">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">满意度预测模型</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/14/torch%E7%89%88%E6%9C%AC%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%95%B0/" title="torch版本和随机数">
-                        <span class="hidden-mobile">torch版本和随机数</span>
+                      <a href="/2022/06/24/PCA%E5%92%8Cxlstat/" title="PCA和xlstat">
+                        <span class="hidden-mobile">PCA和xlstat</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
