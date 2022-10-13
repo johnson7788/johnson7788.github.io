@@ -16,20 +16,26 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前提我们在使用huggiface transformers时, 有时会报错transformers报错如下： 12    raise ValueError(&quot;got_ver is None&quot;)ValueError: got_ver is None  错误分析这是由于transformers使用时，会检查需要依赖的依赖包版本是否满足要求，使用的是importlib_metadat">
+    <meta name="description" content="项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品数据标注开发一个前后端，前端标注人员可以根据提供的关键字进行搜索，搜索通过后端调取爬虫平台，实时获取爬取结果，因为爬取不稳定，添加额外缓存系统，当爬取过一次后，可以直接读取缓存，用户也可以不读取缓存，用户标注的结果提交到后台的mongo中保存标注工具示例:  优化:    0. 提交按钮是浮动状态，方便用户下拉选中后也可以提交    1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个transformers报错">
-<meta property="og:url" content="https://johnson7788.github.io/2022/07/04/%E4%B8%80%E4%B8%AAtransformers%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:title" content="多模态项目记录">
+<meta property="og:url" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="前提我们在使用huggiface transformers时, 有时会报错transformers报错如下： 12    raise ValueError(&quot;got_ver is None&quot;)ValueError: got_ver is None  错误分析这是由于transformers使用时，会检查需要依赖的依赖包版本是否满足要求，使用的是importlib_metadat">
+<meta property="og:description" content="项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品数据标注开发一个前后端，前端标注人员可以根据提供的关键字进行搜索，搜索通过后端调取爬虫平台，实时获取爬取结果，因为爬取不稳定，添加额外缓存系统，当爬取过一次后，可以直接读取缓存，用户也可以不读取缓存，用户标注的结果提交到后台的mongo中保存标注工具示例:  优化:    0. 提交按钮是浮动状态，方便用户下拉选中后也可以提交    1">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-04T06:00:47.000Z">
-<meta property="article:modified_time" content="2022-07-04T06:05:02.118Z">
+<meta property="og:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/labeltool.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/loss1.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/loss.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/eval1.png">
+<meta property="og:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/eval2.png">
+<meta property="article:published_time" content="2022-10-13T06:44:41.000Z">
+<meta property="article:modified_time" content="2022-10-13T07:08:00.358Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/labeltool.png">
   
   
-  <title>一个transformers报错 - Be With you</title>
+  <title>多模态项目记录 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +191,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="一个transformers报错">
+          <span id="subtitle" title="多模态项目记录">
             
           </span>
         </div>
@@ -197,8 +203,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-07-04 14:00" pubdate>
-          2022年7月4日 下午
+        <time datetime="2022-10-13 14:44" pubdate>
+          2022年10月13日 下午
         </time>
       </span>
     
@@ -209,7 +215,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          597 字
+          2.7k 字
         
       </span>
     
@@ -220,7 +226,7 @@
         
         
         
-          5 分钟
+          23 分钟
         
       </span>
     
@@ -258,17 +264,31 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一个transformers报错</h1>
+            <h1 style="display: none">多模态项目记录</h1>
             
             <div class="markdown-body">
               
-              <h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>我们在使用huggiface transformers时, 有时会报错<br>transformers报错如下：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">    <span class="hljs-keyword">raise</span> ValueError(&quot;got_ver is None&quot;)<br>ValueError: got_ver <span class="hljs-keyword">is</span> <span class="hljs-keyword">None</span><br></code></pre></td></tr></table></figure>
+              <h1 id="项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品"><a href="#项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品" class="headerlink" title="项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品"></a>项目目的，根据给定的图片和标题，判断所属的商品是库中的哪个商品</h1><h1 id="数据标注"><a href="#数据标注" class="headerlink" title="数据标注"></a>数据标注</h1><p>开发一个前后端，前端标注人员可以根据提供的关键字进行搜索，搜索通过后端调取爬虫平台，实时获取爬取结果，因为爬取不稳定，添加额外缓存系统，当爬取过一次后，可以直接读取缓存，用户也可以不读取缓存，用户标注的结果提交到后台的mongo中保存<br>标注工具示例:</p>
+<img src="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/labeltool.png" srcset="/img/loading.gif" lazyload class="">
+<p>优化:<br>    0. 提交按钮是浮动状态，方便用户下拉选中后也可以提交<br>    1. 图标加上tmall官方链接，方便标注人员点击查看<br>    2. 标注人员提交标注结果后，给与成功提示，否则给与失败提示，然后清空搜索框<br>    3.Flask接口失败时，也会给与友好提示<br>    4. 当用户搜索关键字为空时，默认给一个搜搜关键字示例<br>    5. 给列表中每个搜索结果的a标签图片都加上点击事件，当是非checked状态时，点击后，变成checked状态，当是checked状态时，点击后变成非checked状态<br>    6. 如果给的关键字在天猫中没有搜索到，返回也是空的，那么给出友好提示<br>    7.判断用户提交的关联商品的名称是否为空，如果为空，提示一下<br>    8. 追加原始的天猫的店铺的url链接，方便标注后一同导入到数据库中<br>    9. 翻页后标签图片的点击事件失效问题修复<br>    10. 增加强制爬取按钮：爬虫搜索（表示不使用缓存直接爬取）<br>        1. 因为缓存的结果可能不存在，那么直接使用强制爬取<br>        html中增加一个div，里面有一个button按钮<br>        css中对这个div浮动，对button更改大小<br>        js中添加事件，点击这个button后，传入的url多加一个spider&#x3D;ture的参数<br>        js通过DOM的location.search解析url参数，获取spider关键字状态，发送请求时根据spdier状态判断请求的force_update参数</p>
+<h1 id="使用模型"><a href="#使用模型" class="headerlink" title="使用模型"></a>使用模型</h1><ol>
+<li>使用的Vilt模型，对比了单流架构和双流架构，单流架构更符合本项目，因为单流架构是汇总了一个文本和图片的高阶特征，而不是2个特征</li>
+<li>首先使用模型继续预训练，我们下载了月70G数据，然后按照Vilt论文中所述，继续预训练，使其适应我们自己的数据集。</li>
+<li>微调模型训练，自定义2个损失，品牌分类损失+商品分类损失，如果只是商品分类损失，模型没有学到品牌的信息点，很容易在品牌上就预测错了，那么商品上更预测错误了，结果能够比单纯的预测商品分类损失准确率提高10%左右</li>
+<li>损失的权重，商品分类损失权重更大一些，因为品牌分类损失更简单，模型很容易就拟合了，结果证明商品分类损失权重大一些的话，准确率提高2%左右。</li>
+<li>损失和训练step的对比图, 使用Visdom绘图, 明显损失相同的情况下，更难的任务拟合更慢<br>图1：损失权重相同的情况<img src="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/loss1.png" srcset="/img/loading.gif" lazyload class=""></li>
+</ol>
+<p>图2：损失权重不同的情况</p>
+<img src="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/loss.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="错误分析"><a href="#错误分析" class="headerlink" title="错误分析"></a>错误分析</h1><p>这是由于transformers使用时，会检查需要依赖的依赖包版本是否满足要求，使用的是importlib_metadata库，<br>没有获取到给定的包的名字的版本号，例如pkg是numpy，而numpy安装不正确，或者importlib_metadata有问题，获取numpy的版本为None，那么就报错如上，got_ver &#x3D; importlib_metadata.version(pkg)</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>请查看是否混用了conda和pip，混用是没有问题的，但是有时它们还是会有部分兼容性问题，我报错的原因是importlib_metadata无法检查到conda安装的numpy的版本，改成使用pip重新安装numpy，然后手动测试是否能成功检查版本</p>
-<figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python-repl">python<br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="language-python"><span class="hljs-keyword">import</span> importlib_metadata</span><br><span class="hljs-meta">&gt;&gt;&gt;</span> <span class="language-python">importlib_metadata.version(<span class="hljs-string">&#x27;numpy&#x27;</span>)</span><br>&#x27;1.23.0&#x27;<br><span class="hljs-meta">&gt;&gt;&gt;</span><br></code></pre></td></tr></table></figure>
-<p>如果能够检查到，说明问题解决</p>
+<p>Vilt总结:<br>ViLT：没有卷积或区域监督的视觉和语言transformer<br>    定义<br>        视觉和语言预训练（VLP），Vision-and-Language Pre-training<br>        Vision-and-Language Transformer (ViLT)<br>            以一种统一的方式处理两种模态<br>            与以前的VLP模型的主要区别在于它对像素级输入的浅层无卷积嵌入。去除仅用于视觉输入的深层嵌入，通过设计大大减少了模型的大小和运行时间<br>            图2d类型，原始像素的嵌入层很浅，计算量也很小，与文本token一样，将大部分的计算集中在模态交互的建模上<br>        VSE：visual semantic embedding，视觉语义嵌入<br>        MI：modality interaction 模态交互<br>            单流方法: Single-Stream<br>                各层操作图像和文本输入的拼接，例如UNITER<br>            双流方法: Dual-stream<br>                两种模态在输入层面没有拼接起来,类似ViLBERT，LXMERT<br>        TE: textual embedder 文本嵌入器<br>        VE: visual embedder 视觉嵌入器<br>            使用碎片投影减小开销，使用一个32×32的补丁投影，只需要2.4M的参数<br>            传统的区域特征需要步骤（参数量大）：<br>                一个区域建议网络（RPN）根据从CNN主干网汇集的网格特征提出感兴趣的区域（RoI）<br>                非最大限度的抑制（NMS）将RoI的数量减少到几千个<br>                RoI经过RoI头，成为区域特征<br>                NMS再次应用于每个类别，最终将特征的数量减少到一百个以下<br>        MSA: multiheaded self-attention 多头自注意力<br>        ITM: Image Text Match: 图像文本匹配<br>        ViT-B&#x2F;32：代表Patch大小为32，即图片的每个碎片的大小，即32*32像素的，使用Conv2d即可<br>    模型（图3）<br>        模型结构<br>            文本嵌入：词嵌入+位置嵌入+模态类型嵌入<br>            视觉嵌入：图片切成块，线性投影嵌入+位置嵌入+模态类型嵌入<br>            被串联成一个组合序列z0<br>            transformer层<br>                由多个块组成，每个块包含一个多头self-attention(MSA)和一个多层感知器(MLP)<br>                层归一化（LN）在MSA和MLP之前<br>                输出上下文序列zD<br>        预训练目标<br>            图像文本匹配（ITM）<br>                以0.5的概率随机地用不同的图像来替换对齐的图像。一个单一的线性层ITM头将汇集的输出特征p投射到二分类的logits上，我们计算出负logits可能性损失作为我们的ITM损失<br>                word patch alignment 词块对齐（WPA）损失<br>                    计算文本子集和视觉子集两个子集之间的对齐分数，使用非精确近似点法进行最优转译optimal transports（IPOT），并将近似的Wasserstein距离乘以0.1加到ITM损失中<br>                    可视化对齐结果见图4，图像部分和词进行了对齐<br>            mask语言模型（MLM）<br>                0.15的概率随机mask，预测被masked的文本ground truth标签<br>                全词mask，而不是仅仅是词片wordpiecemask<br>        使用RandAugment进行图像增强<br>    数据集<br>        预训练<br>            微软COCO（MSCOCO），视觉基因组（VG），SBU字幕（SBU），以及谷歌概念字幕（GCC）<br>        微调测试任务：<br>            分类任务：VQAv2，NLVR2<br>            检索任务: MSCOCO, Flickr30K</p>
+<h1 id="开发多模态模型评估系统"><a href="#开发多模态模型评估系统" class="headerlink" title="开发多模态模型评估系统"></a>开发多模态模型评估系统</h1><ol start="3">
+<li>开发2个Tab标签，一个是测试预测，一个是统计<ol>
+<li>测试预测逻辑<br> 用户提交关键词<br> 调用&#x2F;api&#x2F;goodslist获取爬取结果<br> 对爬取结果的图片进行本地缓存<br> 对结果处理后提交多模态模型预测品牌和所属商品<br> 对预测结果进行展示<br> 展示预测结果<br> 展示图片，title，价格，店铺<br> 用户判断预测结果是否正确<br> 如果错误，给出正确的预测商品<br> 提交用户判断结果到后台<br> 统计逻辑<br> 从mongo中读取用户人工判断的结果<br> 展示所有数据的表格形式<br> 统计模型判断正确和错误的结果，显示准确率<img src="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/eval1.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/eval2.png" srcset="/img/loading.gif" lazyload class=""></li>
+</ol>
+</li>
+</ol>
 
               
             </div>
@@ -285,8 +305,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>一个transformers报错</div>
-      <div>https://johnson7788.github.io/2022/07/04/%E4%B8%80%E4%B8%AAtransformers%E6%8A%A5%E9%94%99/</div>
+      <div>多模态项目记录</div>
+      <div>https://johnson7788.github.io/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/</div>
     </div>
     <div class="license-meta">
       
@@ -298,7 +318,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年7月4日</div>
+          <div>2022年10月13日</div>
         </div>
       
       
@@ -328,18 +348,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/13/%E5%A4%9A%E6%A8%A1%E6%80%81%E9%A1%B9%E7%9B%AE%E8%AE%B0%E5%BD%95/" title="多模态项目记录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">多模态项目记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/04/%E6%BB%A1%E6%84%8F%E5%BA%A6%E9%A2%84%E6%B5%8B%E6%A8%A1%E5%9E%8B/" title="满意度预测模型">
-                        <span class="hidden-mobile">满意度预测模型</span>
+                      <a href="/2022/07/04/%E4%B8%80%E4%B8%AAtransformers%E6%8A%A5%E9%94%99/" title="一个transformers报错">
+                        <span class="hidden-mobile">一个transformers报错</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
