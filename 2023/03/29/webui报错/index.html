@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="salesforce的LAVIS包，https:&#x2F;&#x2F;github.com&#x2F;salesforce&#x2F;LAVIS是一个多模态的库，其中的BLIP2模块部分和huggingface的trasformers&#x3D;&#x3D;4.27.1不兼容,不兼容部分是,原因是query_embeds被repeat了维度0两次，所以造成torch.cat拼接时冲突。 123456789101112131415lavis&#x2F;models&#x2F;">
+    <meta name="description" content="升级Webui时报错如下时升级下gradio即可，pip install -U gradio 123456789101112131415161718192021222324252627282930313233343536373839404142434445Traceback (most recent call last):  File &quot;&#x2F;user&#x2F;stable-diffusion-we">
 <meta property="og:type" content="article">
-<meta property="og:title" content="lavis和transformers的冲突">
-<meta property="og:url" content="https://johnson7788.github.io/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/index.html">
+<meta property="og:title" content="webui报错">
+<meta property="og:url" content="https://johnson7788.github.io/2023/03/29/webui%E6%8A%A5%E9%94%99/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="salesforce的LAVIS包，https:&#x2F;&#x2F;github.com&#x2F;salesforce&#x2F;LAVIS是一个多模态的库，其中的BLIP2模块部分和huggingface的trasformers&#x3D;&#x3D;4.27.1不兼容,不兼容部分是,原因是query_embeds被repeat了维度0两次，所以造成torch.cat拼接时冲突。 123456789101112131415lavis&#x2F;models&#x2F;">
+<meta property="og:description" content="升级Webui时报错如下时升级下gradio即可，pip install -U gradio 123456789101112131415161718192021222324252627282930313233343536373839404142434445Traceback (most recent call last):  File &quot;&#x2F;user&#x2F;stable-diffusion-we">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-27T06:36:40.000Z">
-<meta property="article:modified_time" content="2023-03-27T06:42:07.183Z">
+<meta property="article:published_time" content="2023-03-29T01:39:10.000Z">
+<meta property="article:modified_time" content="2023-03-29T01:40:56.507Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>lavis和transformers的冲突 - Be With you</title>
+  <title>webui报错 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="lavis和transformers的冲突">
+          <span id="subtitle" title="webui报错">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-27 14:36" pubdate>
-          2023年3月27日 下午
+        <time datetime="2023-03-29 09:39" pubdate>
+          2023年3月29日 上午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.2k 字
+          3.1k 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          10 分钟
+          27 分钟
         
       </span>
     
@@ -258,17 +258,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">lavis和transformers的冲突</h1>
+            <h1 style="display: none">webui报错</h1>
             
             <div class="markdown-body">
               
-              <p>salesforce的LAVIS包，<a target="_blank" rel="noopener" href="https://github.com/salesforce/LAVIS%E6%98%AF%E4%B8%80%E4%B8%AA%E5%A4%9A%E6%A8%A1%E6%80%81%E7%9A%84%E5%BA%93%EF%BC%8C%E5%85%B6%E4%B8%AD%E7%9A%84BLIP2%E6%A8%A1%E5%9D%97%E9%83%A8%E5%88%86%E5%92%8Chuggingface%E7%9A%84trasformers==4.27.1%E4%B8%8D%E5%85%BC%E5%AE%B9,%E4%B8%8D%E5%85%BC%E5%AE%B9%E9%83%A8%E5%88%86%E6%98%AF,%E5%8E%9F%E5%9B%A0%E6%98%AFquery_embeds%E8%A2%ABrepeat%E4%BA%86%E7%BB%B4%E5%BA%A60%E4%B8%A4%E6%AC%A1%EF%BC%8C%E6%89%80%E4%BB%A5%E9%80%A0%E6%88%90torch.cat%E6%8B%BC%E6%8E%A5%E6%97%B6%E5%86%B2%E7%AA%81%E3%80%82">https://github.com/salesforce/LAVIS是一个多模态的库，其中的BLIP2模块部分和huggingface的trasformers==4.27.1不兼容,不兼容部分是,原因是query_embeds被repeat了维度0两次，所以造成torch.cat拼接时冲突。</a></p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs maxima">lavis/models/blip2_models/blip2_opt.py<br>的第<span class="hljs-number">217</span>和<span class="hljs-number">218</span>行<br>            # <span class="hljs-keyword">else</span>:<br>            #     query_embeds = inputs_opt.repeat_interleave(num_beams, <span class="hljs-built_in">dim</span>=<span class="hljs-number">0</span>)<br>和trasformers==<span class="hljs-number">4.27</span><span class="hljs-number">.1</span>的<span class="hljs-number">679</span>到<span class="hljs-number">683</span>冲突<br>        def _expand_dict_for_generation(dict_to_expand):<br>            <span class="hljs-keyword">for</span> <span class="hljs-built_in">key</span> <span class="hljs-keyword">in</span> dict_to_expand:<br>                <span class="hljs-keyword">if</span> dict_to_expand[<span class="hljs-built_in">key</span>] <span class="hljs-built_in">is</span> <span class="hljs-keyword">not</span> None <span class="hljs-keyword">and</span> isinstance(dict_to_expand[<span class="hljs-built_in">key</span>], torch.Tensor):<br>                    dict_to_expand[<span class="hljs-built_in">key</span>] = dict_to_expand[<span class="hljs-built_in">key</span>].repeat_interleave(expand_size, <span class="hljs-built_in">dim</span>=<span class="hljs-number">0</span>)<br>            <span class="hljs-built_in">return</span> dict_to_expand<br><br>造成 lavis/models/blip2_models/modeling_opt.py 的<span class="hljs-number">703</span>到<span class="hljs-number">705</span>行 cat拼接时维度不一致<br>        <span class="hljs-keyword">if</span> query_embeds <span class="hljs-built_in">is</span> <span class="hljs-keyword">not</span> None:<br>            inputs_embeds = torch.cat([query_embeds, inputs_embeds], <span class="hljs-built_in">dim</span>=<span class="hljs-number">1</span>)<br>            input_shape = inputs_embeds.size()[:-<span class="hljs-number">1</span>]<br></code></pre></td></tr></table></figure>
-
-<p>repeat_interleave()是PyTorch中的一个函数，用于将张量中的元素沿某一维度复制n次，即复制后的张量沿该维度.<br>这个函数有两个参数，第一个参数是重复的次数，第二个参数是重复的维度 (pytorch.org).<br>例如，如果你有一个形状为(3, 4)的张量，你可以使用repeat_interleave()函数将其中的每个元素沿着第0维重复2次，如下所示：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus">import torch<br><br>x = torch<span class="hljs-selector-class">.tensor</span>(<span class="hljs-selector-attr">[[1, 2, 3, 4]</span>,<br><span class="hljs-selector-attr">[5, 6, 7, 8]</span>,<br><span class="hljs-selector-attr">[9, 10, 11, 12]</span>])<br><br>y = torch<span class="hljs-selector-class">.repeat_interleave</span>(x, repeats=<span class="hljs-number">2</span>, dim=<span class="hljs-number">0</span>)<br><br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(y)</span></span><br></code></pre></td></tr></table></figure>
-<p>输出结果为：</p>
-<p>tensor([[ 1,  2,  3,  4],<br>[ 1,  2,  3,  4],<br>[ 5,  6,  7,  8],<br>[ 5,  6,  7,  8],<br>[ 9, 10, 11, 12],<br>[ 9, 10, 11, 12]])<br>在这个例子中，我们将x沿着第0维重复了2次，因此输出结果中每个元素都被重复了2次</p>
+              <h1 id="升级Webui时报错如下时"><a href="#升级Webui时报错如下时" class="headerlink" title="升级Webui时报错如下时"></a>升级Webui时报错如下时</h1><p>升级下gradio即可，pip install -U gradio</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">340</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;<br>    webui<span class="hljs-literal">()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">243</span>, <span class="hljs-keyword">in</span> webui<br>    shared.demo = modules.ui.create<span class="hljs-constructor">_ui()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">448</span>, <span class="hljs-keyword">in</span> create_ui<br>    <span class="hljs-keyword">with</span> gr.<span class="hljs-constructor">Blocks(<span class="hljs-params">analytics_enabled</span>=False)</span> <span class="hljs-keyword">as</span> txt2img_interface:<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">486</span>, <span class="hljs-keyword">in</span> __init__<br>    super<span class="hljs-literal">()</span>.<span class="hljs-constructor">__init__(<span class="hljs-params">render</span>=False, <span class="hljs-operator">**</span><span class="hljs-params">kwargs</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">561</span>, <span class="hljs-keyword">in</span> BlockContext_init<br>    add<span class="hljs-constructor">_classes_to_gradio_component(<span class="hljs-params">self</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">529</span>, <span class="hljs-keyword">in</span> add_classes_to_gradio_component<br>    comp.elem_classes = <span class="hljs-literal">[&quot;<span class="hljs-identifier">gradio</span>-&quot; + <span class="hljs-identifier">comp</span>.<span class="hljs-identifier">get_block_name</span>(), <span class="hljs-operator">*</span>(<span class="hljs-identifier">comp</span>.<span class="hljs-identifier">elem_classes</span> <span class="hljs-identifier">or</span> []</span>)]<br>AttributeError: &#x27;Blocks&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;elem_classes<br><br><br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">460</span>, <span class="hljs-keyword">in</span> create_ui<br>    txt2img_prompt, txt2img_prompt_styles, txt2img_negative_prompt, submit, _, _, txt2img_prompt_style_apply, txt2img_save_style, txt2img_paste, extra_networks_button, token_counter, token_button, negative_token_counter, negative_token_button = create<span class="hljs-constructor">_toprow(<span class="hljs-params">is_img2img</span>=False)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">288</span>, <span class="hljs-keyword">in</span> create_toprow<br>    prompt = gr.<span class="hljs-constructor">Textbox(<span class="hljs-params">label</span>=<span class="hljs-string">&quot;Prompt&quot;</span>, <span class="hljs-params">elem_id</span>=<span class="hljs-params">f</span><span class="hljs-string">&quot;&#123;id_part&#125;_prompt&quot;</span>, <span class="hljs-params">show_label</span>=False, <span class="hljs-params">lines</span>=3, <span class="hljs-params">placeholder</span>=<span class="hljs-string">&quot;Prompt (press Ctrl+Enter or Alt+Enter to generate)&quot;</span>)</span><br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/components.py&quot;</span>, line <span class="hljs-number">300</span>, <span class="hljs-keyword">in</span> __init__<br>    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">IOComponent</span>.</span><span class="hljs-module"><span class="hljs-identifier">__init__</span>(</span></span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">536</span>, <span class="hljs-keyword">in</span> IOComponent_init<br>    add<span class="hljs-constructor">_classes_to_gradio_component(<span class="hljs-params">self</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">521</span>, <span class="hljs-keyword">in</span> add_classes_to_gradio_component<br>    comp.elem_classes = <span class="hljs-literal">[&quot;<span class="hljs-identifier">gradio</span>-&quot; + <span class="hljs-identifier">comp</span>.<span class="hljs-identifier">get_block_name</span>(), <span class="hljs-operator">*</span>(<span class="hljs-identifier">comp</span>.<span class="hljs-identifier">elem_classes</span> <span class="hljs-identifier">or</span> []</span>)]<br>AttributeError: &#x27;Textbox&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;elem_classes&#x27;<br><br>During handling <span class="hljs-keyword">of</span> the above <span class="hljs-keyword">exception</span>, another <span class="hljs-keyword">exception</span> occurred:<br><br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">337</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;<br>    webui<span class="hljs-literal">()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">240</span>, <span class="hljs-keyword">in</span> webui<br>    shared.demo = modules.ui.create<span class="hljs-constructor">_ui()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">459</span>, <span class="hljs-keyword">in</span> create_ui<br>    <span class="hljs-keyword">with</span> gr.<span class="hljs-constructor">Blocks(<span class="hljs-params">analytics_enabled</span>=False)</span> <span class="hljs-keyword">as</span> txt2img_interface:<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">1097</span>, <span class="hljs-keyword">in</span> __exit__<br>    self.config = self.get<span class="hljs-constructor">_config_file()</span><br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">1073</span>, <span class="hljs-keyword">in</span> get_config_file<br>    <span class="hljs-string">&quot;props&quot;</span>: utils.delete<span class="hljs-constructor">_none(<span class="hljs-params">block</span>.<span class="hljs-params">get_config</span>()</span>)<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/components.py&quot;</span>, line <span class="hljs-number">322</span>, <span class="hljs-keyword">in</span> get_config<br>    <span class="hljs-string">&quot;type&quot;</span>: self.<span class="hljs-keyword">type</span>,<br>AttributeError: &#x27;Textbox&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;<span class="hljs-keyword">type</span>&#x27;. Did you mean: &#x27;style&#x27;?<br></code></pre></td></tr></table></figure>
 
               
             </div>
@@ -285,8 +280,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>lavis和transformers的冲突</div>
-      <div>https://johnson7788.github.io/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/</div>
+      <div>webui报错</div>
+      <div>https://johnson7788.github.io/2023/03/29/webui%E6%8A%A5%E9%94%99/</div>
     </div>
     <div class="license-meta">
       
@@ -298,7 +293,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月27日</div>
+          <div>2023年3月29日</div>
         </div>
       
       
@@ -328,18 +323,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/29/webui%E6%8A%A5%E9%94%99/" title="webui报错">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">webui报错</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/21/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" title="知识点总结">
-                        <span class="hidden-mobile">知识点总结</span>
+                      <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" title="lavis和transformers的冲突">
+                        <span class="hidden-mobile">lavis和transformers的冲突</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
