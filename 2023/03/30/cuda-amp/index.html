@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="升级Webui时报错如下时升级下gradio即可，pip install -U gradio 123456789101112131415161718192021222324252627282930313233343536373839404142434445Traceback (most recent call last):  File &quot;&#x2F;user&#x2F;stable-diffusion-we">
+    <meta name="description" content="torch cuda amp  cuda的混合精度torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支">
 <meta property="og:type" content="article">
-<meta property="og:title" content="webui报错">
-<meta property="og:url" content="https://johnson7788.github.io/2023/03/29/webui%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:title" content="cuda_amp">
+<meta property="og:url" content="https://johnson7788.github.io/2023/03/30/cuda-amp/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="升级Webui时报错如下时升级下gradio即可，pip install -U gradio 123456789101112131415161718192021222324252627282930313233343536373839404142434445Traceback (most recent call last):  File &quot;&#x2F;user&#x2F;stable-diffusion-we">
+<meta property="og:description" content="torch cuda amp  cuda的混合精度torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-29T01:39:10.000Z">
-<meta property="article:modified_time" content="2023-03-29T01:40:56.507Z">
+<meta property="article:published_time" content="2023-03-30T02:51:03.000Z">
+<meta property="article:modified_time" content="2023-03-30T02:55:24.191Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>webui报错 - Be With you</title>
+  <title>cuda_amp - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="webui报错">
+          <span id="subtitle" title="cuda_amp">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-29 09:39" pubdate>
-          2023年3月29日 上午
+        <time datetime="2023-03-30 10:51" pubdate>
+          2023年3月30日 上午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          958 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          27 分钟
+          8 分钟
         
       </span>
     
@@ -258,12 +258,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">webui报错</h1>
+            <h1 style="display: none">cuda_amp</h1>
             
             <div class="markdown-body">
               
-              <h1 id="升级Webui时报错如下时"><a href="#升级Webui时报错如下时" class="headerlink" title="升级Webui时报错如下时"></a>升级Webui时报错如下时</h1><p>升级下gradio即可，pip install -U gradio</p>
-<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">340</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;<br>    webui<span class="hljs-literal">()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">243</span>, <span class="hljs-keyword">in</span> webui<br>    shared.demo = modules.ui.create<span class="hljs-constructor">_ui()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">448</span>, <span class="hljs-keyword">in</span> create_ui<br>    <span class="hljs-keyword">with</span> gr.<span class="hljs-constructor">Blocks(<span class="hljs-params">analytics_enabled</span>=False)</span> <span class="hljs-keyword">as</span> txt2img_interface:<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">486</span>, <span class="hljs-keyword">in</span> __init__<br>    super<span class="hljs-literal">()</span>.<span class="hljs-constructor">__init__(<span class="hljs-params">render</span>=False, <span class="hljs-operator">**</span><span class="hljs-params">kwargs</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">561</span>, <span class="hljs-keyword">in</span> BlockContext_init<br>    add<span class="hljs-constructor">_classes_to_gradio_component(<span class="hljs-params">self</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">529</span>, <span class="hljs-keyword">in</span> add_classes_to_gradio_component<br>    comp.elem_classes = <span class="hljs-literal">[&quot;<span class="hljs-identifier">gradio</span>-&quot; + <span class="hljs-identifier">comp</span>.<span class="hljs-identifier">get_block_name</span>(), <span class="hljs-operator">*</span>(<span class="hljs-identifier">comp</span>.<span class="hljs-identifier">elem_classes</span> <span class="hljs-identifier">or</span> []</span>)]<br>AttributeError: &#x27;Blocks&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;elem_classes<br><br><br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">460</span>, <span class="hljs-keyword">in</span> create_ui<br>    txt2img_prompt, txt2img_prompt_styles, txt2img_negative_prompt, submit, _, _, txt2img_prompt_style_apply, txt2img_save_style, txt2img_paste, extra_networks_button, token_counter, token_button, negative_token_counter, negative_token_button = create<span class="hljs-constructor">_toprow(<span class="hljs-params">is_img2img</span>=False)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">288</span>, <span class="hljs-keyword">in</span> create_toprow<br>    prompt = gr.<span class="hljs-constructor">Textbox(<span class="hljs-params">label</span>=<span class="hljs-string">&quot;Prompt&quot;</span>, <span class="hljs-params">elem_id</span>=<span class="hljs-params">f</span><span class="hljs-string">&quot;&#123;id_part&#125;_prompt&quot;</span>, <span class="hljs-params">show_label</span>=False, <span class="hljs-params">lines</span>=3, <span class="hljs-params">placeholder</span>=<span class="hljs-string">&quot;Prompt (press Ctrl+Enter or Alt+Enter to generate)&quot;</span>)</span><br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/components.py&quot;</span>, line <span class="hljs-number">300</span>, <span class="hljs-keyword">in</span> __init__<br>    <span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">IOComponent</span>.</span><span class="hljs-module"><span class="hljs-identifier">__init__</span>(</span></span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">536</span>, <span class="hljs-keyword">in</span> IOComponent_init<br>    add<span class="hljs-constructor">_classes_to_gradio_component(<span class="hljs-params">self</span>)</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/scripts.py&quot;</span>, line <span class="hljs-number">521</span>, <span class="hljs-keyword">in</span> add_classes_to_gradio_component<br>    comp.elem_classes = <span class="hljs-literal">[&quot;<span class="hljs-identifier">gradio</span>-&quot; + <span class="hljs-identifier">comp</span>.<span class="hljs-identifier">get_block_name</span>(), <span class="hljs-operator">*</span>(<span class="hljs-identifier">comp</span>.<span class="hljs-identifier">elem_classes</span> <span class="hljs-identifier">or</span> []</span>)]<br>AttributeError: &#x27;Textbox&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;elem_classes&#x27;<br><br>During handling <span class="hljs-keyword">of</span> the above <span class="hljs-keyword">exception</span>, another <span class="hljs-keyword">exception</span> occurred:<br><br>Traceback (most recent call last):<br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">337</span>, <span class="hljs-keyword">in</span> &lt;<span class="hljs-keyword">module</span>&gt;<br>    webui<span class="hljs-literal">()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/webui.py&quot;</span>, line <span class="hljs-number">240</span>, <span class="hljs-keyword">in</span> webui<br>    shared.demo = modules.ui.create<span class="hljs-constructor">_ui()</span><br>  File <span class="hljs-string">&quot;/user/stable-diffusion-webui/modules/ui.py&quot;</span>, line <span class="hljs-number">459</span>, <span class="hljs-keyword">in</span> create_ui<br>    <span class="hljs-keyword">with</span> gr.<span class="hljs-constructor">Blocks(<span class="hljs-params">analytics_enabled</span>=False)</span> <span class="hljs-keyword">as</span> txt2img_interface:<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">1097</span>, <span class="hljs-keyword">in</span> __exit__<br>    self.config = self.get<span class="hljs-constructor">_config_file()</span><br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/blocks.py&quot;</span>, line <span class="hljs-number">1073</span>, <span class="hljs-keyword">in</span> get_config_file<br>    <span class="hljs-string">&quot;props&quot;</span>: utils.delete<span class="hljs-constructor">_none(<span class="hljs-params">block</span>.<span class="hljs-params">get_config</span>()</span>)<br>  File <span class="hljs-string">&quot;/user/anaconda3/envs/webui/lib/python3.10/site-packages/gradio/components.py&quot;</span>, line <span class="hljs-number">322</span>, <span class="hljs-keyword">in</span> get_config<br>    <span class="hljs-string">&quot;type&quot;</span>: self.<span class="hljs-keyword">type</span>,<br>AttributeError: &#x27;Textbox&#x27; <span class="hljs-keyword">object</span> has no attribute &#x27;<span class="hljs-keyword">type</span>&#x27;. Did you mean: &#x27;style&#x27;?<br></code></pre></td></tr></table></figure>
+              <h1 id="torch-cuda-amp-cuda的混合精度"><a href="#torch-cuda-amp-cuda的混合精度" class="headerlink" title="torch cuda amp  cuda的混合精度"></a>torch cuda amp  cuda的混合精度</h1><p>torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支持 FP16 的硬件和软件环境一起使用，否则可能会导致计算结果的不准确性。</p>
+<p>contextlib.nullcontext(): 用于在不需要执行任何操作的情况下创建上下文。它可以作为一个占位符上下文管理器使用，以便在某些情况下避免代码重复或错误。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">maybe_autocast</span>(<span class="hljs-params">self, dtype=torch.float16</span>):<br>    <span class="hljs-comment"># if on cpu, don&#x27;t use autocast</span><br>    <span class="hljs-comment"># if on gpu, use autocast with dtype if provided, otherwise use torch.float16</span><br>    enable_autocast = self.device != torch.device(<span class="hljs-string">&quot;cpu&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> enable_autocast:<br>        <span class="hljs-keyword">return</span> torch.cuda.amp.autocast(dtype=dtype)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> contextlib.nullcontext()<br><span class="hljs-keyword">with</span> self.maybe_autocast():  <br>    image_embeds = self.ln_vision(self.visual_encoder(image)) <br></code></pre></td></tr></table></figure>
+<p>这里的self.maybe_autocast() 是一个上下文管理器，用于控制模型是否启用自动混合精度（Automatic Mixed Precision，简称 AMP）加速。当启用 AMP 加速时，模型的参数和梯度会以 FP16 格式存储和计算，从而减少计算量和内存占用。但是，由于 FP16 格式的数值精度较低，可能会对模型的精度造成一定影响。<br>self.maybe_autocast() 的作用是判断当前环境是否支持使用 AMP 加速。如果支持，则启用 AMP 加速，否则不启用。这样可以在不同的环境下保持代码的兼容性，并且可以轻松地在支持 AMP 的环境中实现加速。</p>
 
               
             </div>
@@ -280,8 +282,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>webui报错</div>
-      <div>https://johnson7788.github.io/2023/03/29/webui%E6%8A%A5%E9%94%99/</div>
+      <div>cuda_amp</div>
+      <div>https://johnson7788.github.io/2023/03/30/cuda-amp/</div>
     </div>
     <div class="license-meta">
       
@@ -293,7 +295,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月29日</div>
+          <div>2023年3月30日</div>
         </div>
       
       
@@ -323,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/30/cuda-amp/" title="cuda_amp">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">cuda_amp</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" title="lavis和transformers的冲突">
-                        <span class="hidden-mobile">lavis和transformers的冲突</span>
+                      <a href="/2023/03/29/webui%E6%8A%A5%E9%94%99/" title="webui报错">
+                        <span class="hidden-mobile">webui报错</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
