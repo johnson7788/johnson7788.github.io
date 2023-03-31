@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>stable_diffusion</title>
+    <link href="/2023/03/31/stable-diffusion/"/>
+    <url>/2023/03/31/stable-diffusion/</url>
+    
+    <content type="html"><![CDATA[<h1 id="安装Stable-Diffusion，确保你已经安装了git-命令行下操作"><a href="#安装Stable-Diffusion，确保你已经安装了git-命令行下操作" class="headerlink" title="安装Stable Diffusion，确保你已经安装了git, 命令行下操作"></a>安装Stable Diffusion，确保你已经安装了git, 命令行下操作</h1><p>git clone <a href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a></p><h1 id="安装依赖环境，下载conda或miniconda-安装conda后创建虚拟环境"><a href="#安装依赖环境，下载conda或miniconda-安装conda后创建虚拟环境" class="headerlink" title="安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境"></a>安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境</h1><p>conda create –name webui python&#x3D;3.10<br>conda activate webui</p><h1 id="进入到stable-diffusion-webui目录，安装依赖"><a href="#进入到stable-diffusion-webui目录，安装依赖" class="headerlink" title="进入到stable-diffusion-webui目录，安装依赖"></a>进入到stable-diffusion-webui目录，安装依赖</h1><p>pip install -r requirements.txt</p><h1 id="运行webui"><a href="#运行webui" class="headerlink" title="运行webui"></a>运行webui</h1><p>python webui.py –share –listen –enable-insecure-extension-access</p><h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p><a href="http://127.0.0.1:7860/">http://127.0.0.1:7860</a></p><p>#概念解释:</p><h2 id="stable-diffusion"><a href="#stable-diffusion" class="headerlink" title="stable-diffusion:"></a>stable-diffusion:</h2><p>文字生成图像，或图像生成图像,stable-diffusion是一个旨在提供高质量、稳定的人工图像合成的框架和方法<br>官网: <a href="https://stablediffusionweb.com/">https://stablediffusionweb.com</a></p><h2 id="stable-diffusion-webui"><a href="#stable-diffusion-webui" class="headerlink" title="stable-diffusion-webui:"></a>stable-diffusion-webui:</h2><p>操作stable-diffusion的一个网页界面,stable-diffusion-webui是一个基于stable-diffusion开源图像合成框架构建的交互式用户界面。</p><h2 id="下载模型地址-C站"><a href="#下载模型地址-C站" class="headerlink" title="下载模型地址: C站"></a>下载模型地址: C站</h2><p><a href="https://civitai.com/">https://civitai.com/</a></p><h2 id="什么是checkpoint"><a href="#什么是checkpoint" class="headerlink" title="什么是checkpoint"></a>什么是checkpoint</h2><p>即stable diffusion的base模型,大模型&#x2F;底模型 必备 Stable Diffusion V1.4  V1.5   V2.0  V2.1 泛化性、通用性,有的大模型自带VAE模型。不额外挂载,dreambooth可看作大模型</p><h2 id="VAE模型-必备-解码，图像效果更好"><a href="#VAE模型-必备-解码，图像效果更好" class="headerlink" title="VAE模型:必备,解码，图像效果更好"></a>VAE模型:必备,解码，图像效果更好</h2><h2 id="embedding-model"><a href="#embedding-model" class="headerlink" title="embedding model:"></a>embedding model:</h2><p>就是嵌入模型，或者叫Textual inversion，文本到向量模型,embedding: text inversion, 这里<br>是文本反嵌入，就是用一个词代表很多词的意思，就是某个提示词代表了很多提示词的意思，类似别名词, C站可以&gt;下载embedding模型, embedding模型不大</p><h2 id="Lora"><a href="#Lora" class="headerlink" title="Lora"></a>Lora</h2><p>一种训练模型的方法，很小的插件模型,微调模型</p><h2 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h2><p>提示词，即描述如何生成图像</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>cuda_amp</title>
     <link href="/2023/03/30/cuda-amp/"/>
     <url>/2023/03/30/cuda-amp/</url>

@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="torch cuda amp  cuda的混合精度torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支">
+    <meta name="description" content="安装Stable Diffusion，确保你已经安装了git, 命令行下操作git clone https:&#x2F;&#x2F;github.com&#x2F;AUTOMATIC1111&#x2F;stable-diffusion-webui 安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境conda create –name webui python&#x3D;3.10conda activate">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cuda_amp">
-<meta property="og:url" content="https://johnson7788.github.io/2023/03/30/cuda-amp/index.html">
+<meta property="og:title" content="stable_diffusion">
+<meta property="og:url" content="https://johnson7788.github.io/2023/03/31/stable-diffusion/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="torch cuda amp  cuda的混合精度torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支">
+<meta property="og:description" content="安装Stable Diffusion，确保你已经安装了git, 命令行下操作git clone https:&#x2F;&#x2F;github.com&#x2F;AUTOMATIC1111&#x2F;stable-diffusion-webui 安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境conda create –name webui python&#x3D;3.10conda activate">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-03-30T02:51:03.000Z">
-<meta property="article:modified_time" content="2023-03-30T02:55:24.191Z">
+<meta property="article:published_time" content="2023-03-31T01:01:02.000Z">
+<meta property="article:modified_time" content="2023-03-31T01:14:38.999Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>cuda_amp - Be With you</title>
+  <title>stable_diffusion - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="cuda_amp">
+          <span id="subtitle" title="stable_diffusion">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-03-30 10:51" pubdate>
-          2023年3月30日 上午
+        <time datetime="2023-03-31 09:01" pubdate>
+          2023年3月31日 上午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          958 字
+          939 字
         
       </span>
     
@@ -258,14 +258,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">cuda_amp</h1>
+            <h1 style="display: none">stable_diffusion</h1>
             
             <div class="markdown-body">
               
-              <h1 id="torch-cuda-amp-cuda的混合精度"><a href="#torch-cuda-amp-cuda的混合精度" class="headerlink" title="torch cuda amp  cuda的混合精度"></a>torch cuda amp  cuda的混合精度</h1><p>torch.cuda.amp.autocast函数：自动将上下文中的计算步骤转换为 FP16 格式，并在计算完成后将结果转换回 FP32 格式，以保证数值精度。需要注意的是，autocast() 只会自动转换支持 FP16 格式的计算步骤，对于不支持 FP16 格式的计算步骤，仍然会使用 FP32 格式进行计算。另外，autocast() 需要与支持 FP16 的硬件和软件环境一起使用，否则可能会导致计算结果的不准确性。</p>
-<p>contextlib.nullcontext(): 用于在不需要执行任何操作的情况下创建上下文。它可以作为一个占位符上下文管理器使用，以便在某些情况下避免代码重复或错误。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">maybe_autocast</span>(<span class="hljs-params">self, dtype=torch.float16</span>):<br>    <span class="hljs-comment"># if on cpu, don&#x27;t use autocast</span><br>    <span class="hljs-comment"># if on gpu, use autocast with dtype if provided, otherwise use torch.float16</span><br>    enable_autocast = self.device != torch.device(<span class="hljs-string">&quot;cpu&quot;</span>)<br><br>    <span class="hljs-keyword">if</span> enable_autocast:<br>        <span class="hljs-keyword">return</span> torch.cuda.amp.autocast(dtype=dtype)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> contextlib.nullcontext()<br><span class="hljs-keyword">with</span> self.maybe_autocast():  <br>    image_embeds = self.ln_vision(self.visual_encoder(image)) <br></code></pre></td></tr></table></figure>
-<p>这里的self.maybe_autocast() 是一个上下文管理器，用于控制模型是否启用自动混合精度（Automatic Mixed Precision，简称 AMP）加速。当启用 AMP 加速时，模型的参数和梯度会以 FP16 格式存储和计算，从而减少计算量和内存占用。但是，由于 FP16 格式的数值精度较低，可能会对模型的精度造成一定影响。<br>self.maybe_autocast() 的作用是判断当前环境是否支持使用 AMP 加速。如果支持，则启用 AMP 加速，否则不启用。这样可以在不同的环境下保持代码的兼容性，并且可以轻松地在支持 AMP 的环境中实现加速。</p>
+              <h1 id="安装Stable-Diffusion，确保你已经安装了git-命令行下操作"><a href="#安装Stable-Diffusion，确保你已经安装了git-命令行下操作" class="headerlink" title="安装Stable Diffusion，确保你已经安装了git, 命令行下操作"></a>安装Stable Diffusion，确保你已经安装了git, 命令行下操作</h1><p>git clone <a target="_blank" rel="noopener" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">https://github.com/AUTOMATIC1111/stable-diffusion-webui</a></p>
+<h1 id="安装依赖环境，下载conda或miniconda-安装conda后创建虚拟环境"><a href="#安装依赖环境，下载conda或miniconda-安装conda后创建虚拟环境" class="headerlink" title="安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境"></a>安装依赖环境，下载conda或miniconda, 安装conda后创建虚拟环境</h1><p>conda create –name webui python&#x3D;3.10<br>conda activate webui</p>
+<h1 id="进入到stable-diffusion-webui目录，安装依赖"><a href="#进入到stable-diffusion-webui目录，安装依赖" class="headerlink" title="进入到stable-diffusion-webui目录，安装依赖"></a>进入到stable-diffusion-webui目录，安装依赖</h1><p>pip install -r requirements.txt</p>
+<h1 id="运行webui"><a href="#运行webui" class="headerlink" title="运行webui"></a>运行webui</h1><p>python webui.py –share –listen –enable-insecure-extension-access</p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p><a target="_blank" rel="noopener" href="http://127.0.0.1:7860/">http://127.0.0.1:7860</a></p>
+<p>#概念解释:</p>
+<h2 id="stable-diffusion"><a href="#stable-diffusion" class="headerlink" title="stable-diffusion:"></a>stable-diffusion:</h2><p>文字生成图像，或图像生成图像,stable-diffusion是一个旨在提供高质量、稳定的人工图像合成的框架和方法<br>官网: <a target="_blank" rel="noopener" href="https://stablediffusionweb.com/">https://stablediffusionweb.com</a></p>
+<h2 id="stable-diffusion-webui"><a href="#stable-diffusion-webui" class="headerlink" title="stable-diffusion-webui:"></a>stable-diffusion-webui:</h2><p>操作stable-diffusion的一个网页界面,stable-diffusion-webui是一个基于stable-diffusion开源图像合成框架构建的交互式用户界面。</p>
+<h2 id="下载模型地址-C站"><a href="#下载模型地址-C站" class="headerlink" title="下载模型地址: C站"></a>下载模型地址: C站</h2><p><a target="_blank" rel="noopener" href="https://civitai.com/">https://civitai.com/</a></p>
+<h2 id="什么是checkpoint"><a href="#什么是checkpoint" class="headerlink" title="什么是checkpoint"></a>什么是checkpoint</h2><p>即stable diffusion的base模型,大模型&#x2F;底模型 必备 Stable Diffusion V1.4  V1.5   V2.0  V2.1 泛化性、通用性,有的大模型自带VAE模型。不额外挂载,dreambooth可看作大模型</p>
+<h2 id="VAE模型-必备-解码，图像效果更好"><a href="#VAE模型-必备-解码，图像效果更好" class="headerlink" title="VAE模型:必备,解码，图像效果更好"></a>VAE模型:必备,解码，图像效果更好</h2><h2 id="embedding-model"><a href="#embedding-model" class="headerlink" title="embedding model:"></a>embedding model:</h2><p>就是嵌入模型，或者叫Textual inversion，文本到向量模型,embedding: text inversion, 这里<br>是文本反嵌入，就是用一个词代表很多词的意思，就是某个提示词代表了很多提示词的意思，类似别名词, C站可以&gt;下载embedding模型, embedding模型不大</p>
+<h2 id="Lora"><a href="#Lora" class="headerlink" title="Lora"></a>Lora</h2><p>一种训练模型的方法，很小的插件模型,微调模型</p>
+<h2 id="Tag"><a href="#Tag" class="headerlink" title="Tag"></a>Tag</h2><p>提示词，即描述如何生成图像</p>
 
               
             </div>
@@ -282,8 +291,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>cuda_amp</div>
-      <div>https://johnson7788.github.io/2023/03/30/cuda-amp/</div>
+      <div>stable_diffusion</div>
+      <div>https://johnson7788.github.io/2023/03/31/stable-diffusion/</div>
     </div>
     <div class="license-meta">
       
@@ -295,7 +304,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年3月30日</div>
+          <div>2023年3月31日</div>
         </div>
       
       
@@ -325,18 +334,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/03/31/stable-diffusion/" title="stable_diffusion">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">stable_diffusion</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/29/webui%E6%8A%A5%E9%94%99/" title="webui报错">
-                        <span class="hidden-mobile">webui报错</span>
+                      <a href="/2023/03/30/cuda-amp/" title="cuda_amp">
+                        <span class="hidden-mobile">cuda_amp</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
