@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>mongo数据迁移</title>
+    <link href="/2023/04/06/mongo%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/"/>
+    <url>/2023/04/06/mongo%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="Mongo占用内存过大，迁移部分collection到其它机器"><a href="#Mongo占用内存过大，迁移部分collection到其它机器" class="headerlink" title="Mongo占用内存过大，迁移部分collection到其它机器"></a>Mongo占用内存过大，迁移部分collection到其它机器</h1><h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>mongo和大数据共用一个机器，当mongo中数据较多时，占用内存加到，影响到了大数据机器的稳定性，需要迁移到其它机器</p><h2 id="Mongo和内存之间的关系"><a href="#Mongo和内存之间的关系" class="headerlink" title="Mongo和内存之间的关系"></a>Mongo和内存之间的关系</h2><p>MongoDB数据库占用内存的大小主要依赖于以下几个因素:</p><p>数据量:显然,存储的文档数量越多,占用内存就越大。每个 MongoDB 文档通常占用约为 JSON 对象大小,这通常在 1KB 至 5KB 之间。</p><p>索引: MongoDB 可以在任何字段上创建索引。每个索引本身也会占用一定量的内存。所以,创建过多的索引会增加内存占用。</p><p>文档的平均大小:如果您存储的文档非常大(例如,每个文档包含大量媒体数据),那么整体内存占用将更大。</p><p>是否启用了内存索引:如果启用了内存索引,则 MongoDB 会在内存中缓存一部分的磁盘上索引,以改进查询性能。这会增加内存占用。</p><p>是否启用了内存 mapped view:与内存索引类似,如果启用了内存映射视图,则 MongoDB 也会在内存中缓存一部分数据,以提高视图的性能。这也会增加内存占用。</p><p>分片(如果适用):如果启用了 sharded 集群,每个片段又会有自己的内存占用。所以总体占用会大幅增加。</p><p>集群数(如果适用):如果您有多个互相独立的 MongoDB 集群,那么总的内存占用量将等于每个集群内存占用的总和。</p><h2 id="查看已占用内存"><a href="#查看已占用内存" class="headerlink" title="查看已占用内存"></a>查看已占用内存</h2><p>经过top名称，按内存占用大小查看，mongo占用内存大小约28.2%<br>进入mongo查看某个db占用内存, 单位是B，除以1024&#x2F;1024到MB<br>db.stats().storageSize<br>——&gt;<br>21534863360</p><h2 id="直接导出某个DB或导出某个collection"><a href="#直接导出某个DB或导出某个collection" class="headerlink" title="直接导出某个DB或导出某个collection"></a>直接导出某个DB或导出某个collection</h2><ol><li><p>直接导出某个DB<br>mongodump –db &lt;数据库名称&gt; –out &lt;输出目录&gt;<br>mongodump –db mydatabase –out .&#x2F;data<br>导入命令<br>mongorestore –host &lt;目标主机&gt; –port &lt;目标端口&gt; &lt;输入目录&gt;<br>mongorestore –db mynewdatabase –host localhost –port 27017 .&#x2F;data&#x2F;mydatabase</p></li><li><p>导出占用较大的collection<br>导出db是label,collection是brand的数据<br>mongodump –host localhost –port 27017 –db label –collection brand &gt; brand.bson<br>恢复数据一个collection数据<br>mongorestore –host otherhost –port 27017 –db label roles.bson</p></li></ol><h2 id="启动一个docker的mongo"><a href="#启动一个docker的mongo" class="headerlink" title="启动一个docker的mongo"></a>启动一个docker的mongo</h2><p>sudo docker run -d –name mongodb -v &#x2F;media&#x2F;backup&#x2F;mongo:&#x2F;data&#x2F;db   -p 27017:27017   mongo:4.4.17</p><h2 id="恢复mongo数据"><a href="#恢复mongo数据" class="headerlink" title="恢复mongo数据"></a>恢复mongo数据</h2><p>mongorestore –db label –host newnew –port 27017 .&#x2F;label</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>stable_diffusion</title>
     <link href="/2023/03/31/stable-diffusion/"/>
     <url>/2023/03/31/stable-diffusion/</url>
