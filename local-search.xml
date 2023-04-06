@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>java版本恢复</title>
+    <link href="/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/"/>
+    <url>/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/</url>
+    
+    <content type="html"><![CDATA[<h1 id="java-版本问题"><a href="#java-版本问题" class="headerlink" title="java 版本问题"></a>java 版本问题</h1><p>前提: 突然发现一台服务器因为java版本问题导致大数据服务的挂掉,恢复java版本</p><h2 id="查看现有java版本"><a href="#查看现有java版本" class="headerlink" title="查看现有java版本"></a>查看现有java版本</h2><p>java -version<br>java version “17.0.6” 2023-01-17 LTS<br>Java(TM) SE Runtime Environment (build 17.0.6+9-LTS-190)<br>Java HotSpot(TM) 64-Bit Server VM (build 17.0.6+9-LTS-190, mixed mode, sharing)</p><h2 id="查看其它大数据的java版本"><a href="#查看其它大数据的java版本" class="headerlink" title="查看其它大数据的java版本"></a>查看其它大数据的java版本</h2><p>java -version<br>java version “1.8.0_141”<br>Java(TM) SE Runtime Environment (build 1.8.0_141-b15)<br>Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)</p><h2 id="从官网下载对应版本"><a href="#从官网下载对应版本" class="headerlink" title="从官网下载对应版本"></a>从官网下载对应版本</h2><p><a href="https://www.oracle.com/sg/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/sg/java/technologies/javase/javase8-archive-downloads.html</a><br>下载的文件<br>jdk-8u141-linux-x64.tar.gz</p><h2 id="查看现有java安装路径"><a href="#查看现有java安装路径" class="headerlink" title="查看现有java安装路径"></a>查看现有java安装路径</h2><p>ls -alh &#x2F;usr&#x2F;bin&#x2F;java<br>lrwxrwxrwx 1 root root 22 Apr  6 11:56 &#x2F;usr&#x2F;bin&#x2F;java -&gt; &#x2F;etc&#x2F;alternatives&#x2F;java<br>johnson@wacserver1:~&#x2F;jvm$ ls -alh  &#x2F;etc&#x2F;alternatives&#x2F;java<br>lrwxrwxrwx 1 root root 34 Apr  6 12:06 &#x2F;etc&#x2F;alternatives&#x2F;java -&gt; &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk-17&#x2F;bin&#x2F;java</p><h2 id="解压tar包到对应目录"><a href="#解压tar包到对应目录" class="headerlink" title="解压tar包到对应目录"></a>解压tar包到对应目录</h2><p>sudo tar -xzf jdk-8u141-linux-x64.tar.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;<br>得到<br>&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141</p><h2 id="更新默认java版本"><a href="#更新默认java版本" class="headerlink" title="更新默认java版本"></a>更新默认java版本</h2><p>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141&#x2F;bin&#x2F;java 1<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141&#x2F;bin&#x2F;javac 1<br>sudo update-alternatives –config java<br>sudo update-alternatives –config javac</p><h2 id="有时需要系统的环境变量文件-对所有用户生效"><a href="#有时需要系统的环境变量文件-对所有用户生效" class="headerlink" title="有时需要系统的环境变量文件,对所有用户生效"></a>有时需要系统的环境变量文件,对所有用户生效</h2><p>&#x2F;etc&#x2F;profile<br>修改<br>export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141<br>export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mongo数据迁移</title>
     <link href="/2023/04/06/mongo%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/"/>
     <url>/2023/04/06/mongo%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/</url>
