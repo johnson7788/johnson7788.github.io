@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="java 版本问题前提: 突然发现一台服务器因为java版本问题导致大数据服务的挂掉,恢复java版本 查看现有java版本java -versionjava version “17.0.6” 2023-01-17 LTSJava(TM) SE Runtime Environment (build 17.0.6+9-LTS-190)Java HotSpot(TM) 64-Bit Server VM">
+    <meta name="description" content="当安装cuda时报错如下sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run 12345cat &#x2F;var&#x2F;log&#x2F;nvidia-installer.logUsing built-in stream user interface-&gt; Detected 12 CPUs online; setting concurrency level to 12.ERRO">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java版本恢复">
-<meta property="og:url" content="https://johnson7788.github.io/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/index.html">
+<meta property="og:title" content="安装cuda驱动报错">
+<meta property="og:url" content="https://johnson7788.github.io/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="java 版本问题前提: 突然发现一台服务器因为java版本问题导致大数据服务的挂掉,恢复java版本 查看现有java版本java -versionjava version “17.0.6” 2023-01-17 LTSJava(TM) SE Runtime Environment (build 17.0.6+9-LTS-190)Java HotSpot(TM) 64-Bit Server VM">
+<meta property="og:description" content="当安装cuda时报错如下sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run 12345cat &#x2F;var&#x2F;log&#x2F;nvidia-installer.logUsing built-in stream user interface-&gt; Detected 12 CPUs online; setting concurrency level to 12.ERRO">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-06T04:09:51.000Z">
-<meta property="article:modified_time" content="2023-04-06T04:19:28.040Z">
+<meta property="article:published_time" content="2023-04-11T09:42:21.000Z">
+<meta property="article:modified_time" content="2023-04-11T09:44:41.522Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>java版本恢复 - Be With you</title>
+  <title>安装cuda驱动报错 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="java版本恢复">
+          <span id="subtitle" title="安装cuda驱动报错">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-06 12:09" pubdate>
-          2023年4月6日 中午
+        <time datetime="2023-04-11 17:42" pubdate>
+          2023年4月11日 下午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          987 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          13 分钟
+          9 分钟
         
       </span>
     
@@ -258,18 +258,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">java版本恢复</h1>
+            <h1 style="display: none">安装cuda驱动报错</h1>
             
             <div class="markdown-body">
               
-              <h1 id="java-版本问题"><a href="#java-版本问题" class="headerlink" title="java 版本问题"></a>java 版本问题</h1><p>前提: 突然发现一台服务器因为java版本问题导致大数据服务的挂掉,恢复java版本</p>
-<h2 id="查看现有java版本"><a href="#查看现有java版本" class="headerlink" title="查看现有java版本"></a>查看现有java版本</h2><p>java -version<br>java version “17.0.6” 2023-01-17 LTS<br>Java(TM) SE Runtime Environment (build 17.0.6+9-LTS-190)<br>Java HotSpot(TM) 64-Bit Server VM (build 17.0.6+9-LTS-190, mixed mode, sharing)</p>
-<h2 id="查看其它大数据的java版本"><a href="#查看其它大数据的java版本" class="headerlink" title="查看其它大数据的java版本"></a>查看其它大数据的java版本</h2><p>java -version<br>java version “1.8.0_141”<br>Java(TM) SE Runtime Environment (build 1.8.0_141-b15)<br>Java HotSpot(TM) 64-Bit Server VM (build 25.141-b15, mixed mode)</p>
-<h2 id="从官网下载对应版本"><a href="#从官网下载对应版本" class="headerlink" title="从官网下载对应版本"></a>从官网下载对应版本</h2><p><a target="_blank" rel="noopener" href="https://www.oracle.com/sg/java/technologies/javase/javase8-archive-downloads.html">https://www.oracle.com/sg/java/technologies/javase/javase8-archive-downloads.html</a><br>下载的文件<br>jdk-8u141-linux-x64.tar.gz</p>
-<h2 id="查看现有java安装路径"><a href="#查看现有java安装路径" class="headerlink" title="查看现有java安装路径"></a>查看现有java安装路径</h2><p>ls -alh &#x2F;usr&#x2F;bin&#x2F;java<br>lrwxrwxrwx 1 root root 22 Apr  6 11:56 &#x2F;usr&#x2F;bin&#x2F;java -&gt; &#x2F;etc&#x2F;alternatives&#x2F;java<br>johnson@wacserver1:~&#x2F;jvm$ ls -alh  &#x2F;etc&#x2F;alternatives&#x2F;java<br>lrwxrwxrwx 1 root root 34 Apr  6 12:06 &#x2F;etc&#x2F;alternatives&#x2F;java -&gt; &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk-17&#x2F;bin&#x2F;java</p>
-<h2 id="解压tar包到对应目录"><a href="#解压tar包到对应目录" class="headerlink" title="解压tar包到对应目录"></a>解压tar包到对应目录</h2><p>sudo tar -xzf jdk-8u141-linux-x64.tar.gz -C &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;<br>得到<br>&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141</p>
-<h2 id="更新默认java版本"><a href="#更新默认java版本" class="headerlink" title="更新默认java版本"></a>更新默认java版本</h2><p>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;java java &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141&#x2F;bin&#x2F;java 1<br>sudo update-alternatives –install &#x2F;usr&#x2F;bin&#x2F;javac javac &#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141&#x2F;bin&#x2F;javac 1<br>sudo update-alternatives –config java<br>sudo update-alternatives –config javac</p>
-<h2 id="有时需要系统的环境变量文件-对所有用户生效"><a href="#有时需要系统的环境变量文件-对所有用户生效" class="headerlink" title="有时需要系统的环境变量文件,对所有用户生效"></a>有时需要系统的环境变量文件,对所有用户生效</h2><p>&#x2F;etc&#x2F;profile<br>修改<br>export JAVA_HOME&#x3D;&#x2F;usr&#x2F;lib&#x2F;jvm&#x2F;jdk1.8.0_141<br>export PATH&#x3D;$JAVA_HOME&#x2F;bin:$PATH</p>
+              <h1 id="当安装cuda时报错如下"><a href="#当安装cuda时报错如下" class="headerlink" title="当安装cuda时报错如下"></a>当安装cuda时报错如下</h1><p>sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">cat /var/log/nvidia-installer.log<br><span class="hljs-keyword">Using</span> built-<span class="hljs-keyword">in</span> stream user <span class="hljs-keyword">interface</span><br>-&gt; Detected <span class="hljs-number">12</span> CPUs online; setting concurrency level <span class="hljs-keyword">to</span> <span class="hljs-number">12</span>.<br><span class="hljs-symbol">ERROR:</span> An NVIDIA kernel <span class="hljs-keyword">module</span> <span class="hljs-comment">&#x27;nvidia-uvm&#x27; appears to already be loaded in your kernel.  This may be because it is in use (for example, by an X server, a CUDA program, or the NVIDIA Persistence Daemon), but this may also happen if your kernel was configured without support for module unloading.  Please be sure to exit any programs that may be using the GPU(s) before attempting to upgrade your driver.  If no GPU-based programs are running, you know that your kernel supports module unloading, and you still receive this message, then an error may have occurred that has corrupted an NVIDIA kernel module&#x27;s usage count, for which the simplest remedy is to reboot your computer.</span><br><span class="hljs-symbol">ERROR:</span> Installation has failed.  Please see the file <span class="hljs-comment">&#x27;/var/log/nvidia-installer.log&#x27; for details.  You may find suggestions on fixing installation problems in the README available on the Linux driver download page at www.nvidia.com.</span><br></code></pre></td></tr></table></figure>
+
+<p>只需退出所有正在运行的cuda应用即可。</p>
 
               
             </div>
@@ -286,8 +282,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>java版本恢复</div>
-      <div>https://johnson7788.github.io/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/</div>
+      <div>安装cuda驱动报错</div>
+      <div>https://johnson7788.github.io/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/</div>
     </div>
     <div class="license-meta">
       
@@ -299,7 +295,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月6日</div>
+          <div>2023年4月11日</div>
         </div>
       
       
@@ -329,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/" title="安装cuda驱动报错">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">安装cuda驱动报错</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/06/mongo%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB/" title="mongo数据迁移">
-                        <span class="hidden-mobile">mongo数据迁移</span>
+                      <a href="/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/" title="java版本恢复">
+                        <span class="hidden-mobile">java版本恢复</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
