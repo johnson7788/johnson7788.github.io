@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="当安装cuda时报错如下sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run 12345cat &#x2F;var&#x2F;log&#x2F;nvidia-installer.logUsing built-in stream user interface-&gt; Detected 12 CPUs online; setting concurrency level to 12.ERRO">
+    <meta name="description" content="设计了2种模型分支进行对比,基于VILT和BLIP2的商品相似度模型对比与分析本文将对比分析两种基于深度学习的商品相似度模型：基于VILT的模型和基于BLIP2的模型。这两种方法在商品相似度检测任务中具有不同的优缺点，我们将从训练、推理和实际应用等方面进行详细分析。 基于VILT的模型VILT模型通过结合图像和文本信息来学习商品特征。在训练过程中，模型使用了多个分类损失和正负样本的相似度损失。通过">
 <meta property="og:type" content="article">
-<meta property="og:title" content="安装cuda驱动报错">
-<meta property="og:url" content="https://johnson7788.github.io/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:title" content="多模态检索模型的设计">
+<meta property="og:url" content="https://johnson7788.github.io/2023/04/12/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="当安装cuda时报错如下sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run 12345cat &#x2F;var&#x2F;log&#x2F;nvidia-installer.logUsing built-in stream user interface-&gt; Detected 12 CPUs online; setting concurrency level to 12.ERRO">
+<meta property="og:description" content="设计了2种模型分支进行对比,基于VILT和BLIP2的商品相似度模型对比与分析本文将对比分析两种基于深度学习的商品相似度模型：基于VILT的模型和基于BLIP2的模型。这两种方法在商品相似度检测任务中具有不同的优缺点，我们将从训练、推理和实际应用等方面进行详细分析。 基于VILT的模型VILT模型通过结合图像和文本信息来学习商品特征。在训练过程中，模型使用了多个分类损失和正负样本的相似度损失。通过">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-11T09:42:21.000Z">
-<meta property="article:modified_time" content="2023-04-11T09:44:41.522Z">
+<meta property="article:published_time" content="2023-04-12T06:59:07.000Z">
+<meta property="article:modified_time" content="2023-04-12T07:15:03.053Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>安装cuda驱动报错 - Be With you</title>
+  <title>多模态检索模型的设计 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="安装cuda驱动报错">
+          <span id="subtitle" title="多模态检索模型的设计">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-11 17:42" pubdate>
-          2023年4月11日 下午
+        <time datetime="2023-04-12 14:59" pubdate>
+          2023年4月12日 下午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          987 字
+          925 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          9 分钟
+          8 分钟
         
       </span>
     
@@ -258,14 +258,17 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">安装cuda驱动报错</h1>
+            <h1 style="display: none">多模态检索模型的设计</h1>
             
             <div class="markdown-body">
               
-              <h1 id="当安装cuda时报错如下"><a href="#当安装cuda时报错如下" class="headerlink" title="当安装cuda时报错如下"></a>当安装cuda时报错如下</h1><p>sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">cat /var/log/nvidia-installer.log<br><span class="hljs-keyword">Using</span> built-<span class="hljs-keyword">in</span> stream user <span class="hljs-keyword">interface</span><br>-&gt; Detected <span class="hljs-number">12</span> CPUs online; setting concurrency level <span class="hljs-keyword">to</span> <span class="hljs-number">12</span>.<br><span class="hljs-symbol">ERROR:</span> An NVIDIA kernel <span class="hljs-keyword">module</span> <span class="hljs-comment">&#x27;nvidia-uvm&#x27; appears to already be loaded in your kernel.  This may be because it is in use (for example, by an X server, a CUDA program, or the NVIDIA Persistence Daemon), but this may also happen if your kernel was configured without support for module unloading.  Please be sure to exit any programs that may be using the GPU(s) before attempting to upgrade your driver.  If no GPU-based programs are running, you know that your kernel supports module unloading, and you still receive this message, then an error may have occurred that has corrupted an NVIDIA kernel module&#x27;s usage count, for which the simplest remedy is to reboot your computer.</span><br><span class="hljs-symbol">ERROR:</span> Installation has failed.  Please see the file <span class="hljs-comment">&#x27;/var/log/nvidia-installer.log&#x27; for details.  You may find suggestions on fixing installation problems in the README available on the Linux driver download page at www.nvidia.com.</span><br></code></pre></td></tr></table></figure>
-
-<p>只需退出所有正在运行的cuda应用即可。</p>
+              <h1 id="设计了2种模型分支进行对比-基于VILT和BLIP2的商品相似度模型对比与分析"><a href="#设计了2种模型分支进行对比-基于VILT和BLIP2的商品相似度模型对比与分析" class="headerlink" title="设计了2种模型分支进行对比,基于VILT和BLIP2的商品相似度模型对比与分析"></a>设计了2种模型分支进行对比,基于VILT和BLIP2的商品相似度模型对比与分析</h1><p>本文将对比分析两种基于深度学习的商品相似度模型：基于VILT的模型和基于BLIP2的模型。这两种方法在商品相似度检测任务中具有不同的优缺点，我们将从训练、推理和实际应用等方面进行详细分析。</p>
+<h1 id="基于VILT的模型"><a href="#基于VILT的模型" class="headerlink" title="基于VILT的模型"></a>基于VILT的模型</h1><p>VILT模型通过结合图像和文本信息来学习商品特征。在训练过程中，模型使用了多个分类损失和正负样本的相似度损失。通过保留品牌预测、使用原始商品图片和名称以及别名作为样本，该模型可以学到丰富的商品特征表示。在推理阶段，模型先预测品牌，然后对品牌下所有商品进行相似度检索。实验结果显示，该方法在准确率上取得了较好的效果，达到82.19%。</p>
+<h2 id="VILT模型的优点："><a href="#VILT模型的优点：" class="headerlink" title="VILT模型的优点："></a>VILT模型的优点：</h2><p>通过编码图片和标题为一个向量，可以更好地捕捉商品的多模态信息。<br>使用SimCSE论文中的方法进行训练，可以进一步提高模型的性能。<br>通过使用品牌预测和相似度检索，可以在推理阶段明显提高准确率。</p>
+<h2 id="VILT模型的缺点："><a href="#VILT模型的缺点：" class="headerlink" title="VILT模型的缺点："></a>VILT模型的缺点：</h2><p>需要人工构造样本对和困难样本对，可能无法充分挖掘潜在的信息。<br>训练过程中需要调整多个损失项的权重，可能导致优化困难。</p>
+<h1 id="基于BLIP2的模型"><a href="#基于BLIP2的模型" class="headerlink" title="基于BLIP2的模型"></a>基于BLIP2的模型</h1><p>BLIP2模型受到面部识别任务中损失函数设计的启发，旨在学习图像的良好表示而不是对预定类别进行分类。该模型以BLIP2为基础，结构为ViT+OPT+Qformer，模型参数量为37亿。训练过程中采用arcface损失，可以避免人工构造样本对。实验结果显示，经过微调后，模型的准确率可达52%。</p>
+<h2 id="BLIP2模型的优点："><a href="#BLIP2模型的优点：" class="headerlink" title="BLIP2模型的优点："></a>BLIP2模型的优点：</h2><p>无需人工构造样本对，降低了训练难度。<br>采用arcface损失，可以使样本之间的距离拉开，提高模型性能。<br>BLIP2模型的缺点：<br>训练时间较长，需要48小时才能完成10个epoch的训练。<br>模型参数量较大，计算资源需求高。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>基于VILT的模型和基于BLIP2的模型在商品相似度检测任务中各有优劣。VILT模型可以更好地捕捉商品的多模态信息，但需要人工构造样本对和困难样本对。而BLIP2模型无需人工构造样本对，采用arcface损失可以使样本之间的距离拉开，但训练时间较长，计算资源需求较高。根据实际应用场景和计算资源的限制，可以选择合适的模型进行商品相似度检测任务。</p>
 
               
             </div>
@@ -282,8 +285,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>安装cuda驱动报错</div>
-      <div>https://johnson7788.github.io/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/</div>
+      <div>多模态检索模型的设计</div>
+      <div>https://johnson7788.github.io/2023/04/12/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1/</div>
     </div>
     <div class="license-meta">
       
@@ -295,7 +298,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月11日</div>
+          <div>2023年4月12日</div>
         </div>
       
       
@@ -325,18 +328,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99-1/" title="安装cuda驱动报错">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">安装cuda驱动报错</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/06/java%E7%89%88%E6%9C%AC%E6%81%A2%E5%A4%8D/" title="java版本恢复">
-                        <span class="hidden-mobile">java版本恢复</span>
+                      <a href="/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99-1/" title="安装cuda驱动报错">
+                        <span class="hidden-mobile">安装cuda驱动报错</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
