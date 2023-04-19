@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="关于Pinecone向量检索工具Pinecone：Pinecone是一个托管的向量数据库服务，支持高性能的向量检索和近似最近邻搜索。它提供了Python和REST API，并且可以轻松扩展到数百万个向量。  是否可以增加向量降维后根据不同距离进行展示的效果，例如PCA二维或3维图，方便对向量进行检查？  其它类似的向量检索数据库Annoy：Annoy是一个C++库，用于高效地进行向量检索。它支持多">
+    <meta name="description" content="报错如下:peft报错RuntimeError: self and mat2 must have the same dtype 明确禁用下8bit训练即可model &#x3D; AutoModelForCausalLM.from_pretrained(    base_model,    load_in_8bit&#x3D;False,    torch_dtype&#x3D;torch.flo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pinecone向量检索工具">
-<meta property="og:url" content="https://johnson7788.github.io/2023/04/13/pinecone%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:title" content="peft微调Bloom时报错">
+<meta property="og:url" content="https://johnson7788.github.io/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="关于Pinecone向量检索工具Pinecone：Pinecone是一个托管的向量数据库服务，支持高性能的向量检索和近似最近邻搜索。它提供了Python和REST API，并且可以轻松扩展到数百万个向量。  是否可以增加向量降维后根据不同距离进行展示的效果，例如PCA二维或3维图，方便对向量进行检查？  其它类似的向量检索数据库Annoy：Annoy是一个C++库，用于高效地进行向量检索。它支持多">
+<meta property="og:description" content="报错如下:peft报错RuntimeError: self and mat2 must have the same dtype 明确禁用下8bit训练即可model &#x3D; AutoModelForCausalLM.from_pretrained(    base_model,    load_in_8bit&#x3D;False,    torch_dtype&#x3D;torch.flo">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-13T02:19:38.000Z">
-<meta property="article:modified_time" content="2023-04-13T02:25:47.203Z">
+<meta property="article:published_time" content="2023-04-18T08:41:32.000Z">
+<meta property="article:modified_time" content="2023-04-18T08:45:36.420Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>pinecone向量检索工具 - Be With you</title>
+  <title>peft微调Bloom时报错 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="pinecone向量检索工具">
+          <span id="subtitle" title="peft微调Bloom时报错">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-13 10:19" pubdate>
-          2023年4月13日 上午
+        <time datetime="2023-04-18 16:41" pubdate>
+          2023年4月18日 下午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          334 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          12 分钟
+          3 分钟
         
       </span>
     
@@ -258,19 +258,12 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">pinecone向量检索工具</h1>
+            <h1 style="display: none">peft微调Bloom时报错</h1>
             
             <div class="markdown-body">
               
-              <h1 id="关于Pinecone向量检索工具"><a href="#关于Pinecone向量检索工具" class="headerlink" title="关于Pinecone向量检索工具"></a>关于Pinecone向量检索工具</h1><p>Pinecone：Pinecone是一个托管的向量数据库服务，支持高性能的向量检索和近似最近邻搜索。它提供了Python和REST API，并且可以轻松扩展到数百万个向量。</p>
-<ol>
-<li>是否可以增加向量降维后根据不同距离进行展示的效果，例如PCA二维或3维图，方便对向量进行检查？</li>
-</ol>
-<h1 id="其它类似的向量检索数据库"><a href="#其它类似的向量检索数据库" class="headerlink" title="其它类似的向量检索数据库"></a>其它类似的向量检索数据库</h1><p>Annoy：Annoy是一个C++库，用于高效地进行向量检索。它支持多种距离度量和索引构建算法，可以在大型数据集上进行高性能的近似最近邻搜索。</p>
-<p>Faiss：Faiss是Facebook AI Research开发的一个高性能向量检索库。它支持多种距离度量和索引构建算法，并且可以在多个GPU上进行分布式计算。</p>
-<p>Milvus：Milvus是一个开源的向量数据库，支持高性能的向量检索和近似最近邻搜索。它支持多种距离度量和索引构建算法，并且可以在多个节点上进行分布式计算。</p>
-<p>ScaNN：ScaNN是Google开发的一个高性能向量检索库，支持多种距离度量和索引构建算法，并且可以在多个GPU上进行分布式计算。它还提供了一些实用工具，例如可视化和性能分析。</p>
-<h1 id="Pinecone的现有功能"><a href="#Pinecone的现有功能" class="headerlink" title="Pinecone的现有功能"></a>Pinecone的现有功能</h1><p>安装和使用<br>用户可以通过pip或conda安装Pinecone向量检索工具；<br>用户可以在命令行或脚本中使用Pinecone向量检索工具。<br>初始化<br>用户可以通过初始化方法创建一个向量检索实例；<br>用户可以设置连接Pinecone服务的参数，例如API密钥、服务区域和集合名称。<br>配置索引<br>用户可以通过configure_index方法配置索引的参数；<br>用户可以设置索引的维度、索引类型和检索方法。<br>创建集合<br>用户可以通过create_collection方法创建一个新的集合；<br>用户可以用于存储向量数据。<br>创建索引<br>用户可以通过create_index方法创建一个新的索引；<br>用户可以用于存储向量数据并支持向量检索。<br>删除集合<br>用户可以通过delete_collection方法删除一个集合；<br>同时也会删除其中的所有向量数据和索引。<br>删除索引<br>用户可以通过delete_index方法删除一个索引；<br>同时也会删除其中的所有向量数据。<br>描述集合<br>用户可以通过describe_collection方法获取一个集合的详细信息；<br>例如集合名称、索引类型、向量数量等。<br>描述索引<br>用户可以通过describe_index方法获取一个索引的详细信息；<br>例如索引类型、向量数量等。<br>列出集合<br>用户可以通过list_collections方法获取所有可用的集合列表。<br>列出索引<br>用户可以通过list_indexes方法获取一个集合中所有可用的索引列表。<br>向索引中插入向量<br>用户可以通过Index.upsert方法向索引中插入向量；<br>用户可以插入多个向量，每个向量有一个唯一的ID。<br>从索引中检索向量<br>用户可以通过Index.query方法从索引中检索与查询向量最相似的向量；<br>用户可以指定要检索的查询向量和检索的最相似向量数量。<br>删除向量<br>用户可以通过Index.delete方法从索引中删除向量；<br>用户可以指定要删除的向量ID列表。<br>更新向量<br>用户可以通过Index.update方法更新索引中已存在的向量；<br>用户可以指定要更新的向量ID和更新后的向量值。</p>
+              <h1 id="报错如下"><a href="#报错如下" class="headerlink" title="报错如下:"></a>报错如下:</h1><p>peft报错<br>RuntimeError: self and mat2 must have the same dtype</p>
+<h1 id="明确禁用下8bit训练即可"><a href="#明确禁用下8bit训练即可" class="headerlink" title="明确禁用下8bit训练即可"></a>明确禁用下8bit训练即可</h1><p>model &#x3D; AutoModelForCausalLM.from_pretrained(<br>    base_model,<br>    load_in_8bit&#x3D;False,<br>    torch_dtype&#x3D;torch.float16,<br>    device_map&#x3D;device_map,<br>)<br>model.is_loaded_in_8bit &#x3D; False   #明确一下，不使用8bit进行训练，因为huggingface的8bit训练不支持<br>model &#x3D; prepare_model_for_int8_training(model)</p>
 
               
             </div>
@@ -287,8 +280,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>pinecone向量检索工具</div>
-      <div>https://johnson7788.github.io/2023/04/13/pinecone%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7/</div>
+      <div>peft微调Bloom时报错</div>
+      <div>https://johnson7788.github.io/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/</div>
     </div>
     <div class="license-meta">
       
@@ -300,7 +293,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月13日</div>
+          <div>2023年4月18日</div>
         </div>
       
       
@@ -330,9 +323,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/" title="peft微调Bloom时报错">
+                      <a href="/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/" title="export_ONNX报错">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">peft微调Bloom时报错</span>
+                        <span class="hidden-mobile">export_ONNX报错</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -340,8 +333,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/12/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1/" title="多模态检索模型的设计">
-                        <span class="hidden-mobile">多模态检索模型的设计</span>
+                      <a href="/2023/04/13/pinecone%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7/" title="pinecone向量检索工具">
+                        <span class="hidden-mobile">pinecone向量检索工具</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

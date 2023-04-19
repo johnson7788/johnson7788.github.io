@@ -4,6 +4,32 @@
   
   
   <entry>
+    <title>export_ONNX报错</title>
+    <link href="/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/"/>
+    <url>/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/</url>
+    
+    <content type="html"><![CDATA[<h1 id="当使用torch导出ONNX模型的时候报错如下"><a href="#当使用torch导出ONNX模型的时候报错如下" class="headerlink" title="当使用torch导出ONNX模型的时候报错如下"></a>当使用torch导出ONNX模型的时候报错如下</h1><pre><code class="hljs">for idx, r_split in enumerate(r_splits):</code></pre><p>TypeError: ‘torch._C.Value’ object is not iterable<br>(Occurred when translating repeat_interleave).</p><p>解决方法：更新torch到2.0即可</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>peft微调Bloom时报错</title>
+    <link href="/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/"/>
+    <url>/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/</url>
+    
+    <content type="html"><![CDATA[<h1 id="报错如下"><a href="#报错如下" class="headerlink" title="报错如下:"></a>报错如下:</h1><p>peft报错<br>RuntimeError: self and mat2 must have the same dtype</p><h1 id="明确禁用下8bit训练即可"><a href="#明确禁用下8bit训练即可" class="headerlink" title="明确禁用下8bit训练即可"></a>明确禁用下8bit训练即可</h1><p>model &#x3D; AutoModelForCausalLM.from_pretrained(<br>    base_model,<br>    load_in_8bit&#x3D;False,<br>    torch_dtype&#x3D;torch.float16,<br>    device_map&#x3D;device_map,<br>)<br>model.is_loaded_in_8bit &#x3D; False   #明确一下，不使用8bit进行训练，因为huggingface的8bit训练不支持<br>model &#x3D; prepare_model_for_int8_training(model)</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>pinecone向量检索工具</title>
     <link href="/2023/04/13/pinecone%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7/"/>
     <url>/2023/04/13/pinecone%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E5%B7%A5%E5%85%B7/</url>
