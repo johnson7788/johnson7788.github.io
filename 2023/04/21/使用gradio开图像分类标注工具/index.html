@@ -16,20 +16,22 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目录结构├── all_results.json├── config.json├── eval_results.json├── preprocessor_config.json├── pytorch_model.bin├── runs│   └── Apr20_11-09-24_wac209│   ├── 1681960165.2226455│   │   └── events.out.tfeve">
+    <meta name="description" content="利用gradio做一个图像的分类的标注工具 首先使用少量数据训练一个不太准的分类模型（我们测试的是一个检索模型,先训练模型嵌入，然后得到候选向量，查询数据和候选向量进行相似度对比，返回预测结果）,写好接口，传入图片后能预测图片的类别 然后自制一个gradio的标注工具，能够读取未标注数据，调用模型接口，预测结果，经过人工判断，是否正确，如果正确，直接点提交按钮，如果不正确，修改成正确的标签左边是方">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对huggingface的训练完成的结果的目录结构进行说明">
-<meta property="og:url" content="https://johnson7788.github.io/2023/04/20/%E5%AF%B9huggingface%E7%9A%84%E8%AE%AD%E7%BB%83%E5%AE%8C%E6%88%90%E7%9A%84%E7%BB%93%E6%9E%9C%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8C%E8%AF%B4%E6%98%8E/index.html">
+<meta property="og:title" content="使用gradio开图像分类标注工具">
+<meta property="og:url" content="https://johnson7788.github.io/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="目录结构├── all_results.json├── config.json├── eval_results.json├── preprocessor_config.json├── pytorch_model.bin├── runs│   └── Apr20_11-09-24_wac209│   ├── 1681960165.2226455│   │   └── events.out.tfeve">
+<meta property="og:description" content="利用gradio做一个图像的分类的标注工具 首先使用少量数据训练一个不太准的分类模型（我们测试的是一个检索模型,先训练模型嵌入，然后得到候选向量，查询数据和候选向量进行相似度对比，返回预测结果）,写好接口，传入图片后能预测图片的类别 然后自制一个gradio的标注工具，能够读取未标注数据，调用模型接口，预测结果，经过人工判断，是否正确，如果正确，直接点提交按钮，如果不正确，修改成正确的标签左边是方">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-20T03:19:09.000Z">
-<meta property="article:modified_time" content="2023-04-20T03:20:15.646Z">
+<meta property="og:image" content="https://johnson7788.github.io/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/1.png">
+<meta property="article:published_time" content="2023-04-21T08:02:09.000Z">
+<meta property="article:modified_time" content="2023-04-21T08:08:43.429Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/1.png">
   
   
-  <title>对huggingface的训练完成的结果的目录结构进行说明 - Be With you</title>
+  <title>使用gradio开图像分类标注工具 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +187,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="对huggingface的训练完成的结果的目录结构进行说明">
+          <span id="subtitle" title="使用gradio开图像分类标注工具">
             
           </span>
         </div>
@@ -197,8 +199,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-20 11:19" pubdate>
-          2023年4月20日 上午
+        <time datetime="2023-04-21 16:02" pubdate>
+          2023年4月21日 下午
         </time>
       </span>
     
@@ -209,7 +211,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.1k 字
+          236 字
         
       </span>
     
@@ -220,7 +222,7 @@
         
         
         
-          26 分钟
+          2 分钟
         
       </span>
     
@@ -258,15 +260,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">对huggingface的训练完成的结果的目录结构进行说明</h1>
+            <h1 style="display: none">使用gradio开图像分类标注工具</h1>
             
             <div class="markdown-body">
               
-              <h1 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h1><p>├── all_results.json<br>├── config.json<br>├── eval_results.json<br>├── preprocessor_config.json<br>├── pytorch_model.bin<br>├── runs<br>│   └── Apr20_11-09-24_wac209<br>│   ├── 1681960165.2226455<br>│   │   └── events.out.tfevents.1681960165.wac209<br>│   ├── events.out.tfevents.1681960165.wac209<br>│   └── events.out.tfevents.1681960176.wac209<br>├── train_results.json<br>├── trainer_state.json<br>└── training_args.bin</p>
-<p>all_results.json：一个JSON文件，包含每个epoch的训练和验证结果。<br>config.json：一个JSON文件，包含模型的配置信息，例如模型的架构、超参数等等。<br>eval_results.json：一个JSON文件，包含验证集上的结果。<br>preprocessor_config.json：一个JSON文件，包含预处理器的配置信息，例如tokenizer的参数等等。<br>pytorch_model.bin：一个二进制文件，包含训练好的PyTorch模型的参数。<br>runs：一个目录，包含TensorBoard日志文件，用于可视化训练过程中的指标和图形。 tensforboard –logdir runs 即可查看<br>train_results.json：一个JSON文件，包含训练集上的结果。<br>trainer_state.json：一个JSON文件，包含训练过程中Trainer对象的状态信息，例如当前epoch、当前step等等。<br>training_args.bin：一个二进制文件，包含训练脚本的参数，例如训练数据的路径、训练的超参数等等。</p>
-<p>#cat all_results.json<br>{<br>    “epoch”: 6.0,<br>    “eval_accuracy”: 0.7272727272727273,<br>    “eval_loss”: 1.4200994968414307,<br>    “eval_runtime”: 0.1368,<br>    “eval_samples_per_second”: 80.438,<br>    “eval_steps_per_second”: 14.625,<br>    “train_loss”: 1.4368099636501737,<br>    “train_runtime”: 10.7547,<br>    “train_samples_per_second”: 49.095,<br>    “train_steps_per_second”: 3.347<br>}%</p>
-<p>#cat eval_results.json<br>{<br>    “epoch”: 6.0,<br>    “eval_accuracy”: 0.7272727272727273,<br>    “eval_loss”: 1.4200994968414307,<br>    “eval_runtime”: 0.1368,<br>    “eval_samples_per_second”: 80.438,<br>    “eval_steps_per_second”: 14.625<br>}%                                                                                                           ➜  vit-base-disney cat trainer_state.json<br>{<br>  “best_metric”: null,<br>  “best_model_checkpoint”: null,<br>  “epoch”: 6.0,<br>  “global_step”: 36,<br>  “is_hyper_param_search”: false,<br>  “is_local_process_zero”: true,<br>  “is_world_process_zero”: true,<br>  “log_history”: [<br>    {<br>      “epoch”: 1.67,<br>      “learning_rate”: 0.00014444444444444444,<br>      “loss”: 2.1824,<br>      “step”: 10<br>    },<br>    {<br>      “epoch”: 3.33,<br>      “learning_rate”: 8.888888888888889e-05,<br>      “loss”: 1.4562,<br>      “step”: 20<br>    },<br>    {<br>      “epoch”: 5.0,<br>      “learning_rate”: 3.3333333333333335e-05,<br>      “loss”: 1.0267,<br>      “step”: 30<br>    },<br>    {<br>      “epoch”: 6.0,<br>      “step”: 36,<br>      “total_flos”: 4.091907095248896e+16,<br>      “train_loss”: 1.4368099636501737,<br>      “train_runtime”: 10.7547,<br>      “train_samples_per_second”: 49.095,<br>      “train_steps_per_second”: 3.347<br>    }<br>  ],<br>  “max_steps”: 36,<br>  “num_train_epochs”: 6,<br>  “total_flos”: 4.091907095248896e+16,<br>  “trial_name”: null,<br>  “trial_params”: null<br>}</p>
-<p>#模型的配置信息<br>cat config.json<br>{<br>  “_name_or_path”: “google&#x2F;vit-base-patch16-224-in21k”,<br>  “architectures”: [<br>    “ViTForImageClassification”<br>  ],<br>  “attention_probs_dropout_prob”: 0.0,<br>  “encoder_stride”: 16,<br>  “hidden_act”: “gelu”,<br>  “hidden_dropout_prob”: 0.0,<br>  “hidden_size”: 768,<br>  “id2label”: {<br>    “0”: “\u514b\u8389\u65af”,<br>    “1”: “\u5510\u8001\u9e2d”,<br>    “10”: “\u9edb\u4e1d”,<br>    “2”: “\u5947\u5947”,<br>    “3”: “\u5e03\u9c81\u6258”,<br>    “4”: “\u661f\u9edb\u9732”,<br>    “5”: “\u73b2\u5a1c\u8d1d\u5c14”,<br>    “6”: “\u7c73\u5947”,<br>    “7”: “\u7c73\u59ae”,<br>    “8”: “\u8482\u8482”,<br>    “9”: “\u9ad8\u98de”<br>  },<br>  “image_size”: 224,<br>  “initializer_range”: 0.02,<br>  “intermediate_size”: 3072,<br>  “label2id”: {<br>    “\u514b\u8389\u65af”: “0”,<br>    “\u5510\u8001\u9e2d”: “1”,<br>    “\u5947\u5947”: “2”,<br>    “\u5e03\u9c81\u6258”: “3”,<br>    “\u661f\u9edb\u9732”: “4”,<br>    “\u73b2\u5a1c\u8d1d\u5c14”: “5”,<br>    “\u7c73\u5947”: “6”,<br>    “\u7c73\u59ae”: “7”,<br>    “\u8482\u8482”: “8”,<br>    “\u9ad8\u98de”: “9”,<br>    “\u9edb\u4e1d”: “10”<br>  },<br>  “layer_norm_eps”: 1e-12,<br>  “model_type”: “vit”,<br>  “num_attention_heads”: 12,<br>  “num_channels”: 3,<br>  “num_hidden_layers”: 12,<br>  “patch_size”: 16,<br>  “problem_type”: “single_label_classification”,<br>  “qkv_bias”: true,<br>  “torch_dtype”: “float32”,<br>  “transformers_version”: “4.28.1”<br>}</p>
+              <h1 id="利用gradio做一个图像的分类的标注工具"><a href="#利用gradio做一个图像的分类的标注工具" class="headerlink" title="利用gradio做一个图像的分类的标注工具"></a>利用gradio做一个图像的分类的标注工具</h1><ol>
+<li>首先使用少量数据训练一个不太准的分类模型（我们测试的是一个检索模型,先训练模型嵌入，然后得到候选向量，查询数据和候选向量进行相似度对比，返回预测结果）,写好接口，传入图片后能预测图片的类别</li>
+<li>然后自制一个gradio的标注工具，能够读取未标注数据，调用模型接口，预测结果，经过人工判断，是否正确，如果正确，直接点提交按钮，如果不正确，修改成正确的标签<br>左边是方便用户查看标签图片，右边是会显示当前的的图片和预测结果，上一张和下一张可翻页<img src="/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/1.png" srcset="/img/loading.gif" lazyload class=""></li>
+</ol>
 
               
             </div>
@@ -283,8 +284,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>对huggingface的训练完成的结果的目录结构进行说明</div>
-      <div>https://johnson7788.github.io/2023/04/20/%E5%AF%B9huggingface%E7%9A%84%E8%AE%AD%E7%BB%83%E5%AE%8C%E6%88%90%E7%9A%84%E7%BB%93%E6%9E%9C%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8C%E8%AF%B4%E6%98%8E/</div>
+      <div>使用gradio开图像分类标注工具</div>
+      <div>https://johnson7788.github.io/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/</div>
     </div>
     <div class="license-meta">
       
@@ -296,7 +297,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月20日</div>
+          <div>2023年4月21日</div>
         </div>
       
       
@@ -326,18 +327,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/" title="使用gradio开图像分类标注工具">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">使用gradio开图像分类标注工具</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/" title="export_ONNX报错">
-                        <span class="hidden-mobile">export_ONNX报错</span>
+                      <a href="/2023/04/20/%E5%AF%B9huggingface%E7%9A%84%E8%AE%AD%E7%BB%83%E5%AE%8C%E6%88%90%E7%9A%84%E7%BB%93%E6%9E%9C%E7%9A%84%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E8%BF%9B%E8%A1%8C%E8%AF%B4%E6%98%8E/" title="对huggingface的训练完成的结果的目录结构进行说明">
+                        <span class="hidden-mobile">对huggingface的训练完成的结果的目录结构进行说明</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
