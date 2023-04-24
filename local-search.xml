@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>transformers_datasets报错</title>
+    <link href="/2023/04/24/transformers-datasets%E6%8A%A5%E9%94%99/"/>
+    <url>/2023/04/24/transformers-datasets%E6%8A%A5%E9%94%99/</url>
+    
+    <content type="html"><![CDATA[<h1 id="使用huggingface的时datasets报错如下"><a href="#使用huggingface的时datasets报错如下" class="headerlink" title="使用huggingface的时datasets报错如下:"></a>使用huggingface的时datasets报错如下:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">multiprocess.pool.RemoteTraceback: <br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">Traceback (most recent call last):</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/multiprocess/pool.py<span class="hljs-string">&quot;, line 125, in worker</span><br><span class="hljs-string">    result = (True, func(*args, **kwds))</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/utils/py_utils.py<span class="hljs-string">&quot;, line 1353, in _write_generator_to_queue</span><br><span class="hljs-string">    for i, result in enumerate(func(**kwargs)):</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/arrow_dataset.py<span class="hljs-string">&quot;, line 3397, in _map_single</span><br><span class="hljs-string">    writer.write_batch(batch)</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/arrow_writer.py<span class="hljs-string">&quot;, line 554, in write_batch</span><br><span class="hljs-string">    pa_table = pa.Table.from_arrays(arrays, schema=schema)</span><br><span class="hljs-string">  File &quot;</span>pyarrow/table.pxi<span class="hljs-string">&quot;, line 3657, in pyarrow.lib.Table.from_arrays</span><br><span class="hljs-string">  File &quot;</span>pyarrow/table.pxi<span class="hljs-string">&quot;, line 1416, in pyarrow.lib._sanitize_arrays</span><br><span class="hljs-string">ValueError: Schema and number of arrays unequal</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure><p>这个报错很不明显，官方可能会在最新版本对这个错误的描述进行更改，真正的原因是有的批次数据是空的，检查你的批次数据，确保不为空即可。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>使用gradio开图像分类标注工具</title>
     <link href="/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/"/>
     <url>/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/</url>
