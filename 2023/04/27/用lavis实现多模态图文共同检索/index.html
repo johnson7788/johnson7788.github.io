@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用huggingface的时datasets报错如下:123456789101112131415multiprocess.pool.RemoteTraceback: &quot;&quot;&quot;Traceback (most recent call last):  File &quot;&#x2F;Users&#x2F;admin&#x2F;miniforge3&#x2F;envs&#x2F;py39&#x2F;lib&#x2F;python3.9&#x2F;sit">
+    <meta name="description" content="多模态检索 我们平常常见的多模态检索是，图到文或文到图的检索, 方式如下:文本和图像之间的视觉-语义相似度任务1： 使用句子查询图像任务2：使用图像查询句子搜索关键字: image-text retrieval  图文共同检索，这个不太常见，主要是利用图片和单独的文本的特征没有一起使用的特征进行检索的效果好，所以图文共同检索，思路如下：图文匹配本质就是要对图像和文本这两个模态的样本分别或联合进行编">
 <meta property="og:type" content="article">
-<meta property="og:title" content="transformers_datasets报错">
-<meta property="og:url" content="https://johnson7788.github.io/2023/04/24/transformers-datasets%E6%8A%A5%E9%94%99/index.html">
+<meta property="og:title" content="用lavis实现多模态图文共同检索">
+<meta property="og:url" content="https://johnson7788.github.io/2023/04/27/%E7%94%A8lavis%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E6%96%87%E5%85%B1%E5%90%8C%E6%A3%80%E7%B4%A2/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="使用huggingface的时datasets报错如下:123456789101112131415multiprocess.pool.RemoteTraceback: &quot;&quot;&quot;Traceback (most recent call last):  File &quot;&#x2F;Users&#x2F;admin&#x2F;miniforge3&#x2F;envs&#x2F;py39&#x2F;lib&#x2F;python3.9&#x2F;sit">
+<meta property="og:description" content="多模态检索 我们平常常见的多模态检索是，图到文或文到图的检索, 方式如下:文本和图像之间的视觉-语义相似度任务1： 使用句子查询图像任务2：使用图像查询句子搜索关键字: image-text retrieval  图文共同检索，这个不太常见，主要是利用图片和单独的文本的特征没有一起使用的特征进行检索的效果好，所以图文共同检索，思路如下：图文匹配本质就是要对图像和文本这两个模态的样本分别或联合进行编">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-04-24T02:07:41.000Z">
-<meta property="article:modified_time" content="2023-04-24T02:09:42.058Z">
+<meta property="article:published_time" content="2023-04-27T02:43:24.000Z">
+<meta property="article:modified_time" content="2023-04-27T02:59:55.314Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>transformers_datasets报错 - Be With you</title>
+  <title>用lavis实现多模态图文共同检索 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="transformers_datasets报错">
+          <span id="subtitle" title="用lavis实现多模态图文共同检索">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-04-24 10:07" pubdate>
-          2023年4月24日 上午
+        <time datetime="2023-04-27 10:43" pubdate>
+          2023年4月27日 上午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.1k 字
+          2.1k 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          9 分钟
+          18 分钟
         
       </span>
     
@@ -258,13 +258,23 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">transformers_datasets报错</h1>
+            <h1 style="display: none">用lavis实现多模态图文共同检索</h1>
             
             <div class="markdown-body">
               
-              <h1 id="使用huggingface的时datasets报错如下"><a href="#使用huggingface的时datasets报错如下" class="headerlink" title="使用huggingface的时datasets报错如下:"></a>使用huggingface的时datasets报错如下:</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">multiprocess.pool.RemoteTraceback: <br><span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">Traceback (most recent call last):</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/multiprocess/pool.py<span class="hljs-string">&quot;, line 125, in worker</span><br><span class="hljs-string">    result = (True, func(*args, **kwds))</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/utils/py_utils.py<span class="hljs-string">&quot;, line 1353, in _write_generator_to_queue</span><br><span class="hljs-string">    for i, result in enumerate(func(**kwargs)):</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/arrow_dataset.py<span class="hljs-string">&quot;, line 3397, in _map_single</span><br><span class="hljs-string">    writer.write_batch(batch)</span><br><span class="hljs-string">  File &quot;</span>/Users/admin/miniforge3/envs/py39/lib/python3.9/site-packages/datasets/arrow_writer.py<span class="hljs-string">&quot;, line 554, in write_batch</span><br><span class="hljs-string">    pa_table = pa.Table.from_arrays(arrays, schema=schema)</span><br><span class="hljs-string">  File &quot;</span>pyarrow/table.pxi<span class="hljs-string">&quot;, line 3657, in pyarrow.lib.Table.from_arrays</span><br><span class="hljs-string">  File &quot;</span>pyarrow/table.pxi<span class="hljs-string">&quot;, line 1416, in pyarrow.lib._sanitize_arrays</span><br><span class="hljs-string">ValueError: Schema and number of arrays unequal</span><br><span class="hljs-string">&quot;</span><span class="hljs-string">&quot;&quot;</span><br></code></pre></td></tr></table></figure>
-
-<p>这个报错很不明显，官方可能会在最新版本对这个错误的描述进行更改，真正的原因是有的批次数据是空的，检查你的批次数据，确保不为空即可。</p>
+              <h1 id="多模态检索"><a href="#多模态检索" class="headerlink" title="多模态检索"></a>多模态检索</h1><ol>
+<li><p>我们平常常见的多模态检索是，图到文或文到图的检索, 方式如下:<br>文本和图像之间的视觉-语义相似度<br>任务1： 使用句子查询图像<br>任务2：使用图像查询句子<br>搜索关键字: image-text retrieval</p>
+</li>
+<li><p>图文共同检索，这个不太常见，主要是利用图片和单独的文本的特征没有一起使用的特征进行检索的效果好，所以图文共同检索，思路如下：<br>图文匹配本质就是要对图像和文本这两个模态的样本分别或联合进行编码得到其语义表示embedding，同时还要有相应的相似性计算方法来计算这些embedding之间相似度。</p>
+</li>
+</ol>
+<h1 id="依赖的框架LAVIS，Facebook的开源框架"><a href="#依赖的框架LAVIS，Facebook的开源框架" class="headerlink" title="依赖的框架LAVIS，Facebook的开源框架"></a>依赖的框架LAVIS，Facebook的开源框架</h1><p>LAVIS是一个支持多模态学习的开源库。该库支持多种任务、数据集和模型，并不断更新和扩充。</p>
+<p>在支持的任务方面，LAVIS支持以下任务：图像-文本预训练、图像-文本检索、文本-图像检索、视觉问答、图像描述、图像分类、自然语言视觉推理、视觉蕴涵、视觉对话、视频-文本检索、文本-视频检索、视频问答和视频对话。</p>
+<p>在支持的数据集方面，LAVIS支持以下数据集：COCO、VisualGenome、SBU ConceptualCaptions、Flickr30k、VQAv2、OKVQA、A-OKVQA、NoCaps、ImageNet、NLVR2、SNLI-VE、VisDial、MSRVTT、DiDeMo和MSVD等。</p>
+<p>在支持的模型方面，LAVIS支持多种模型，包括ALBEF、BLIP、CLIP、VGD-GPT和ALPRO等。LAVIS还提供了自定义功能，使用户可以根据自己的需求定制自己的多模态学习模型。</p>
+<p>总之，LAVIS是一个非常强大的多模态学习库，为研究者和开发者提供了丰富的任务、数据集和模型选择，可以大大加速多模态学习的研究和应用。</p>
+<h1 id="base模型和设计-我们还设计了使用Lora只微调Qformer即可，使用huggingface的peft插件"><a href="#base模型和设计-我们还设计了使用Lora只微调Qformer即可，使用huggingface的peft插件" class="headerlink" title="base模型和设计, 我们还设计了使用Lora只微调Qformer即可，使用huggingface的peft插件"></a>base模型和设计, 我们还设计了使用Lora只微调Qformer即可，使用huggingface的peft插件</h1><p>使用BLIP2作为base模型,使用BLIP2模型，模型结构是ViT+OPT+Qformer，我们只微调Qformer，大约是5%的参数量，总的参数量是37亿。OPT是多语言模型。损失是arcface损失，优点是不用人工构造样本对。缺点是需要较多的微调，才能使的样本之间的距离拉开。<br>参考Face Recognition (FR) 面部识别的损失设计方法<br><a target="_blank" rel="noopener" href="https://neptune.ai/blog/how-to-choose-loss-function-for-face-recognition">https://neptune.ai/blog/how-to-choose-loss-function-for-face-recognition</a>,<br>learn a good representation of the images rather than classify images among a set of predetermined classes</p>
+<h1 id="代码结构"><a href="#代码结构" class="headerlink" title="代码结构"></a>代码结构</h1><p>building_index.py  预训练后的模型构建索引<br>lavis_predict.py   模型预测<br>lavis&#x2F;common&#x2F;lora_utils.py  Lora的模型更改<br>lavis&#x2F;configs&#x2F;datasets&#x2F;coco&#x2F;mini_cap.yaml  #caption的mini数据集<br>lavis&#x2F;configs&#x2F;datasets&#x2F;cosmetic&#x2F;defaults_cos.yaml   #默认训练数据集<br>lavis&#x2F;configs&#x2F;datasets&#x2F;cosmetic&#x2F;mini_cos.yaml   #mini数据集<br>lavis&#x2F;datasets&#x2F;builders&#x2F;caption_builder.py   # 加入自己的数据集的builder<br>lavis&#x2F;datasets&#x2F;datasets&#x2F;comestic_datasets.py  # 自己数据集的构造和读取处理<br>lavis&#x2F;models&#x2F;<strong>init</strong>.py  #加入”Blip2Lora”,模型<br>lavis&#x2F;models&#x2F;blip2_models&#x2F;blip2_lora.py  #具体模型<br>lavis&#x2F;models&#x2F;blip2_models&#x2F;blip2_opt.py   #使用BLIP2的模型，OPT是语义模型，视觉模型是ViT<br>lavis&#x2F;models&#x2F;blip2_models&#x2F;face_head.py   #arcface损失<br>lavis&#x2F;projects&#x2F;blip2&#x2F;eval&#x2F;cosmetic_ft_eval.yaml   评估的配置<br>lavis&#x2F;projects&#x2F;blip2&#x2F;train&#x2F;cosmetic_ft.yaml    微调的配置<br>lavis&#x2F;tasks&#x2F;<strong>init</strong>.py              #加了检索的任务设置<br>lavis&#x2F;tasks&#x2F;base_task.py<br>lavis&#x2F;tasks&#x2F;multimodal_retrieval.py    #MultimodalRetrievalTask检索任务的具体代码</p>
 
               
             </div>
@@ -281,8 +291,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>transformers_datasets报错</div>
-      <div>https://johnson7788.github.io/2023/04/24/transformers-datasets%E6%8A%A5%E9%94%99/</div>
+      <div>用lavis实现多模态图文共同检索</div>
+      <div>https://johnson7788.github.io/2023/04/27/%E7%94%A8lavis%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E6%96%87%E5%85%B1%E5%90%8C%E6%A3%80%E7%B4%A2/</div>
     </div>
     <div class="license-meta">
       
@@ -294,7 +304,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年4月24日</div>
+          <div>2023年4月27日</div>
         </div>
       
       
@@ -324,18 +334,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/25/%E5%BC%80%E5%8F%91bbox%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/" title="开发bbox标注工具">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">开发bbox标注工具</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/21/%E4%BD%BF%E7%94%A8gradio%E5%BC%80%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/" title="使用gradio开图像分类标注工具">
-                        <span class="hidden-mobile">使用gradio开图像分类标注工具</span>
+                      <a href="/2023/04/25/%E5%BC%80%E5%8F%91bbox%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/" title="开发bbox标注工具">
+                        <span class="hidden-mobile">开发bbox标注工具</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
