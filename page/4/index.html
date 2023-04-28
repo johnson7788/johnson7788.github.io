@@ -214,69 +214,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/03/08/apex%E7%9A%84%E4%B8%80%E4%B8%AAbug/" target="_self">
-          apex兼容torch1.10时的一个bug
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/03/08/apex%E7%9A%84%E4%B8%80%E4%B8%AAbug/" target="_self">
-          
-          关于apex的一个bug具体报错内容如下: 12    if cached_x.grad_fn.next_functions[1][0].variable is not x:IndexError: tuple index out of range  先说具体的官方的issue和解决方法https:&#x2F;&#x2F;github.com&#x2F;NVIDIA&#x2F;apex&#x2F;issues&#x2F;1227https:&#x2F;&#x2F;github.
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-08 17:55" pubdate>
-              2022-03-08
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/torch/" class="category-chain-item">torch</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/apex/">#apex</a>
-            
-              <a href="/tags/fp16/">#fp16</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2022/03/08/%E4%BF%A1%E6%81%AF%E6%8F%90%E5%8F%96/" target="_self">
           信息提取的方式总结
         </a>
@@ -792,11 +729,72 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/18/shap-explore2/" target="_self">
+          shap值的探索，判断shap值是否符合基本单调递增
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/18/shap-explore2/" target="_self">
+          
+          需求 构建一个模型，本示例用的XGBoost，然后构建shap解释模型，使用shap值对模型特征进行解释 按特征重要性，这里对应的是shap值的绝对值的均值，shap_values.abs.mean，进行排序 如果特征符合基本单调递增, 不一定是线性的，因为特征之间可能有相关性,打印对应shap值为0附近的原始特征数值，用原始特征的均值代替  意义我们构建的是一个客户满意度模型，使用的是用户对一个
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-18 11:32" pubdate>
+              2022-02-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%A8%A1%E5%9E%8B/" class="category-chain-item">模型</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%8F%AF%E8%A7%A3%E9%87%8A%E6%80%A7/">#可解释性</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span>
     </span>
   </nav>
 
