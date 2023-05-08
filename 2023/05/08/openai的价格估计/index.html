@@ -1,0 +1,676 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="介绍到目前为止，我们利用openai的api做了6个任务，想统计下每个任务的花费情况，现做简单统计和绘图 一、收集缓存json数据，然后收集需要数据，转换成dataframe格式12345678910111213141516171819202122232425262728293031323334353637for json_file in json_files:    json_data &#x3D; js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openai的价格估计">
+<meta property="og:url" content="https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="介绍到目前为止，我们利用openai的api做了6个任务，想统计下每个任务的花费情况，现做简单统计和绘图 一、收集缓存json数据，然后收集需要数据，转换成dataframe格式12345678910111213141516171819202122232425262728293031323334353637for json_file in json_files:    json_data &#x3D; js">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/prompt_prefix_freq.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/question_prices2.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/question_prices.png">
+<meta property="article:published_time" content="2023-05-08T04:36:05.000Z">
+<meta property="article:modified_time" content="2023-05-08T04:47:39.033Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/prompt_prefix_freq.png">
+  
+  
+  <title>openai的价格估计 - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="openai的价格估计">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-08 12:36" pubdate>
+          2023年5月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          42 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">openai的价格估计</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>到目前为止，我们利用openai的api做了6个任务，想统计下每个任务的花费情况，现做简单统计和绘图</p>
+<h1 id="一、收集缓存json数据，然后收集需要数据，转换成dataframe格式"><a href="#一、收集缓存json数据，然后收集需要数据，转换成dataframe格式" class="headerlink" title="一、收集缓存json数据，然后收集需要数据，转换成dataframe格式"></a>一、收集缓存json数据，然后收集需要数据，转换成dataframe格式</h1><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs nix">for json_file <span class="hljs-keyword">in</span> json_files:<br>    <span class="hljs-attr">json_data</span> = json.load(open(json_file, <span class="hljs-string">&quot;r&quot;</span>, <span class="hljs-attr">encoding=&quot;utf-8&quot;))</span><br>    src_data.append(json_data)<br><span class="hljs-attr">data</span> = []<br><span class="hljs-attr">cnt</span> = <span class="hljs-number">0</span><br>for one <span class="hljs-keyword">in</span> tqdm(src_data):<br>    <span class="hljs-attr">prompt_prefix</span> = one.get(<span class="hljs-string">&quot;input_prompt&quot;</span>)<br>    <span class="hljs-keyword">if</span> not prompt_prefix:<br>        continue<br>    cnt += <span class="hljs-number">1</span><br>    <span class="hljs-attr">prompt_prefix_len</span> = len(prompt_prefix)<br>    <span class="hljs-attr">question</span> = one[<span class="hljs-string">&quot;input_text&quot;</span>]<br>    <span class="hljs-attr">question_len</span> = len(question)<br>    <span class="hljs-attr">result</span> = one[<span class="hljs-string">&quot;result&quot;</span>]<br>    <span class="hljs-attr">model</span> = result[<span class="hljs-string">&quot;model&quot;</span>]<br>    <span class="hljs-attr">prompt_token_num</span> = result[<span class="hljs-string">&quot;usage&quot;</span>][<span class="hljs-string">&quot;prompt_tokens&quot;</span>]<br>    <span class="hljs-attr">anwser_token_num</span> = result[<span class="hljs-string">&quot;usage&quot;</span>][<span class="hljs-string">&quot;completion_tokens&quot;</span>]<br>    <span class="hljs-attr">total_token_num</span> = result[<span class="hljs-string">&quot;usage&quot;</span>][<span class="hljs-string">&quot;total_tokens&quot;</span>]<br>    <span class="hljs-attr">anwser</span> = result[<span class="hljs-string">&quot;choices&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;message&quot;</span>][<span class="hljs-string">&quot;content&quot;</span>]<br>    <span class="hljs-attr">anwser_len</span> = len(anwser)<br>    <span class="hljs-attr">one_data</span> = &#123;<br>        <span class="hljs-string">&quot;prompt_prefix&quot;</span>: prompt_prefix,<br>        <span class="hljs-string">&quot;prompt_prefix_len&quot;</span>: prompt_prefix_len,<br>        <span class="hljs-string">&quot;question&quot;</span>: question,<br>        <span class="hljs-string">&quot;question_len&quot;</span>: question_len,<br>        <span class="hljs-string">&quot;model&quot;</span>: model,<br>        <span class="hljs-string">&quot;prompt_token_num&quot;</span>: prompt_token_num,<br>        <span class="hljs-string">&quot;anwser_token_num&quot;</span>: anwser_token_num,<br>        <span class="hljs-string">&quot;total_token_num&quot;</span>: total_token_num,<br>        <span class="hljs-string">&quot;anwser&quot;</span>: anwser,<br>        <span class="hljs-string">&quot;anwser_len&quot;</span>: anwser_len,<br>        <span class="hljs-string">&quot;total_length&quot;</span>: prompt_prefix_len + question_len + anwser_len, <span class="hljs-comment">#单词的总长度</span><br>    &#125;<br>    data.append(one_data)<br><span class="hljs-comment"># 转换成Dataframe</span><br><span class="hljs-attr">df</span> = pd.DataFrame(data)<br>print(f<span class="hljs-string">&quot;共收集到&#123;len(df)&#125;条数据，列名是&#123;df.columns&#125;&quot;</span>)<br></code></pre></td></tr></table></figure>
+<p>共收集到9624条数据</p>
+<h1 id="首先对每个任务的问题数量进行统计和绘图"><a href="#首先对每个任务的问题数量进行统计和绘图" class="headerlink" title="首先对每个任务的问题数量进行统计和绘图"></a>首先对每个任务的问题数量进行统计和绘图</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs routeros">def plot_prompt_prefix_freq(df_data):<br>    # 按input_prompt的问题进行统计<br>    #对相似的问题进行合并<br>    # 对prompt_prefix进行修改，如果出现了包含某些关键字的问题，那么就更改prompt_prefix为统一的关键字<br>    df_prompt_prefix_cnt = df_data[<span class="hljs-string">&#x27;prompt_type&#x27;</span>].value_counts().sort_values(<span class="hljs-attribute">ascending</span>=<span class="hljs-literal">False</span>)<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;共有&#123;len(df_prompt_prefix_cnt)&#125;个问题,列名分别是: &#123;df_prompt_prefix_cnt.index&#125;&quot;</span>)<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;去掉结果为1个的的问题&quot;</span>)<br>    df_prompt_prefix_cnt = df_prompt_prefix_cnt[df_prompt_prefix_cnt &gt; 10]<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;剩余共有&#123;len(df_prompt_prefix_cnt)&#125;个问题,列名分别是: &#123;df_prompt_prefix_cnt.index&#125;&quot;</span>)<br>    df_counts = df_prompt_prefix_cnt.reset_index()<br>    df_counts.columns = [<span class="hljs-string">&#x27;prompt_prefix&#x27;</span>, <span class="hljs-string">&#x27;count&#x27;</span>]<br>    fig, ax = plt.subplots(figsize=(20, 10), <span class="hljs-attribute">dpi</span>=100)<br>    df_counts.plot.bar(<span class="hljs-attribute">x</span>=<span class="hljs-string">&#x27;prompt_prefix&#x27;</span>, <span class="hljs-attribute">y</span>=<span class="hljs-string">&#x27;count&#x27;</span>, <span class="hljs-attribute">ax</span>=ax)<br>    plt.xlabel(<span class="hljs-string">&#x27;prompt_prefix&#x27;</span>)<br>    plt.ylabel(<span class="hljs-string">&#x27;Count&#x27;</span>)<br>    plt.xticks(<span class="hljs-attribute">rotation</span>=45)<br>    plt.title(<span class="hljs-string">&#x27;问题分布数量分别&#x27;</span>)<br>    # 保存到图片<br>    png_file = <span class="hljs-string">&quot;/Users/admin/tmp/prompt_prefix_freq.png&quot;</span><br>    plt.savefig(png_file)<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;保存到文件&#123;png_file&#125;&quot;</span>)<br></code></pre></td></tr></table></figure>
+<img src="/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/prompt_prefix_freq.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="对总的问题数，问题-答案长度和token数量和价格进行绘图"><a href="#对总的问题数，问题-答案长度和token数量和价格进行绘图" class="headerlink" title="对总的问题数，问题+答案长度和token数量和价格进行绘图"></a>对总的问题数，问题+答案长度和token数量和价格进行绘图</h1><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs routeros">def plot_prompt_token_num2(df_data):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-string">&quot;</span><br><span class="hljs-string">    根据prompt类型，统计总的问题长度，prompt长度</span><br><span class="hljs-string">    Args:</span><br><span class="hljs-string">        df_data ():</span><br><span class="hljs-string">    Returns:</span><br><span class="hljs-string">    &quot;</span><span class="hljs-string">&quot;&quot;</span><br>    df_prompt_prefix_cnt = df_data[<span class="hljs-string">&#x27;prompt_type&#x27;</span>].value_counts().sort_values(<span class="hljs-attribute">ascending</span>=<span class="hljs-literal">False</span>)<br>    df_counts = df_prompt_prefix_cnt.reset_index()<br>    df_counts.columns = [<span class="hljs-string">&#x27;prompt_type&#x27;</span>, <span class="hljs-string">&#x27;count&#x27;</span>]<br>    # 每个token的人民币价格<br>    price_unit = 0.014/1000<br>    #对prompt_type进行groupby，根据groupby的结果对prompt_prefix_len求和，question_len求和，anwser_len求和，prompt_token_num	anwser_token_num	total_token_num<br>    df_sum = df_data.groupby(<span class="hljs-string">&quot;prompt_type&quot;</span>).agg(&#123;<span class="hljs-string">&quot;total_length&quot;</span>: <span class="hljs-string">&quot;sum&quot;</span>, <span class="hljs-string">&quot;total_token_num&quot;</span>: <span class="hljs-string">&quot;sum&quot;</span>&#125;)<br>    df_sum = df_sum.reset_index()<br>    df_sum = df_sum.sort_values(<span class="hljs-attribute">by</span>=<span class="hljs-string">&quot;total_token_num&quot;</span>, <span class="hljs-attribute">ascending</span>=<span class="hljs-literal">False</span>)<br>    # 加上df_counts中的count列<br>    df_sum = pd.merge(df_sum, df_counts, <span class="hljs-attribute">on</span>=<span class="hljs-string">&quot;prompt_type&quot;</span>, <span class="hljs-attribute">how</span>=<span class="hljs-string">&quot;left&quot;</span>)<br>    # 调换列的顺序，让count列在最前面，去掉<span class="hljs-string">&quot;prompt_token_num&quot;</span>, <span class="hljs-string">&quot;anwser_token_num&quot;</span>,<br>    df_sum = df_sum[[<span class="hljs-string">&quot;prompt_type&quot;</span>, <span class="hljs-string">&quot;count&quot;</span>, <span class="hljs-string">&quot;total_length&quot;</span>, <span class="hljs-string">&quot;total_token_num&quot;</span>]]<br>    # 计算总的价格，根据total_token_num乘以price_unit<br>    df_sum[<span class="hljs-string">&quot;total_price&quot;</span>] = df_sum[<span class="hljs-string">&quot;total_token_num&quot;</span>] * price_unit<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;形状是&#123;df_sum.shape&#125;&quot;</span>)<br>    # 重命名列名, 去掉：<span class="hljs-string">&quot;提示token计数&quot;</span>, <span class="hljs-string">&quot;答案token计数&quot;</span>,<br>    df_sum.columns = [<span class="hljs-string">&quot;prompt_type&quot;</span>, <span class="hljs-string">&quot;问题个数&quot;</span>, <span class="hljs-string">&quot;单词总数&quot;</span>, <span class="hljs-string">&quot;总token数&quot;</span>,<span class="hljs-string">&quot;总价格人民币&quot;</span>]<br>    df_list = df_sum.to_dict(<span class="hljs-attribute">orient</span>=<span class="hljs-string">&quot;list&quot;</span>)<br>    prompt_types = df_list.pop(<span class="hljs-string">&quot;prompt_type&quot;</span>)<br>    # 其余的列转换成字典，key是列名，值是列表，list<br>    # 绘图<br>    x = np.arange(len(prompt_types))  # the label locations<br>    width = 0.1  # the width of the bars<br>    multiplier = 0<br><br>    fig, ax = plt.subplots(<span class="hljs-attribute">layout</span>=<span class="hljs-string">&#x27;constrained&#x27;</span>,figsize=(20, 10), <span class="hljs-attribute">dpi</span>=100)<br><br>    <span class="hljs-keyword">for</span> attribute, measurement <span class="hljs-keyword">in</span> df_list.items():<br>        offset = width * multiplier<br>        rects = ax.bar(x + offset, measurement, width, <span class="hljs-attribute">label</span>=attribute)<br>        ax.bar_label(rects, <span class="hljs-attribute">padding</span>=5)<br>        multiplier += 1<br><br>    # <span class="hljs-built_in">Add</span> some text <span class="hljs-keyword">for</span> labels, title <span class="hljs-keyword">and</span> custom x-axis tick labels, etc.<br>    ax.set_ylabel(<span class="hljs-string">&#x27;数量、长度、价格&#x27;</span>)<br>    # 设置标题<br>    ax.set_title(<span class="hljs-string">&#x27;问题类型和价格，问题长度，token数量的关系&#x27;</span>)<br>    ax.set_xticks(x + width, prompt_types)<br>    ax.legend(<span class="hljs-attribute">loc</span>=<span class="hljs-string">&#x27;upper left&#x27;</span>, <span class="hljs-attribute">ncols</span>=5)<br>    # 上限200万<br>    ax.set_ylim(0, 2000000)<br>    png_file = <span class="hljs-string">&quot;/Users/admin/tmp/question_prices2.png&quot;</span><br>    plt.savefig(png_file)<br>    <span class="hljs-built_in">print</span>(f<span class="hljs-string">&quot;保存到文件&#123;png_file&#125;&quot;</span>)<br></code></pre></td></tr></table></figure>
+<img src="/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/question_prices2.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/question_prices.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们的任务都是中文的任务，根据单词总数和总的token数量的关系，我们可以算出token和单词总数的占比</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">1</span>.<span class="hljs-number">32419</span>/<span class="hljs-number">1</span>.<span class="hljs-number">70707</span>=<span class="hljs-number">0</span>.<span class="hljs-number">77570</span><br><span class="hljs-attribute">1</span>.<span class="hljs-number">25557</span>/<span class="hljs-number">1</span>.<span class="hljs-number">64893</span>=<span class="hljs-number">0</span>.<span class="hljs-number">76144</span><br></code></pre></td></tr></table></figure>
+<p>所以1000个token大概相当于中文770个单词左右，由于我们的在统计中没有对少量英文进行切词，所以如果纯中文大概还会更多一些，相当于800个中文单词左右。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>openai的价格估计</div>
+      <div>https://johnson7788.github.io/2023/05/08/openai%E7%9A%84%E4%BB%B7%E6%A0%BC%E4%BC%B0%E8%AE%A1/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年5月8日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/05/08/%E5%88%A9%E7%94%A8chatgpt%E6%8E%A5%E5%8F%A3%E5%81%9A%E8%B6%85%E7%BB%86%E7%B2%92%E5%BA%A6%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" title="利用chatgpt接口做超细粒度情感分析">
+                        <span class="hidden-mobile">利用chatgpt接口做超细粒度情感分析</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
