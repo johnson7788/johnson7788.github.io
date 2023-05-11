@@ -16,27 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="ChatGPT运行原理大语言模型进化树:  一共三种方式： 编码器，解码器，编码器-解码器 编码器代表：Bert的训练方式:完形填空： ___________和阿里、腾讯一起并成为中国互联网 BAT 三巨头。随机地扣掉一部分字，形成上面例子的完形填空题型，不断地学习空格处到底该填写什么。所谓语言模型的训练和学习，就是从大量的数据中学习复杂的上下文联系。 解码器代表: GPT的训练方式:根据已有句子">
+    <meta name="description" content="1.首先思考人力的大脑:左脑主要负责逻辑思考、语言、数学、分析、推理、顺序性等任务。左脑还负责控制身体的右侧肌肉运动，因此通常被认为是“理性”、“分析性”和“线性思维”的代表。在语言处理方面，左脑主要负责语言的理解和表达，包括词汇、语法、语音等方面。右脑主要负责空间感知、图像处理、想象力、情感、直觉、创造性思维等任务。右脑还负责控制身体的左侧肌肉运动，因此通常被认为是“感性”、“综合性”和“非线性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Chatgpt分享">
-<meta property="og:url" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:title" content="为什么大模型的推理能力差的思考">
+<meta property="og:url" content="https://johnson7788.github.io/2023/05/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E5%B7%AE%E7%9A%84%E6%80%9D%E8%80%83/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="ChatGPT运行原理大语言模型进化树:  一共三种方式： 编码器，解码器，编码器-解码器 编码器代表：Bert的训练方式:完形填空： ___________和阿里、腾讯一起并成为中国互联网 BAT 三巨头。随机地扣掉一部分字，形成上面例子的完形填空题型，不断地学习空格处到底该填写什么。所谓语言模型的训练和学习，就是从大量的数据中学习复杂的上下文联系。 解码器代表: GPT的训练方式:根据已有句子">
+<meta property="og:description" content="1.首先思考人力的大脑:左脑主要负责逻辑思考、语言、数学、分析、推理、顺序性等任务。左脑还负责控制身体的右侧肌肉运动，因此通常被认为是“理性”、“分析性”和“线性思维”的代表。在语言处理方面，左脑主要负责语言的理解和表达，包括词汇、语法、语音等方面。右脑主要负责空间感知、图像处理、想象力、情感、直觉、创造性思维等任务。右脑还负责控制身体的左侧肌肉运动，因此通常被认为是“感性”、“综合性”和“非线性">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Transformer.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/self-attention.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/cross-attention.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Actor_Env_reward.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Reward.png">
-<meta property="article:published_time" content="2023-05-11T01:15:01.000Z">
-<meta property="article:modified_time" content="2023-05-11T03:22:42.679Z">
+<meta property="article:published_time" content="2023-05-11T04:06:29.000Z">
+<meta property="article:modified_time" content="2023-05-11T04:06:49.237Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95.png">
   
   
-  <title>Chatgpt分享 - Be With you</title>
+  <title>为什么大模型的推理能力差的思考 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -192,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="Chatgpt分享">
+          <span id="subtitle" title="为什么大模型的推理能力差的思考">
             
           </span>
         </div>
@@ -204,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-11 09:15" pubdate>
-          2023年5月11日 上午
+        <time datetime="2023-05-11 12:06" pubdate>
+          2023年5月11日 中午
         </time>
       </span>
     
@@ -216,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.8k 字
+          475 字
         
       </span>
     
@@ -227,7 +220,7 @@
         
         
         
-          24 分钟
+          4 分钟
         
       </span>
     
@@ -265,35 +258,14 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Chatgpt分享</h1>
+            <h1 style="display: none">为什么大模型的推理能力差的思考</h1>
             
             <div class="markdown-body">
               
-              <h1 id="ChatGPT运行原理"><a href="#ChatGPT运行原理" class="headerlink" title="ChatGPT运行原理"></a>ChatGPT运行原理</h1><p>大语言模型进化树:</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%8F%91%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="">
-<p>一共三种方式： 编码器，解码器，编码器-解码器</p>
-<h2 id="编码器代表：Bert的训练方式"><a href="#编码器代表：Bert的训练方式" class="headerlink" title="编码器代表：Bert的训练方式:"></a>编码器代表：Bert的训练方式:</h2><p>完形填空： ___________和阿里、腾讯一起并成为中国互联网 BAT 三巨头。<br>随机地扣掉一部分字，形成上面例子的完形填空题型，不断地学习空格处到底该填写什么。所谓语言模型的训练和学习，就是从大量的数据中学习复杂的上下文联系。</p>
-<h2 id="解码器代表-GPT的训练方式"><a href="#解码器代表-GPT的训练方式" class="headerlink" title="解码器代表: GPT的训练方式:"></a>解码器代表: GPT的训练方式:</h2><p>根据已有句子的一部分，来预测下一个单词会是什么。<br>示例：手机上的输入法，它可以根据当前输入的内容智能推荐下一个词。</p>
-<h2 id="编码器-解码器Transformer结构-T5，GLM"><a href="#编码器-解码器Transformer结构-T5，GLM" class="headerlink" title="编码器-解码器Transformer结构: T5，GLM"></a>编码器-解码器Transformer结构: T5，GLM</h2><p>数据—向量—数据</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Transformer.png" srcset="/img/loading.gif" lazyload class="">
-<p>self-attention和cross-attention其实就是比较表面的意思，self-attention可以理解为自我观察学习，cross-attention是借鉴和学习。<br>把下面这句话当成自己，每个词当成每个生活的部分，相互影响。</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/self-attention.png" srcset="/img/loading.gif" lazyload class="">
-<p>灰色块和蓝色块是来自2个不同的向量，例如2个不同的句子，图片和文本，等等</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/cross-attention.png" srcset="/img/loading.gif" lazyload class="">
-
-<h1 id="ChatGPT训练方法"><a href="#ChatGPT训练方法" class="headerlink" title="ChatGPT训练方法"></a>ChatGPT训练方法</h1><h2 id="Openai的训练方法"><a href="#Openai的训练方法" class="headerlink" title="Openai的训练方法:"></a>Openai的训练方法:</h2><p>BaseModel:  GPT3.5, 1750亿参数,45TB训练数据<br>SFT: supervised fine-tuning监督微调模型, 大量标注问答对数据<br>RM: Reward Model训练一个奖励模型或者叫做偏好模型, 一个问题生成多个答案，人工排序后，RM模型知道哪个答案更好。<br>RLHF: reinforcement learning from human feedback，人类反馈的强化学习, 对齐AI系统和人类, PPO强化学习算法微调模型SFT，RM反馈，另一个约束是KL散度，即原始当前模型和对比模型的KL散度差。<br>Actor就是我们的模型，update是对比模型，ENV是RM模型，Reward是RM模型的输出。</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Actor_Env_reward.png" srcset="/img/loading.gif" lazyload class="">
-<p>小知识：PPO算法简单理解:Proximal Policy Optimization Algorithms, 如何更新策略，即如何更新决策，这里就是如何更新模型，KL散度简单理解，衡量两个概率分布之间差异的一种度量方式，这里是训练约束2个模型的差异不要太大。</p>
-<img src="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/Reward.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="开源的训练方法"><a href="#开源的训练方法" class="headerlink" title="开源的训练方法:"></a>开源的训练方法:</h2><p>适配器方面，撬动大模型。<br>Huggingface的PEFT库集成,Parameter-Efficient Fine-Tuning 参数高效微调的方法，总的来说就是对模型的部分参数进行微调<br>包括4种适配器方法<br>    PROMPT_TUNING<br>        提示优化,额外的文字和占位符向量<br>    P_TUNING,<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/610943594">https://zhuanlan.zhihu.com/p/610943594</a><br>        嵌入优化,V1只训练嵌入向量，V2模型每一层添加一个额外的向量<br>    PREFIX_TUNING<br>        提示学习的前缀优化,输入中添加k个位置,注意力层添加对这个k个位置的注意力向量。<br>    LORA: <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/610943445">https://zhuanlan.zhihu.com/p/610943445</a><br>        来自微软的Low-rank论文,对注意力中的q和v进行添加,低秩矩阵参数量小，降低微调时的计算复杂度和内存消耗<br>        例如训练roberta-large时，使用LoRA微调月10GB显存，总的参数量是3.5亿，其中训练参数是0.5%，其它冻结<br>        如果全部微调，那么使用的显存是18GB</p>
-<p>数据方面:<br>借助ChatGPT生成数据, 斯坦福大学不到 500 美元,使用Facebook开源的LLaMA进行微调。<br><a target="_blank" rel="noopener" href="https://github.com/tatsu-lab/stanford_alpaca">https://github.com/tatsu-lab/stanford_alpaca</a><br>instruction: 描述了模型应该执行的任务,共52K指令<br>input: 任务的可选上下文或输入，可以为空<br>output: chatgpt生成的答案</p>
-<p>模型方面:<br>Base模型:Facebook的LLama模型，bigScience的Bloom, 清华的GLM<br>其它模型，有的是微调模型，有的是其它版本模型:Dolly,ChatYuan,ChatGLM-6B,MOSS,RWKV-LM,stanford_alpaca,Chinese-alpaca-lora,Vicuna,Colossal AI,BELLE,Firefly,Phoenix</p>
-<p>训练技术方面: 撬动大模型。<br>混合精度和分布式训练<br>模型的大小由其参数量及其精度决定，精度通常为 float32、float16 或 bfloat16, huggingface的LLM.int8() 方案<br>小知识：1个字节（Byte）等于8个位（bit），即8个二进制数字，每个二进制数字可以表示0或1两种状态,所以FP32占4个字节，int8占1个字节。GLM-6B举例，如果模型使用fp16，全部微调模型，每个参数占大概2个字节，Adam优化器需要8个字节, 60<em>10</em>100000000&#x2F;1024&#x2F;1024&#x2F;1024&#x3D;55.9GB, 加上一些其它并且还可能需要更多用于计算诸如注意力分数的中间值。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/624929178">https://zhuanlan.zhihu.com/p/624929178</a><br>分布式训练: 模型并行，数据并行，张量并行</p>
-<p>工具库和显存优化算法:<br>accelerate,torchrun,DeepSpeed</p>
-<p>新技术:<br>LangChain: 字面意义，链接模型，数据，和提示链,一个提示接着一个提示。<br>Auto-GPT: 任务分解，将任务分解多个步骤，并对每个步骤进行分析和决策<br>minigpt-4: 多模态的gpt问答<br>imagebind: meta开源,6模态,图像、文本、音频、深度、温度和 IMU 数据<br>图像领域: Segment Anything, stable diffusion, Control Net</p>
-<h1 id="ChatGPT的优缺点"><a href="#ChatGPT的优缺点" class="headerlink" title="ChatGPT的优缺点"></a>ChatGPT的优缺点</h1><p>优点：更智能，更通用<br>缺点：容易胡说，专业度差, 推理能力差，不能真正的实时学习</p>
-<h1 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h1><p>CoT: Chain-of-Thought，链式思考（CoT）,加上“让我们逐步思考”,增加模型的推理能力<br>EA: 涌现能力（Emergent Ability）,指的是当模型参数规模未能达到某个阀值时，模型基本不具备解决此类任务的任何能力，体现为其性能和随机选择答案效果相当，但是当模型规模跨过阀值，LLM模型对此类任务的效果就出现突然的性能增长。<br>AIGC：AI Generated Content ，人工智能自动生成内容<br>NLP：Natural Language Processing，自然语言处理<br>LLM：Large language model，大语言模型<br>AGI：Artificial general intelligence，通用人工智能<br>Prompt：提示词<br>Fine-tuning：模型调优<br>ML：Machine Learning，机器学习<br>DL：Deep Learning，深度学习<br>BERT：Bidirectional Encoder Representations from Transformers”，双向编码器表示<br>RLHF：Reinforcement Learning from Human Feedback，基于人类反馈的强化学习</p>
+              <p>1.首先思考人力的大脑:<br>左脑主要负责逻辑思考、语言、数学、分析、推理、顺序性等任务。左脑还负责控制身体的右侧肌肉运动，因此通常被认为是“理性”、“分析性”和“线性思维”的代表。在语言处理方面，左脑主要负责语言的理解和表达，包括词汇、语法、语音等方面。<br>右脑主要负责空间感知、图像处理、想象力、情感、直觉、创造性思维等任务。右脑还负责控制身体的左侧肌肉运动，因此通常被认为是“感性”、“综合性”和“非线性思维”的代表。在图像处理方面，右脑主要负责图像的识别、处理和记忆，包括形状、颜色、空间位置等方面。</p>
+<ol start="2">
+<li>目前大模型在在逻辑思考，推理，数学上都比较差，但是如果加上Chain-of-Thought，链式思考（CoT），例如Let’s think step by step，效果就会提升很高。另一个证据是现在的大模型都会加上github上的代码进行训练，结果证明对推理能力有较大提高。我觉得这有2个方面的原因，1是我们训练数据上没有或很少教模型的思考过程，直接训练答案，模型缺少思考为什么结果是这样。2是增加多模态的知识，让它对世界的运作有了解，而不是只通过学习语言。</li>
+</ol>
 
               
             </div>
@@ -310,8 +282,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>Chatgpt分享</div>
-      <div>https://johnson7788.github.io/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/</div>
+      <div>为什么大模型的推理能力差的思考</div>
+      <div>https://johnson7788.github.io/2023/05/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E5%B7%AE%E7%9A%84%E6%80%9D%E8%80%83/</div>
     </div>
     <div class="license-meta">
       
@@ -353,18 +325,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E5%B7%AE%E7%9A%84%E6%80%9D%E8%80%83/" title="为什么大模型的推理能力差的思考">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">为什么大模型的推理能力差的思考</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/08/sentence-transformers%E8%81%94%E7%BD%91%E6%8A%A5%E9%94%99%E9%97%AE%E9%A2%98/" title="sentence_transformers联网报错问题">
-                        <span class="hidden-mobile">sentence_transformers联网报错问题</span>
+                      <a href="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/" title="Chatgpt分享">
+                        <span class="hidden-mobile">Chatgpt分享</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
