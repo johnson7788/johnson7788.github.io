@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>图像标注系统工具开发</title>
+    <link href="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/"/>
+    <url>/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/</url>
+    
+    <content type="html"><![CDATA[<h1 id="标注系统开发"><a href="#标注系统开发" class="headerlink" title="标注系统开发"></a>标注系统开发</h1><p>上一个标注系统是单张图片中的目标识别，我们有10万张图片，即使模型准确率较高，也需要10万次确认才能确认所有图片，这不是一个高效的方式。所以开发了这个标注系统。<br>这个标注系统的原理是首先把所有数据进行目标检测，然后按某个商品的一个已标注样本搜索所有相似的项目，然后人为只需要确认哪些是同一商品即可，只需确认2万个商品即可。而且对同一商品的对比更方便观察和确认，效率更高。</p><h1 id="界面效果"><a href="#界面效果" class="headerlink" title="界面效果"></a>界面效果</h1><img src="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7.png" class=""><h1 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h1><img src="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png" class="">]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>微软的Low-codeLLM解析</title>
     <link href="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/"/>
     <url>/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/</url>

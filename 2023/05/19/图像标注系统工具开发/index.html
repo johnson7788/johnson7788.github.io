@@ -16,23 +16,23 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。一共分成3步：   用户问一个问题，ChatGPT作为规划LLM，出一个SOP的任务规划。    用户对ChatGPT返回的规划LLM进行修改，还可以对简单的逻辑进行修改，即if和else，类似Scratch编程。    用户可以对某个Step进一步扩展成subStep，方便更精细的子任务操作。">
+    <meta name="description" content="标注系统开发上一个标注系统是单张图片中的目标识别，我们有10万张图片，即使模型准确率较高，也需要10万次确认才能确认所有图片，这不是一个高效的方式。所以开发了这个标注系统。这个标注系统的原理是首先把所有数据进行目标检测，然后按某个商品的一个已标注样本搜索所有相似的项目，然后人为只需要确认哪些是同一商品即可，只需确认2万个商品即可。而且对同一商品的对比更方便观察和确认，效率更高。 界面效果  设计思">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微软的Low-codeLLM解析">
-<meta property="og:url" content="https://johnson7788.github.io/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:title" content="图像标注系统工具开发">
+<meta property="og:url" content="https://johnson7788.github.io/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。一共分成3步：   用户问一个问题，ChatGPT作为规划LLM，出一个SOP的任务规划。    用户对ChatGPT返回的规划LLM进行修改，还可以对简单的逻辑进行修改，即if和else，类似Scratch编程。    用户可以对某个Step进一步扩展成subStep，方便更精细的子任务操作。">
+<meta property="og:description" content="标注系统开发上一个标注系统是单张图片中的目标识别，我们有10万张图片，即使模型准确率较高，也需要10万次确认才能确认所有图片，这不是一个高效的方式。所以开发了这个标注系统。这个标注系统的原理是首先把所有数据进行目标检测，然后按某个商品的一个已标注样本搜索所有相似的项目，然后人为只需要确认哪些是同一商品即可，只需确认2万个商品即可。而且对同一商品的对比更方便观察和确认，效率更高。 界面效果  设计思">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/lowcode.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png">
-<meta property="article:published_time" content="2023-05-17T09:02:40.000Z">
-<meta property="article:modified_time" content="2023-05-17T09:12:43.286Z">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png">
+<meta property="article:published_time" content="2023-05-19T11:55:35.000Z">
+<meta property="article:modified_time" content="2023-05-19T12:00:34.336Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/lowcode.png">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7.png">
   
   
-  <title>微软的Low-codeLLM解析 - Be With you</title>
+  <title>图像标注系统工具开发 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +188,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="微软的Low-codeLLM解析">
+          <span id="subtitle" title="图像标注系统工具开发">
             
           </span>
         </div>
@@ -200,8 +200,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-17 17:02" pubdate>
-          2023年5月17日 下午
+        <time datetime="2023-05-19 19:55" pubdate>
+          2023年5月19日 晚上
         </time>
       </span>
     
@@ -212,7 +212,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          627 字
+          198 字
         
       </span>
     
@@ -223,7 +223,7 @@
         
         
         
-          6 分钟
+          2 分钟
         
       </span>
     
@@ -261,41 +261,15 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微软的Low-codeLLM解析</h1>
+            <h1 style="display: none">图像标注系统工具开发</h1>
             
             <div class="markdown-body">
               
-              <h1 id="微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。"><a href="#微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。" class="headerlink" title="微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。"></a>微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。</h1><p>一共分成3步：</p>
-<ul>
-<li><ol>
-<li>用户问一个问题，ChatGPT作为规划LLM，出一个SOP的任务规划。</li>
-</ol>
-</li>
-<li><ol start="2">
-<li>用户对ChatGPT返回的规划LLM进行修改，还可以对简单的逻辑进行修改，即if和else，类似Scratch编程。</li>
-</ol>
-</li>
-<li><ol start="3">
-<li>用户可以对某个Step进一步扩展成subStep，方便更精细的子任务操作。</li>
-</ol>
-</li>
-<li><ol start="4">
-<li>当用户实际问一个具体的问题时，按照规划好的SOP进行回答。</li>
-</ol>
-</li>
-</ul>
-<h1 id="代码地址"><a href="#代码地址" class="headerlink" title="代码地址"></a>代码地址</h1><p>代码：<a target="_blank" rel="noopener" href="https://github.com/microsoft/TaskMatrix/tree/main/LowCodeLLM">https://github.com/microsoft/TaskMatrix/tree/main/LowCodeLLM</a></p>
-<h1 id="示例截图"><a href="#示例截图" class="headerlink" title="示例截图"></a>示例截图</h1><img src="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/lowcode.png" srcset="/img/loading.gif" lazyload class="">
+              <h1 id="标注系统开发"><a href="#标注系统开发" class="headerlink" title="标注系统开发"></a>标注系统开发</h1><p>上一个标注系统是单张图片中的目标识别，我们有10万张图片，即使模型准确率较高，也需要10万次确认才能确认所有图片，这不是一个高效的方式。所以开发了这个标注系统。<br>这个标注系统的原理是首先把所有数据进行目标检测，然后按某个商品的一个已标注样本搜索所有相似的项目，然后人为只需要确认哪些是同一商品即可，只需确认2万个商品即可。而且对同一商品的对比更方便观察和确认，效率更高。</p>
+<h1 id="界面效果"><a href="#界面效果" class="headerlink" title="界面效果"></a>界面效果</h1><img src="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="代码的结构"><a href="#代码的结构" class="headerlink" title="代码的结构"></a>代码的结构</h1><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs stylus">├── Dockerfile<br>├── README-zh<span class="hljs-selector-class">.md</span><br>├── README<span class="hljs-selector-class">.md</span><br>├── config<span class="hljs-selector-class">.template</span><br>└── <span class="hljs-attribute">src</span><br>    ├── app<span class="hljs-selector-class">.py</span>  主进程<br>    ├── executingLLM<span class="hljs-selector-class">.py</span><br>    ├── index<span class="hljs-selector-class">.html</span><br>    ├── lowCodeLLM<span class="hljs-selector-class">.py</span><br>    ├── openAIWrapper<span class="hljs-selector-class">.py</span><br>    ├── planningLLM<span class="hljs-selector-class">.py</span><br>    ├── requirements<span class="hljs-selector-class">.txt</span><br>    ├── supervisord.conf<br></code></pre></td></tr></table></figure>
+<h1 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h1><img src="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="执行流程的示例"><a href="#执行流程的示例" class="headerlink" title="执行流程的示例"></a>执行流程的示例</h1><img src="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.png" srcset="/img/loading.gif" lazyload class="">
-
-<h1 id="微软的代码的待完善"><a href="#微软的代码的待完善" class="headerlink" title="微软的代码的待完善"></a>微软的代码的待完善</h1><ol>
-<li>没有对用户修改的Step进行存储。</li>
-<li>最后用户询问时，没有一步步的调用chatgpt进行解答，直接贴上所有的SOP和问题后直接进行回答。</li>
-</ol>
-<h1 id="示例问题，测试的示例其实需要和本地的数据库进行联动的，作为下一步改进的方向。"><a href="#示例问题，测试的示例其实需要和本地的数据库进行联动的，作为下一步改进的方向。" class="headerlink" title="示例问题，测试的示例其实需要和本地的数据库进行联动的，作为下一步改进的方向。"></a>示例问题，测试的示例其实需要和本地的数据库进行联动的，作为下一步改进的方向。</h1>
               
             </div>
             <hr/>
@@ -311,8 +285,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>微软的Low-codeLLM解析</div>
-      <div>https://johnson7788.github.io/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/</div>
+      <div>图像标注系统工具开发</div>
+      <div>https://johnson7788.github.io/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/</div>
     </div>
     <div class="license-meta">
       
@@ -324,7 +298,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月17日</div>
+          <div>2023年5月19日</div>
         </div>
       
       
@@ -354,18 +328,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/" title="图像标注系统工具开发">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">图像标注系统工具开发</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/16/transformers%E7%9A%84%E6%89%80%E6%9C%89%E6%A8%A1%E5%9E%8B%E5%90%8D%E7%A7%B0%E5%92%8C%E9%85%8D%E7%BD%AE%E7%9A%84%E6%98%A0%E5%B0%84%E8%AE%B0%E5%BD%95/" title="transformers的所有模型名称和配置的映射记录">
-                        <span class="hidden-mobile">transformers的所有模型名称和配置的映射记录</span>
+                      <a href="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/" title="微软的Low-codeLLM解析">
+                        <span class="hidden-mobile">微软的Low-codeLLM解析</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
