@@ -16,20 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用的技术LangChain: 链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术LLM：Large Language Model，大型生成式语言模型,根据问题生成答案。 模型开发计划A. 基于已有知识的问答B. 类似NewBing结合搜索引擎问答C. 链接备用数据库查询后问答D. 根据专业知识微调模型，模型更懂专业知识E. 接入各个平台,例如爬虫平台的额外">
+    <meta name="description" content="LangChain的作用链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术 LangChain的Models LangChain的Models部分是该平台的核心之一，提供了大型语言模型（LLM）、聊天模型、文本嵌入模型等多种模型类型。其中LLM是最基础的类型，它能够接受输入文本并返回输出文本。LangChain内置了一些常见的LLM，比如OpenAI和Pro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="聊天机器人问题梳理">
-<meta property="og:url" content="https://johnson7788.github.io/2023/05/23/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/index.html">
+<meta property="og:title" content="LangChain知识点梳理">
+<meta property="og:url" content="https://johnson7788.github.io/2023/05/23/LangChain%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="使用的技术LangChain: 链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术LLM：Large Language Model，大型生成式语言模型,根据问题生成答案。 模型开发计划A. 基于已有知识的问答B. 类似NewBing结合搜索引擎问答C. 链接备用数据库查询后问答D. 根据专业知识微调模型，模型更懂专业知识E. 接入各个平台,例如爬虫平台的额外">
+<meta property="og:description" content="LangChain的作用链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术 LangChain的Models LangChain的Models部分是该平台的核心之一，提供了大型语言模型（LLM）、聊天模型、文本嵌入模型等多种模型类型。其中LLM是最基础的类型，它能够接受输入文本并返回输出文本。LangChain内置了一些常见的LLM，比如OpenAI和Pro">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-23T03:50:52.000Z">
-<meta property="article:modified_time" content="2023-05-23T04:00:30.108Z">
+<meta property="article:published_time" content="2023-05-23T08:06:52.000Z">
+<meta property="article:modified_time" content="2023-05-23T08:24:47.511Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
   
-  <title>聊天机器人问题梳理 - Be With you</title>
+  <title>LangChain知识点梳理 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="聊天机器人问题梳理">
+          <span id="subtitle" title="LangChain知识点梳理">
             
           </span>
         </div>
@@ -197,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-23 11:50" pubdate>
-          2023年5月23日 中午
+        <time datetime="2023-05-23 16:06" pubdate>
+          2023年5月23日 下午
         </time>
       </span>
     
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          249 字
+          4.5k 字
         
       </span>
     
@@ -220,7 +220,7 @@
         
         
         
-          3 分钟
+          38 分钟
         
       </span>
     
@@ -258,12 +258,44 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">聊天机器人问题梳理</h1>
+            <h1 style="display: none">LangChain知识点梳理</h1>
             
             <div class="markdown-body">
               
-              <h1 id="使用的技术"><a href="#使用的技术" class="headerlink" title="使用的技术"></a>使用的技术</h1><p>LangChain: 链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术<br>LLM：Large Language Model，大型生成式语言模型,根据问题生成答案。</p>
-<h1 id="模型开发计划"><a href="#模型开发计划" class="headerlink" title="模型开发计划"></a>模型开发计划</h1><p>A. 基于已有知识的问答<br>B. 类似NewBing结合搜索引擎问答<br>C. 链接备用数据库查询后问答<br>D. 根据专业知识微调模型，模型更懂专业知识<br>E. 接入各个平台,例如爬虫平台的额外功能<br>F. 接入数据处理，绘图等，通过问答的形式操控数据绘图展现<br>G. 多模态能力，可以根据用户提供的图片或视频链接进行回答</p>
+              <h1 id="LangChain的作用"><a href="#LangChain的作用" class="headerlink" title="LangChain的作用"></a>LangChain的作用</h1><p>链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术</p>
+<h1 id="LangChain的Models"><a href="#LangChain的Models" class="headerlink" title="LangChain的Models"></a>LangChain的Models</h1><ol>
+<li><p>LangChain的Models部分是该平台的核心之一，提供了大型语言模型（LLM）、聊天模型、文本嵌入模型等多种模型类型。其中LLM是最基础的类型，它能够接受输入文本并返回输出文本。LangChain内置了一些常见的LLM，比如OpenAI和PromptLayerOpenAI。同时，LangChain还提供了自定义LLM的功能，用户可以通过定义_call方法来创建自己的LLM。除此之外，LangChain还提供了FakeListLLM和HumanInputLLM这两个特殊的LLM，前者用于模拟聊天回复，后者用于模拟人类问答。</p>
+</li>
+<li><p>聊天模型是LLM的一种变体，它需要通过memory来实现聊天的功能。LangChain提供了ChatOpenAI和Anthropic等多种聊天模型，它们支持异步执行，速度更快。与LLM不同的是，聊天模型的接口不是“文本输入，文本输出”，而是“聊天消息”输入和输出。消息类型包括AIMessage、HumanMessage、SystemMessage和ChatMessage，其中ChatMessage可以接受任意角色参数。用户可以通过输入HumanMessage来开始一次聊天，而ChatModel会根据memory中的信息进行回复。除了内置的聊天模型，LangChain还提供了文本嵌入模型，它能够将一段文本转换成矢量表示，实现语义搜索和向量空间中的相似度匹配等功能。</p>
+</li>
+<li><p>为了提高LLM的效率，LangChain还提供了缓存功能。用户可以使用Semantic Cache将LLM的回答缓存起来，下次遇到相同的问题时就可以直接返回缓存中的结果，避免重复计算。LangChain支持多种缓存类型，包括Redis、SQLAlchemy、SQLiteCache和InMemoryCache等。此外，LangChain还支持动态加载LLM、LLM的流式传输、LLM的token使用数量查看等功能，以满足用户对LLM的不同需求。</p>
+</li>
+</ol>
+<h1 id="LangChain中的Prompt"><a href="#LangChain中的Prompt" class="headerlink" title="LangChain中的Prompt"></a>LangChain中的Prompt</h1><ol>
+<li><p>在LangChain中，Prompt提示部分就是提示工程,包括LLM Prompt Templates和Chat Prompt Templates两种类型的提示模板、Example Selectors、Output Parsers、PromptTemplates、FewShotPromptTemplate、Feature Store等几个模块。其中，PromptTemplates和FewShotPromptTemplate是基于前两种类型的模板的执行格式化、示例选择和问题的模块。Output Parsers负责指示模型应如何格式化输出，并将输出解析为所需的格式。Feature Store则是保存用户的信息，以便个性化LLM，并将需要的数据信息添加到Prompt中。同时，用户还可以通过创建自定义提示模板Class，来实现更加个性化的提示需求。</p>
+</li>
+<li><p>LangChain中的Prompt提示部分提供了丰富的功能和应用。例如，使用PromptTemplates可以通过执行格式化、示例选择和问题的模块，快速构建出需要的提示模板。使用FewShotPromptTemplate则可以基于少量示例来定制提示模板，从而提高模型的准确性。Output Parsers则可以帮助模型将输出解析为所需的格式，并在必要时重试，从而提高答案的准确性。同时，用户可以使用Feature Store来保存用户的信息，以便个性化LLM，并将需要的数据信息添加到Prompt中，从而实现更加个性化的提示需求。此外，用户还可以通过创建自定义提示模板Class来实现更加个性化的提示需求，从而满足不同场景下的需求。总之，LangChain中的Prompt提示部分提供了丰富的功能和应用，可以帮助用户快速构建出需要的提示模板，并实现更加个性化的提示需求，从而提高模型的准确性和用户体验。</p>
+</li>
+</ol>
+<h1 id="LangChain中的Memory"><a href="#LangChain中的Memory" class="headerlink" title="LangChain中的Memory"></a>LangChain中的Memory</h1><ol>
+<li><p>Memory是指Chains和Agents在用户与语言模型的整个交互过程中保持状态概念，即记忆。记忆的目的是在历史聊天记录中摄取、捕获、转换和提取知识，以提高模型的准确性和用户体验。Memory包括多种类型，如ChatMessageHistory、ConversationBufferMemory、ConversationBufferWindowMemory、ConversationEntityMemory、ConversationKGMemory、ConversationSummaryMemory、ConversationSummaryBufferMemory、ConversationTokenBufferMemory、VectorStore-Backed Memory等。这些Memory类型各自具有不同的特点和用途，例如ChatMessageHistory用于保存人类消息和AI消息，并提供获取消息的便捷方法；ConversationBufferMemory使用缓存的Buffer进行存储消息，支持使用redis存储消息；Entity Memory和Knowledge Graph Memory则是使用LLM模型对聊天记录中的实体进行保存和检索；Summary Memory则用于对聊天记录进行文本摘要，以便更好地展示历史记录等。同时，这些Memory类型也可以组合到一起形成CombinedMemory，满足不同场景下的需求。</p>
+</li>
+<li><p>Memory的实现和工具包括MongoDBChatMessageHistory、PostgresChatMessageHistory、RedisChatMessageHistory等。这些工具可以用于在不同的数据存储平台上保存聊天记录，以便后续使用。此外，还有一些开源工具可以用于实现Memory的相关功能，如zep等。zep是一个集成了存储历史消息、摘要、embedding、索引等功能的工具，可以方便地实现Memory的相关功能，以提高模型的准确性和用户体验。</p>
+</li>
+</ol>
+<h1 id="LangChain中的indexes索引"><a href="#LangChain中的indexes索引" class="headerlink" title="LangChain中的indexes索引"></a>LangChain中的indexes索引</h1><ol>
+<li><p>LangChain中的Indexes可以帮助处理非结构化数据的文本文档，其中包括了数据加载、切分、向量化和检索四个过程。在数据加载方面，Indexes支持多种格式的文档，例如各种常见的文本格式、电子书、邮件、网页、图片、PDF、字幕等，同时还支持一些特殊的数据源，例如百科知识、媒体维基、BLIP图像字幕等。而在文档切分方面，Indexes提供了多种拆分器，可以将文本切分成小的、语义有意义的块，例如基于字符、空行、LaTeX标记、Markdown标记、Python代码等的拆分器，以及基于自然语言处理工具NLTK和spaCy的拆分器等。这些拆分器可以根据函数测量来调整块的大小和重叠程度，以保持块之间的上下文连续性。</p>
+</li>
+<li><p>在向量化和检索方面，Indexes支持多种向量存储和向量检索器，例如Annoy、ElasticSearch、FAISS、Milvus等开源数据库，以及一些云上的数据库，例如MyScale、Pinecone、Qdrant等。这些向量存储可以将文本转化为向量形式进行存储和检索，而向量检索器则可以帮助用户查询并返回最相关的文档。Indexes还提供了一些特殊的检索方式，例如基于TFIDF的检索、基于时间权重的检索、KNN和SVM等方式代替向量相似度检索等。通过这些功能的支持，Indexes可以大大简化文本文档的处理过程，帮助用户高效地完成文本检索任务。</p>
+</li>
+</ol>
+<h1 id="LangChain中的Chains"><a href="#LangChain中的Chains" class="headerlink" title="LangChain中的Chains"></a>LangChain中的Chains</h1><ol>
+<li>Chains是为了解决复杂的问题而设计的。这个库提供了多个链类型，每个链类型都有不同的功能和用途。LLMChain是最基本类型的Chain，包括run、predict、apply、generate和对话等方式。还提供了保存和加载链的方法，如load_chain、save、单独保存prompt等方法。</li>
+<li>其它类型的Chain，如RouterChain、SimpleSequentialChain、SequentialChain、CustomChain、AsyncChain、TransformChain、AnalyzeDocumentChain、GraphQAChain、RetrievalQA、Vector DB、APIChain、ConstitutionalChain、FLARE、GraphCypherQAChain、LLMBashChain、LLMCheckerChain、LLMMathChain、LLMRequestsChain、LLMSummarizationCheckerChain、OpenAIModerationChain、PALChain等，它们都有不同的用途和功能。</li>
+</ol>
+<h1 id="LangChain中的Agent"><a href="#LangChain中的Agent" class="headerlink" title="LangChain中的Agent"></a>LangChain中的Agent</h1><p>Action Agent是一种采取行动的Agent，用于简单任务。该代理具有提示模板、语言模型和输出解析器。Agent公开一个接口，该接口接收用户输入以及代理之前执行的一系列步骤，并返回AgentAction或AgentFinish。Agent可以采取的行动取决于提供给Agent的工具。这些工具可以是搜索引擎、数据库查找、数学计算等。工具被传递给Agent，Agent使用这些工具来决定下一步采取什么步骤。重复此操作，直到代理决定不再需要使用工具，然后直接响应用户。Action Agents可以方便地与各种工具集成，并且可以使用自定义工具来扩展其功能。</p>
+<p>Plan Agent是一种制定行动计划的Agent，用于复杂任务。Plan Agent调用Action Agent来执行计划中的每个步骤。Plan Agent和Action Agent分别用于制定计划和执行计划。Plan Agent收到一些用户输入后，计划者列出了要采取的步骤。然后执行者遍历步骤列表，执行它们。Plan Agent可以包含多个Action Agent，每个ActionAgent负责执行一个步骤。Plan Agent使用Action Agent的结果来决定下一步采取什么步骤。这种代理通常用于处理复杂问题，需要对问题进行分解并制定适当的计划。Plan Agent可以使用各种工具和工具包来扩展其功能，例如LLM生成SQL、CSV Agent、Gmail Toolkit等。相比Action Agent，Plan Agent需要更高的延迟和更多的计算资源，因为它需要制定计划并执行多个步骤。但是Plan Agent可以更好地处理复杂问题，并且可以使用Action Agent的结果进行决策，从而提高问题解决的准确性和效率。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>LangChain还是一个急速发展的工具，里面的众多功能都在实验中，还需进行更深的探索，简单一些的设计。</p>
 
               
             </div>
@@ -280,8 +312,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>聊天机器人问题梳理</div>
-      <div>https://johnson7788.github.io/2023/05/23/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/</div>
+      <div>LangChain知识点梳理</div>
+      <div>https://johnson7788.github.io/2023/05/23/LangChain%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/</div>
     </div>
     <div class="license-meta">
       
@@ -323,18 +355,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/23/LangChain%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86/" title="LangChain知识点梳理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">LangChain知识点梳理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/23/%E5%AE%89%E9%98%B2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BE%E8%AE%A1/" title="安防机器人设计">
-                        <span class="hidden-mobile">安防机器人设计</span>
+                      <a href="/2023/05/23/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/" title="聊天机器人问题梳理">
+                        <span class="hidden-mobile">聊天机器人问题梳理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
