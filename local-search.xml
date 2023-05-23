@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>聊天机器人问题梳理</title>
+    <link href="/2023/05/23/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/"/>
+    <url>/2023/05/23/%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA%E9%97%AE%E9%A2%98%E6%A2%B3%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<h1 id="使用的技术"><a href="#使用的技术" class="headerlink" title="使用的技术"></a>使用的技术</h1><p>LangChain: 链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术<br>LLM：Large Language Model，大型生成式语言模型,根据问题生成答案。</p><h1 id="模型开发计划"><a href="#模型开发计划" class="headerlink" title="模型开发计划"></a>模型开发计划</h1><p>A. 基于已有知识的问答<br>B. 类似NewBing结合搜索引擎问答<br>C. 链接备用数据库查询后问答<br>D. 根据专业知识微调模型，模型更懂专业知识<br>E. 接入各个平台,例如爬虫平台的额外功能<br>F. 接入数据处理，绘图等，通过问答的形式操控数据绘图展现<br>G. 多模态能力，可以根据用户提供的图片或视频链接进行回答</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>安防机器人设计</title>
     <link href="/2023/05/23/%E5%AE%89%E9%98%B2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BE%E8%AE%A1/"/>
     <url>/2023/05/23/%E5%AE%89%E9%98%B2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BE%E8%AE%A1/</url>
