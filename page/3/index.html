@@ -214,39 +214,6 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/" target="_self">
-          export_ONNX报错
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/04/19/export-ONNX%E6%8A%A5%E9%94%99/" target="_self">
-          
-          当使用torch导出ONNX模型的时候报错如下for idx, r_split in enumerate(r_splits):  TypeError: ‘torch._C.Value’ object is not iterable(Occurred when translating repeat_interleave). 解决方法：更新torch到2.0即可
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-19 14:20" pubdate>
-              2023-04-19
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
         <a href="/2023/04/18/peft%E5%BE%AE%E8%B0%83Bloom%E6%97%B6%E6%8A%A5%E9%94%99/" target="_self">
           peft微调Bloom时报错
         </a>
@@ -529,6 +496,39 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-03-29 09:39" pubdate>
               2023-03-29
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" target="_self">
+          lavis和transformers的冲突
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" target="_self">
+          
+          salesforce的LAVIS包，https:&#x2F;&#x2F;github.com&#x2F;salesforce&#x2F;LAVIS是一个多模态的库，其中的BLIP2模块部分和huggingface的trasformers&#x3D;&#x3D;4.27.1不兼容,不兼容部分是,原因是query_embeds被repeat了维度0两次，所以造成torch.cat拼接时冲突。 123456789101112131415lavis&#x2F;models&#x2F;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-27 14:36" pubdate>
+              2023-03-27
             </time>
           </div>
         
