@@ -16,24 +16,24 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="AIGCAIGC在各种方面的应用   领域内问答的是如何实现的数据集来源A. 内部平台使用教程B. 行业报告，白皮书等C. 美妆专业知识D.所有用户（客户，内部人员）常见问题收集 不同数据集不同对待，完全训练，微调和提示工程对于从0开始学习的大模型来说，最好的方式是完全训练。 完全训练：针对大公司有超多数据集和计算资源，可以采用完全训练的方式。 对于基础的专业知识来说，最好的方式是微调训练。 微调">
+    <meta name="description" content="精度的前提知识1B(Byte)字节&#x3D;8bit比特，位  FP32使用32位二进制格式来表示实数。 可以表示的数字范围更广，精度更高。 在大多数应用中被广泛使用，因为它提供了足够的精度和数字范围。 硬件支持程度广泛，几乎所有现代CPU和GPU都支持FP32。  FP16也叫half，半精度 FP16是16位浮点数格式，FP32是32位浮点数格式。 使用16位二进制格式来表示实数。 可以表示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="领域内问答分享">
-<meta property="og:url" content="https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:title" content="混合精度训练的细节">
+<meta property="og:url" content="https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="AIGCAIGC在各种方面的应用   领域内问答的是如何实现的数据集来源A. 内部平台使用教程B. 行业报告，白皮书等C. 美妆专业知识D.所有用户（客户，内部人员）常见问题收集 不同数据集不同对待，完全训练，微调和提示工程对于从0开始学习的大模型来说，最好的方式是完全训练。 完全训练：针对大公司有超多数据集和计算资源，可以采用完全训练的方式。 对于基础的专业知识来说，最好的方式是微调训练。 微调">
+<meta property="og:description" content="精度的前提知识1B(Byte)字节&#x3D;8bit比特，位  FP32使用32位二进制格式来表示实数。 可以表示的数字范围更广，精度更高。 在大多数应用中被广泛使用，因为它提供了足够的精度和数字范围。 硬件支持程度广泛，几乎所有现代CPU和GPU都支持FP32。  FP16也叫half，半精度 FP16是16位浮点数格式，FP32是32位浮点数格式。 使用16位二进制格式来表示实数。 可以表示">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524151839391.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524154901055.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524164355115.png">
-<meta property="article:published_time" content="2023-05-24T08:49:44.000Z">
-<meta property="article:modified_time" content="2023-05-24T12:13:29.797Z">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525093752711.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525094218942.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525094438027.png">
+<meta property="article:published_time" content="2023-05-25T01:45:24.000Z">
+<meta property="article:modified_time" content="2023-05-25T01:45:24.685Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524151839391.png">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525093752711.png">
   
   
-  <title>领域内问答分享 - Be With you</title>
+  <title>混合精度训练的细节 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -189,7 +189,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="领域内问答分享">
+          <span id="subtitle" title="混合精度训练的细节">
             
           </span>
         </div>
@@ -201,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-05-24 16:49" pubdate>
-          2023年5月24日 下午
+        <time datetime="2023-05-25 09:45" pubdate>
+          2023年5月25日 上午
         </time>
       </span>
     
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          13 分钟
+          17 分钟
         
       </span>
     
@@ -262,56 +262,64 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">领域内问答分享</h1>
+            <h1 style="display: none">混合精度训练的细节</h1>
             
             <div class="markdown-body">
               
-              <h1 id="AIGC"><a href="#AIGC" class="headerlink" title="AIGC"></a>AIGC</h1><p>AIGC在各种方面的应用</p>
-<img src="/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524151839391.png" srcset="/img/loading.gif" lazyload class="">
+              <h1 id="精度的前提知识"><a href="#精度的前提知识" class="headerlink" title="精度的前提知识"></a>精度的前提知识</h1><h2 id="1B-Byte-字节-x3D-8bit比特，位"><a href="#1B-Byte-字节-x3D-8bit比特，位" class="headerlink" title="1B(Byte)字节&#x3D;8bit比特，位"></a>1B(Byte)字节&#x3D;8bit比特，位</h2><img src="/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525093752711.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="领域内问答的是如何实现的"><a href="#领域内问答的是如何实现的" class="headerlink" title="领域内问答的是如何实现的"></a>领域内问答的是如何实现的</h1><h2 id="数据集来源"><a href="#数据集来源" class="headerlink" title="数据集来源"></a>数据集来源</h2><p>A. 内部平台使用教程<br>B. 行业报告，白皮书等<br>C. 美妆专业知识<br>D.所有用户（客户，内部人员）常见问题收集</p>
-<h2 id="不同数据集不同对待，完全训练，微调和提示工程"><a href="#不同数据集不同对待，完全训练，微调和提示工程" class="headerlink" title="不同数据集不同对待，完全训练，微调和提示工程"></a>不同数据集不同对待，完全训练，微调和提示工程</h2><p>对于从0开始学习的大模型来说，最好的方式是完全训练。</p>
-<p>完全训练：针对大公司有超多数据集和计算资源，可以采用完全训练的方式。</p>
-<p>对于基础的专业知识来说，最好的方式是微调训练。</p>
-<p>微调训练：基于大模型的二次训练。主要使用的方法是使用开源大模型，例如<br>Base模型:Facebook的LLama模型，bigScience的Bloom, 清华的GLM等，借助工具库和显存优化算法accelerate,torchrun,DeepSpeed，采用适配器的方式进行微调，典型的包括Huggingface的PEFT库集成,Parameter-Efficient Fine-Tuning 参数高效微调的方法。</p>
-<p>对于部分专业文档问答，教程来说，最好的方式是提示工程，现学现用的方式。</p>
-<h1 id="LLM中的推理生成流程"><a href="#LLM中的推理生成流程" class="headerlink" title="LLM中的推理生成流程"></a>LLM中的推理生成流程</h1><h2 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h2><p>历史聊天和最新问题会转成如下格式进行tokenizer</p>
-<p>例如历史聊天记录为Round 0部分，Round 1 为最新的问题，拼接历史和最新的聊天作为输入:</p>
-<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs excel">&#x27;[<span class="hljs-built_in">Round</span> <span class="hljs-number">0</span>]<br>问：现在开始,你的任务是提取关键词，提取下列语句中的关键词，并用空格分隔：科普之路是不是任重而道远？<br>答：科普 道路 任重 道远<br>[<span class="hljs-built_in">Round</span> <span class="hljs-number">1</span>]<br>问：提取下列语句中的关键词：简述下噪音污染<br>答：&#x27;<br></code></pre></td></tr></table></figure>
+<h2 id="FP32"><a href="#FP32" class="headerlink" title="FP32"></a>FP32</h2><pre><code class="hljs">使用32位二进制格式来表示实数。
+可以表示的数字范围更广，精度更高。
+在大多数应用中被广泛使用，因为它提供了足够的精度和数字范围。
+硬件支持程度广泛，几乎所有现代CPU和GPU都支持FP32。
+</code></pre>
+<h2 id="FP16"><a href="#FP16" class="headerlink" title="FP16"></a>FP16</h2><pre><code class="hljs">也叫half，半精度
+FP16是16位浮点数格式，FP32是32位浮点数格式。
+使用16位二进制格式来表示实数。
+可以表示的数字范围比较小，但是精度相对较低。
+在深度学习等计算密集型任务中，使用FP16可以大大减少内存使用，加快计算速度。
+硬件支持程度有限，一些较旧的GPU可能不支持FP16。
+</code></pre>
+<h2 id="BFloat16"><a href="#BFloat16" class="headerlink" title="BFloat16"></a>BFloat16</h2><pre><code class="hljs">BFloat16是一种浮点数格式，它用于表示16位二进制浮点数。它的名称来自于&quot;Brain Floating Point format&quot;，因为它是由谷歌公司的Brain团队开发的。与传统的浮点数格式（如IEEE 754）相比，BFloat16使用更少的位数来表示一个浮点数，这在机器学习和人工智能等计算密集型应用中非常有用，因为它可以减少内存使用和加速计算。
+BFloat16的格式是1位符号位、8位指数和7位尾数。它可以表示的范围和精度与IEEE 754单精度浮点数（32位）相似，但是它不能表示与IEEE 754双精度浮点数（64位）相同的精度和范围。BFloat16广泛应用于机器学习框架和芯片设计中，例如TensorFlow和Google的TPU芯片。
+可以表示的数字范围比较小，但是相对于FP16而言精度更高。
+在TensorFlow和Google的TPU芯片等机器学习框架和芯片中广泛使用。
+可以用于进行混合精度计算，其中权重和梯度使用FP32或更高精度的浮点数，而激活使用BFloat16，从而提高计算速度和减少内存使用。
+使用16位二进制格式来表示实数，其中5位用于指数，10位用于尾数，1位用于符号。
+可以表示的数字范围和精度相对于BFloat16而言略低。
+在深度学习等计算密集型任务中，使用FP16可以大大减少内存使用，加快计算速度。
+可以用于进行混合精度计算，从而提高计算速度和减少内存使用。
+BFloat16相对于FP16而言精度更高，但是支持程度较低，而FP16则具有更广泛的支持程度，但是精度略低
+相对于FP16，失去了3比特的精度
+</code></pre>
+<h2 id="int8"><a href="#int8" class="headerlink" title="int8"></a>int8</h2><pre><code class="hljs">FP32被称为全精度（4字节），而BF16和FP16被称为半精度（2字节）。在此基础上，int8（INT8）数据类型由8字节表示组成，可以存储2^8个不同的值（对于有符号的整数，在[0，255]或[-128，127]之间）
+    如果模型是1760亿参数，用半精度推理，那么需要的GPU内存是1760亿* 2byte = 352GB
+    BLOOM-1760亿参数需要8个80GB的A100进行推理, 如果微调，需要72个
+GPU设备上加载一个模型，每十亿个参数在float32精度下要花费4GB，float16要花费2GB，int8要花费1GB
+    如果你使用AdamW优化器,每个参数需要8个字节，10亿个参数需要8GB的GPU内存
+Huggingface 的LLM.int8()
+    使用LLM.int8()的BLOOM-176B比fp16版本慢了大约15%到23%
+</code></pre>
+<h2 id="int4"><a href="#int4" class="headerlink" title="int4"></a>int4</h2><pre><code class="hljs"> 等价4bit训练
+NVIDIA的图灵Turing架构
+推理速度更快，精度损失较小，约1%
+工作原理
+    通过“量化”的 FP32 模型运行校准数据集并收集直方图数据
+    使用直方图查找所有张量的第 99.999 个百分位数范围值
+    使用新范围调整模型中的量化层
+    通过量化模型运行训练数据集的一个时期，并使用量化层的直通估计器 Straight Through Estimator (STE) 反向传播误差。继续训练，直到准确度达到可接受的水平。
+</code></pre>
+<h2 id="混合精度训练（mixed-precision-training）"><a href="#混合精度训练（mixed-precision-training）" class="headerlink" title="混合精度训练（mixed precision training）"></a>混合精度训练（mixed precision training）</h2><p>Adam 在 SGD 基础上，为每个参数梯度增加了一阶动量（momentum）和二阶动量（variance）。混合精度训练，字如其名，同时存在 fp16 和 fp32 两种格式的数值，其中模型参数、模型梯度都是 fp16，此外还有 fp32 的模型参数，如果优化器是 Adam，则还有 fp32 的 momentum 和 variance。</p>
+<p>过程：数据，前向模型参数，激活，梯度都用fp16,反向传播更新参数时，使用预先备份的模型32位参数，优化器的32位动量和二阶动量32位参数进行更新模型参数，更新后的模型参数进行进行fp16前向传播</p>
+<img src="/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525094218942.png" srcset="/img/loading.gif" lazyload class="">
 
-<h2 id="Tokenizer"><a href="#Tokenizer" class="headerlink" title="Tokenizer"></a>Tokenizer</h2><p> 文字经过tokenizer，进行拆词变成input id</p>
-<h2 id="输入模型generate函数"><a href="#输入模型generate函数" class="headerlink" title="输入模型generate函数"></a>输入模型generate函数</h2><p>重要参数：</p>
-<p>inputs：输入的input id，其实还可以语音到文本，图片到本文，都可以。</p>
-<p>logits_processor：对预测出来的下一个logits的处理，例如使用temperature,topk,topp，或用户对logits进行自定义处理等</p>
-<p>stopping_criteria: 停止生成的条件，例如遇到了EOS的token或用户指定token，或达到最大长度等等。</p>
-<p>is_encoder_decoder：是解码器还是编码器-解码器架构</p>
-<p>While True:<br>​                准备input_id<br>​                模型前向传播<br>​                获取模型返回的logits<br>​                对logits进行处理，例如temperature，topk等<br>​                softmax和Sample token,得到next token id<br>​                更新input_id<br>​                判断停止生成条件，如果没有继续生成，否则break</p>
-<h1 id="LLM中使用的超参数"><a href="#LLM中使用的超参数" class="headerlink" title="LLM中使用的超参数"></a>LLM中使用的超参数</h1><p>对应着New bing中的对话风格。</p>
-<p>创作，平衡和准确，意味着temperature的不同。</p>
-<img src="/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524154901055.png" srcset="/img/loading.gif" lazyload class="">
 
 
-<h1 id="Langchain"><a href="#Langchain" class="headerlink" title="Langchain"></a>Langchain</h1><p>集成了最新的使用LLM进行解决复杂问题的方法。Langchain是链式调用工具，整合数据处理，数据调用，提示工程，LLM调用，输出格式化，复杂链式调用等技术，是自然语言和程序之间进行交互的胶水,由语言模型驱动的应用程序的框架,数据感知：将语言模型连接到其他数据源,Agentic：允许语言模型与其环境交互。</p>
-<h1 id="ChatGPT的plugins和LangChain的Tools"><a href="#ChatGPT的plugins和LangChain的Tools" class="headerlink" title="ChatGPT的plugins和LangChain的Tools"></a>ChatGPT的plugins和LangChain的Tools</h1><h2 id="ChatGPT-Plugins"><a href="#ChatGPT-Plugins" class="headerlink" title="ChatGPT Plugins"></a>ChatGPT Plugins</h2><ul>
-<li><p>让Chatgpt使用工具，插件可以成为语言模型的“眼睛和耳朵”，使它们可以访问太新、太个人化或太具体而无法包含在训练数据中的信息</p>
-</li>
-<li><p>检索实时信息；例如，体育比分、股票价格、最新消息等</p>
-</li>
-<li><p>检索知识库信息；例如，公司文档、个人笔记等</p>
-</li>
-<li><p>协助用户采取行动；例如，订机票、订餐等</p>
-</li>
-</ul>
-<img src="/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/image-20230524164355115.png" srcset="/img/loading.gif" lazyload class="">
+<h1 id="ZeRO简介"><a href="#ZeRO简介" class="headerlink" title="ZeRO简介"></a>ZeRO简介</h1><p>微软的 DeepSpeed 团队解决数据并行的中存在的内存冗余问题所提出的解决方法，安装deepspeed库即可使用。</p>
+<p>思路：常驻在每块GPU上的数据可以分为三部分：模型参数，模型梯度和优化器参数。注意到由于每张 GPU 上都存储着完全相同的上述三部分参数，我们可以考虑每张卡上仅保留部分数据，其余的可以从其他 GPU 上获取。</p>
+<p>下图表示当对模型参数，梯度，和优化器状态分别进行分割存储后，占用显存量的多少的对比。</p>
+<img src="/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/image-20230525094438027.png" srcset="/img/loading.gif" lazyload class="">
 
-<h2 id="LangChain-tools"><a href="#LangChain-tools" class="headerlink" title="LangChain tools"></a>LangChain tools</h2><p>Agent可以采取的行动，可以定制化开发。有工具tool和工具包toolkits两种概念，工具包就是多个工具的一起协作。工具的类型和Chatgpt的Plugin是一样的。但是工具更多。</p>
-
-
-
-
-
-
-<h1 id="Q-amp-A环节"><a href="#Q-amp-A环节" class="headerlink" title="Q&amp;A环节"></a>Q&amp;A环节</h1>
               
             </div>
             <hr/>
@@ -327,8 +335,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>领域内问答分享</div>
-      <div>https://johnson7788.github.io/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/</div>
+      <div>混合精度训练的细节</div>
+      <div>https://johnson7788.github.io/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/</div>
     </div>
     <div class="license-meta">
       
@@ -340,7 +348,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年5月24日</div>
+          <div>2023年5月25日</div>
         </div>
       
       
@@ -370,18 +378,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/" title="混合精度训练的细节">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">混合精度训练的细节</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/24/LangChain%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98%E7%9A%84%E6%80%9D%E8%B7%AF/" title="LangChain解决问题的思路">
-                        <span class="hidden-mobile">LangChain解决问题的思路</span>
+                      <a href="/2023/05/24/%E9%A2%86%E5%9F%9F%E5%86%85%E9%97%AE%E7%AD%94%E5%88%86%E4%BA%AB/" title="领域内问答分享">
+                        <span class="hidden-mobile">领域内问答分享</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
