@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>几种模型回答同一问题的对比</title>
+    <link href="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/"/>
+    <url>/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/</url>
+    
+    <content type="html"><![CDATA[<h1 id="对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4"><a href="#对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4" class="headerlink" title="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4"></a>对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4</h1><p>问题: 防晒霜的使用顺序？</p><p>1.清华大学glm6B模型</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png" class=""><p>2.斯坦福大学的vicuna7B模型</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png" class=""><p>3.斯坦福大学的vicuna13B模型</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png" class=""><p>4.哈工大的lamma 7B</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png" class=""><p>5.哈工大的lamma13B</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png" class=""><p>6.chatgpt</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png" class=""><p>Gpt4</p><img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png" class=""><h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>综合来看斯坦福的vicuna模型7B效果最差，其次是13B，缺少对中文语料的训练，所以导致对中文理解较差，哈工大的Lamma 7B弱于13B，哈工大的13B和glm6B效果差不太多，但都弱于Chatgpt ,gpt4效果最好。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>gpt数据标注小知识</title>
     <link href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/"/>
     <url>/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/</url>

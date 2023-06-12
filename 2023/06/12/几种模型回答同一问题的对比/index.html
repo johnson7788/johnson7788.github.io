@@ -16,20 +16,28 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="prompt，instruction, input, context, question,output,completion,history的区分instruction： 指令，这里是要求模型做的事情。基本上等价于question。input: 这里等价于context,就是上下文，例如根据下面的段落进行回答问题，这里的段落就是contextprompt: 就是提示，可以认为instruction">
+    <meta name="description" content="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamma13B   6.chatgpt   Gpt4   结论综合来看斯坦福的vicuna模">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gpt数据标注小知识">
-<meta property="og:url" content="https://johnson7788.github.io/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/index.html">
+<meta property="og:title" content="几种模型回答同一问题的对比">
+<meta property="og:url" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="prompt，instruction, input, context, question,output,completion,history的区分instruction： 指令，这里是要求模型做的事情。基本上等价于question。input: 这里等价于context,就是上下文，例如根据下面的段落进行回答问题，这里的段落就是contextprompt: 就是提示，可以认为instruction">
+<meta property="og:description" content="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamma13B   6.chatgpt   Gpt4   结论综合来看斯坦福的vicuna模">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-06-05T06:53:10.000Z">
-<meta property="article:modified_time" content="2023-06-05T06:53:10.663Z">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png">
+<meta property="article:published_time" content="2023-06-12T03:50:59.000Z">
+<meta property="article:modified_time" content="2023-06-12T03:50:59.135Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png">
   
   
-  <title>gpt数据标注小知识 - Be With you</title>
+  <title>几种模型回答同一问题的对比 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +193,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="gpt数据标注小知识">
+          <span id="subtitle" title="几种模型回答同一问题的对比">
             
           </span>
         </div>
@@ -197,8 +205,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-05 14:53" pubdate>
-          2023年6月5日 下午
+        <time datetime="2023-06-12 11:50" pubdate>
+          2023年6月12日 中午
         </time>
       </span>
     
@@ -209,7 +217,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          340 字
+          269 字
         
       </span>
     
@@ -258,11 +266,33 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">gpt数据标注小知识</h1>
+            <h1 style="display: none">几种模型回答同一问题的对比</h1>
             
             <div class="markdown-body">
               
-              <h1 id="prompt，instruction-input-context-question-output-completion-history的区分"><a href="#prompt，instruction-input-context-question-output-completion-history的区分" class="headerlink" title="prompt，instruction, input, context, question,output,completion,history的区分"></a>prompt，instruction, input, context, question,output,completion,history的区分</h1><p>instruction： 指令，这里是要求模型做的事情。基本上等价于question。<br>input: 这里等价于context,就是上下文，例如根据下面的段落进行回答问题，这里的段落就是context<br>prompt: 就是提示，可以认为instruction+input<br>output: 就是模型的输出，也可以叫做completion,就是模型的输出，模型的回答。<br>history: 就是历史聊天记录，现阶段模型多轮对话靠的就是把历史对话一起送入模型，放在prompt之前。注意现在的模型由于注意力机制，通常会限制最大的输入的文本长度，这里的长度是输入+输出</p>
+              <h1 id="对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4"><a href="#对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4" class="headerlink" title="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4"></a>对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4</h1><p>问题: 防晒霜的使用顺序？</p>
+<p>1.清华大学glm6B模型</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>2.斯坦福大学的vicuna7B模型</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>3.斯坦福大学的vicuna13B模型</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>4.哈工大的lamma 7B</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>5.哈工大的lamma13B</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>6.chatgpt</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>Gpt4</p>
+<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>综合来看斯坦福的vicuna模型7B效果最差，其次是13B，缺少对中文语料的训练，所以导致对中文理解较差，哈工大的Lamma 7B弱于13B，哈工大的13B和glm6B效果差不太多，但都弱于Chatgpt ,gpt4效果最好。</p>
 
               
             </div>
@@ -279,8 +309,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>gpt数据标注小知识</div>
-      <div>https://johnson7788.github.io/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/</div>
+      <div>几种模型回答同一问题的对比</div>
+      <div>https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/</div>
     </div>
     <div class="license-meta">
       
@@ -292,7 +322,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月5日</div>
+          <div>2023年6月12日</div>
         </div>
       
       
@@ -322,18 +352,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/" title="几种模型回答同一问题的对比">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">几种模型回答同一问题的对比</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/05/31/%E4%BB%80%E4%B9%88%E6%98%AF%E6%80%9D%E7%BB%B4%E9%93%BE%E5%92%8C%E6%80%9D%E7%BB%B4%E6%A0%91/" title="什么是思维链和思维树">
-                        <span class="hidden-mobile">什么是思维链和思维树</span>
+                      <a href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/" title="gpt数据标注小知识">
+                        <span class="hidden-mobile">gpt数据标注小知识</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
