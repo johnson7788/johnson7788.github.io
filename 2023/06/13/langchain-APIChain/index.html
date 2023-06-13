@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="使用LangChain的APIChain调用天气接口的API查询天气的示例思路：使用自己封装的LLM接口，确保最大长度不要太长，设定API的提示模板格式，防止太长时对prompt截断的时候只保留关键信息。一共调用2次LLM模型，第一次根据问题，生成API的请求，然后调用API获取结果，第二次根据API的结果和问题，生成最终的答案。代码: 123456789101112131415161718192">
+<meta property="og:type" content="article">
+<meta property="og:title" content="langchain-APIChain">
+<meta property="og:url" content="https://johnson7788.github.io/2023/06/13/langchain-APIChain/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="使用LangChain的APIChain调用天气接口的API查询天气的示例思路：使用自己封装的LLM接口，确保最大长度不要太长，设定API的提示模板格式，防止太长时对prompt截断的时候只保留关键信息。一共调用2次LLM模型，第一次根据问题，生成API的请求，然后调用API获取结果，第二次根据API的结果和问题，生成最终的答案。代码: 123456789101112131415161718192">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-13T06:24:43.000Z">
+<meta property="article:modified_time" content="2023-06-13T06:24:43.461Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>langchain-APIChain - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="langchain-APIChain">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-13 14:24" pubdate>
+          2023年6月13日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          15k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          129 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">langchain-APIChain</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="使用LangChain的APIChain调用天气接口的API查询天气的示例"><a href="#使用LangChain的APIChain调用天气接口的API查询天气的示例" class="headerlink" title="使用LangChain的APIChain调用天气接口的API查询天气的示例"></a>使用LangChain的APIChain调用天气接口的API查询天气的示例</h1><p>思路：<br>使用自己封装的LLM接口，确保最大长度不要太长，设定API的提示模板格式，防止太长时对prompt截断的时候只保留关键信息。<br>一共调用2次LLM模型，第一次根据问题，生成API的请求，然后调用API获取结果，第二次根据API的结果和问题，生成最终的答案。<br>代码:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> langchain.chains <span class="hljs-keyword">import</span> APIChain<br><span class="hljs-keyword">from</span> langchain.prompts.prompt <span class="hljs-keyword">import</span> PromptTemplate<br><span class="hljs-keyword">from</span> chat.paper_chat <span class="hljs-keyword">import</span> PoeSageAPI<br><span class="hljs-keyword">from</span> langchain.chains.api <span class="hljs-keyword">import</span> open_meteo_docs<br><br><span class="hljs-comment"># 使用API查询调用天气查询的接口示例</span><br>llm = PoeSageAPI(temperature=<span class="hljs-number">0</span>,max_token=<span class="hljs-number">700</span>)<br>API_RESPONSE_PROMPT_TEMPLATE = (<br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">You are given the below API Documentation:</span><br><span class="hljs-string">&#123;api_docs&#125;</span><br><span class="hljs-string">Using this documentation, generate the full API url to call for answering the user question.</span><br><span class="hljs-string">You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.</span><br><span class="hljs-string">API url:&#123;api_url&#125;</span><br><span class="hljs-string">Here is the response from the API:</span><br><span class="hljs-string">&#123;api_response&#125;</span><br><span class="hljs-string">Question:&#123;question&#125;</span><br><span class="hljs-string">Summarize this response to answer the original question.</span><br><span class="hljs-string">Summary:&quot;&quot;&quot;</span><br>)<br><br>MY_API_RESPONSE_PROMPT = PromptTemplate(<br>    input_variables=[<span class="hljs-string">&quot;api_docs&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>, <span class="hljs-string">&quot;api_url&quot;</span>, <span class="hljs-string">&quot;api_response&quot;</span>],<br>    template=API_RESPONSE_PROMPT_TEMPLATE,<br>)<br><br>chain_new = APIChain.from_llm_and_api_docs(llm, api_docs=open_meteo_docs.OPEN_METEO_DOCS,api_response_prompt=MY_API_RESPONSE_PROMPT,verbose=<span class="hljs-literal">True</span>)<br><br>response = chain_new.run(<span class="hljs-string">&#x27;What is the weather like right now in Munich, Germany in degrees Fahrenheit?&#x27;</span>)<br><span class="hljs-built_in">print</span>(response)<br></code></pre></td></tr></table></figure>
+
+<p>结果</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-operator">&gt;</span> <span class="hljs-type">Entering</span> new <span class="hljs-type">APIChain</span> chain<span class="hljs-operator">...</span><br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;You are given the below API Documentation:<span class="hljs-subst">\n</span>BASE URL: https://api.open-meteo.com/<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /v1/forecast accepts a geographical coordinate, a list of weather variables and responds with a JSON hourly weather forecast for 7 days. Time always starts at 0:00 today and contains 168 hours. All URL parameters are listed below:<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>latitude, longitude<span class="hljs-subst">\t</span>Floating point<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>Geographical WGS84 coordinate of the location<span class="hljs-subst">\n</span>hourly<span class="hljs-subst">\t</span>String array<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>A list of weather variables which should be returned. Values can be comma separated, or multiple &amp;hourly= parameter in the URL can be used.<span class="hljs-subst">\n</span>daily<span class="hljs-subst">\t</span>String array<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>A list of daily weather variable aggregations which should be returned. Values can be comma separated, or multiple &amp;daily= parameter in the URL can be used. If daily weather variables are specified, parameter timezone is required.<span class="hljs-subst">\n</span>current_weather<span class="hljs-subst">\t</span>Bool<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>false<span class="hljs-subst">\t</span>Include current weather conditions in the JSON output.<span class="hljs-subst">\n</span>temperature_unit<span class="hljs-subst">\t</span>String<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>celsius<span class="hljs-subst">\t</span>If fahrenheit is set, all temperature values are converted to Fahrenheit.<span class="hljs-subst">\n</span>windspeed_unit<span class="hljs-subst">\t</span>String<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>kmh<span class="hljs-subst">\t</span>Other wind speed speed units: ms, mph and kn<span class="hljs-subst">\n</span>precipitation_unit<span class="hljs-subst">\t</span>String<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>mm<span class="hljs-subst">\t</span>Other precipitation amount units: inch<span class="hljs-subst">\n</span>timeformat<span class="hljs-subst">\t</span>String<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>iso8601<span class="hljs-subst">\t</span>If format unixtime is selected, all time values are returned in UNIX epoch time in seconds. Please note that all timestamp are in GMT+0! For daily values with unix timestamps, please apply utc_offset_seconds again to get the correct date.<span class="hljs-subst">\n</span>timezone<span class="hljs-subst">\t</span>String<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>GMT<span class="hljs-subst">\t</span>If timezone is set, all timestamps are returned as local-time and data is returned starting at 00:00 local-time. Any time zone name from the time zone database is supported. If auto is set as a time zone, the coordinates will be automatically resolved to the local time zone.<span class="hljs-subst">\n</span>past_days<span class="hljs-subst">\t</span>Integer (0-2)<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>0<span class="hljs-subst">\t</span>If past_days is set, yesterday or the day before yesterday data are also returned.<span class="hljs-subst">\n</span>start_date<span class="hljs-subst">\n</span>end_date<span class="hljs-subst">\t</span>String (yyyy-mm-dd)<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>The time interval to get weather data. A day must be specified as an ISO8601 date (e.g. 2022-06-30).<span class="hljs-subst">\n</span>models<span class="hljs-subst">\t</span>String array<span class="hljs-subst">\t</span>No<span class="hljs-subst">\t</span>auto<span class="hljs-subst">\t</span>Manually select one or more weather models. Per default, the best suitable weather models will be combined.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Hourly Parameter Definition<span class="hljs-subst">\n</span>The parameter &amp;hourly= accepts the following values. Most weather variables are given as an instantaneous value for the indicated hour. Some variables like precipitation are calculated from the preceding hour as an average or sum.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Variable<span class="hljs-subst">\t</span>Valid time<span class="hljs-subst">\t</span>Unit<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>temperature_2m<span class="hljs-subst">\t</span>Instant<span class="hljs-subst">\t</span>°C (°F)<span class="hljs-subst">\t</span>Air temperature at 2 meters above ground<span class="hljs-subst">\n</span>snowfall<span class="hljs-subst">\t</span>Preceding hour sum<span class="hljs-subst">\t</span>cm (inch)<span class="hljs-subst">\t</span>Snowfall amount of the preceding hour in centimeters. For the water equivalent in millimeter, divide by 7. E.g. 7 cm snow = 10 mm precipitation water equivalent<span class="hljs-subst">\n</span>rain<span class="hljs-subst">\t</span>Preceding hour sum<span class="hljs-subst">\t</span>mm (inch)<span class="hljs-subst">\t</span>Rain from large scale weather systems of the preceding hour in millimeter<span class="hljs-subst">\n</span>showers<span class="hljs-subst">\t</span>Preceding hour sum<span class="hljs-subst">\t</span>mm (inch)<span class="hljs-subst">\t</span>Showers from convective precipitation in millimeters from the preceding hour<span class="hljs-subst">\n</span>weathercode<span class="hljs-subst">\t</span>Instant<span class="hljs-subst">\t</span>WMO code<span class="hljs-subst">\t</span>Weather condition as a numeric code. Follow WMO weather interpretation codes. See table below for details.<span class="hljs-subst">\n</span>snow_depth<span class="hljs-subst">\t</span>Instant<span class="hljs-subst">\t</span>meters<span class="hljs-subst">\t</span>Snow depth on the ground<span class="hljs-subst">\n</span>freezinglevel_height<span class="hljs-subst">\t</span>Instant<span class="hljs-subst">\t</span>meters<span class="hljs-subst">\t</span>Altitude above sea level of the 0°C level<span class="hljs-subst">\n</span>visibility<span class="hljs-subst">\t</span>Instant<span class="hljs-subst">\t</span>meters<span class="hljs-subst">\t</span>Viewing distance in meters. Influenced by low clouds, humidity and aerosols. Maximum visibility is approximately 24 km.<span class="hljs-subst">\n</span>Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Question:What is the weather like right now in Munich, Germany in degrees Fahrenheit?<span class="hljs-subst">\n</span>API url:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;https://api.open-meteo.com/v1/forecast?latitude=48.137154&amp;longitude=11.576124&amp;hourly=temperature_2m&amp;current_weather=true&amp;temperature_unit=fahrenheit&quot;</span><br>    &#125;<br>]<br>https:<span class="hljs-comment">//api.open-meteo.com/v1/forecast?latitude=48.137154&amp;longitude=11.576124&amp;hourly=temperature_2m&amp;current_weather=true&amp;temperature_unit=fahrenheit</span><br>&#123;<span class="hljs-string">&quot;latitude&quot;</span>:<span class="hljs-number">48.14</span>,<span class="hljs-string">&quot;longitude&quot;</span>:<span class="hljs-number">11.58</span>,<span class="hljs-string">&quot;generationtime_ms&quot;</span>:<span class="hljs-number">0.2110004425048828</span>,<span class="hljs-string">&quot;utc_offset_seconds&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;timezone&quot;</span>:<span class="hljs-string">&quot;GMT&quot;</span>,<span class="hljs-string">&quot;timezone_abbreviation&quot;</span>:<span class="hljs-string">&quot;GMT&quot;</span>,<span class="hljs-string">&quot;elevation&quot;</span>:<span class="hljs-number">526.0</span>,<span class="hljs-string">&quot;current_weather&quot;</span>:&#123;<span class="hljs-string">&quot;temperature&quot;</span>:<span class="hljs-number">54.3</span>,<span class="hljs-string">&quot;windspeed&quot;</span>:<span class="hljs-number">12.3</span>,<span class="hljs-string">&quot;winddirection&quot;</span>:<span class="hljs-number">75.0</span>,<span class="hljs-string">&quot;weathercode&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;is_day&quot;</span>:<span class="hljs-number">1</span>,<span class="hljs-string">&quot;time&quot;</span>:<span class="hljs-string">&quot;2023-06-13T06:00&quot;</span>&#125;,<span class="hljs-string">&quot;hourly_units&quot;</span>:&#123;<span class="hljs-string">&quot;time&quot;</span>:<span class="hljs-string">&quot;iso8601&quot;</span>,<span class="hljs-string">&quot;temperature_2m&quot;</span>:<span class="hljs-string">&quot;°F&quot;</span>&#125;,<span class="hljs-string">&quot;hourly&quot;</span>:&#123;<span class="hljs-string">&quot;time&quot;</span>:[<span class="hljs-string">&quot;2023-06-13T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-13T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-14T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-15T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-16T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-17T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-18T23:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T00:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T01:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T02:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T03:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T04:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T05:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T06:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T07:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T08:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T09:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T10:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T11:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T12:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T13:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T14:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T15:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T16:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T17:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T18:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T19:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T20:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T21:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T22:00&quot;</span>,<span class="hljs-string">&quot;2023-06-19T23:00&quot;</span>],<span class="hljs-string">&quot;temperature_2m&quot;</span>:[<span class="hljs-number">57.8</span>,<span class="hljs-number">56.2</span>,<span class="hljs-number">54.1</span>,<span class="hljs-number">52.4</span>,<span class="hljs-number">51.0</span>,<span class="hljs-number">51.5</span>,<span class="hljs-number">54.3</span>,<span class="hljs-number">58.3</span>,<span class="hljs-number">62.1</span>,<span class="hljs-number">65.2</span>,<span class="hljs-number">67.7</span>,<span class="hljs-number">69.8</span>,<span class="hljs-number">71.3</span>,<span class="hljs-number">72.2</span>,<span class="hljs-number">72.4</span>,<span class="hljs-number">72.3</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">70.1</span>,<span class="hljs-number">68.3</span>,<span class="hljs-number">65.7</span>,<span class="hljs-number">62.6</span>,<span class="hljs-number">60.0</span>,<span class="hljs-number">57.8</span>,<span class="hljs-number">56.3</span>,<span class="hljs-number">55.1</span>,<span class="hljs-number">53.9</span>,<span class="hljs-number">52.9</span>,<span class="hljs-number">52.2</span>,<span class="hljs-number">51.2</span>,<span class="hljs-number">52.1</span>,<span class="hljs-number">55.5</span>,<span class="hljs-number">59.5</span>,<span class="hljs-number">63.0</span>,<span class="hljs-number">67.0</span>,<span class="hljs-number">68.7</span>,<span class="hljs-number">69.9</span>,<span class="hljs-number">71.3</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">72.2</span>,<span class="hljs-number">72.0</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">70.1</span>,<span class="hljs-number">68.2</span>,<span class="hljs-number">66.1</span>,<span class="hljs-number">63.7</span>,<span class="hljs-number">61.8</span>,<span class="hljs-number">60.2</span>,<span class="hljs-number">58.2</span>,<span class="hljs-number">57.2</span>,<span class="hljs-number">55.5</span>,<span class="hljs-number">54.7</span>,<span class="hljs-number">53.7</span>,<span class="hljs-number">52.4</span>,<span class="hljs-number">54.6</span>,<span class="hljs-number">58.0</span>,<span class="hljs-number">61.6</span>,<span class="hljs-number">64.8</span>,<span class="hljs-number">67.9</span>,<span class="hljs-number">68.6</span>,<span class="hljs-number">69.2</span>,<span class="hljs-number">71.0</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">72.9</span>,<span class="hljs-number">72.8</span>,<span class="hljs-number">71.9</span>,<span class="hljs-number">71.1</span>,<span class="hljs-number">69.7</span>,<span class="hljs-number">66.5</span>,<span class="hljs-number">63.5</span>,<span class="hljs-number">61.8</span>,<span class="hljs-number">60.6</span>,<span class="hljs-number">59.3</span>,<span class="hljs-number">58.1</span>,<span class="hljs-number">56.8</span>,<span class="hljs-number">56.0</span>,<span class="hljs-number">55.4</span>,<span class="hljs-number">54.6</span>,<span class="hljs-number">56.4</span>,<span class="hljs-number">60.2</span>,<span class="hljs-number">63.0</span>,<span class="hljs-number">66.2</span>,<span class="hljs-number">68.7</span>,<span class="hljs-number">70.2</span>,<span class="hljs-number">71.1</span>,<span class="hljs-number">71.6</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">71.5</span>,<span class="hljs-number">71.0</span>,<span class="hljs-number">70.2</span>,<span class="hljs-number">69.3</span>,<span class="hljs-number">67.9</span>,<span class="hljs-number">65.6</span>,<span class="hljs-number">62.9</span>,<span class="hljs-number">60.7</span>,<span class="hljs-number">59.8</span>,<span class="hljs-number">59.5</span>,<span class="hljs-number">59.1</span>,<span class="hljs-number">57.9</span>,<span class="hljs-number">56.5</span>,<span class="hljs-number">55.8</span>,<span class="hljs-number">56.4</span>,<span class="hljs-number">57.6</span>,<span class="hljs-number">59.4</span>,<span class="hljs-number">62.0</span>,<span class="hljs-number">64.9</span>,<span class="hljs-number">67.5</span>,<span class="hljs-number">69.3</span>,<span class="hljs-number">70.6</span>,<span class="hljs-number">71.6</span>,<span class="hljs-number">72.2</span>,<span class="hljs-number">72.5</span>,<span class="hljs-number">72.3</span>,<span class="hljs-number">71.8</span>,<span class="hljs-number">70.8</span>,<span class="hljs-number">69.2</span>,<span class="hljs-number">66.7</span>,<span class="hljs-number">63.8</span>,<span class="hljs-number">61.2</span>,<span class="hljs-number">59.6</span>,<span class="hljs-number">58.6</span>,<span class="hljs-number">57.9</span>,<span class="hljs-number">55.1</span>,<span class="hljs-number">53.8</span>,<span class="hljs-number">53.6</span>,<span class="hljs-number">55.2</span>,<span class="hljs-number">58.0</span>,<span class="hljs-number">61.1</span>,<span class="hljs-number">65.0</span>,<span class="hljs-number">69.3</span>,<span class="hljs-number">72.8</span>,<span class="hljs-number">74.9</span>,<span class="hljs-number">76.1</span>,<span class="hljs-number">77.0</span>,<span class="hljs-number">77.9</span>,<span class="hljs-number">78.4</span>,<span class="hljs-number">78.4</span>,<span class="hljs-number">77.9</span>,<span class="hljs-number">77.0</span>,<span class="hljs-number">75.2</span>,<span class="hljs-number">72.4</span>,<span class="hljs-number">68.8</span>,<span class="hljs-number">65.8</span>,<span class="hljs-number">64.0</span>,<span class="hljs-number">62.8</span>,<span class="hljs-number">61.7</span>,<span class="hljs-number">60.4</span>,<span class="hljs-number">59.2</span>,<span class="hljs-number">59.0</span>,<span class="hljs-number">60.1</span>,<span class="hljs-number">62.2</span>,<span class="hljs-number">64.8</span>,<span class="hljs-number">68.4</span>,<span class="hljs-number">72.5</span>,<span class="hljs-number">76.1</span>,<span class="hljs-number">78.8</span>,<span class="hljs-number">80.8</span>,<span class="hljs-number">82.4</span>,<span class="hljs-number">83.5</span>,<span class="hljs-number">84.2</span>,<span class="hljs-number">84.2</span>,<span class="hljs-number">83.3</span>,<span class="hljs-number">81.8</span>,<span class="hljs-number">79.7</span>,<span class="hljs-number">76.2</span>,<span class="hljs-number">72.2</span>,<span class="hljs-number">68.9</span>,<span class="hljs-number">67.2</span>,<span class="hljs-number">66.2</span>]&#125;&#125;<br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;15:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T16:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T17:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T18:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T19:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T20:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T21:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T22:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-17T23:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T00:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T01:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T02:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T03:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T04:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T05:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T06:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T07:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T08:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T09:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T10:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T11:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T12:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T13:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T14:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T15:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T16:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T17:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T18:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T19:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T20:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T21:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T22:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-18T23:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T00:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T01:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T02:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T03:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T04:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T05:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T06:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T07:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T08:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T09:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T10:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T11:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T12:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T13:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T14:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T15:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T16:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T17:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T18:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T19:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T20:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T21:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T22:00<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\&quot;</span>2023-06-19T23:00<span class="hljs-subst">\&quot;</span>],<span class="hljs-subst">\&quot;</span>temperature_2m<span class="hljs-subst">\&quot;</span>:[57.8,56.2,54.1,52.4,51.0,51.5,54.3,58.3,62.1,65.2,67.7,69.8,71.3,72.2,72.4,72.3,71.8,70.1,68.3,65.7,62.6,60.0,57.8,56.3,55.1,53.9,52.9,52.2,51.2,52.1,55.5,59.5,63.0,67.0,68.7,69.9,71.3,71.8,72.2,72.0,71.8,70.1,68.2,66.1,63.7,61.8,60.2,58.2,57.2,55.5,54.7,53.7,52.4,54.6,58.0,61.6,64.8,67.9,68.6,69.2,71.0,71.8,72.9,72.8,71.9,71.1,69.7,66.5,63.5,61.8,60.6,59.3,58.1,56.8,56.0,55.4,54.6,56.4,60.2,63.0,66.2,68.7,70.2,71.1,71.6,71.8,71.5,71.0,70.2,69.3,67.9,65.6,62.9,60.7,59.8,59.5,59.1,57.9,56.5,55.8,56.4,57.6,59.4,62.0,64.9,67.5,69.3,70.6,71.6,72.2,72.5,72.3,71.8,70.8,69.2,66.7,63.8,61.2,59.6,58.6,57.9,55.1,53.8,53.6,55.2,58.0,61.1,65.0,69.3,72.8,74.9,76.1,77.0,77.9,78.4,78.4,77.9,77.0,75.2,72.4,68.8,65.8,64.0,62.8,61.7,60.4,59.2,59.0,60.1,62.2,64.8,68.4,72.5,76.1,78.8,80.8,82.4,83.5,84.2,84.2,83.3,81.8,79.7,76.2,72.2,68.9,67.2,66.2]&#125;&#125;<span class="hljs-subst">\n</span>Question:What is the weather like right now in Munich, Germany in degrees Fahrenheit?<span class="hljs-subst">\n</span>Summarize this response to answer the original question.<span class="hljs-subst">\n</span>Summary:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;The provided data includes a list of dates and times along with corresponding temperature readings in degrees Celsius for Munich, Germany. However, the data does not provide the current temperature or convert the Celsius readings to Fahrenheit. Therefore, it is not possible to determine the current weather in Munich, Germany in degrees Fahrenheit based on this data alone.&quot;</span><br>    &#125;<br>]<br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Finished</span> chain.<br><span class="hljs-type">The</span> provided data includes a list of dates and times along with corresponding temperature readings <span class="hljs-keyword">in</span> degrees <span class="hljs-type">Celsius</span> <span class="hljs-keyword">for</span> <span class="hljs-type">Munich</span>, <span class="hljs-type">Germany</span>. <span class="hljs-type">However</span>, the data does not provide the current temperature or convert the <span class="hljs-type">Celsius</span> readings to <span class="hljs-type">Fahrenheit</span>. <span class="hljs-type">Therefore</span>, it <span class="hljs-keyword">is</span> not possible to determine the current weather <span class="hljs-keyword">in</span> <span class="hljs-type">Munich</span>, <span class="hljs-type">Germany</span> <span class="hljs-keyword">in</span> degrees <span class="hljs-type">Fahrenheit</span> based on this data alone.<br></code></pre></td></tr></table></figure>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>langchain-APIChain</div>
+      <div>https://johnson7788.github.io/2023/06/13/langchain-APIChain/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月13日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/" title="几种模型回答同一问题的对比">
+                        <span class="hidden-mobile">几种模型回答同一问题的对比</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
