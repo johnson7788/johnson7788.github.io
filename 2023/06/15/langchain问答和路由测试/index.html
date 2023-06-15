@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="基于APIChain和RouterChain打造的问答 首先准备好APIChain所需的api调用，我们构造2个Datatouch的api接口，使用GET的请求方式，每个接口支持多个参数。 制定好回答某类问题的标注流程SOP。 解答思路, 用户提问–RouterChain–APIChain或DefaultChain–答案LLM    代码功能实现核心代码：路由Chain的实现 1234567891">
+<meta property="og:type" content="article">
+<meta property="og:title" content="langchain问答和路由测试">
+<meta property="og:url" content="https://johnson7788.github.io/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="基于APIChain和RouterChain打造的问答 首先准备好APIChain所需的api调用，我们构造2个Datatouch的api接口，使用GET的请求方式，每个接口支持多个参数。 制定好回答某类问题的标注流程SOP。 解答思路, 用户提问–RouterChain–APIChain或DefaultChain–答案LLM    代码功能实现核心代码：路由Chain的实现 1234567891">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/image-20230615092538201.png">
+<meta property="article:published_time" content="2023-06-15T02:16:06.000Z">
+<meta property="article:modified_time" content="2023-06-15T02:16:06.591Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/image-20230615092538201.png">
+  
+  
+  <title>langchain问答和路由测试 - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="langchain问答和路由测试">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-06-15 10:16" pubdate>
+          2023年6月15日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          22k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          188 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">langchain问答和路由测试</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="基于APIChain和RouterChain打造的问答"><a href="#基于APIChain和RouterChain打造的问答" class="headerlink" title="基于APIChain和RouterChain打造的问答"></a>基于APIChain和RouterChain打造的问答</h1><ol>
+<li>首先准备好APIChain所需的api调用，我们构造2个Datatouch的api接口，使用GET的请求方式，每个接口支持多个参数。</li>
+<li>制定好回答某类问题的标注流程SOP。</li>
+<li>解答思路, 用户提问–RouterChain–APIChain或DefaultChain–答案LLM</li>
+</ol>
+<img src="/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/image-20230615092538201.png" srcset="/img/loading.gif" lazyload class="">
+
+<h1 id="代码功能实现"><a href="#代码功能实现" class="headerlink" title="代码功能实现"></a>代码功能实现</h1><p>核心代码：路由Chain的实现</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_prompt_infos</span>(<span class="hljs-params">self,name=<span class="hljs-literal">None</span></span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        获取提示模板的相关信息</span><br><span class="hljs-string">        param:name: 如果提供name，那么只返回属于这条name的信息</span><br><span class="hljs-string">        Returns:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        prompt_infos = [<br>            &#123;<br>                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;菱歌研究院&quot;</span>,<br>                <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取菱歌Datatouch网站下的菱歌研究院中的内容，包括发布的所有白皮书，文章等&quot;</span>,<br>                <span class="hljs-string">&quot;example_question&quot;</span>:[<span class="hljs-string">&quot;菱歌研究院最近发表的一篇文章讲了是关于什么的？&quot;</span>,<span class="hljs-string">&quot;菱歌的白皮书有哪些？&quot;</span>],  <span class="hljs-comment"># 帮助匹配到正确的接口</span><br>                <span class="hljs-string">&quot;api_doc_name&quot;</span>: <span class="hljs-string">&quot;academic_docs&quot;</span>,<br>                <span class="hljs-string">&quot;prompt_response_template&quot;</span>: self.get_api_response_template(),<br>                <span class="hljs-string">&quot;prompt_url_template&quot;</span>: self.get_api_url_template(),<br>                <span class="hljs-string">&quot;chain_type&quot;</span>: <span class="hljs-string">&quot;apichain&quot;</span>,<br>                <span class="hljs-string">&quot;input_keyword&quot;</span>: <span class="hljs-string">&quot;question&quot;</span>,<br>            &#125;,<br>            &#123;<br>                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;商品排行榜&quot;</span>,<br>                <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;获取菱歌Datatouch网站下商品排行榜中的内容，根据时间对商品按热度，销量，涨幅等进行排名，还返回商品的功效简介和价格信息&quot;</span>,<br>                <span class="hljs-string">&quot;example_question&quot;</span>: [<span class="hljs-string">&quot;最近2个月的商品排行情况？&quot;</span>, <span class="hljs-string">&quot;某某商品在最近2个月的热度如何？&quot;</span>],  <span class="hljs-comment"># 帮助匹配到正确的接口</span><br>                <span class="hljs-string">&quot;api_doc_name&quot;</span>: <span class="hljs-string">&quot;rank_docs&quot;</span>,<br>                <span class="hljs-string">&quot;prompt_response_template&quot;</span>: self.get_api_response_template(),<br>                <span class="hljs-string">&quot;prompt_url_template&quot;</span>: self.get_api_url_template(),<br>                <span class="hljs-string">&quot;chain_type&quot;</span>: <span class="hljs-string">&quot;apichain&quot;</span>,<br>                <span class="hljs-string">&quot;input_keyword&quot;</span>: <span class="hljs-string">&quot;question&quot;</span>,<br>            &#125;,<br>            &#123;<br>                <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;math&quot;</span>,<br>                <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;用于解决数学问题&quot;</span>,<br>                <span class="hljs-string">&quot;chain_type&quot;</span>: <span class="hljs-string">&quot;llmchain&quot;</span>,<br>                <span class="hljs-string">&quot;input_keyword&quot;</span>: <span class="hljs-string">&quot;input&quot;</span>,<br>                <span class="hljs-string">&quot;prompt_template&quot;</span>: <span class="hljs-string">&quot;&quot;&quot;You are a very good mathematician. You are great at answering math questions. \</span><br><span class="hljs-string">You are so good because you are able to break down hard problems into their component parts, \</span><br><span class="hljs-string">answer the component parts, and then put them together to answer the broader question.</span><br><span class="hljs-string"></span><br><span class="hljs-string">Here is a question:</span><br><span class="hljs-string">&#123;input&#125;&quot;&quot;&quot;</span><br>            &#125;<br>        ]<br>        <span class="hljs-keyword">if</span> name <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-literal">None</span>:<br>            <span class="hljs-keyword">for</span> p_info <span class="hljs-keyword">in</span> prompt_infos:<br>                <span class="hljs-keyword">if</span> p_info[<span class="hljs-string">&quot;name&quot;</span>] == name:<br>                    <span class="hljs-keyword">return</span> p_info<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;名字为:&#123;&#125;的，不在我们的提示模板中&quot;</span>.<span class="hljs-built_in">format</span>(name))<br>        <span class="hljs-keyword">return</span> prompt_infos<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_router_of_destination_chains</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        获取所有的路由的chains</span><br><span class="hljs-string">        Returns:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        prompt_infos = self.get_prompt_infos()<br>        destination_chains = &#123;&#125;<br>        <span class="hljs-keyword">for</span> p_info <span class="hljs-keyword">in</span> prompt_infos:<br>            name = p_info[<span class="hljs-string">&quot;name&quot;</span>]<br>            chain_type = p_info[<span class="hljs-string">&quot;chain_type&quot;</span>]<br>            <span class="hljs-keyword">if</span> chain_type == <span class="hljs-string">&quot;apichain&quot;</span>:<br>                api_doc_name = p_info[<span class="hljs-string">&quot;api_doc_name&quot;</span>]<br>                api_docs = self.get_api_docs(doc_name=api_doc_name)<br>                prompt_response_template = p_info[<span class="hljs-string">&quot;prompt_response_template&quot;</span>]<br>                prompt_url_template = p_info[<span class="hljs-string">&quot;prompt_url_template&quot;</span>]<br>                <span class="hljs-comment"># 只用了回复的template</span><br>                chain = APIChain.from_llm_and_api_docs(self.llm, api_docs=api_docs,api_url_prompt=prompt_url_template, api_response_prompt=prompt_response_template,verbose=<span class="hljs-literal">True</span>)<br>            <span class="hljs-keyword">elif</span> chain_type == <span class="hljs-string">&quot;llmchain&quot;</span>:<br>                prompt_template = p_info[<span class="hljs-string">&quot;prompt_template&quot;</span>]<br>                prompt = PromptTemplate(template=prompt_template, input_variables=[<span class="hljs-string">&quot;input&quot;</span>])<br>                chain = LLMChain(llm=self.llm, prompt=prompt)<br>            <span class="hljs-keyword">else</span>:<br>                <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">f&quot;不支持的chain_type: <span class="hljs-subst">&#123;chain_type&#125;</span>，请检查&quot;</span>)<br>            destination_chains[name] = chain<br>        <span class="hljs-keyword">return</span> destination_chains, prompt_infos<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get_routers_chain</span>(<span class="hljs-params">self</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        获取路由的chains, 路由的chains是一个多路由的chain</span><br><span class="hljs-string">        Returns:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        default_chain = ConversationChain(llm=self.llm, output_key=<span class="hljs-string">&quot;text&quot;</span>)<br>        destination_chains, prompt_infos = self.get_router_of_destination_chains()<br>        destinations = [<span class="hljs-string">f&quot;<span class="hljs-subst">&#123;p[<span class="hljs-string">&#x27;name&#x27;</span>]&#125;</span>: <span class="hljs-subst">&#123;p[<span class="hljs-string">&#x27;description&#x27;</span>]&#125;</span>&quot;</span> <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> prompt_infos]<br>        destinations_str = <span class="hljs-string">&quot;\n&quot;</span>.join(destinations)<br>        router_template = MULTI_PROMPT_ROUTER_TEMPLATE.<span class="hljs-built_in">format</span>(<br>            destinations=destinations_str<br>        )<br>        router_prompt = PromptTemplate(<br>            template=router_template,<br>            input_variables=[<span class="hljs-string">&quot;input&quot;</span>],<br>            output_parser=RouterOutputParser(),<br>        )<br>        router_chain = LLMRouterChain.from_llm(self.llm, router_prompt)<br>        <span class="hljs-comment"># 不能用MultiPromptChain，会出现问题，不兼容APIChain</span><br>        <span class="hljs-comment"># chain = MultiPromptChain(router_chain=router_chain, destination_chains=destination_chains,</span><br>        <span class="hljs-comment">#                          default_chain=default_chain, verbose=True)</span><br>        <span class="hljs-keyword">return</span> router_chain, destination_chains, default_chain<br></code></pre></td></tr></table></figure>
+
+<p>回答实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python">    <span class="hljs-keyword">def</span> <span class="hljs-title function_">anwser</span>(<span class="hljs-params">self,question</span>):<br>        <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        回答问题</span><br><span class="hljs-string">        1. 问题类型判断，判断使用的需要使用的接口和工具</span><br><span class="hljs-string">        2. 查看接口和工具使用的参数</span><br><span class="hljs-string">        3. 获取接口和工具中的参数，组织后，调用接口和工具</span><br><span class="hljs-string">        4. 对获取到的结果进行最终解答</span><br><span class="hljs-string">        Args:</span><br><span class="hljs-string">            question ():</span><br><span class="hljs-string">        Returns:</span><br><span class="hljs-string">        &quot;&quot;&quot;</span><br>        <span class="hljs-comment"># 第一次调用LLM，根据问题和各个Chain，选择最合适的Chain</span><br>        router_chain, destination_chains, default_chain = self.get_routers_chain()<br>        destination,next_inputs = router_chain.route(question)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> destination:<br>            response = default_chain(next_inputs)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">assert</span> destination <span class="hljs-keyword">in</span> destination_chains, <span class="hljs-string">f&quot;destination: <span class="hljs-subst">&#123;destination&#125;</span> 不在destination_chains中&quot;</span><br>            <span class="hljs-comment"># 需要检查next_inputs中的内容是否符合要求</span><br>            prompt_infos = self.get_prompt_infos(name=destination)<br>            input_keyword = prompt_infos[<span class="hljs-string">&quot;input_keyword&quot;</span>]<br>            <span class="hljs-keyword">if</span> input_keyword <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> next_inputs:<br>                new_inputs = &#123;input_keyword: next_inputs[<span class="hljs-string">&quot;input&quot;</span>]&#125;<br>                next_inputs = new_inputs<br>            response = destination_chains[destination](next_inputs)<br>        <span class="hljs-keyword">return</span> response<br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    chatbot = ChatBot()<br>    <span class="hljs-comment"># response = chatbot.anwser(&quot;菱歌研究院最近发表的一篇文章讲了什么内容？&quot;)</span><br>    <span class="hljs-comment"># response = chatbot.anwser(&quot;菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？&quot;)</span><br>    response = chatbot.anwser(<span class="hljs-string">&quot;你好啊，你知道中国的五岳是那几座山吗？&quot;</span>)<br>    <span class="hljs-built_in">print</span>(response)<br></code></pre></td></tr></table></figure>
+
+<h1 id="效果测试"><a href="#效果测试" class="headerlink" title="效果测试"></a>效果测试</h1><p>1.模型内部知识，其它未匹配的到SOP的知识回答</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs swift">[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;Given a raw text input to a language model select the model prompt best suited for the input. You will be given the names of the available prompts and a description of what the prompt is best suited for. You may also revise the original input if you think that revising it will ultimately lead to a better response from the language model.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; FORMATTING &gt;&gt;<span class="hljs-subst">\n</span>Return a markdown code snippet with a JSON object formatted to look like:<span class="hljs-subst">\n</span>```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> name of the prompt to use or <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> a potentially modified version of the original input<span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span> MUST be one of the candidate prompt names specified below OR it can be <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span> if the input is not well suited for any of the candidate prompts.<span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span> can just be the original input if you don&#x27;t think any modifications are needed.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; CANDIDATE PROMPTS &gt;&gt;<span class="hljs-subst">\n</span>菱歌研究院: 获取菱歌Datatouch网站下的菱歌研究院中的内容，包括发布的所有白皮书，文章等<span class="hljs-subst">\n</span>商品排行榜: 获取菱歌Datatouch网站下商品排行榜中的内容，根据时间对商品按热度，销量，涨幅等进行排名，还返回商品的功效简介和价格信息<span class="hljs-subst">\n</span>math: 用于解决数学问题<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; INPUT &gt;&gt;<span class="hljs-subst">\n</span>你好啊，你知道中国的五岳是那几座山吗？<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; OUTPUT &gt;&gt;<span class="hljs-subst">\n</span>&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>你好啊，你知道中国的五岳是那几座山吗？<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```&quot;</span><br>    &#125;<br>]<br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;The following is a friendly conversation between a human and an AI. The AI is talkative and provides lots of specific details from its context. If the AI does not know the answer to a question, it truthfully says it does not know.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Current conversation:<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>Human: 你好啊，你知道中国的五岳是那几座山吗？<span class="hljs-subst">\n</span>AI:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;你好！中国的五岳指的是五座历史上被誉为最高的山峰，它们分别是：华山、嵩山、泰山、衡山和恒山。这五座山峰都有着悠久的历史和文化背景，也是中国历史上的重要地标之一。&quot;</span><br>    &#125;<br>]<br>&#123;&#x27;input&#x27;: &#x27;你好啊，你知道中国的五岳是那几座山吗？&#x27;, &#x27;history&#x27;: &#x27;&#x27;, &#x27;text&#x27;: &#x27;你好！中国的五岳指的是五座历史上被誉为最高的山峰，它们分别是：华山<span class="hljs-operator">、</span>嵩山<span class="hljs-operator">、</span>泰山<span class="hljs-operator">、</span>衡山和恒山<span class="hljs-operator">。</span>这五座山峰都有着悠久的历史和文化背景，也是中国历史上的重要地标之一<span class="hljs-operator">。</span>&#x27;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>2.关于Datatouch中的排行榜相关的问题</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs swift">[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;Given a raw text input to a language model select the model prompt best suited for the input. You will be given the names of the available prompts and a description of what the prompt is best suited for. You may also revise the original input if you think that revising it will ultimately lead to a better response from the language model.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; FORMATTING &gt;&gt;<span class="hljs-subst">\n</span>Return a markdown code snippet with a JSON object formatted to look like:<span class="hljs-subst">\n</span>```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> name of the prompt to use or <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> a potentially modified version of the original input<span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span> MUST be one of the candidate prompt names specified below OR it can be <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span> if the input is not well suited for any of the candidate prompts.<span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span> can just be the original input if you don&#x27;t think any modifications are needed.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; CANDIDATE PROMPTS &gt;&gt;<span class="hljs-subst">\n</span>菱歌研究院: 获取菱歌Datatouch网站下的菱歌研究院中的内容，包括发布的所有白皮书，文章等<span class="hljs-subst">\n</span>商品排行榜: 获取菱歌Datatouch网站下商品排行榜中的内容，根据时间对商品按热度，销量，涨幅等进行排名，还返回商品的功效简介和价格信息<span class="hljs-subst">\n</span>math: 用于解决数学问题<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; INPUT &gt;&gt;<span class="hljs-subst">\n</span>菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; OUTPUT &gt;&gt;<span class="hljs-subst">\n</span>&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>商品排行榜<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```&quot;</span><br>    &#125;<br>]<br><br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Entering</span> new  chain<span class="hljs-operator">...</span><br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        CAUSTION: only response the API url, no any other information and explanation.<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        API url:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;http://127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1&quot;</span><br>    &#125;<br>]<br>http:<span class="hljs-comment">//127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1</span><br>[&#123;<span class="hljs-string">&quot;商品名称&quot;</span>: <span class="hljs-string">&quot;半亩花田米酵氨基酸泡泡洁面慕斯&quot;</span>, <span class="hljs-string">&quot;热度&quot;</span>: <span class="hljs-number">47216</span>, <span class="hljs-string">&quot;环比涨幅&quot;</span>: <span class="hljs-number">90.22</span>, <span class="hljs-string">&quot;同比涨幅&quot;</span>: <span class="hljs-number">87.88</span>, <span class="hljs-string">&quot;图片链接&quot;</span>: <span class="hljs-string">&quot;http://img.lavector.com/lavectorimages/f93d527c83b7616b2876939ded81c3291686552069291.jpg&quot;</span>, <span class="hljs-string">&quot;价格&quot;</span>: <span class="hljs-number">39.9</span>, <span class="hljs-string">&quot;功效列表&quot;</span>: [<span class="hljs-string">&quot;深层清洁&quot;</span>, <span class="hljs-string">&quot;水油平衡&quot;</span>, <span class="hljs-string">&quot;柔肤&quot;</span>, <span class="hljs-string">&quot;改善粗糙&quot;</span>, <span class="hljs-string">&quot;祛闭口&quot;</span>, <span class="hljs-string">&quot;祛黑头&quot;</span>, <span class="hljs-string">&quot;祛痘&quot;</span>, <span class="hljs-string">&quot;收缩毛孔&quot;</span>, <span class="hljs-string">&quot;温和不刺激&quot;</span>]&#125;]<br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span>        You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        API url:http://127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1<span class="hljs-subst">\n</span>        Here is the response from the API:<span class="hljs-subst">\n</span>        [&#123;<span class="hljs-subst">\&quot;</span>商品名称<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>半亩花田米酵氨基酸泡泡洁面慕斯<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>热度<span class="hljs-subst">\&quot;</span>: 47216, <span class="hljs-subst">\&quot;</span>环比涨幅<span class="hljs-subst">\&quot;</span>: 90.22, <span class="hljs-subst">\&quot;</span>同比涨幅<span class="hljs-subst">\&quot;</span>: 87.88, <span class="hljs-subst">\&quot;</span>图片链接<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>http://img.lavector.com/lavectorimages/f93d527c83b7616b2876939ded81c3291686552069291.jpg<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>价格<span class="hljs-subst">\&quot;</span>: 39.9, <span class="hljs-subst">\&quot;</span>功效列表<span class="hljs-subst">\&quot;</span>: [<span class="hljs-subst">\&quot;</span>深层清洁<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>水油平衡<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>柔肤<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>改善粗糙<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛闭口<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛黑头<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛痘<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>收缩毛孔<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>温和不刺激<span class="hljs-subst">\&quot;</span>]&#125;]<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        根据上面的Question问题和API返回结果进行回答，用中文回答。<span class="hljs-subst">\n</span>        答:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;根据API返回结果，菱歌Datatouch官网商品排行榜中热度第一的商品是<span class="hljs-subst">\&quot;</span>半亩花田米酵氨基酸泡泡洁面慕斯<span class="hljs-subst">\&quot;</span>。该商品的功效包括深层清洁、水油平衡、柔肤、改善粗糙、祛闭口、祛黑头、祛痘、收缩毛孔、温和不刺激。&quot;</span><br>    &#125;<br>]<br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Finished</span> chain.<br>&#123;&#x27;question&#x27;: &#x27;菱歌<span class="hljs-type">Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？</span>&#x27;, &#x27;output&#x27;: &#x27;根据<span class="hljs-type">API返回结果，菱歌Datatouch官网商品排行榜中热度第一的商品是</span><span class="hljs-string">&quot;半亩花田米酵氨基酸泡泡洁面慕斯&quot;</span><span class="hljs-operator">。</span>该商品的功效包括深层清洁<span class="hljs-operator">、</span>水油平衡<span class="hljs-operator">、</span>柔肤<span class="hljs-operator">、</span>改善粗糙<span class="hljs-operator">、</span>祛闭口<span class="hljs-operator">、</span>祛黑头<span class="hljs-operator">、</span>祛痘<span class="hljs-operator">、</span>收缩毛孔<span class="hljs-operator">、</span>温和不刺激<span class="hljs-operator">。</span>&#x27;&#125;<br></code></pre></td></tr></table></figure>
+
+<p>3.灵活扩展排行榜中的问题</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs swift">[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;Given a raw text input to a language model select the model prompt best suited for the input. You will be given the names of the available prompts and a description of what the prompt is best suited for. You may also revise the original input if you think that revising it will ultimately lead to a better response from the language model.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; FORMATTING &gt;&gt;<span class="hljs-subst">\n</span>Return a markdown code snippet with a JSON object formatted to look like:<span class="hljs-subst">\n</span>```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> name of the prompt to use or <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> a potentially modified version of the original input<span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span> MUST be one of the candidate prompt names specified below OR it can be <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span> if the input is not well suited for any of the candidate prompts.<span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span> can just be the original input if you don&#x27;t think any modifications are needed.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; CANDIDATE PROMPTS &gt;&gt;<span class="hljs-subst">\n</span>菱歌研究院: 获取菱歌Datatouch网站下的菱歌研究院中的内容，包括发布的所有白皮书，文章等<span class="hljs-subst">\n</span>商品排行榜: 获取菱歌Datatouch网站下商品排行榜中的内容，根据时间对商品按热度，销量，涨幅等进行排名，还返回商品的功效简介和价格信息<span class="hljs-subst">\n</span>math: 用于解决数学问题<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; INPUT &gt;&gt;<span class="hljs-subst">\n</span>菱歌Datatouch官网中5月份商品排行榜中销量第二的商品是哪个，有什么功效？<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; OUTPUT &gt;&gt;<span class="hljs-subst">\n</span>&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>商品排行榜<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>菱歌Datatouch官网中5月份商品排行榜中销量第二的商品是哪个，有什么功效？<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```&quot;</span><br>    &#125;<br>]<br><br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Entering</span> new  chain<span class="hljs-operator">...</span><br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        CAUSTION: only response the API url, no any other information and explanation.<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中5月份商品排行榜中销量第二的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        API url:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot; http://127.0.0.1:6301/api/rank?endTime=2023-05&amp;size=1&amp;type=2&amp;page=0&quot;</span><br>    &#125;<br>]<br> http:<span class="hljs-comment">//127.0.0.1:6301/api/rank?endTime=2023-05&amp;size=1&amp;type=2&amp;page=0</span><br>[&#123;<span class="hljs-string">&quot;商品名称&quot;</span>: <span class="hljs-string">&quot;至本舒颜修护洁面乳&quot;</span>, <span class="hljs-string">&quot;热度&quot;</span>: <span class="hljs-number">490202</span>, <span class="hljs-string">&quot;环比涨幅&quot;</span>: <span class="hljs-number">67.9</span>, <span class="hljs-string">&quot;同比涨幅&quot;</span>: <span class="hljs-operator">-</span><span class="hljs-number">59.01</span>, <span class="hljs-string">&quot;图片链接&quot;</span>: <span class="hljs-string">&quot;http://img.lavector.com/lavectorimages/4eb3166de70caf8c8e19e8158b042d9e.jpg&quot;</span>, <span class="hljs-string">&quot;价格&quot;</span>: <span class="hljs-number">55.0</span>, <span class="hljs-string">&quot;功效列表&quot;</span>: [<span class="hljs-string">&quot;清洁肌肤污垢&quot;</span>, <span class="hljs-string">&quot;温和不刺激&quot;</span>]&#125;]<br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span>        You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        API url:http://127.0.0.1:6301/api/rank?endTime=2023-05&amp;size=1&amp;type=2&amp;page=0<span class="hljs-subst">\n</span>        Here is the response from the API:<span class="hljs-subst">\n</span>        [&#123;<span class="hljs-subst">\&quot;</span>商品名称<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>至本舒颜修护洁面乳<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>热度<span class="hljs-subst">\&quot;</span>: 490202, <span class="hljs-subst">\&quot;</span>环比涨幅<span class="hljs-subst">\&quot;</span>: 67.9, <span class="hljs-subst">\&quot;</span>同比涨幅<span class="hljs-subst">\&quot;</span>: -59.01, <span class="hljs-subst">\&quot;</span>图片链接<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>http://img.lavector.com/lavectorimages/4eb3166de70caf8c8e19e8158b042d9e.jpg<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>价格<span class="hljs-subst">\&quot;</span>: 55.0, <span class="hljs-subst">\&quot;</span>功效列表<span class="hljs-subst">\&quot;</span>: [<span class="hljs-subst">\&quot;</span>清洁肌肤污垢<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>温和不刺激<span class="hljs-subst">\&quot;</span>]&#125;]<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中5月份商品排行榜中销量第二的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        根据上面的Question问题和API返回结果进行回答，用中文回答。<span class="hljs-subst">\n</span>        答:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;  至本舒颜修护洁面乳是5月份销量第二的商品,它具有清洁肌肤污垢、温和不刺激的功效。&quot;</span><br>    &#125;<br>]<br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Finished</span> chain.<br>&#123;&#x27;question&#x27;: &#x27;菱歌<span class="hljs-type">Datatouch官网中5月份商品排行榜中销量第二的商品是哪个，有什么功效？</span>&#x27;, &#x27;output&#x27;: &#x27;  至本舒颜修护洁面乳是<span class="hljs-number">5</span>月份销量第二的商品,它具有清洁肌肤污垢<span class="hljs-operator">、</span>温和不刺激的功效<span class="hljs-operator">。</span>&#x27;&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>4.关于菱歌研究院的中的问题回答</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs swift">[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;Given a raw text input to a language model select the model prompt best suited for the input. You will be given the names of the available prompts and a description of what the prompt is best suited for. You may also revise the original input if you think that revising it will ultimately lead to a better response from the language model.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; FORMATTING &gt;&gt;<span class="hljs-subst">\n</span>Return a markdown code snippet with a JSON object formatted to look like:<span class="hljs-subst">\n</span>```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> name of the prompt to use or <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: string <span class="hljs-subst">\\</span> a potentially modified version of the original input<span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span> MUST be one of the candidate prompt names specified below OR it can be <span class="hljs-subst">\&quot;</span>DEFAULT<span class="hljs-subst">\&quot;</span> if the input is not well suited for any of the candidate prompts.<span class="hljs-subst">\n</span>REMEMBER: <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span> can just be the original input if you don&#x27;t think any modifications are needed.<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; CANDIDATE PROMPTS &gt;&gt;<span class="hljs-subst">\n</span>菱歌研究院: 获取菱歌Datatouch网站下的菱歌研究院中的内容，包括发布的所有白皮书，文章等<span class="hljs-subst">\n</span>商品排行榜: 获取菱歌Datatouch网站下商品排行榜中的内容，根据时间对商品按热度，销量，涨幅等进行排名，还返回商品的功效简介和价格信息<span class="hljs-subst">\n</span>math: 用于解决数学问题<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; INPUT &gt;&gt;<span class="hljs-subst">\n</span>菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span><span class="hljs-subst">\n</span>&lt;&lt; OUTPUT &gt;&gt;<span class="hljs-subst">\n</span>&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;```json<span class="hljs-subst">\n</span>&#123;<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>destination<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>商品排行榜<span class="hljs-subst">\&quot;</span>,<span class="hljs-subst">\n</span>    <span class="hljs-subst">\&quot;</span>next_inputs<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\n</span>&#125;<span class="hljs-subst">\n</span>```&quot;</span><br>    &#125;<br>]<br><br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Entering</span> new  chain<span class="hljs-operator">...</span><br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        CAUSTION: only response the API url, no any other information and explanation.<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        API url:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;http://127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1&quot;</span><br>    &#125;<br>]<br>http:<span class="hljs-comment">//127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1</span><br>[&#123;<span class="hljs-string">&quot;商品名称&quot;</span>: <span class="hljs-string">&quot;半亩花田米酵氨基酸泡泡洁面慕斯&quot;</span>, <span class="hljs-string">&quot;热度&quot;</span>: <span class="hljs-number">47216</span>, <span class="hljs-string">&quot;环比涨幅&quot;</span>: <span class="hljs-number">90.22</span>, <span class="hljs-string">&quot;同比涨幅&quot;</span>: <span class="hljs-number">87.88</span>, <span class="hljs-string">&quot;图片链接&quot;</span>: <span class="hljs-string">&quot;http://img.lavector.com/lavectorimages/f93d527c83b7616b2876939ded81c3291686552069291.jpg&quot;</span>, <span class="hljs-string">&quot;价格&quot;</span>: <span class="hljs-number">39.9</span>, <span class="hljs-string">&quot;功效列表&quot;</span>: [<span class="hljs-string">&quot;深层清洁&quot;</span>, <span class="hljs-string">&quot;水油平衡&quot;</span>, <span class="hljs-string">&quot;柔肤&quot;</span>, <span class="hljs-string">&quot;改善粗糙&quot;</span>, <span class="hljs-string">&quot;祛闭口&quot;</span>, <span class="hljs-string">&quot;祛黑头&quot;</span>, <span class="hljs-string">&quot;祛痘&quot;</span>, <span class="hljs-string">&quot;收缩毛孔&quot;</span>, <span class="hljs-string">&quot;温和不刺激&quot;</span>]&#125;]<br>[<br>    &#123;<br>        <span class="hljs-string">&quot;POE&quot;</span>: <span class="hljs-string">&quot;poe&quot;</span>,<br>        <span class="hljs-string">&quot;input_prompt&quot;</span>: <span class="hljs-string">&quot;<span class="hljs-subst">\n</span>        You are given the below API Documentation:<span class="hljs-subst">\n</span>        BASE URL: http://127.0.0.1:6301/api<span class="hljs-subst">\n</span>API Documentation<span class="hljs-subst">\n</span>The API endpoint /rank accepts some filter variables, use GET Method, responds with a JSON of 商品名称,热度,涨幅,价格,功效介绍.<span class="hljs-subst">\n</span>Parameter<span class="hljs-subst">\t</span>Format<span class="hljs-subst">\t</span>Required<span class="hljs-subst">\t</span>Default<span class="hljs-subst">\t</span>Description<span class="hljs-subst">\n</span>startTime,  string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>endTime,    string<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    year-month, eg: 2023-05<span class="hljs-subst">\n</span>page,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    page number, default: 0<span class="hljs-subst">\n</span>size,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    limit items of per page, default: 5<span class="hljs-subst">\n</span>type,       Integer<span class="hljs-subst">\t</span>Yes<span class="hljs-subst">\t</span><span class="hljs-subst">\t</span>    1 means sort by 热度, 2 means sort by 销量, 1: 热度, 2: 销量, default: 1<span class="hljs-subst">\n</span>                <span class="hljs-subst">\n</span>        Using this documentation, generate the full API url to call for answering the user question.<span class="hljs-subst">\n</span>        You should build the API url in order to get a response that is as short as possible, while still getting the necessary information to answer the question. Pay attention to deliberately exclude any unnecessary pieces of data in the API call.<span class="hljs-subst">\n</span>        API url:http://127.0.0.1:6301/api/rank?startTime=2023-05&amp;endTime=2023-05&amp;page=0&amp;size=1&amp;type=1<span class="hljs-subst">\n</span>        Here is the response from the API:<span class="hljs-subst">\n</span>        [&#123;<span class="hljs-subst">\&quot;</span>商品名称<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>半亩花田米酵氨基酸泡泡洁面慕斯<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>热度<span class="hljs-subst">\&quot;</span>: 47216, <span class="hljs-subst">\&quot;</span>环比涨幅<span class="hljs-subst">\&quot;</span>: 90.22, <span class="hljs-subst">\&quot;</span>同比涨幅<span class="hljs-subst">\&quot;</span>: 87.88, <span class="hljs-subst">\&quot;</span>图片链接<span class="hljs-subst">\&quot;</span>: <span class="hljs-subst">\&quot;</span>http://img.lavector.com/lavectorimages/f93d527c83b7616b2876939ded81c3291686552069291.jpg<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>价格<span class="hljs-subst">\&quot;</span>: 39.9, <span class="hljs-subst">\&quot;</span>功效列表<span class="hljs-subst">\&quot;</span>: [<span class="hljs-subst">\&quot;</span>深层清洁<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>水油平衡<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>柔肤<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>改善粗糙<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛闭口<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛黑头<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>祛痘<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>收缩毛孔<span class="hljs-subst">\&quot;</span>, <span class="hljs-subst">\&quot;</span>温和不刺激<span class="hljs-subst">\&quot;</span>]&#125;]<span class="hljs-subst">\n</span>        Question:菱歌Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？<span class="hljs-subst">\n</span>        根据上面的Question问题和API返回结果进行回答，用中文回答。<span class="hljs-subst">\n</span>        答:&quot;</span>,<br>        <span class="hljs-string">&quot;input_text&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;response&quot;</span>: <span class="hljs-string">&quot;根据API返回结果，菱歌Datatouch官网商品排行榜中热度第一的商品是<span class="hljs-subst">\&quot;</span>半亩花田米酵氨基酸泡泡洁面慕斯<span class="hljs-subst">\&quot;</span>。该商品的功效包括深层清洁、水油平衡、柔肤、改善粗糙、祛闭口、祛黑头、祛痘、收缩毛孔、温和不刺激。&quot;</span><br>    &#125;<br>]<br><br><span class="hljs-operator">&gt;</span> <span class="hljs-type">Finished</span> chain.<br>&#123;&#x27;question&#x27;: &#x27;菱歌<span class="hljs-type">Datatouch官网中商品排行榜中热度第一的商品是哪个，有什么功效？</span>&#x27;, &#x27;output&#x27;: &#x27;根据<span class="hljs-type">API返回结果，菱歌Datatouch官网商品排行榜中热度第一的商品是</span><span class="hljs-string">&quot;半亩花田米酵氨基酸泡泡洁面慕斯&quot;</span><span class="hljs-operator">。</span>该商品的功效包括深层清洁<span class="hljs-operator">、</span>水油平衡<span class="hljs-operator">、</span>柔肤<span class="hljs-operator">、</span>改善粗糙<span class="hljs-operator">、</span>祛闭口<span class="hljs-operator">、</span>祛黑头<span class="hljs-operator">、</span>祛痘<span class="hljs-operator">、</span>收缩毛孔<span class="hljs-operator">、</span>温和不刺激<span class="hljs-operator">。</span>&#x27;&#125;<br></code></pre></td></tr></table></figure>
+
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>langchain问答和路由测试</div>
+      <div>https://johnson7788.github.io/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年6月15日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/06/14/langchain-tools-example/" title="langchain-tools-example">
+                        <span class="hidden-mobile">langchain-tools-example</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
