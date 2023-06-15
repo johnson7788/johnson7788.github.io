@@ -16,25 +16,28 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamma13B   6.chatgpt   Gpt4   结论综合来看斯坦福的vicuna模">
+    <meta name="description" content="9款模型对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4,rwkv,基于Bloom的Bellegradio写了一个简单的测试接口   问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="几种模型回答同一问题的对比">
-<meta property="og:url" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:url" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamma13B   6.chatgpt   Gpt4   结论综合来看斯坦福的vicuna模">
+<meta property="og:description" content="9款模型对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4,rwkv,基于Bloom的Bellegradio写了一个简单的测试接口   问题: 防晒霜的使用顺序？ 1.清华大学glm6B模型   2.斯坦福大学的vicuna7B模型   3.斯坦福大学的vicuna13B模型   4.哈工大的lamma 7B   5.哈工大的lamm">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png">
-<meta property="article:published_time" content="2023-06-12T03:50:59.000Z">
-<meta property="article:modified_time" content="2023-06-12T03:50:59.135Z">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102456716.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102219628.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102546773.png">
+<meta property="article:published_time" content="2023-06-15T02:27:53.000Z">
+<meta property="article:modified_time" content="2023-06-15T02:27:53.814Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102456716.png">
   
   
   <title>几种模型回答同一问题的对比 - Be With you</title>
@@ -205,8 +208,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-06-12 11:50" pubdate>
-          2023年6月12日 中午
+        <time datetime="2023-06-15 10:27" pubdate>
+          2023年6月15日 上午
         </time>
       </span>
     
@@ -217,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          269 字
+          355 字
         
       </span>
     
@@ -270,27 +273,38 @@
             
             <div class="markdown-body">
               
-              <h1 id="对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4"><a href="#对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4" class="headerlink" title="对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4"></a>对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4</h1><p>问题: 防晒霜的使用顺序？</p>
+              <h1 id="9款模型对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4-rwkv-基于Bloom的Belle"><a href="#9款模型对比模型vicuna7B-13B-glm6B-Chinese-Lamma7B-13B，chatgpt，gpt4-rwkv-基于Bloom的Belle" class="headerlink" title="9款模型对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4,rwkv,基于Bloom的Belle"></a>9款模型对比模型vicuna7B,13B, glm6B, Chinese Lamma7B,13B，chatgpt，gpt4,rwkv,基于Bloom的Belle</h1><p>gradio写了一个简单的测试接口</p>
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102456716.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>问题: 防晒霜的使用顺序？</p>
 <p>1.清华大学glm6B模型</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114145919.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>2.斯坦福大学的vicuna7B模型</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114304108.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>3.斯坦福大学的vicuna13B模型</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114432877.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>4.哈工大的lamma 7B</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114610908.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>5.哈工大的lamma13B</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230612114628621.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>6.chatgpt</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png" srcset="/img/loading.gif" lazyload class="">
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image.png" srcset="/img/loading.gif" lazyload class="">
 
-<p>Gpt4</p>
-<img src="/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png" srcset="/img/loading.gif" lazyload class="">
+<p>7.Gpt4</p>
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/gpt4.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>8.RWKV：回答的也是驴唇不对马嘴😂</p>
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102219628.png" srcset="/img/loading.gif" lazyload class="">
+
+<ol start="9">
+<li>经过微调的Bloom模型，BELLE-7B-2M</li>
+</ol>
+<img src="/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/image-20230615102546773.png" srcset="/img/loading.gif" lazyload class="">
 
 <h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>综合来看斯坦福的vicuna模型7B效果最差，其次是13B，缺少对中文语料的训练，所以导致对中文理解较差，哈工大的Lamma 7B弱于13B，哈工大的13B和glm6B效果差不太多，但都弱于Chatgpt ,gpt4效果最好。</p>
 
@@ -310,7 +324,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>几种模型回答同一问题的对比</div>
-      <div>https://johnson7788.github.io/2023/06/12/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/</div>
+      <div>https://johnson7788.github.io/2023/06/15/%E5%87%A0%E7%A7%8D%E6%A8%A1%E5%9E%8B%E5%9B%9E%E7%AD%94%E5%90%8C%E4%B8%80%E9%97%AE%E9%A2%98%E7%9A%84%E5%AF%B9%E6%AF%94/</div>
     </div>
     <div class="license-meta">
       
@@ -322,7 +336,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年6月12日</div>
+          <div>2023年6月15日</div>
         </div>
       
       
@@ -352,18 +366,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/06/13/langchain-APIChain/" title="langchain-APIChain">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">langchain-APIChain</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/" title="gpt数据标注小知识">
-                        <span class="hidden-mobile">gpt数据标注小知识</span>
+                      <a href="/2023/06/15/langchain%E9%97%AE%E7%AD%94%E5%92%8C%E8%B7%AF%E7%94%B1%E6%B5%8B%E8%AF%95/" title="langchain问答和路由测试">
+                        <span class="hidden-mobile">langchain问答和路由测试</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
