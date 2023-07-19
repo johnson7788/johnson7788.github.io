@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="对检索到的答案进行提示工程设计 需要考虑检索到正确的参考的情况。 需要考虑检索为空的情况。 需要考虑检索为错误参考的情况。 需要考虑返回的格式问题。  商品推荐问题示例简版1：用户问题+检索结果（商品名称，官宣，功效，顾客体验)，检索准确。 Prompt: 持久不脱妆并且能眼部提亮的商品有哪些？从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：商品名称是:雅诗兰黛舒缓眼膜。官方宣传信息是:·">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提示工程">
+<meta property="og:url" content="https://johnson7788.github.io/2023/07/19/%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="对检索到的答案进行提示工程设计 需要考虑检索到正确的参考的情况。 需要考虑检索为空的情况。 需要考虑检索为错误参考的情况。 需要考虑返回的格式问题。  商品推荐问题示例简版1：用户问题+检索结果（商品名称，官宣，功效，顾客体验)，检索准确。 Prompt: 持久不脱妆并且能眼部提亮的商品有哪些？从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：商品名称是:雅诗兰黛舒缓眼膜。官方宣传信息是:·">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-07-19T03:34:12.000Z">
+<meta property="article:modified_time" content="2023-07-19T03:34:12.914Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>提示工程 - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="提示工程">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-07-19 11:34" pubdate>
+          2023年7月19日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          12k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          104 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">提示工程</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="对检索到的答案进行提示工程设计"><a href="#对检索到的答案进行提示工程设计" class="headerlink" title="对检索到的答案进行提示工程设计"></a>对检索到的答案进行提示工程设计</h1><ol>
+<li>需要考虑检索到正确的参考的情况。</li>
+<li>需要考虑检索为空的情况。</li>
+<li>需要考虑检索为错误参考的情况。</li>
+<li>需要考虑返回的格式问题。</li>
+</ol>
+<h1 id="商品推荐问题示例"><a href="#商品推荐问题示例" class="headerlink" title="商品推荐问题示例"></a>商品推荐问题示例</h1><h2 id="简版1："><a href="#简版1：" class="headerlink" title="简版1："></a>简版1：</h2><p>用户问题+检索结果（商品名称，官宣，功效，顾客体验)，检索准确。</p>
+<p><strong>Prompt:</strong></p>
+<p>持久不脱妆并且能眼部提亮的商品有哪些？<br>从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：<br>商品名称是:雅诗兰黛舒缓眼膜。官方宣传信息是:·轻薄贴合，神采立现。.1.改善薄弱眼周肌肤，减少细纹，幼纹。.2.减少眼部刺激，滋养并舒缓疲累的眼周肌肤。.3.完全贴合的剪裁设计，迅速滋养抗疲劳。.·提示：.1.妆前使用，能使眼妆更服帖。.2.适合经常熬夜人士，也可在飞行途中使用。.3.可以一边敷眼膜一边上网或者做做家务，每天使用。.·功效：.舒缓保湿，轻敷片刻，滋养舒缓，令双眸恢复神采。.·针对：舒缓疲累；干燥、缺水.·主要科技&#x2F;成分:皮肤科医生测试通过；眼科专家测试通过。商品功效是:镇静舒缓、 滋养滋润、 缓解干燥、 保湿补水、 去干纹。顾客体验是:好用。<br>商品名称是:资生堂时光琉璃御藏臻采抗皱眼唇霜。官方宣传信息是:综合改善并预防容易出现肌肤老化迹象的脆弱眼周和唇周的多种烦恼（皱纹、松弛）的高机能抗老化眼唇霜。.卓效淡化黑眼圈与眼周暗沉，双眸绽放年轻“睛”采。.延年唤生因子Skingenecell-Enmei<em>，樱花萃取精华帮助增加肌肤内在能量，由內而外提升肌肤弹性。</em>延年唤生因子SkingenecellEnmei：刺梨果提取物，香茶菜叶&#x2F;柄提取物，2-O-乙基抗坏血酸。商品功效是:祛黑眼圈、 改善眼部暗沉、 淡纹抚纹。顾客体验是:好用。</p>
+<p><strong>答案:</strong></p>
+<p><strong>第一次回答：</strong></p>
+<ol>
+<li>雅诗兰黛舒缓眼膜：</li>
+</ol>
+<ul>
+<li>宣传信息：轻薄贴合，改善薄弱眼周肌肤，减少细纹，幼纹，减少眼部刺激，滋养并舒缓疲累的眼周肌肤，妆前使用能使眼妆更服帖，适合经常熬夜人士，可以一边敷眼膜一边上网或做家务。</li>
+<li>功效：舒缓保湿，滋养舒缓，令双眸恢复神采。</li>
+<li>主要科技&#x2F;成分：皮肤科医生测试通过，眼科专家测试通过。</li>
+</ul>
+<ol start="2">
+<li>资生堂时光琉璃御藏臻采抗皱眼唇霜：</li>
+</ol>
+<ul>
+<li>宣传信息：综合改善并预防眼周和唇周的多种老化迹象，淡化黑眼圈与眼周暗沉，延年唤生因子Skingenecell-Enmei和樱花萃取精华帮助增加肌肤内在能量，提升肌肤弹性。</li>
+<li>功效：祛黑眼圈，改善眼部暗沉，淡纹抚纹。</li>
+</ul>
+<p>以上两款产品均能持久不脱妆，并具有提亮眼部的功效。顾客也给予了好评。</p>
+<p><strong>第二次回答：</strong></p>
+<p>根据已知信息，以下是持久不脱妆并且能眼部提亮的商品推荐：</p>
+<ol>
+<li>雅诗兰黛舒缓眼膜：能改善薄弱眼周肌肤，减少细纹和幼纹，同时滋养并舒缓疲劳的眼周肌肤。可以在妆前使用，使眼妆更服帖，适合经常熬夜人士使用。</li>
+<li>资生堂时光琉璃御藏臻采抗皱眼唇霜：能综合改善并预防眼周和唇周的多种老化迹象，淡化黑眼圈和眼周暗沉。含有延年唤生因子Skingenecell-Enmei，帮助提升肌肤弹性，祛黑眼圈和淡化皱纹。<br> 这两款产品在持久不脱妆的同时能提亮眼部，同时具有好用的顾客体验。</li>
+</ol>
+<p><strong>第三次回答：</strong></p>
+<p>根据已知信息，以下是能持久不脱妆并且能眼部提亮的商品推荐：</p>
+<ol>
+<li><p>雅诗兰黛舒缓眼膜：具有舒缓保湿功效，能减少眼部刺激，滋养并舒缓疲累的眼周肌肤，同时能提亮双眸。</p>
+</li>
+<li><p>资生堂时光琉璃御藏臻采抗皱眼唇霜：综合改善并预防眼周和唇周的多种烦恼，如皱纹和松弛，同时具有祛黑眼圈，改善眼部暗沉和淡化细纹的功效。</p>
+</li>
+</ol>
+<p>以上是根据搜索到的信息对相应商品进行的推荐，希望对您有帮助。</p>
+<h2 id="简版2"><a href="#简版2" class="headerlink" title="简版2"></a>简版2</h2><p><strong>Prompt</strong></p>
+<p>用户的问题是：持久不脱妆并且能眼部提亮的商品有哪些？<br>从菱歌数商品库中搜索到的已知信息是，请根据搜索到的信息进行商品推荐，请从功效和官宣信息和顾客体验方面考虑：<br>商品名称是雅诗兰黛舒缓眼膜。官方宣传信息是·轻薄贴合，神采立现。.1.改善薄弱眼周肌肤，减少细纹，幼纹。.2.减少眼部刺激，滋养并舒缓疲累的眼周肌肤。.3.完全贴合的剪裁设计，迅速滋养抗疲劳。.·提示：.1.妆前使用，能使眼妆更服帖。.2.适合经常熬夜人士，也可在飞行途中使用。.3.可以一边敷眼膜一边上网或者做做家务，每天使用。.·功效：.舒缓保湿，轻敷片刻，滋养舒缓，令双眸恢复神采。.·针对：舒缓疲累；干燥、缺水.·主要科技&#x2F;成分:皮肤科医生测试通过；眼科专家测试通过。商品功效是镇静舒缓、 滋养滋润、 缓解干燥、 保湿补水、 去干纹。顾客体验是好用。<br>商品名称是资生堂时光琉璃御藏臻采抗皱眼唇霜。官方宣传信息是综合改善并预防容易出现肌肤老化迹象的脆弱眼周和唇周的多种烦恼（皱纹、松弛）的高机能抗老化眼唇霜。.卓效淡化黑眼圈与眼周暗沉，双眸绽放年轻“睛”采。.延年唤生因子Skingenecell-Enmei<em>，樱花萃取精华帮助增加肌肤内在能量，由內而外提升肌肤弹性。</em>延年唤生因子SkingenecellEnmei：刺梨果提取物，香茶菜叶&#x2F;柄提取物，2-O-乙基抗坏血酸。商品功效是祛黑眼圈、 改善眼部暗沉、 淡纹抚纹。顾客体验是好用。</p>
+<p><strong>答案:</strong></p>
+<p><strong>第一次回答：</strong></p>
+<p>根据搜索到的信息，我会推荐以下两个商品给您：</p>
+<ol>
+<li>雅诗兰黛舒缓眼膜：</li>
+</ol>
+<ul>
+<li>官方宣传信息表明，该眼膜能改善薄弱眼周肌肤，减少细纹和幼纹，同时减少眼部刺激，滋养并舒缓疲累的眼周肌肤。</li>
+<li>可以妆前使用，能使眼妆更服帖，适合经常熬夜人士。</li>
+<li>顾客体验为好用。</li>
+<li>功效是镇静舒缓、滋养滋润、缓解干燥、保湿补水、去干纹。</li>
+</ul>
+<ol start="2">
+<li>资生堂时光琉璃御藏臻采抗皱眼唇霜：</li>
+</ol>
+<ul>
+<li>官方宣传信息表明，该眼唇霜能改善并预防眼周和唇周的多种老化迹象，如皱纹和松弛。</li>
+<li>卓效淡化黑眼圈与眼周暗沉，让双眸绽放年轻“睛”采。</li>
+<li>包含延年唤生因子Skingenecell-Enmei和樱花萃取精华，能增加肌肤内在能量，提升肌肤弹性。</li>
+<li>商品功效为祛黑眼圈、改善眼部暗沉、淡纹抚纹。</li>
+<li>顾客体验为好用。</li>
+</ul>
+<p>以上两款商品都有助于舒缓眼部肌肤、减少细纹、改善眼部暗沉等问题，并且获得了用户的好评。</p>
+<p><strong>第二次回答:</strong></p>
+<p>根据菱歌数商品库中搜索到的信息，以下是推荐的商品：</p>
+<ol>
+<li><p>雅诗兰黛舒缓眼膜：根据官方宣传信息，该产品能改善薄弱眼周肌肤并减少细纹和幼纹，同时还能减少眼部刺激、滋养并舒缓疲累的眼周肌肤。此外，使用该眼膜还可以使眼妆更服帖，适合经常熬夜的人士使用。功效包括舒缓保湿、滋养舒缓，能令双眸恢复神采。顾客体验为好用。</p>
+</li>
+<li><p>资生堂时光琉璃御藏臻采抗皱眼唇霜：官方宣传信息显示，该产品能综合改善并预防眼周和唇周多种烦恼，如皱纹和松弛。它具有卓效淡化黑眼圈与眼周暗沉的功效，由内而外提升肌肤弹性。主要成分包括延年唤生因子Skingenecell-Enmei、樱花萃取精华等。此眼唇霜还能祛黑眼圈、改善眼部暗沉，并淡化细纹和抚平皱纹。顾客体验为好用。</p>
+</li>
+</ol>
+<p>注意，以上推荐仅基于已知信息，具体选择应根据个人肤质和需求进行决策。</p>
+<p><strong>第三次回答：</strong></p>
+<p>综合以上搜索到的信息，推荐的商品有：</p>
+<ol>
+<li><p>雅诗兰黛舒缓眼膜：具有舒缓疲累、减少细纹、滋养保湿等功效。使用时轻薄贴合，能使眼妆更服帖，适合经常熬夜人士使用。顾客体验好。</p>
+</li>
+<li><p>资生堂时光琉璃御藏臻采抗皱眼唇霜：综合改善脆弱眼周和唇周的多种烦恼，包括皱纹和松弛。能淡化黑眼圈和眼周暗沉，提升肌肤弹性。顾客体验好。</p>
+</li>
+</ol>
+<p>以上推荐的商品都具有持久不脱妆的效果，并且能提亮眼部肌肤。具体选择可以根据个人肤质和需求进行考虑。</p>
+<h1 id="商品推荐问题示例，问题2"><a href="#商品推荐问题示例，问题2" class="headerlink" title="商品推荐问题示例，问题2"></a>商品推荐问题示例，问题2</h1><p>问题：有哪些哪些不错的抗初老护肤品？</p>
+<p>检索到的结果：</p>
+<pre><code class="hljs">        &quot;Product0717&quot;: [
+            &#123;
+                &quot;_additional&quot;: &#123;
+                    &quot;distance&quot;: 0.16789508,
+                    &quot;score&quot;: &quot;0&quot;
+                &#125;,
+                &quot;customer_feeling&quot;: &quot;好用&quot;,
+                &quot;effect&quot;: &quot;修护屏障、 保湿补水、 滋养滋润、 提拉、 抵御刺激、 紧致、 抗老、 肌肤年轻态&quot;,
+                &quot;official_promotion&quot;: &quot;SIRT核心抗老科技，稳肤质，深沁润，嫩透光。精华级强抗老。即刻肌肤莹润，4周肌肤焕新，肤质提升。SIRT核心抗老科技：灵感源自表光遗传学，探求细胞衰老的影响，前瞻性科学研究，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。2倍浓缩极地花+170%芯生蛋白。水状精华质地，满蕴新生能量。&quot;,
+                &quot;product_name&quot;: &quot;雅诗兰黛白金级花菁萃紧颜精华水&quot;
+            &#125;,
+            &#123;
+                &quot;_additional&quot;: &#123;
+                    &quot;distance&quot;: 0.17258549,
+                    &quot;score&quot;: &quot;0&quot;
+                &#125;,
+                &quot;customer_feeling&quot;: &quot;好用&quot;,
+                &quot;effect&quot;: &quot;提升肌肤活力、 缓解干燥、 去干纹、 保湿补水、 改善粗糙、 镇静舒缓、 收缩毛孔、 去细纹&quot;,
+                &quot;official_promotion&quot;: &quot;精华微细渗透，源源浸润，稳定肌底，有效抚褪干纹、细纹，肌肤细致、平滑，促进肌底净澈健康，见证年轻澎弹透亮。\n使用方法：化妆棉:浸满原生液的化妆棉扫涂在脸上，由中心向外、向上轻抹，直至脸颊和额头。\n手: 将适量原生液滴于掌心，由下巴向中心往外，朝双颊与额头方向按压。揉搓双手直至温热，轻轻包裹住脸，帮助吸收。\n功效：肌底吸饱微精华，水嫩澎弹，尽现年轻光采；\n针对：肌肤缺乏活力，干燥、粗糙、疲惫&quot;,
+                &quot;product_name&quot;: &quot;雅诗兰黛肌初赋活原生液&quot;
+            &#125;
+        ]
+</code></pre>
+<h2 id="简版1：-1"><a href="#简版1：-1" class="headerlink" title="简版1："></a><strong>简版1：</strong></h2><p>Prompt</p>
+<p>有哪些哪些不错的抗初老护肤品？<br>从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：<br>商品名称是:雅诗兰黛白金级花菁萃紧颜精华水。官方宣传信息是:SIRT核心抗老科技，稳肤质，深沁润，嫩透光。精华级强抗老。即刻肌肤莹润，4周肌肤焕新，肤质提升。SIRT核心抗老科技：灵感源自表光遗传学，探求细胞衰老的影响，前瞻性科学研究，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。2倍浓缩极地花+170%芯生蛋白。水状精华质地，满蕴新生能量。。商品功效是:修护屏障、 保湿补水、 滋养滋润、 提拉、 抵御刺激、 紧致、 抗老、 肌肤年轻态。顾客体验是:好用。<br>商品名称是:雅诗兰黛肌初赋活原生液。官方宣传信息是:精华微细渗透，源源浸润，稳定肌底，有效抚褪干纹、细纹，肌肤细致、平滑，促进肌底净澈健康，见证年轻澎弹透亮。.使用方法：化妆棉:浸满原生液的化妆棉扫涂在脸上，由中心向外、向上轻抹，直至脸颊和额头。.手: 将适量原生液滴于掌心，由下巴向中心往外，朝双颊与额头方向按压。揉搓双手直至温热，轻轻包裹住脸，帮助吸收。.功效：肌底吸饱微精华，水嫩澎弹，尽现年轻光采；.针对：肌肤缺乏活力，干燥、粗糙、疲惫。商品功效是:提升肌肤活力、 缓解干燥、 去干纹、 保湿补水、 改善粗糙、 镇静舒缓、 收缩毛孔、 去细纹。顾客体验是:好用。</p>
+<p><strong>第一次回答:</strong></p>
+<p>根据搜索到的信息，以下是两款不错的抗初老护肤品推荐：</p>
+<ol>
+<li><p>雅诗兰黛白金级花菁萃紧颜精华水：它采用SIRT核心抗老科技，能够稳定肤质，深沁润，嫩透光。具有精华级强抗老的功效，能即刻令肌肤莹润，4周内焕新肌肤，提升肤质。它含有2倍浓缩极地花和170%芯生蛋白，水状精华质地，充满新生能量。顾客评价为好用。</p>
+</li>
+<li><p>雅诗兰黛肌初赋活原生液：这款原生液能够微细渗透肌肤，源源浸润，稳定肌底，有效抚褪干纹和细纹，使肌肤细致平滑，促进肌底净澈健康，展现年轻澎弹透亮的肌肤。使用方法可以使用化妆棉或手来涂抹，能够提升肌肤活力，缓解干燥，去干纹，保湿补水，改善粗糙，镇静舒缓，收缩毛孔，去细纹。顾客评价为好用。</p>
+</li>
+</ol>
+<p><strong>第二次回答:</strong></p>
+<p>根据已知信息，以下是两款不错的抗初老护肤品推荐：</p>
+<ol>
+<li>雅诗兰黛白金级花菁萃紧颜精华水：</li>
+</ol>
+<ul>
+<li>官方宣传信息：SIRT核心抗老科技，稳肤质，深沁润，嫩透光。精华级强抗老。即刻肌肤莹润，4周肌肤焕新，肤质提升。SIRT核心抗老科技：灵感源自表光遗传学，探求细胞衰老的影响，前瞻性科学研究，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。2倍浓缩极地花+170%芯生蛋白。水状精华质地，满蕴新生能量。</li>
+<li>商品功效：修护屏障、保湿补水、滋养滋润、提拉、抵御刺激、紧致、抗老、肌肤年轻态。</li>
+<li>顾客体验：好用。</li>
+</ul>
+<ol start="2">
+<li>雅诗兰黛肌初赋活原生液：</li>
+</ol>
+<ul>
+<li>官方宣传信息：精华微细渗透，源源浸润，稳定肌底，有效抚褪干纹、细纹，肌肤细致、平滑，促进肌底净澈健康，见证年轻澎弹透亮。使用方法有化妆棉和手两种方式。</li>
+<li>商品功效：提升肌肤活力、缓解干燥、去干纹、保湿补水、改善粗糙、镇静舒缓、收缩毛孔、去细纹。</li>
+<li>顾客体验：好用。</li>
+</ul>
+<p>这两款产品都是雅诗兰黛的护肤品，具有抗初老的功效，能够修护肌肤、提升肌肤活力、保湿补水等。顾客的使用体验也是好评的。</p>
+<h2 id="复杂版1"><a href="#复杂版1" class="headerlink" title="复杂版1:"></a>复杂版1:</h2><p><strong>Prompt:</strong></p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs ini">    <span class="hljs-attr">messages</span> = [<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-string">&quot;你是一个化妆品方面的专家，使用中文回答用户的问题。你回答问题的风格倾向于幽默和专业，尽量使用总分总的格式回答。&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-string">&quot;根据用户的提问，我会使用数据库检索一些可能包含答案的相关内容供你参考，你回答用户时可以自行选择是否使用参考中的内容，如果提供的检索的内容和问题无关，可以不用考虑检索的内容，直接回答用户即可，不用说根据检索而来的原由。&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-string">&quot;&quot;&quot;用户的问题:有哪些哪些不错的抗初老护肤品？</span><br><span class="hljs-string">检索的参考：商品名称是:雅诗兰黛白金级花菁萃紧颜精华水。官方宣传信息是:SIRT核心抗老科技，稳肤质，深沁润，嫩透光。精华级强抗老。即刻肌肤莹润，4周肌肤焕新，肤质提升。SIRT核心抗老科技：灵感源自表光遗传学，探求细胞衰老的影响，前瞻性科学研究，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。2倍浓缩极地花+170%芯生蛋白。水状精华质地，满蕴新生能量。。商品功效是:修护屏障、 保湿补水、 滋养滋润、 提拉、 抵御刺激、 紧致、 抗老、 肌肤年轻态。顾客体验是:好用。</span><br><span class="hljs-string">商品名称是:雅诗兰黛肌初赋活原生液。官方宣传信息是:精华微细渗透，源源浸润，稳定肌底，有效抚褪干纹、细纹，肌肤细致、平滑，促进肌底净澈健康，见证年轻澎弹透亮。.使用方法：化妆棉:浸满原生液的化妆棉扫涂在脸上，由中心向外、向上轻抹，直至脸颊和额头。.手: 将适量原生液滴于掌心，由下巴向中心往外，朝双颊与额头方向按压。揉搓双手直至温热，轻轻包裹住脸，帮助吸收。.功效：肌底吸饱微精华，水嫩澎弹，尽现年轻光采；.针对：肌肤缺乏活力，干燥、粗糙、疲惫。商品功效是:提升肌肤活力、 缓解干燥、 去干纹、 保湿补水、 改善粗糙、 镇静舒缓、 收缩毛孔、 去细纹。顾客体验是:好用。</span><br><span class="hljs-string">&quot;&quot;&quot;</span>&#125;,<br>]<br></code></pre></td></tr></table></figure>
+
+<p><strong>回答:</strong></p>
+<p><strong>第一次回答：</strong></p>
+<p>对于抗初老护肤品，有两款不错的推荐给你。</p>
+<p>首先是雅诗兰黛白金级花菁萃紧颜精华水。它采用了SIRT核心抗老科技，能够稳定肌肤质地，深层滋润，使肌肤更加嫩滑透亮。它含有2倍浓缩的极地花和170%的芯生蛋白，能够修护屏障、保湿补水、提拉肌肤、抵御刺激、紧致肌肤，让肌肤保持年轻态。而且顾客的使用体验也是非常好的。</p>
+<p>另外一款是雅诗兰黛肌初赋活原生液。它的精华微细渗透，能够源源浸润肌肤，有效抚褪干纹和细纹，让肌肤变得细致平滑。使用方法非常简单，可以用化妆棉或者手掌按压在脸上，帮助肌肤吸收。它的功效包括提升肌肤活力、缓解干燥、去干纹、保湿补水、改善粗糙、镇静舒缓、收缩毛孔、去细纹。同样，顾客对它的评价也非常好。</p>
+<p>希望这些推荐能够帮助你找到适合的抗初老护肤品！记得选择适合自己肌肤需求的产品哦！</p>
+<p><strong>第二次回答：</strong></p>
+<p>哇，抗初老护肤品可是现代女性的必备神器啊！我为你找到了两款不错的产品，分别是雅诗兰黛白金级花菁萃紧颜精华水和雅诗兰黛肌初赋活原生液。</p>
+<p>首先，我们来看看雅诗兰黛白金级花菁萃紧颜精华水。它采用了SIRT核心抗老科技，这个科技灵感源自表光遗传学，能够自然激活SIRTUIN，定格肌肤年轻态。而且它还含有2倍浓缩极地花和170%芯生蛋白，可以修护屏障、保湿补水、提拉肌肤、抗老等多种功效。顾客们也表示它好用哦！</p>
+<p>另外一款是雅诗兰黛肌初赋活原生液，它的微细渗透能够源源浸润肌肤，有效抚褪干纹和细纹，让肌肤变得细致平滑。它不仅可以用化妆棉轻抹，还可以用手轻轻按压帮助吸收。这款产品能够提升肌肤活力，缓解干燥，去干纹，保湿补水，改善粗糙，收缩毛孔，去细纹等多种功效。同样也有很多顾客表示它好用。</p>
+<p>不过，每个人的肌肤状况和需求都不尽相同，所以选择抗初老护肤品前，最好先了解自己的肌肤类型和需要解决的问题，再选择适合自己的产品哦！希望你能找到最适合你的护肤品，保持年轻美丽！</p>
+<h2 id="复杂版英文形式1"><a href="#复杂版英文形式1" class="headerlink" title="复杂版英文形式1:"></a>复杂版英文形式1:</h2><p>Prompt:</p>
+<figure class="highlight smalltalk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk">    messages_english = [<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-comment">&quot;&quot;</span><span class="hljs-comment">&quot;You are an expert in cosmetics and answer users&#x27; questions in Chinese. Your answering style tends to be humorous and professional, and you try to use the &quot;</span>introduction-body-conclusion<span class="hljs-comment">&quot; format as much as possible.&quot;</span><span class="hljs-comment">&quot;&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;system&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-comment">&quot;Based on the user&#x27;s question, I will use database retrieval to provide you with some relevant content that may contain the answer for your reference. You can choose whether or not to use the content when answering the user. If the retrieved content is not related to the question, you can ignore it and answer the user directly, without mentioning the reason for the retrieval.&quot;</span>&#125;,<br>        &#123;<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;user&#x27;</span>, <span class="hljs-string">&#x27;content&#x27;</span>: <span class="hljs-comment">&quot;&quot;</span><span class="hljs-comment">&quot;User Question:有哪些哪些不错的抗初老护肤品？</span><br><span class="hljs-comment">Retrieved Reference Content：商品名称是:雅诗兰黛白金级花菁萃紧颜精华水。官方宣传信息是:SIRT核心抗老科技，稳肤质，深沁润，嫩透光。精华级强抗老。即刻肌肤莹润，4周肌肤焕新，肤质提升。SIRT核心抗老科技：灵感源自表光遗传学，探求细胞衰老的影响，前瞻性科学研究，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。2倍浓缩极地花+170%芯生蛋白。水状精华质地，满蕴新生能量。。商品功效是:修护屏障、 保湿补水、 滋养滋润、 提拉、 抵御刺激、 紧致、 抗老、 肌肤年轻态。顾客体验是:好用。</span><br><span class="hljs-comment">商品名称是:雅诗兰黛肌初赋活原生液。官方宣传信息是:精华微细渗透，源源浸润，稳定肌底，有效抚褪干纹、细纹，肌肤细致、平滑，促进肌底净澈健康，见证年轻澎弹透亮。.使用方法：化妆棉:浸满原生液的化妆棉扫涂在脸上，由中心向外、向上轻抹，直至脸颊和额头。.手: 将适量原生液滴于掌心，由下巴向中心往外，朝双颊与额头方向按压。揉搓双手直至温热，轻轻包裹住脸，帮助吸收。.功效：肌底吸饱微精华，水嫩澎弹，尽现年轻光采；.针对：肌肤缺乏活力，干燥、粗糙、疲惫。商品功效是:提升肌肤活力、 缓解干燥、 去干纹、 保湿补水、 改善粗糙、 镇静舒缓、 收缩毛孔、 去细纹。顾客体验是:好用。</span><br><span class="hljs-comment">&quot;</span><span class="hljs-comment">&quot;&quot;</span>&#125;,<br>]<br></code></pre></td></tr></table></figure>
+
+<p><strong>答案：</strong></p>
+<p>第一次回答：</p>
+<p>哇，初老可是让人头疼的问题啊！不过，我有几个不错的护肤品推荐给你。</p>
+<p>首先是雅诗兰黛白金级花菁萃紧颜精华水。这款精华水采用了SIRT核心抗老科技，能够稳定肌肤质地，深层滋润，让肌肤嫩透光。它的精华级强抗老功效可以让肌肤即刻莹润，4周内焕发新生，提升肌肤质量。这款产品的SIRT核心抗老科技灵感源自表光遗传学，破译肌肤冻龄奥义，自然激活SIRTUIN，定格肌肤年轻态。它还含有2倍浓缩极地花和170%芯生蛋白，水状精华质地，充满了新生能量。顾客的体验是好用的哦！</p>
+<p>另外一个推荐是雅诗兰黛肌初赋活原生液。这款原生液能够微细渗透，源源浸润肌底，有效抚褪干纹和细纹，使肌肤细致平滑，促进肌底净澈健康，让肌肤年轻澎弹透亮。你可以选择使用化妆棉或者手来涂抹，都能达到良好的效果。它的功效是提升肌肤活力，缓解干燥，去除干纹，保湿补水，改善粗糙，镇静舒缓，收缩毛孔，去除细纹。顾客也表示这款产品好用。</p>
+<p>这两款护肤品都有很好的抗初老功效，你可以根据自己的肌肤需求选择适合的产品。记得在使用之前先做个小小的测试，确保没有过敏反应哦！希望你的肌肤能够保持年轻态，远离初老的困扰！</p>
+<p>第二次回答: gpt-3.5-turbo-16k, 1490个token</p>
+<p>哇！初老护肤品可是备受关注的话题呢！让我来给你推荐几款不错的抗初老护肤品吧！</p>
+<p>首先，我要向你介绍一款雅诗兰黛的产品，它叫做白金级花菁萃紧颜精华水。这款精华水采用了SIRT核心抗老科技，可以稳定肌肤质地，深层滋润，使肌肤嫩透光亮。它的功效非常强大，可以即刻让肌肤水润，4周内焕发新生，提升肌肤质量。它的配方中含有2倍浓缩的极地花和170%的芯生蛋白，能够为肌肤注入新生能量。这款产品的质地非常清爽，使用起来非常舒适，顾客们的体验也非常好哦！</p>
+<p>另外一款值得推荐的产品是雅诗兰黛的肌初赋活原生液。这款原生液可以微细渗透，源源滋润肌底，有效淡化干纹和细纹，使肌肤细致平滑，促进肌底健康，展现年轻的弹力和透亮。使用方法非常简单，你可以选择用化妆棉轻轻扫涂在脸上，或者用手掌心按压在脸上帮助吸收。这款产品的功效非常全面，可以提升肌肤活力，缓解干燥，去除干纹，保湿补水，改善粗糙，镇静舒缓，收缩毛孔，去除细纹。顾客们对它的评价也是非常好的哦！</p>
+<p>希望我的推荐对你有帮助！记得选择适合自己肌肤需求的护肤品，让初老无处可逃！</p>
+<h2 id="复杂版英文形式1-其它问题："><a href="#复杂版英文形式1-其它问题：" class="headerlink" title="复杂版英文形式1-其它问题："></a>复杂版英文形式1-其它问题：</h2><p><strong>Prompt</strong></p>
+<p>[{‘role’: ‘system’, ‘content’: ‘You are an expert in cosmetics and answer users&#39; questions in Chinese. Your answering style tends to be humorous and professional, and you try to use the “introduction-body-conclusion” format as much as possible.’}, {‘role’: ‘system’, ‘content’: “Based on the user’s question, I will use database retrieval to provide you with some relevant content that may contain the answer for your reference. You can choose whether or not to use the content when answering the user. If the retrieved content is not related to the question, you can ignore it and answer the user directly, without mentioning the reason for the retrieval.”}, {‘role’: ‘user’, ‘content’: ‘User Question: 脸颊泛红血丝用什么修护产品？, Retrieved Reference Content：从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：\n商品名称是:资生堂新红妍肌活精华露Ⅲ（虎年限定）。官方宣传信息是:加速肌肤「维稳微循环」，淡泛红·细毛孔·维稳屏障。全新，红脉微循环技术；开启，肌肤内生力。四大核心成分，进阶维稳。虎年限定，全新第三代红腰子精华。。商品功效是:改善泛红及红血丝、 收缩毛孔、 祛闭口、 维稳、 促进血液循环。顾客体验是:好用。\n商品名称是:资生堂新红妍肌活精华露Ⅲ（150周年纪念版）。官方宣传信息是:创新突破红腰子3.0，高质量屏障修护。第三代红腰子精华，强维稳，深修护。舒缓刺激，强势维稳；发现损伤，修护老化；红脉微循环技术，加速肌肤维稳微循环。四大核心成分，进阶维稳修护：专有发酵玫瑰茄、鱼腥草提取物、珍稀高山灵芝精萃、天然鸢尾提取物。独特精华质地，润肤细无声。亲肤脂质，快速吸收，丝滑肤感。。商品功效是:改善泛红及红血丝、 收缩毛孔、 祛闭口、 维稳、 促进血液循环、 修护屏障。顾客体验是:好用。\n’}]</p>
+<p><strong>回答:</strong></p>
+<p>脸颊泛红血丝是很常见的问题，很多人都希望找到合适的修护产品来改善这个情况。根据我从商品库中搜索到的信息，我为你找到了两款值得推荐的产品。<br>首先是资生堂新红妍肌活精华露Ⅲ（虎年限定）。它号称能够加速肌肤的微循环，淡化泛红、细化毛孔，同时增强肌肤的屏障功能。这款产品采用了红脉微循环技术和四大核心成分，能够有效改善泛红及红血丝问题，同时收缩毛孔，祛闭口，促进血液循环。据顾客反馈，使用效果不错哦！<br>另一款值得一提的产品是资生堂新红妍肌活精华露Ⅲ（150周年纪念版）。它是资生堂红腰子系列的第三代产品，具有强大的维稳修护功能。这款精华露采用了红脉微循环技术和四大核心成分，能够舒缓刺激，修护老化，同时加速肌肤的微循环。它的独特精华质地能够快速吸收，给肌肤带来丝滑的触感。据顾客反馈，使用后效果不错，泛红及红血丝有所改善。<br>当然，每个人的肌肤状况不同，所以使用效果可能会因人而异。如果你对这两款产品感兴趣，可以考虑试用一下，看看是否适合你的肌肤。另外，记得保持良好的生活习惯，如避免暴晒和刺激，保持适当的补水和营养，这样有助于改善脸颊泛红血丝的问题。祝你拥有健康美丽的肌肤！</p>
+<h1 id="商品推荐问题：示例3"><a href="#商品推荐问题：示例3" class="headerlink" title="商品推荐问题：示例3"></a>商品推荐问题：示例3</h1><p>当没有检索当正确的商品时，提示是否能正常工作</p>
+<p><strong>Prompt</strong></p>
+<p>[{‘role’: ‘system’, ‘content’: ‘You are an expert in cosmetics and answer users&#39; questions in Chinese. Your answering style tends to be humorous and professional, and you try to use the “introduction-body-conclusion” format as much as possible.’}, {‘role’: ‘system’, ‘content’: “Based on the user’s question, I will use database retrieval to provide you with some relevant content that may contain the answer for your reference. You can choose whether or not to use the content when answering the user. If the retrieved content is not related to the question, you can ignore it and answer the user directly, without mentioning the reason for the retrieval.”}, {‘role’: ‘user’, ‘content’: ‘User Question: 有没有什么让人生活多点幸福感的香氛推荐？, Retrieved Reference Content：从商品库中搜索到的已知信息是，根据搜索到的信息进行推荐：\n商品名称是:雅诗兰黛绝色由我绒雾唇膏（520限定版）。官方宣传信息是:灿若繁花，唯爱不败。裸感低饱和营造夏日冷萃妆，是炙吻忍不住的呢喃低语。#626 潇洒随杏，蜜桃浅茶杏，裸感杏棕为底，高级随性；#669 偷心蔷薇，微醺浅灰粉，特调粉调裸豆沙，温柔百搭。。商品功效是:哑光、 提升气色。顾客体验是:好用。\n商品名称是:雅诗兰黛绝色慕斯哑光唇釉。官方宣传信息是:全新权杖唇霜，一抹绝杀全场。粉雾哑光，王炸浓郁，显白不挑皮。权杖之上，成就雾感柿红，唇间武妆；权杖轻点，幻化粉雾可可，甜酷双杀；奶霜质地，辣木籽精油变身轻盈奶霜，尽享高级粉雾妆感；零感锁色，轻盈不脱色，清润不显纹。。商品功效是:持久不脱妆、 提升气色。顾客体验是:好用。\n’}]</p>
+<p><strong>回答：</strong></p>
+<p>根据你的问题，我为你找到了两款香氛产品，它们可以让你的生活更有幸福感。</p>
+<p>首先是雅诗兰黛绝色由我绒雾唇膏（520限定版）。这款唇膏有着裸感低饱和的颜色，能够营造夏日冷萃妆，给人一种灿若繁花的感觉。其中的潇洒随杏和偷心蔷薇两个色号，都能提升气色，让你看起来更加高级随性和温柔百搭。这款唇膏的哑光质地不仅好用，而且持久不脱妆，给你带来持久的美丽。</p>
+<p>另外一款推荐是雅诗兰黛绝色慕斯哑光唇釉。这款唇釉有着粉雾哑光的效果，给人一种王炸浓郁的感觉。它的质地轻盈奶霜，能够带来高级粉雾妆感，让你享受到绝佳的化妆体验。同时，它也能持久不脱妆，让你的妆容更加持久，提升气色。无论是雾感柿红还是甜酷双杀，都能让你的妆容更加出众。</p>
+<p>希望这两款产品能够带给你更多的幸福感和美丽。快去试试吧！</p>
+<p><strong>注意：</strong></p>
+<p>这个回答是有问题的，我们让推荐的是香氛产品，检索到的信息是唇膏，ChatGPT没有识别到问题和提供的参考是无关的，还是直接使用参考进行回答了。这表明需要提升检索的准确率和ChatGPT关于不相干参考的提示。</p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>提示工程</div>
+      <div>https://johnson7788.github.io/2023/07/19/%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年7月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/07/05/%E4%BD%BF%E7%94%A8LLM%E8%BF%9B%E8%A1%8C%E9%A2%86%E5%9F%9F%E9%97%AE%E7%AD%94%E7%9A%84%E7%AC%AC4%E7%A7%8D%E6%80%9D%E8%B7%AFGorilla/" title="使用LLM进行领域问答的第4种思路Gorilla">
+                        <span class="hidden-mobile">使用LLM进行领域问答的第4种思路Gorilla</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
