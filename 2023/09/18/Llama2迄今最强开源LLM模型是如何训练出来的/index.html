@@ -1,0 +1,1020 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Llama2迄今最强开源LLM模型是如何训练出来的1.引言背景资料 虽然大家耳熟能详的大语言模型很多，例如ChatGPT，Newbing，Claude，但他们都是闭源的，而Llama是meta公司开源的大语言模型系列，是可以免费商用，是羊驼模型家族的base模型，国内外众多继续微调模型都是基于Llama系列的改进版本。所以llama2这次更新的对于推广AI的平民化重要性可想而知。 2. 什么是Ll">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Llama2迄今最强开源LLM模型是如何训练出来的">
+<meta property="og:url" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="Llama2迄今最强开源LLM模型是如何训练出来的1.引言背景资料 虽然大家耳熟能详的大语言模型很多，例如ChatGPT，Newbing，Claude，但他们都是闭源的，而Llama是meta公司开源的大语言模型系列，是可以免费商用，是羊驼模型家族的base模型，国内外众多继续微调模型都是基于Llama系列的改进版本。所以llama2这次更新的对于推广AI的平民化重要性可想而知。 2. 什么是Ll">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/image-20230906165416848.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/image-20230906165745928.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/1-4498207.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/2.png">
+<meta property="article:published_time" content="2023-09-18T07:52:20.000Z">
+<meta property="article:modified_time" content="2023-09-18T07:52:20.657Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/image-20230906165416848.png">
+  
+  
+  <title>Llama2迄今最强开源LLM模型是如何训练出来的 - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="Llama2迄今最强开源LLM模型是如何训练出来的">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-18 15:52" pubdate>
+          2023年9月18日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          85 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Llama2迄今最强开源LLM模型是如何训练出来的</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="Llama2迄今最强开源LLM模型是如何训练出来的"><a href="#Llama2迄今最强开源LLM模型是如何训练出来的" class="headerlink" title="Llama2迄今最强开源LLM模型是如何训练出来的"></a>Llama2迄今最强开源LLM模型是如何训练出来的</h1><h2 id="1-引言"><a href="#1-引言" class="headerlink" title="1.引言"></a>1.引言</h2><p>背景资料</p>
+<p>虽然大家耳熟能详的大语言模型很多，例如ChatGPT，Newbing，Claude，但他们都是闭源的，而Llama是meta公司开源的大语言模型系列，是可以免费商用，是羊驼模型家族的base模型，国内外众多继续微调模型都是基于Llama系列的改进版本。所以llama2这次更新的对于推广AI的平民化重要性可想而知。</p>
+<h2 id="2-什么是Llama2大语言模型"><a href="#2-什么是Llama2大语言模型" class="headerlink" title="2. 什么是Llama2大语言模型"></a>2. 什么是Llama2大语言模型</h2><p>Llama2是Meta开发的大型语言模型，是LLaMA的升级版本。它是一种基于变换器网络（Transformer）架构的自回归语言模型。该模型有不同的参数规模：7B、13B、70B参数。Meta开放了两个版本，一个是纯无监督训练出来的基础模型，另一个是在基础模型之上进行有监督微调SFT和人类反馈的强化学习RLHF进行训练的Chat模型。所发布的两个版本中，都提供了7B、13B和70B的三个参数规模的模型。<br>Llama2大语言模型在自然语言处理领域有着广泛的应用，如机器翻译、文本摘要、对话生成等。</p>
+<h2 id="3-Llama2的训练"><a href="#3-Llama2的训练" class="headerlink" title="3. Llama2的训练"></a>3. Llama2的训练</h2><p>使用标准Transformer 架构，使用 RMSNorm 应用预归一化、使用 SwiGLU 激活函数和旋转位置嵌入RoPE。与 Llama 1 的主要架构差异包括增加了上下文长度和分组查询注意力（GQA）。</p>
+<img src="/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/image-20230906165416848.png" srcset="/img/loading.gif" lazyload class="">
+
+<ul>
+<li>Llama 2 模型接受了 2 万亿个标记的训练，上下文长度是 Llama 1 的两倍。Llama-2-chat 模型还接受了超过 100 万个新的人类注释的训练。</li>
+<li>Llama 2训练语料相比LLaMA多出40%，上下文长度是由之前的2048升级到4096，可以理解和生成更长的文本。</li>
+</ul>
+<h2 id="4-Llama2的优缺点"><a href="#4-Llama2的优缺点" class="headerlink" title="4. Llama2的优缺点"></a>4. Llama2的优缺点</h2><p>优点：Llama 2优于目前市面上的开源LLM模型，而且上下文长度较长，可商用。</p>
+<p>缺点：预训练数据中的语言分布，百分比 &gt;&#x3D; 0.005%。 大多数数据都是英文的，这意味着 Llama 2 在英语用例中表现最佳。</p>
+<img src="/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/image-20230906165745928.png" srcset="/img/loading.gif" lazyload class="">
+
+<h2 id="5-中文llama2"><a href="#5-中文llama2" class="headerlink" title="5. 中文llama2"></a>5. 中文llama2</h2><p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/FlagAlpha/Llama2-Chinese">https://github.com/FlagAlpha/Llama2-Chinese</a></p>
+<p>在线体验：<a target="_blank" rel="noopener" href="https://llama.family/">https://llama.family/</a></p>
+<p><strong>基于大规模中文数据，从预训练开始对Llama2模型进行中文能力的持续迭代升级</strong>。</p>
+<p>虽然Llama2的预训练数据相对于第一代LLaMA扩大了一倍，但是中文预训练数据的比例依然非常少，仅占0.13%，这也导致了原始Llama2的中文能力较弱。为了能够提升模型的中文能力，可以采用微调和预训练两种路径，其中：</p>
+<ul>
+<li>微调需要的算力资源少，能够快速实现一个中文Llama的雏形。但缺点也显而易见，只能激发基座模型已有的中文能力，由于Llama2的中文训练数据本身较少，所以能够激发的能力也有限，治标不治本。</li>
+<li>基于大规模中文语料进行预训练，成本高，不仅需要大规模高质量的中文数据，也需要大规模的算力资源。但是优点也显而易见，就是能从模型底层优化中文能力，真正达到治本的效果，从内核为大模型注入强大的中文能力。</li>
+</ul>
+<h2 id="6-总结"><a href="#6-总结" class="headerlink" title="6.总结"></a>6.总结</h2><ul>
+<li>未来，几乎每台计算机都有可能本地运行大型语言模型，这是一个积极的趋势。目前已经取得了巨大进展，将大型语言模型部署在设备上变得非常普遍。</li>
+<li>预计将出现领域特定微调模型，以满足不同应用需求。为每个应用领域提供专门的解决方案，特别是结合检索增强生成或工具形式的应用。</li>
+<li>Llama模型的发布提供了更高的可解释性。未来的模型，如GPT-5或Llama 3，可以解释Llama 2模型的权重，从而提高了模型的可解释性。</li>
+<li>开源模型的发展将使研究人员能够按照其本来的目标和价值观进行研究，为学术界带来重要的机遇。对于研究人员来说，这是一个重要的机会，可以恢复NLP研究的发展动力，并避免过度依赖OpenAI API的情况发生。</li>
+<li>开源模型的发展和商业应用是AI领域的主要趋势，许多初创公司正在利用开源模型构建自己的AI产品。</li>
+<li>开源模型的使用带来了一些挑战，包括数据集的多样性和正确性以及模型训练和优化的技术要求。</li>
+<li>隐私和安全顾虑使得一些企业客户更倾向于在自己控制的硬件上运行推断，以确保数据的安全性。</li>
+</ul>
+<h2 id="7-应用"><a href="#7-应用" class="headerlink" title="7.应用"></a>7.应用</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">1)情感分析：<br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>你是一个情感分析模型，帮助用户分析评论中的细微情感，并归类到以下的情感维度中的一个或几个，情感维度包括:功效、服务、肤感、包装、促销、价格、成分、使用部位、使用方法、科技、体验、活动。并给出你认为的情感强度，量化量化上述情绪，值是1-5，答案用json格式返回，示例是:[{“功效”: 1}, {“促销”: 4}, {“价格”: 3}]，并在答案末尾给出导致这种情感的原因？</p>
+<p>用户评论：特别好用。用完皮肤不紧绷，而且脸特别的干净，亮。值得推荐！还是比较满意的。还送小赠品。</p>
+<p><strong>Response：</strong></p>
+<p>[{“功效”: 5}, {“肤感”: 4}, {“服务”: 4}, {“包装”: 4}, {“促销”: 5}]</p>
+<p>导致这种情感的原因是产品的功效非常好，使用后皮肤不紧绷，干净亮丽，用户觉得非常满意。此外，产品的肤感也很好，使用起来很舒适。用户还提到了服务和包装都很满意，而且还有额外的小赠品，这些都增加了用户的满意度。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-number">2</span>) 自然语言转<span class="hljs-keyword">SQL</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>你是一个数据库专家，brand表的数据结构如下，请根据下面的表结构根据用户的需求撰写SQL CREATE TABLE <code>brand</code> ( <code>id</code> bigint(20) NOT NULL AUTO_INCREMENT, <code>status</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL, <code>version</code> int(11) NOT NULL DEFAULT 0, <code>created_by</code> varchar(255) COLLATE utf8mb4_bin NOT NULL, <code>last_modified_by</code> varchar(255) COLLATE utf8mb4_bin NOT NULL, <code>time_created</code> datetime NOT NULL, <code>time_updated</code> datetime NOT NULL, <code>country</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL, <code>english_name</code> varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL, <code>name</code> varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL, <code>nick_name</code> varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL, <code>user_name</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL, <code>is_not_minority</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL, <code>pic_url</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ‘品牌图片url’, <code>official_weibo_address</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ‘官方微博地址’, <code>initials</code> varchar(4) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ‘拼音首字母’, <code>belong_group</code> varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT ‘所属集团’, PRIMARY KEY (<code>id</code>) USING BTREE ) ENGINE&#x3D;InnoDB AUTO_INCREMENT&#x3D;876 DEFAULT CHARSET&#x3D;utf8mb4 COLLATE&#x3D;utf8mb4_bin;</p>
+<p>问题：查询下属于中国的化妆品品牌，country字段是CHINA，打印品牌名称和微博地址</p>
+<p><strong>Response：</strong></p>
+<p>根据您的需求，可以使用以下SQL查询语句来获取属于中国的化妆品品牌的名称和微博地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Plaintext">SELECT `name`, `official_weibo_address`<br>FROM `brand`<br>WHERE `country` = &#x27;CHINA&#x27;;<br></code></pre></td></tr></table></figure>
+
+<p>这将从<code>brand</code>表中选择<code>name</code>和<code>official_weibo_address</code>列，其中<code>country</code>列的值等于’CHINA’。结果将返回符合条件的品牌名称和官方微博地址。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">3) 信息提取<br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>你是一个信息提取模型，请提取用户评论中提到的关于化妆品的成分词语，用逗号分隔，返回列表格式即可。 用户评论： 雅诗兰黛粉水400ml添加的保湿成分高达92%，海藻糖、玻尿酸、角鲨烷都是保湿界大佬，还有舒缓修护的雪绒花和甘草酸二钾等神级舒缓成分，一瓶满满的精华，真的堪比精华水</p>
+<p><strong>Response：</strong></p>
+<p>海藻糖, 玻尿酸, 角鲨烷, 雪绒花, 甘草酸二钾</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4）广告判断<br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>你是一个广告判别模型，请判别下面用户评论是否是一则广告推销，回答是或否。 用户评论： 科颜氏520送福利咯 | 超能惊喜、宠你到底！|||礼赠拿到手软科颜氏淡斑精华? 让你由内而外自信发光 ?科颜氏A醇精华? 实力加乘肌肤夜间修护力 ?科颜氏紫玻A面霜? 无惧年龄束缚，做最酷的自己 ?科颜氏紫玻A眼霜? 一瓶直击四大眼部问题，练就超A眼眸 ?</p>
+<p><strong>Response：</strong></p>
+<p>是</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">5）聚类分组<br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>你是一个聚类模型，对下面的护肤科技类词语进行聚类分组，给每组一个类别名称，并对分组的意义进行解释</p>
+<p>聚合科技 前进科技 滋润倒入技术 微米净透科技 抗氧化科技 护肤技术 海藻纤维膜布技术 高压注氧纳米雾化技术 玻尿酸分层技术 智慧亮肌精技术 双生科技 透明油技术 Aboolute六大技术 冻干技术 水珠凝露科技 透皮防晒技术 专利防脱科技 精细微乳化科技 仿生气息诱蚊技术 遮瑕技术 冷萃科技 渗科技 水凝技术 纳米级科技 精油雾化技术 视黄醇专利抗衰老科技 夸迪独5D玻尿酸技术 超分子包技术 Micellar微米科技 亮光感科技 透明质酸纳米乳液包裹技术 0H2O无水科技 精细微乳化技术 防晒养护科技 抗糖技术 微乳包裹技术 TE-Cell技术 MICELLE胶束科技 闪释技术 微囊包裹技术 临界乳化技术 低温冷风干燥萃取技术 麦色滤科技 精华顶级科技 IPF技术 空气触融科技 多光谱混合扫描技术 MVE渐层缓释导入技术 高端护肤科技 透气防晒技术 白茶精粹取技术 年度敏肌舒缓修护科技 精华封装技术 专利植物取技术 液氮冻干技术 生物三种防晒技术 喷雾技术 乳化技术 细胞抓氧白科技 精氨酸活性尖端护肤科技 胶束净颜技术 左旋糖复合技术</p>
+<p><strong>Response：</strong></p>
+<p>根据给定的护肤科技类词语，我可以对它们进行聚类分组并为每组提供一个类别名称。以下是对这些词语的聚类分组和对分组意义的解释：</p>
+<ol>
+<li>护肤科技类:<ol>
+<li>护肤技术</li>
+<li>护肤技术是一个广泛的类别，涵盖了各种与护肤相关的技术和创新。</li>
+</ol>
+</li>
+<li>保湿类科技:<ol>
+<li>滋润倒入技术</li>
+<li>玻尿酸分层技术</li>
+<li>水珠凝露科技</li>
+<li>透明油技术</li>
+<li>透明质酸纳米乳液包裹技术</li>
+<li>0H2O无水科技</li>
+<li>微乳包裹技术</li>
+<li>微囊包裹技术</li>
+<li>临界乳化技术</li>
+<li>MVE渐层缓释导入技术</li>
+<li>乳化技术</li>
+<li>胶束净颜技术</li>
+<li>这些科技词语都与保湿和滋润肌肤相关，采用不同的技术手段来提供肌肤所需的水分和滋润度。</li>
+</ol>
+</li>
+<li>抗氧化类科技:<ol>
+<li>抗氧化科技</li>
+<li>专利防脱科技</li>
+<li>超分子包技术</li>
+<li>TE-Cell技术</li>
+<li>IPF技术</li>
+<li>这些科技词语强调了抗氧化的功能，可以帮助减少自由基对肌肤的损害，保护肌肤健康。</li>
+</ol>
+</li>
+<li>防晒类科技:<ol>
+<li>透皮防晒技术</li>
+<li>闪释技术</li>
+<li>透气防晒技术</li>
+<li>多光谱混合扫描技术</li>
+<li>年度敏肌舒缓修护科技</li>
+<li>生物三种防晒技术</li>
+<li>白茶精粹取技术</li>
+<li>这些科技词语指向了与防晒功能相关的技术和创新，帮助保护肌肤免受紫外线的伤害。</li>
+</ol>
+</li>
+<li>抗衰老类科技:<ol>
+<li>智慧亮肌精技术</li>
+<li>视黄醇专利抗衰老科技</li>
+<li>高端护肤科技</li>
+<li>年度敏肌舒缓修护科技</li>
+<li>精华封装技术</li>
+<li>细胞抓氧白科技</li>
+<li>这些科技词语强调了抗衰老的功能，采用不同的技术手段来改善肌肤的光泽度、减少细纹和皱纹等衰老迹象。</li>
+</ol>
+</li>
+<li>其他类科技:<ol>
+<li>聚合科技</li>
+<li>前进科技</li>
+<li>海藻纤维膜布技术</li>
+<li>高压注氧纳米雾化技术</li>
+<li>双生科技</li>
+<li>仿生气息诱蚊技术</li>
+<li>冻干技术</li>
+<li>冷萃科技</li>
+<li>渗科技</li>
+<li>纳米级科技</li>
+<li>精油雾化技术</li>
+<li>遮瑕技术</li>
+<li>麦色滤科技</li>
+<li>精华顶级科技</li>
+<li>空气触融科技</li>
+<li>MICELLE胶束科技</li>
+<li>左旋糖复合技术</li>
+<li>这些科技词语归类为其他类科技，涵盖了各种护肤技术和创新，包括聚合科技、纳米级科技、冻干技术等。这些技术可能针对不同的护肤需求和功能，如清洁、保湿、抗衰老等。</li>
+</ol>
+</li>
+</ol>
+<p>请注意，以上分类和类别名称是根据词语的表面含义进行的推测和归类，并不能确保完全准确。在实际应用中，需要根据具体的领域知识和上下文来进行更准确的分类。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">6）协助构建词表<br></code></pre></td></tr></table></figure>
+
+<p><strong>Prompt:</strong></p>
+<p>化妆品中关于容量的关键词有哪些？</p>
+<p><strong>Response：</strong></p>
+<p>在化妆品领域，与容量相关的关键词包括：</p>
+<ol>
+<li>毫升（ml）：表示产品的容量大小，通常用于液体和乳液类产品的容量表示，如面霜、精华液等。</li>
+<li>克（g）：用于固体或半固体产品的重量表示，如粉底、眼影等。</li>
+<li>盎司（oz）：一种容量单位，常用于国际市场，特别是美国市场，表示液体产品的容量。</li>
+<li>液体盎司（fl. oz）：用于液体产品的容量表示，与普通盎司稍有区别。</li>
+<li>毫升&#x2F;盎司（ml&#x2F;fl. oz）：一些化妆品品牌为了适应不同市场的需求，会同时标注毫升和盎司两种容量单位。</li>
+<li>容器尺寸（dimension）：指容器的尺寸大小，包括高度、宽度和深度等，有时也会与容量相关联。</li>
+<li>容器类型（container type）：指容器的种类，如瓶子（bottle）、管状容器（tube）、罐子（jar）等，不同容器类型所容纳的容量可能有所不同。</li>
+<li>标准容量（standard capacity）：指化妆品行业中常见的容量规格，如30ml、50ml、100ml等。</li>
+<li>旅行装（travel size）：指小容量的化妆品包装，方便携带，通常在100ml以下。</li>
+<li>大容量（jumbo size）：指较大容量的化妆品包装，通常超过常见的标准容量，如200ml、500ml等。</li>
+</ol>
+<p>这些关键词在购买化妆品时可以帮助消费者了解产品的容量大小，以便根据个人需求做出选择。</p>
+<h2 id="8-APP相关应用"><a href="#8-APP相关应用" class="headerlink" title="8.APP相关应用"></a>8.<strong>APP相关应用</strong></h2><p><strong>1）open-interpreter</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/KillianLucas/open-interpreter">https://github.com/KillianLucas/open-interpreter</a></p>
+<p>interpreter -y –fast #使用chatgpt3.5</p>
+<p>示例1：对excel进行分析</p>
+<p><strong>Prompt:</strong></p>
+<p>分析excel文件&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;商品详情.xlsx，统计商品价格列，画出倩碧商品的价格区间，要求品牌名称为倩碧，价格区间为4档，分别是0-100,100-200,200-500,500以上，打印统计结果，保存绘图结果到&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;price_plot.png</p>
+<p><strong>Response:</strong></p>
+<blockquote>
+<p>  Plan:</p>
+<p>   1 Read the Excel file and extract the data.</p>
+<p>   2 Filter the data to include only the rows with the brand name “倩碧”.</p>
+<p>   3 Extract the price column from the filtered data.</p>
+<p>   4 Create four price ranges: 0-100, 100-200, 200-500, 500 and above.</p>
+<p>   5 Count the number of prices falling into each range.</p>
+<p>   6 Print the statistics.</p>
+<p>   7 Plot the price ranges and their corresponding counts.</p>
+<p>  import pandas as pd</p>
+<p>  import matplotlib.pyplot as plt</p>
+<p>  df &#x3D; pd.read_excel(‘&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;商品详情.xlsx’)</p>
+<p>  df.head()</p>
+<p>  warn(“Workbook contains no default style, apply openpyxl’s default”)</p>
+<p>  商品id 一级分类  二级分类 三级分类  … 商品级别                    规格</p>
+<p>  官宣功效   商品价格</p>
+<p>  0    89   护肤  面部护理  化妆水  …   高端                 200ml</p>
+<p>  保湿补水,深层清洁,二次清洁,去角质,提亮焕亮,抗敏舒敏  160.0</p>
+<p>  1    90   护肤  面部护理   乳液  …   高端  【活力焕亮】偏油肌，10ml+115ml</p>
+<p>  保湿补水,控油,滋养滋润,淡纹抚纹,水油平衡,提亮焕亮,去细纹,抗敏舒敏  299.0</p>
+<p>  2    98   护肤  面部护理   卸妆  …   高端                 125ml                                           卸妆</p>
+<p>  220.0</p>
+<p>  3   104   彩妆    脸部   底妆  …   高端               61，30ml</p>
+<p>  裸妆,遮瑕,均匀肤色,持久不脱妆,防汗,防晒,眼部遮瑕,滋润滋养,控油,保湿  310.0</p>
+<p>  4   105   护肤  面部护理   洁面  …   高端                 200ml</p>
+<p>  控油,深层清洁,保湿补水,镇静舒缓,软化角质,弱酸性,清洁肌肤污垢,去角质,温和不刺激  185.0</p>
+<p>  [5 rows x 14 columns]</p>
+<p>  filtered_df &#x3D; df[df[‘品牌名称’] &#x3D;&#x3D; ‘倩碧’]</p>
+<p>  filtered_df.head()</p>
+<p>  商品id 一级分类  二级分类 三级分类  … 商品级别                    规格</p>
+<p>  官宣功效   商品价格</p>
+<p>  0    89   护肤  面部护理  化妆水  …   高端                 200ml</p>
+<p>  保湿补水,深层清洁,二次清洁,去角质,提亮焕亮,抗敏舒敏  160.0</p>
+<p>  1    90   护肤  面部护理   乳液  …   高端  【活力焕亮】偏油肌，10ml+115ml</p>
+<p>  保湿补水,控油,滋养滋润,淡纹抚纹,水油平衡,提亮焕亮,去细纹,抗敏舒敏  299.0</p>
+<p>  2    98   护肤  面部护理   卸妆  …   高端                 125ml                                           卸妆</p>
+<p>  220.0</p>
+<p>  3   104   彩妆    脸部   底妆  …   高端               61，30ml</p>
+<p>  裸妆,遮瑕,均匀肤色,持久不脱妆,防汗,防晒,眼部遮瑕,滋润滋养,控油,保湿  310.0</p>
+<p>  4   105   护肤  面部护理   洁面  …   高端                 200ml</p>
+<p>  控油,深层清洁,保湿补水,镇静舒缓,软化角质,弱酸性,清洁肌肤污垢,去角质,温和不刺激  185.0</p>
+<p>  [5 rows x 14 columns]</p>
+<p>  price_column &#x3D; filtered_df[‘商品价格’]</p>
+<p>  price_column.head()</p>
+<p>  0    160.0</p>
+<p>  1    299.0</p>
+<p>  2    220.0</p>
+<p>  3    310.0</p>
+<p>  4    185.0</p>
+<p>  Name: 商品价格, dtype: float64</p>
+<p>  price_ranges &#x3D; [0, 100, 200, 500, float(‘inf’)]</p>
+<p>  price_counts &#x3D; pd.cut(price_column, price_ranges, right&#x3D;False).value_counts()</p>
+<p>  price_counts</p>
+<p>  [200.0, 500.0)    59</p>
+<p>  [100.0, 200.0)    20</p>
+<p>  [500.0, inf)       9</p>
+<p>  [0.0, 100.0)       1</p>
+<p>  Name: 商品价格, dtype: int64</p>
+<p>  plt.bar(price_counts.index.astype(str), price_counts.values)</p>
+<p>  plt.xlabel(‘Price Range’)</p>
+<p>  plt.ylabel(‘Count’)</p>
+<p>  plt.title(‘Price Range Distribution for 倩碧’)</p>
+<p>  plt.show()</p>
+<p>  &lt;BarContainer object of 4 artists&gt;</p>
+<p>  Text(0.5, 0, ‘Price Range’)</p>
+<p>  Text(0, 0.5, ‘Count’)</p>
+<p>  Text(0.5, 1.0, ‘Price Range Distribution for 倩碧’)</p>
+<p>  <stdin>:12: UserWarning: Glyph 30887 (\N{CJK UNIFIED IDEOGRAPH-78A7}) missing from current font.</p>
+<p>  Here are the statistics and the plot for the price range distribution of 倩碧 products:</p>
+<p>   • Price Range [0-100): 1 product</p>
+<p>   • Price Range [100-200): 20 products</p>
+<p>   • Price Range [200-500): 59 products</p>
+<p>   • Price Range [500 and above): 9 products</p>
+<p>  🌆 Price Range Distribution for 倩碧</p>
+</blockquote>
+<blockquote>
+<p>保存上面的绘图结果到&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;price_plot.png</p>
+</blockquote>
+<blockquote>
+<p>  plt.bar(price_counts.index.astype(str), price_counts.values)</p>
+<p>  plt.xlabel(‘Price Range’)</p>
+<p>  plt.ylabel(‘Count’)</p>
+<p>  plt.title(‘Price Range Distribution for 倩碧’)</p>
+<p>  plt.savefig(‘&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;price_plot.png’)</p>
+<p>  &lt;BarContainer object of 4 artists&gt;</p>
+<p>  Text(0.5, 0, ‘Price Range’)</p>
+<p>  <stdin>:12: UserWarning: Glyph 30887 (\N{CJK UNIFIED IDEOGRAPH-78A7}) missing from current font.</p>
+<p>  Text(0, 0.5, ‘Count’)</p>
+<p>  Text(0.5, 1.0, ‘Price Range Distribution for 倩碧’)</p>
+<p>  sys:1: UserWarning: Glyph 30887 (\N{CJK UNIFIED IDEOGRAPH-78A7}) missing from current font.</p>
+<p>  绘图结果已保存到文件 [&#x2F;Users&#x2F;admin&#x2F;Documents&#x2F;lavector&#x2F;price_plot.png]。您可以在该位置找到绘图结果。</p>
+</blockquote>
+<img src="/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/1-4498207.png" srcset="/img/loading.gif" lazyload class="">
+
+<p><strong>示例2：写一个前后端投票网页</strong></p>
+<p><strong>Prompt:</strong></p>
+<p>帮我写一个投票功能的前后端程序，前端要求投票网页的主要内容是对本次团建去哪玩进行投票，可选地区是北京八达岭长城，青岛看海，杭州游西湖，自驾游新疆，所有人投票后自动显示投票结果。</p>
+<p><strong>Response:</strong></p>
+<blockquote>
+<p>main.py后端页面</p>
+<p>import flask</p>
+<p>from flask import Flask, request, jsonify</p>
+<p>from flask_cors import CORS</p>
+<p>app &#x3D; Flask(<strong>name</strong>)</p>
+<p>CORS(app, supports_credentials&#x3D;True)</p>
+<p># 投票结果</p>
+<p>votes &#x3D; {</p>
+<p>​    ‘北京八达岭长城’: 0,</p>
+<p>​    ‘青岛看海’: 0,</p>
+<p>​    ‘杭州游西湖’: 0,</p>
+<p>​    ‘自驾游新疆’: 0</p>
+<p>}</p>
+<p># 处理投票请求</p>
+<p>@app.route(‘&#x2F;vote’, methods&#x3D;[‘POST’])</p>
+<p>def vote():</p>
+<p>​    option &#x3D; request.form.get(‘option’)</p>
+<p>​    if option in votes:</p>
+<p>​        votes[option] +&#x3D; 1</p>
+<p>​        return jsonify({‘message’: ‘投票成功’})</p>
+<p>​    else:</p>
+<p>​        return jsonify({‘message’: ‘投票选项无效’})</p>
+<p># 显示投票结果</p>
+<p>@app.route(‘&#x2F;results’, methods&#x3D;[‘GET’])</p>
+<p>def results():</p>
+<p>​    return jsonify(votes)</p>
+<p>if <strong>name</strong> &#x3D;&#x3D; ‘<strong>main</strong>‘:</p>
+<p>​    app.run(debug&#x3D;True)</p>
+<p>index.html前端页面</p>
+   <!DOCTYPE html>
+
+   <html>
+
+   <head>
+
+<p>​       <title>投票</title></p>
+<p>​       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script></p>
+   </head>
+
+   <body>
+
+<p>​       <h1>投票</h1></p>
+<p>​       <form id="vote-form"></p>
+<p>​           <label for="option">请选择投票选项：</label></p>
+<p>​           <select id="option" name="option"></p>
+<p>​               <option value="北京八达岭长城">北京八达岭长城</option></p>
+<p>​               <option value="青岛看海">青岛看海</option></p>
+<p>​               <option value="杭州游西湖">杭州游西湖</option></p>
+<p>​               <option value="自驾游新疆">自驾游新疆</option></p>
+<p>​           </select></p>
+<p>​           <button type="submit">投票</button></p>
+<p>​       </form></p>
+<p>​       <h2>投票结果</h2></p>
+<p>​       <div id="results"></div></p>
+<p>​       <script></p>
+<p>​           // 处理投票表单提交</p>
+<p>​           $('#vote-form').submit(function(event) {</p>
+<p>​               event.preventDefault();</p>
+<p>​               var option = $('#option').val();</p>
+<p>​               $.post('<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/vote&#39;">http://127.0.0.1:5000/vote&#39;</a>, { option: option }, function(data) {</p>
+<p>​                   alert(data.message);</p>
+<p>​                   loadResults();</p>
+<p>​               });</p>
+<p>​           });</p>
+<p>​           // 加载投票结果</p>
+<p>​           function loadResults() {</p>
+<p>​               $.get('<a target="_blank" rel="noopener" href="http://127.0.0.1:5000/results&#39;">http://127.0.0.1:5000/results&#39;</a>, function(data) {</p>
+<p>​                   var resultsHtml = '';</p>
+<p>​                   for (var option in data) {</p>
+<p>​                       resultsHtml += '<p>' + option + ': ' + data[option] + ' 票</p>';</p>
+<p>​                   }</p>
+<p>​                   $('#results').html(resultsHtml);</p>
+<p>​               });</p>
+<p>​           }</p>
+<p>​           // 初始化加载投票结果</p>
+<p>​           loadResults();</p>
+<p>​       </script></p>
+   </body>
+
+   </html>
+</blockquote>
+<img src="/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/2.png" srcset="/img/loading.gif" lazyload class="">
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2307.09288">https://arxiv.org/abs/2307.09288</a></p>
+<p><a target="_blank" rel="noopener" href="https://ai.meta.com/llama/">Llama 2 - Meta AI</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/645886809">https://zhuanlan.zhihu.com/p/645886809</a></p>
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Llama2迄今最强开源LLM模型是如何训练出来的</div>
+      <div>https://johnson7788.github.io/2023/09/18/Llama2%E8%BF%84%E4%BB%8A%E6%9C%80%E5%BC%BA%E5%BC%80%E6%BA%90LLM%E6%A8%A1%E5%9E%8B%E6%98%AF%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%87%BA%E6%9D%A5%E7%9A%84/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月18日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/05/chatgpt%E5%BC%82%E5%B8%B8%E5%A4%A7%E6%94%B6%E9%9B%86/" title="chatgpt异常大收集">
+                        <span class="hidden-mobile">chatgpt异常大收集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
