@@ -23,8 +23,8 @@
 <meta property="og:site_name" content="Be With you">
 <meta property="og:description" content="向量检索模型对比和优化一、测试模型我们此次对比以下几个向量检索模型: 12345678910&quot;BAAI&quot;: &quot;BAAI&#x2F;bge-large-zh&quot;,&quot;MiniLM&quot;: &quot;sentence-transformers&#x2F;all-MiniLM-L6-v2&quot;,&quot;m3e&quot;: &quot;moka-ai&#x2F;m3e-">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-25T06:29:32.000Z">
-<meta property="article:modified_time" content="2023-09-25T06:29:32.239Z">
+<meta property="article:published_time" content="2023-09-25T06:42:40.000Z">
+<meta property="article:modified_time" content="2023-09-25T06:42:40.953Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -197,7 +197,7 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-09-25 14:29" pubdate>
+        <time datetime="2023-09-25 14:42" pubdate>
           2023年9月25日 下午
         </time>
       </span>
@@ -220,7 +220,7 @@
         
         
         
-          173 分钟
+          174 分钟
         
       </span>
     
@@ -263,7 +263,7 @@
             <div class="markdown-body">
               
               <h1 id="向量检索模型对比和优化"><a href="#向量检索模型对比和优化" class="headerlink" title="向量检索模型对比和优化"></a>向量检索模型对比和优化</h1><h2 id="一、测试模型"><a href="#一、测试模型" class="headerlink" title="一、测试模型"></a>一、测试模型</h2><p>我们此次对比以下几个向量检索模型:</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-string">&quot;BAAI&quot;</span>: <span class="hljs-string">&quot;BAAI/bge-large-zh&quot;</span>,<br><span class="hljs-string">&quot;MiniLM&quot;</span>: <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span>,<br><span class="hljs-string">&quot;m3e&quot;</span>: <span class="hljs-string">&quot;moka-ai/m3e-base&quot;</span>,<br><span class="hljs-string">&quot;e5&quot;</span>: <span class="hljs-string">&quot;intfloat/multilingual-e5-large&quot;</span>,<br><span class="hljs-string">&quot;mpnet&quot;</span>: <span class="hljs-string">&quot;sentence-transformers/all-mpnet-base-v2&quot;</span>,<br><span class="hljs-string">&quot;text2vec&quot;</span>: <span class="hljs-string">&quot;GanymedeNil/text2vec-large-chinese&quot;</span>,<br><span class="hljs-symbol">gtr:</span> sentence-transformers/gtr-t5-large<br><span class="hljs-symbol">ernie:</span> nghuyong/ernie<span class="hljs-number">-3.0</span>-base-<span class="hljs-built_in">zh</span><br><span class="hljs-symbol">piccolo:</span> sensenova/piccolo-base-<span class="hljs-built_in">zh</span><br><span class="hljs-symbol">stella:</span> infgrad/stella-base-<span class="hljs-built_in">zh</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;BAAI&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;BAAI/bge-large-zh&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;MiniLM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;m3e&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;moka-ai/m3e-base&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;e5&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;intfloat/multilingual-e5-large&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;mpnet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sentence-transformers/all-mpnet-base-v2&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;text2vec&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;GanymedeNil/text2vec-large-chinese&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;gtr&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sentence-transformers/gtr-t5-large&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;ernie&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nghuyong/ernie-3.0-base-zh&quot;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;piccolo&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sensenova/piccolo-base-zh&quot;</span><br><span class="hljs-attr">&quot;stella&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;infgrad/stella-base-zh&quot;</span><span class="hljs-punctuation">,</span><br></code></pre></td></tr></table></figure>
 
 <h2 id="二、简要介绍模型"><a href="#二、简要介绍模型" class="headerlink" title="二、简要介绍模型"></a>二、简要介绍模型</h2><ol>
 <li><p>“BAAI”: “BAAI&#x2F;bge-large-zh”<br>这是由BAAI（北京智源人工智能研究院）发布的一个中文预训练语言模型。它是基于GPT-3.5架构进行训练的，专注于中文语言处理任务。</p>
@@ -288,9 +288,9 @@
 <p>商汤模型，借鉴了E5以及GTE的训练流程，采用了两阶段的训练方式。 在第一阶段中，我们搜集和爬取了4亿的中文文本对(可视为弱监督文本对数据)，并采用二元组的softmax对比学习损失来优化模型。 在第二阶段中，我们搜集整理了2000万人工标注的中文文本对(精标数据)，并采用带有难负样本的三元组的softmax对比学习损失来帮助模型更好地优化。</p>
 </li>
 <li><p>infgrad&#x2F;stella-base-zh</p>
+<p>是商汤模型的微调版本，stella-base-zh和stella-large-zh分别以piccolo-base-zh[6]和piccolo-large-zh作为基础模型</p>
 </li>
 </ol>
-<p>   是商汤模型的微调版本，stella-base-zh和stella-large-zh分别以piccolo-base-zh[6]和piccolo-large-zh作为基础模型</p>
 <h2 id="三、为什么要测试不同的模型"><a href="#三、为什么要测试不同的模型" class="headerlink" title="三、为什么要测试不同的模型"></a>三、为什么要测试不同的模型</h2><p>因为目前密集检索模型对于不同领域的数据，性能相差很大，这也很容易理解，模型对于不同领域的数据理解的深度不同，所以不能很好的区分，所以我们找来几款模型进行对比。</p>
 <h2 id="四、测试方法"><a href="#四、测试方法" class="headerlink" title="四、测试方法"></a>四、测试方法</h2><p>使用自己领域内的数据，构建文档数据集，使用weaviate的数据库，使用的余弦相似度度量，自动化切换不同的向量模型，构建不同的数据表，同时写几个评估问题集，即真实的问题和应该要检索出的内容。测试结果是topk的准确率。</p>
 <p>**1)**对于文档数据集，我们统计文档平均长度在400字左右。我们分2种方案，方案1是直接把整个文档放入模型，生成向量，方案2：是对文档拆成成不大于250个字的多个子文档，然后生成向量，目的是测试文档长度对向量的影响。</p>
