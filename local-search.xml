@@ -8,7 +8,7 @@
     <link href="/2023/11/16/ChatGPT%E7%9A%84GPTs/"/>
     <url>/2023/11/16/ChatGPT%E7%9A%84GPTs/</url>
     
-    <content type="html"><![CDATA[<h1 id="ChatGPT的GPTs的Playground"><a href="#ChatGPT的GPTs的Playground" class="headerlink" title="ChatGPT的GPTs的Playground"></a>ChatGPT的GPTs的Playground</h1><p>链接：<a href="https://platform.openai.com/playground?assistant=new">Playground - OpenAI API</a></p><p>什么是GPTs，就是自定义的Chatgpt，具有你设置的特殊能力的ChatGPT，特殊能力包括检索给定的文献，调用一些工具，例如查询天气。运行代码，例如绘图，等等。</p><p>下面是根据自己的知识库进行回答问题的示例。</p><p>测试案例，支持检索的文件目前包括pdf，不支持xlsx文件，csv文件</p><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113105146117.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110354457.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110206539.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110447219.png" class="">]]></content>
+    <content type="html"><![CDATA[<h1 id="ChatGPT的GPTs的Playground"><a href="#ChatGPT的GPTs的Playground" class="headerlink" title="ChatGPT的GPTs的Playground"></a>ChatGPT的GPTs的Playground</h1><p>链接：<a href="https://platform.openai.com/playground?assistant=new">Playground - OpenAI API</a></p><p>什么是GPTs，就是自定义的Chatgpt，具有你设置的特殊能力的ChatGPT，特殊能力包括检索给定的文献，调用一些工具，例如查询天气。运行代码，例如绘图，等等。</p><p>下面是根据自己的知识库进行回答问题的示例。</p><p>测试案例，支持检索的文件目前包括pdf，不支持xlsx文件，csv文件, 支持json文件，推荐json文件</p><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113105146117.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110354457.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110206539.png" class=""><img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231113110447219.png" class="">]]></content>
     
     
     
