@@ -16,25 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="什么是GPTs具有自定义能力的聊天机器人，可以根据文档进行问答，可以使用工具，可以运行代码。使用工具，例如调用搜索引擎搜索数据，调用api查询天气，搜索数据库等，运行代码可以是按需求绘图，按需求计算数学，排列等。 Introducing GPTs (openai.com) 一些分享的GPTs示例： 图片OCR工具： https:&#x2F;&#x2F;chat.openai.com&#x2F;g&#x2F;g-L29PpDmgg-ocr">
+    <meta name="description" content="一、 Prompt Engineering提示工程1.什么是提示工程？ 提示工程(Prompt Engineering)指的是构建和优化AI系统(尤其是大型语言模型)使用的提示词(Prompt)的过程。 提示词是提供给AI系统的简短文本,用于指示其执行特定任务或回答特定问题。良好的提示词可以大大提高AI系统的性能,让其生成更相关、更有用的响应。 2.提示工程的重要性。 提示工程的重要性在于:  提">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开源GPTs">
-<meta property="og:url" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/index.html">
+<meta property="og:title" content="写好LLMprompt提示的总结">
+<meta property="og:url" content="https://johnson7788.github.io/2023/12/08/%E5%86%99%E5%A5%BDLLMprompt%E6%8F%90%E7%A4%BA%E7%9A%84%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="什么是GPTs具有自定义能力的聊天机器人，可以根据文档进行问答，可以使用工具，可以运行代码。使用工具，例如调用搜索引擎搜索数据，调用api查询天气，搜索数据库等，运行代码可以是按需求绘图，按需求计算数学，排列等。 Introducing GPTs (openai.com) 一些分享的GPTs示例： 图片OCR工具： https:&#x2F;&#x2F;chat.openai.com&#x2F;g&#x2F;g-L29PpDmgg-ocr">
+<meta property="og:description" content="一、 Prompt Engineering提示工程1.什么是提示工程？ 提示工程(Prompt Engineering)指的是构建和优化AI系统(尤其是大型语言模型)使用的提示词(Prompt)的过程。 提示词是提供给AI系统的简短文本,用于指示其执行特定任务或回答特定问题。良好的提示词可以大大提高AI系统的性能,让其生成更相关、更有用的响应。 2.提示工程的重要性。 提示工程的重要性在于:  提">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204164948518.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204165109911.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231205093215659.png">
-<meta property="og:image" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204175817306.png">
-<meta property="article:published_time" content="2023-12-05T10:46:44.000Z">
-<meta property="article:modified_time" content="2023-12-05T10:46:44.058Z">
+<meta property="article:published_time" content="2023-12-08T07:00:11.000Z">
+<meta property="article:modified_time" content="2023-12-08T07:00:11.322Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204164948518.png">
   
   
-  <title>开源GPTs - Be With you</title>
+  <title>写好LLMprompt提示的总结 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -190,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="开源GPTs">
+          <span id="subtitle" title="写好LLMprompt提示的总结">
             
           </span>
         </div>
@@ -202,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-05 18:46" pubdate>
-          2023年12月5日 晚上
+        <time datetime="2023-12-08 15:00" pubdate>
+          2023年12月8日 下午
         </time>
       </span>
     
@@ -214,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2.4k 字
         
       </span>
     
@@ -225,7 +220,7 @@
         
         
         
-          15 分钟
+          21 分钟
         
       </span>
     
@@ -263,45 +258,87 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">开源GPTs</h1>
+            <h1 style="display: none">写好LLMprompt提示的总结</h1>
             
             <div class="markdown-body">
               
-              <h2 id="什么是GPTs"><a href="#什么是GPTs" class="headerlink" title="什么是GPTs"></a>什么是GPTs</h2><p>具有自定义能力的聊天机器人，可以根据文档进行问答，可以使用工具，可以运行代码。使用工具，例如调用搜索引擎搜索数据，调用api查询天气，搜索数据库等，运行代码可以是按需求绘图，按需求计算数学，排列等。</p>
-<p><a target="_blank" rel="noopener" href="https://openai.com/blog/introducing-gpts">Introducing GPTs (openai.com)</a></p>
-<p>一些分享的GPTs示例：</p>
-<p>图片OCR工具： <a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-L29PpDmgg-ocr-gpt">https://chat.openai.com/g/g-L29PpDmgg-ocr-gpt</a></p>
-<p>网页设计：<a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-2Eo3NxuS7-designergpt">https://chat.openai.com/g/g-2Eo3NxuS7-designergpt</a></p>
-<p>根据提供位置绘制天气报告： <a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-twUGxmpHv-visual-weather-artist-gpt">https://chat.openai.com/g/g-twUGxmpHv-visual-weather-artist-gpt</a></p>
-<p>角色扮演游戏：<a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-ZPDmFphpX-satoru-gojo">https://chat.openai.com/g/g-ZPDmFphpX-satoru-gojo</a></p>
-<p>数据分析可视化： <a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-HMNcP6w7d-data-analysis">https://chat.openai.com/g/g-HMNcP6w7d-data-analysis</a></p>
-<p>图像编辑器: 基本的图像编辑操作 - 裁剪、调整大小、缩放、旋转、格式转换等: 基本的图像编辑操作 - 裁剪、调整大小、缩放、旋转、格式转换等: <a target="_blank" rel="noopener" href="https://chat.openai.com/g/g-WXEhiLIoP-image-editor">https://chat.openai.com/g/g-WXEhiLIoP-image-editor</a></p>
-<p>更多： <a target="_blank" rel="noopener" href="https://github.com/taranjeet/awesome-gpts">taranjeet&#x2F;awesome-gpts: Collection of all the GPTs created by the community (github.com)</a></p>
-<p>香氛ChatGPT： <a target="_blank" rel="noopener" href="http://192.168.50.189:5173/">http://192.168.50.189:5173</a></p>
-<h2 id="开源的GPTs"><a href="#开源的GPTs" class="headerlink" title="开源的GPTs"></a>开源的GPTs</h2><p>Hugging Face: <a target="_blank" rel="noopener" href="https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules.html#hugging-face">https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules.html#hugging-face</a><br>EverlyAI: <a target="_blank" rel="noopener" href="https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules.html#everlyai">https://docs.llamaindex.ai/en/stable/module_guides/models/llms/modules.html#everlyai</a><br>LiteLLM<br>PaLM<br>Predibase<br>Replicate<br>LangChain<br>Llama API<br>Llama CPP<br>Xorbits Inference<br>MonsterAPI<br>RunGPT<br>Portkey<br>AnyScale<br>Ollama<br>Konko<br>Clarifai<br>Bedrock<br>Vertex<br>Perplexity<br>OpenLLM  <a target="_blank" rel="noopener" href="https://github.com/bentoml/OpenLLM">https://github.com/bentoml/OpenLLM</a><br>LocalAI  <a target="_blank" rel="noopener" href="https://github.com/mudler/LocalAI">https://github.com/mudler/LocalAI</a><br>Dify: <a target="_blank" rel="noopener" href="https://docs.dify.ai/">https://docs.dify.ai/</a></p>
-<p>测试Dify:</p>
-<img src="/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204164948518.png" srcset="/img/loading.gif" lazyload class="">
+              <h2 id="一、-Prompt-Engineering提示工程"><a href="#一、-Prompt-Engineering提示工程" class="headerlink" title="一、 Prompt Engineering提示工程"></a>一、 Prompt Engineering提示工程</h2><p>1.什么是提示工程？</p>
+<p>提示工程(Prompt Engineering)指的是构建和优化AI系统(尤其是大型语言模型)使用的提示词(Prompt)的过程。</p>
+<p>提示词是提供给AI系统的简短文本,用于指示其执行特定任务或回答特定问题。良好的提示词可以大大提高AI系统的性能,让其生成更相关、更有用的响应。</p>
+<p>2.提示工程的重要性。</p>
+<p>提示工程的重要性在于:</p>
+<ol>
+<li>提高性能。精心设计的提示词可以让AI系统更好地理解人类的意图,提供更加智能和符合预期的响应。</li>
+<li>提高安全性。提示词可以避免AI系统生成有害或不实的内容。</li>
+<li>扩展功能。通过提示词可以让AI系统执行更广泛的任务,而不仅仅是它在训练数据中看到的那些。</li>
+<li>提高可解释性。提示词为AI提供了额外的上下文,使其决策过程更加透明和可解释。</li>
+<li>简化交互。提示工程让用户无需专业知识就可以和AI系统进行有意义的交互。</li>
+</ol>
+<h2 id="二、提示工程可以用于哪些任务"><a href="#二、提示工程可以用于哪些任务" class="headerlink" title="二、提示工程可以用于哪些任务"></a>二、提示工程可以用于哪些任务</h2><ul>
+<li><strong>自然语言处理任务</strong>：例如，文本摘要、问题回答、文本生成、机器翻译、情感分析等。在这些任务中，提示可以帮助模型生成更准确、更有创意、更符合要求的输出。</li>
+<li><strong>生成任务</strong>：例如，诗歌、代码、脚本、音乐作品等。提示可以帮助模型生成更加符合用户需求的生成作品。</li>
+<li><strong>推理任务</strong>：例如，算术推理、逻辑推理、自然语言推理等。提示可以帮助模型进行更复杂的推理，并得出更准确的结果。</li>
+<li><strong>Agent 应用</strong>：每个Agent的后面对对应着一个单独的Prompt，用于帮助用户解决问题。</li>
+</ul>
+<p>下面是一些示例</p>
+<ul>
+<li><strong>文本摘要</strong>：给定一个长篇文章，提示可以帮助模型生成一个更简洁、更有重点的摘要。</li>
+<li><strong>问题回答</strong>：给定一个问题，提示可以帮助模型生成一个更准确、更有信息量的答案。</li>
+<li><strong>文本生成</strong>：给定一个主题或要求，提示可以帮助模型生成更符合用户需求的文本。</li>
+<li><strong>机器翻译</strong>：给定源语言文本和目标语言文本，提示可以帮助模型生成更准确、更流畅的翻译。</li>
+<li><strong>情感分析</strong>：给定一段文本，提示可以帮助模型分析文本的情感。</li>
+</ul>
+<h2 id="三、如何写好提示工程，注意哪些要点"><a href="#三、如何写好提示工程，注意哪些要点" class="headerlink" title="三、如何写好提示工程，注意哪些要点"></a>三、如何写好提示工程，注意哪些要点</h2><p><strong>提示词的注意事项</strong><br>模型输入有长度限制，注意输入的提示的长度。</p>
+<p><strong>提示词的技巧</strong></p>
+<ul>
+<li>使用明确的命令（Instruction）。<ul>
+<li>您希望模型执行的特定任务。任务指示是至关重要的，因为它指导模型具体应该做什么以及对它的期望是什么。</li>
+<li>要确保我们的任务指示内容清楚、简明和具体。当处理复杂的推理任务时，考虑将任务分解成更小的、更容易管理的步骤，以帮助模型理解接收到的任务。</li>
+</ul>
+</li>
+<li>列举例子。<ul>
+<li>1-shot，<br>给出示例。<ul>
+<li>这太棒了！&#x2F;&#x2F; Negative</li>
+<li>这太糟糕了！&#x2F;&#x2F; Positive</li>
+<li>哇，那部电影太棒了！&#x2F;&#x2F; Positive</li>
+</ul>
+</li>
+<li>给出多些知识或示例。<ul>
+<li>问题：高尔夫球的一部分是试图获得比其他人更高的得分。<br>是或否？<ul>
+<li>知识：高尔夫球的目标是以最少的杆数打完一组洞。一轮高尔夫球比赛通常包括18个洞。每个洞在标准高尔夫球场上一轮只打一次。每个杆计为一分，总杆数用于确定比赛的获胜者。</li>
+<li>解释和答案：是。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>参考信息：<ul>
+<li>这些信息可以是相关文章或数据的链接。</li>
+</ul>
+</li>
+<li>上下文（可选）。<ul>
+<li>提供上下文的背景信息，以指导更好的响应。确保提供足够的与指定任务相关的背景信息，以便模型能够理解指令的执行背景，并生成更加相关和准确的文本。</li>
+</ul>
+</li>
+<li>设定模型角色，<br>例如xx专家，<br>具有什么能力。<ul>
+<li>可以要求模型step-by-step思考。</li>
+</ul>
+</li>
+<li>输出指示器（可选）：指定所需的输出类型或格式。<ul>
+<li>输出约束有助于指导LLM明确能做什么和不能做什么，保证我们在最终输出中，获得更准确的结果。这可能涉及到指定输出的格式，使用的语言类型，甚至是输出的长度。此外，指定难度等级和风格，也可以进一步完善我们获得的最终输出。</li>
+<li>你希望 ChatGPT 以什么风格或方式回答你。</li>
+</ul>
+</li>
+<li>输入数据（可选）：模型要处理的数据。</li>
+</ul>
+<h2 id="四、一些提示工程的示例"><a href="#四、一些提示工程的示例" class="headerlink" title="四、一些提示工程的示例"></a>四、一些提示工程的示例</h2><p>一个香水分析的示例</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs makefile">你是一名香水消费者评论分析师，可以根据用户提供的香水产品和评论对评论内容进行分析。现在需要通过提供的评论分析消费者对香味的感受，消费者使用香水时的情绪，使用香水时可以想象到的画面。你要做的就是提取刚刚提到的消费者评论中提到这3个维度的关键词，例如香味感受的词有清新，妩媚，性感，醇厚。香味情绪的词有快乐、幸福、怀旧。香味画面的词包括森林、&gt;庙宇、男友的白衬衫。下面是一些示例。<br><span class="hljs-section">商品:祖玛珑英国梨与小苍兰香水</span><br>评论开始,每行是一个用户的评论：<br>有蜂蜜的味道 甜甜蜜蜜<br>前调，梨味很清新，点一点点酸。 后面就甜甜的，特别像初秋，一点点的温暖。<br>春秋还不错<br>留香其实还蛮久的，喷在脖子很自然<br>小白日记：还是没有很喜欢就是和正常版一样，区别不大，但是五步散还是五步散啊<br>一开始还挺好闻的，闻多了有点腻和晕。<br>很喜欢 适合夏天<br>评论结束。<br>输出时注意每个维度用换行符分割，提取的每个词用逗号分割，输出为：<br><span class="hljs-section">香味感受:甜甜蜜蜜,清新,甜甜的,温暖,腻和晕,很自然</span><br><span class="hljs-section">香味情绪:很喜欢</span><br><span class="hljs-section">香味画面:蜂蜜,梨味,初秋,夏天</span><br>现在正式开始。<br><span class="hljs-section">商品: &#123;&#123;product&#125;&#125;</span><br><span class="hljs-section">评论开始:</span><br>&#123;&#123;comments&#125;&#125;<br>评论结束。<br><span class="hljs-section">输出为:</span><br></code></pre></td></tr></table></figure>
 
-<img src="/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204165109911.png" srcset="/img/loading.gif" lazyload class="">
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">变量:</span><br><span class="hljs-section">product: 纪梵希 圆周率 派</span><br><span class="hljs-section">comments: 如果让我用一款香水来形容小奶狗这种类型的男生那一定是圆周率没跑了这个味道就是小奶狗本狗啊香草零陵香豆杏仁太甜太奶了但橘子橙花和雪松在提醒你姐姐我是男生男生有的我都有男生会做的我都会想起了传说中的日本夜店头牌牛郎Roland好像有一点油腻但粘人的时候的真挚眼光还是会让姐姐有一点晃神 你是一个女铜地铁上你遇到一个时尚的年轻女孩经过搭讪加上了你们成为了朋友发现她是从杭州来旅游的不是本地人刚从大学毕业就空降家里公司做了高管现在是女强人</span><br><br>输出：<br><span class="hljs-section">香味感受:甜,奶,油腻</span><br><span class="hljs-section">香味情绪:真挚</span><br><span class="hljs-section">香味画面:小奶狗,香草,杏仁,橘子,橙花,雪松,日本夜店,头牌牛郎,Roland,女铜,地铁,时尚的年轻女孩,杭州,大学毕业,高管,女强人</span><br></code></pre></td></tr></table></figure>
 
-<img src="/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231205093215659.png" srcset="/img/loading.gif" lazyload class="">
 
-<p>支持的功能：基于LLM开发的GPTs，支持自定义Prompts，接入各种LLM，使用工具，自定义知识库，自定义embedding模型，暴露GPTs的API和js前端聊天插件。</p>
-<p>测试地址：</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.50.209/">http://192.168.50.209/</a></p>
-<p>构建的chat：</p>
-<p><a target="_blank" rel="noopener" href="http://192.168.50.209/chat/4iPdsjSSCnfOG2g8">http://192.168.50.209/chat/4iPdsjSSCnfOG2g8</a></p>
-<h2 id="GPTs功能设想（使用自然语言的数据交互平台）"><a href="#GPTs功能设想（使用自然语言的数据交互平台）" class="headerlink" title="GPTs功能设想（使用自然语言的数据交互平台）"></a>GPTs功能设想（使用自然语言的数据交互平台）</h2><p>GPTs的发展导致LLM的使用门槛迅速下降，所以每个人都可以设计专用领域的GPTs，🤔，使用GPTs的客户，目前C端的客户除了Openai进行付费，其它的付费不太多，C端客户和B端客户的对使用GPTs区别，B端会比C端更要求准确度，会对领域内模型和数据要求更高，专业功能更多。</p>
-<p>原因：简化数据的操作。</p>
-<p>1.数据来源：数据流动性，GPTs数据可以流动，数据来源来自后台提供和用户上传，数据会通过LLM进行解析知识点，保存到知识库中，形成知识图谱。结构化数据更好理解。</p>
-<p>2.用户问答：用户提问，对用户进行回答。如果涉及到知识库中的数据，那么就通过图的形式展示出来。展示出原始数据，避免LLM的幻想。</p>
-<p>3.数据操作和挖掘：自然语言可以查询数据，问答数据。筛选数据，表现为对图节点进行控制和筛选(数据的2-8定律，百分之20有用）。挖掘数据：自然语言可以调用工具进行统计，绘图，在左侧展示出来。</p>
-<img src="/2023/12/05/%E5%BC%80%E6%BA%90GPTs/image-20231204175817306.png" srcset="/img/loading.gif" lazyload class="">
 
-<p><strong>技术需求：</strong></p>
-<p>支持Agent的只能LLM，例如ChatGPT，GPT4，开源的通义千问。</p>
-<p>嵌入模型。</p>
-<p>LLM知识抽取和知识图谱。</p>
 
               
             </div>
@@ -318,8 +355,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>开源GPTs</div>
-      <div>https://johnson7788.github.io/2023/12/05/%E5%BC%80%E6%BA%90GPTs/</div>
+      <div>写好LLMprompt提示的总结</div>
+      <div>https://johnson7788.github.io/2023/12/08/%E5%86%99%E5%A5%BDLLMprompt%E6%8F%90%E7%A4%BA%E7%9A%84%E6%80%BB%E7%BB%93/</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +368,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月5日</div>
+          <div>2023年12月8日</div>
         </div>
       
       
@@ -361,18 +398,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/12/08/%E5%86%99%E5%A5%BDLLMprompt%E6%8F%90%E7%A4%BA%E7%9A%84%E6%80%BB%E7%BB%93/" title="写好LLMprompt提示的总结">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">写好LLMprompt提示的总结</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/11/16/ChatGPT%E7%9A%84GPTs/" title="ChatGPT的GPTs">
-                        <span class="hidden-mobile">ChatGPT的GPTs</span>
+                      <a href="/2023/12/05/%E5%BC%80%E6%BA%90GPTs/" title="开源GPTs">
+                        <span class="hidden-mobile">开源GPTs</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

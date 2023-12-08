@@ -214,6 +214,39 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" target="_self">
+          lavis和transformers的冲突
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/03/27/lavis%E5%92%8Ctransformers%E7%9A%84%E5%86%B2%E7%AA%81/" target="_self">
+          
+          salesforce的LAVIS包，https:&#x2F;&#x2F;github.com&#x2F;salesforce&#x2F;LAVIS是一个多模态的库，其中的BLIP2模块部分和huggingface的trasformers&#x3D;&#x3D;4.27.1不兼容,不兼容部分是,原因是query_embeds被repeat了维度0两次，所以造成torch.cat拼接时冲突。 123456789101112131415lavis&#x2F;models&#x2F;
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-03-27 14:36" pubdate>
+              2023-03-27
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/03/21/%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/" target="_self">
           知识点总结
         </a>
@@ -549,69 +582,6 @@
 
           </div>
         
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/" target="_self">
-          neo4j的构建的知识图谱的语法示例
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/03/15/neo4j%E7%9A%84%E6%9E%84%E5%BB%BA%E7%9A%84%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E8%AF%AD%E6%B3%95%E7%A4%BA%E4%BE%8B/" target="_self">
-          
-          查询包含甘油的产品1MATCH p&#x3D;()-[r:PRODUCT_COMPONENT_IS] -&gt;(n:Component &amp;#123;name:&quot;甘油&quot;&amp;#125;) return p limit 50   #查看2个品牌之间有什么共同点 123MATCH(n:Brand &amp;#123;name:&quot;希思黎&quot;&amp;#125;), (b:Brand &amp;#123;
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-03-15 13:58" pubdate>
-              2022-03-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" class="category-chain-item">知识图谱</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/cql%E8%AF%AD%E6%B3%95/">#cql语法</a>
-            
-              <a href="/tags/neo4j/">#neo4j</a>
-            
-          </div>
         
       </div>
     </article>
