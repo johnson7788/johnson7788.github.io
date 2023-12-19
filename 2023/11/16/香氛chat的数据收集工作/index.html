@@ -25,8 +25,9 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://johnson7788.github.io/2023/11/16/%E9%A6%99%E6%B0%9Bchat%E7%9A%84%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%B7%A5%E4%BD%9C/image-20231116120906318.png">
 <meta property="og:image" content="https://johnson7788.github.io/2023/11/16/%E9%A6%99%E6%B0%9Bchat%E7%9A%84%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%B7%A5%E4%BD%9C/image-20231116130520159.png">
+<meta property="og:image" content="https://johnson7788.github.io/2023/11/16/%E9%A6%99%E6%B0%9Bchat%E7%9A%84%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%B7%A5%E4%BD%9C/image-20231219104233125.png">
 <meta property="article:published_time" content="2023-11-16T05:07:29.000Z">
-<meta property="article:modified_time" content="2023-11-16T05:07:29.273Z">
+<meta property="article:modified_time" content="2023-12-19T02:43:00.640Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://johnson7788.github.io/2023/11/16/%E9%A6%99%E6%B0%9Bchat%E7%9A%84%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%B7%A5%E4%BD%9C/image-20231116120906318.png">
@@ -212,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          3.4k 字
         
       </span>
     
@@ -223,7 +224,7 @@
         
         
         
-          16 分钟
+          29 分钟
         
       </span>
     
@@ -287,6 +288,12 @@
 
 
 <p>接下来进行香氛的知识类数据收集和数据的整理</p>
+<h1 id="三、-LLM-prompt和数据维度"><a href="#三、-LLM-prompt和数据维度" class="headerlink" title="三、 LLM prompt和数据维度"></a>三、 LLM prompt和数据维度</h1><p>Prompt:</p>
+<p>你的名字是BeautyChat2.0,被xx科技有限公司开发,你是一个香氛领域的专家,能够深思熟虑并且专业的解答任何关于香氛的问 题,包括香氛知识和香氛产品推荐等,你的回答风格是有趣的,已经为你提供了一个关于香氛商品的文档,根据用户的问题选择合适的时机可以查看香氛商品库,香氛商品库的主要包括不同品牌的商品,每个商品包括了产品名称，规格，价格，适用性别，香调， 前中后调，香味，用户闻到香水时的香味感受，同时感受到的香味情绪，想象到的香味画面，合适的香味使用场景和香味特点以及商品的店铺链接。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs 1c">    &#123;<br>        <span class="hljs-string">&quot;产品名称&quot;</span>: <span class="hljs-string">&quot;观夏三重茶&quot;</span>,<br>        <span class="hljs-string">&quot;英文名&quot;</span>: <span class="hljs-string">&quot;To summer Triple Tea&quot;</span>,<br>        <span class="hljs-string">&quot;别名&quot;</span>: <span class="hljs-string">&quot;观夏三重茶&quot;</span>,<br>        <span class="hljs-string">&quot;品牌&quot;</span>: <span class="hljs-string">&quot;观夏&quot;</span>,<br>        <span class="hljs-string">&quot;规格&quot;</span>: <span class="hljs-string">&quot;30ml&quot;</span>,<br>        <span class="hljs-string">&quot;价格&quot;</span>: <span class="hljs-string">&quot;498.0元&quot;</span>,<br>        <span class="hljs-string">&quot;浓度&quot;</span>: <span class="hljs-string">&quot;浓香水EDP&quot;</span>,<br>        <span class="hljs-string">&quot;适用性别&quot;</span>: <span class="hljs-string">&quot;中性香&quot;</span>,<br>        <span class="hljs-string">&quot;香调&quot;</span>: <span class="hljs-string">&quot;茶香木质调&quot;</span>,<br>        <span class="hljs-string">&quot;前调&quot;</span>: <span class="hljs-string">&quot;马黛茶 绿茶&quot;</span>,<br>        <span class="hljs-string">&quot;中调&quot;</span>: <span class="hljs-string">&quot;红茶 紫罗兰 茉莉花&quot;</span>,<br>        <span class="hljs-string">&quot;后调&quot;</span>: <span class="hljs-string">&quot;岩茶&quot;</span>,<br>        <span class="hljs-string">&quot;香味&quot;</span>: <span class="hljs-string">&quot;柑橘 清新辛辣 芳香植物 绿叶&quot;</span>,<br>        <span class="hljs-string">&quot;香味感受&quot;</span>: <span class="hljs-string">&quot;深沉，甜润，百搭，甜蜜，茶叶，龙井茶香，清凉，皮革，苦，干净，苦涩，柠檬，温柔，晚香玉露香，回甘，薄荷，茉莉花香，闻多了腻和晕，茉莉绿茶，微苦，好闻，木质，清冷绿意，清新自然，烟草，绿茶，淡雅香醇，茶味，茉莉花，甜美，清甜，醇厚，柑</span><br>橘，干净清爽<span class="hljs-string">&quot;,</span><br>        <span class="hljs-string">&quot;香味情绪&quot;</span>: <span class="hljs-string">&quot;自然又纯粹，倦拥，治愈，有雅韵的气质，轻盈不沉闷，儒雅，感动，安稳又上头，舒展，混合着大自然清香，干净阳光，优雅&quot;</span>,<br>        <span class="hljs-string">&quot;香味画面&quot;</span>: <span class="hljs-string">&quot;情侣茶会，Miller Harris 莓果缪斯，电影画面，温暖，带有露水的阳光，远离城市喧嚣，帕尔玛之水 藏红拂晓，波斯</span><br>城堡，LE LABO <span class="hljs-number">13</span>，享受茶园纯天然香气，茶园，草木间闲庭信步，一片秘境，抚慰<span class="hljs-string">&quot;,</span><br>        <span class="hljs-string">&quot;香味场景&quot;</span>: <span class="hljs-string">&quot;茶馆，炎热的夏天，外出，雨后树林，温和春日，夏季，摇篮，下雨潮湿的夜晚，庭院，休闲，绿叶系，路上闻到，没有城市喧嚣的地方，湿润的草地&quot;</span>,<br>        <span class="hljs-string">&quot;特点&quot;</span>: <span class="hljs-string">&quot;东方茶香，从茶山飘落到锁骨，呼吸之间，与茶同在。&quot;</span>,<br>        <span class="hljs-string">&quot;链接&quot;</span>: <span class="hljs-string">&quot;https://detail.tmall.com/item.htm?abbucket=11&amp;id=676012504457&amp;rn=760fb2aa967606ede8027516fab139b9&amp;spm=a1z10.3-b-s.w4011-24426768373.139.5a6435d7t1Pawn&amp;sku_properties=1626520:364672102;1626521:437624087&quot;</span><br>    &#125;,<br></code></pre></td></tr></table></figure>
+
+<h1 id="四、测试问答效果"><a href="#四、测试问答效果" class="headerlink" title="四、测试问答效果"></a>四、测试问答效果</h1><img src="/2023/11/16/%E9%A6%99%E6%B0%9Bchat%E7%9A%84%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E5%B7%A5%E4%BD%9C/image-20231219104233125.png" srcset="/img/loading.gif" lazyload class="">
+
 
               
             </div>
