@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://johnson7788.github.io/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231122165042348.png">
 <meta property="og:image" content="https://johnson7788.github.io/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231122165254846.png">
 <meta property="article:published_time" content="2023-11-16T09:50:02.000Z">
-<meta property="article:modified_time" content="2023-12-11T08:47:07.638Z">
+<meta property="article:modified_time" content="2023-12-20T10:00:18.311Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://johnson7788.github.io/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231211164624905.png">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7k 字
+          7.8k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          59 分钟
+          66 分钟
         
       </span>
     
@@ -324,6 +324,14 @@
 <img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231122165042348.png" srcset="/img/loading.gif" lazyload class="">
 
 <img src="/2023/11/16/ChatGPT%E7%9A%84GPTs/image-20231122165254846.png" srcset="/img/loading.gif" lazyload class="">
+
+
+
+<h2 id="用时估计"><a href="#用时估计" class="headerlink" title="用时估计"></a>用时估计</h2><p>Assistant API的返回结果随着文档随着文档变大，速度变慢，个人感觉文档大时，候选topk文档数量越多，导致输入文本过长，那么Openai的模型速度越慢，而且Assistant Beta版本还不支持流式stream输出，所以感觉特别漫长，平均回复在30秒上下。</p>
+<h2 id="异常问题"><a href="#异常问题" class="headerlink" title="异常问题"></a>异常问题</h2><p>Assistant API 返回的内容经常携带【13†source】，【16†source】等特殊字符，如下</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">嗯哼，Johnson，你提到的木质玫瑰香，我找到了一个相似的香水可能会符合你的喜好——“观夏昆仑煮雪”。这款香水具有玫瑰和木质的香调，它的中调恰好包括了玫瑰，给人带来清新辛辣的感受，同时还带有木质芳香植物的气息，感觉上是深沉而又清凉的，非常独特【13†source】。这款中性香型的香水可能不完全像卡诗鱼子酱精油的味道，但它的木质感和温暖感可能会让你惊喜。感兴趣的话，你可以在这里查看更多详情和购买链接：[观夏昆仑煮雪]<span class="hljs-params">(https://detail.tmall.com/item.htm?<span class="hljs-attr">abbucket</span>=11&amp;<span class="hljs-attr">id</span>=676539654541&amp;<span class="hljs-attr">rn</span>=760fb2aa967606ede8027516fab139b9&amp;<span class="hljs-attr">skuId</span>=4859629692517&amp;<span class="hljs-attr">spm</span>=a1z10.3-b-s.w4011-24426768373.74.5a6435d7t1Pawn)</span>。别忘了，每个人的鼻子都是独一无二的，试试才知道是否合拍哦！<br></code></pre></td></tr></table></figure>
+
+<p>Openai的官方论坛上有相关说明，是Openai的一个bug。建议返回时通过正则匹配替换掉。<br><a target="_blank" rel="noopener" href="https://community.openai.com/t/assistant-api-always-return-empty-annotations/489285/2">Assistant API always return empty annotations - API &#x2F; Bugs - OpenAI Developer Forum — Assistant API 总是返回空注解 - API &#x2F; Bugs - OpenAI 开发者论坛</a></p>
 
               
             </div>
