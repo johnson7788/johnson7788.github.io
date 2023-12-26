@@ -24,7 +24,7 @@
 <meta property="og:description" content="一、RAG模型RAG模型，基于检索的文档增强式问答，一般流程是:  首先对文档进行分割，分割后的段落使用向量模型进行向量化，向量化之后保存到向量数据库。 然后用户问问题的时候，问题也进行向量化，然后问题向量和段落向量计算相似度，找出topk个段落作为问答的参考。 同时传入问题，参考段落给大预言模型LLM，生成答案。  Assistant 指的是Openai的Assistant助手，主要有3大特点。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-19T05:21:29.000Z">
-<meta property="article:modified_time" content="2023-12-19T05:21:29.111Z">
+<meta property="article:modified_time" content="2023-12-26T01:34:15.885Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -209,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          720 字
+          779 字
         
       </span>
     
@@ -285,6 +285,7 @@
 <ol>
 <li>依赖性强，可定制化差，价格随着数据增多而变多。</li>
 <li>不稳定，网络不稳定和服务器计算能力不稳定。国外网络，需要梯子，其次OpenAI用户较多，算力经常耗尽。</li>
+<li>嵌入检索的时候，感觉有一个问题，排在前面的商品总是被优先检索到。即当标准答案不止一个的时候，排在靠前的总是优先被引用。</li>
 </ol>
 <p>自建RAG的优点：</p>
 <ol>
