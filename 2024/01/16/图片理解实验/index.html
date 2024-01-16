@@ -16,20 +16,24 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、RAG模型RAG模型，基于检索的文档增强式问答，一般流程是:  首先对文档进行分割，分割后的段落使用向量模型进行向量化，向量化之后保存到向量数据库。 然后用户问问题的时候，问题也进行向量化，然后问题向量和段落向量计算相似度，找出topk个段落作为问答的参考。 同时传入问题，参考段落给大预言模型LLM，生成答案。  Assistant 指的是Openai的Assistant助手，主要有3大特点。">
+    <meta name="description" content="图片理解前端： 基于vue3开发，可以输入图片地址，或上传本地图片，可以选择不同的模型，对预测结果进行显示。 后端：后端API，启动时加载不同的模型，模型主要是ram-plus和blip。 Ram-plus: xinyu1205&#x2F;recognize-anything-plus-model at main (huggingface.co) blip: Salesforce&#x2F;bli">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自建RAG模型和Assistant对比">
-<meta property="og:url" content="https://johnson7788.github.io/2023/12/19/%E8%87%AA%E5%BB%BARAG%E6%A8%A1%E5%9E%8B%E5%92%8CAssistant%E5%AF%B9%E6%AF%94/index.html">
+<meta property="og:title" content="图片理解实验">
+<meta property="og:url" content="https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="一、RAG模型RAG模型，基于检索的文档增强式问答，一般流程是:  首先对文档进行分割，分割后的段落使用向量模型进行向量化，向量化之后保存到向量数据库。 然后用户问问题的时候，问题也进行向量化，然后问题向量和段落向量计算相似度，找出topk个段落作为问答的参考。 同时传入问题，参考段落给大预言模型LLM，生成答案。  Assistant 指的是Openai的Assistant助手，主要有3大特点。">
+<meta property="og:description" content="图片理解前端： 基于vue3开发，可以输入图片地址，或上传本地图片，可以选择不同的模型，对预测结果进行显示。 后端：后端API，启动时加载不同的模型，模型主要是ram-plus和blip。 Ram-plus: xinyu1205&#x2F;recognize-anything-plus-model at main (huggingface.co) blip: Salesforce&#x2F;bli">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-12-19T05:21:29.000Z">
-<meta property="article:modified_time" content="2023-12-26T01:34:15.885Z">
+<meta property="og:image" content="https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/image-20240116114512375.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/image-20240116114523909.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/item.image">
+<meta property="article:published_time" content="2024-01-16T03:46:48.000Z">
+<meta property="article:modified_time" content="2024-01-16T03:46:48.436Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/image-20240116114512375.png">
   
   
-  <title>自建RAG模型和Assistant对比 - Be With you</title>
+  <title>图片理解实验 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -185,7 +189,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="自建RAG模型和Assistant对比">
+          <span id="subtitle" title="图片理解实验">
             
           </span>
         </div>
@@ -197,8 +201,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-12-19 13:21" pubdate>
-          2023年12月19日 下午
+        <time datetime="2024-01-16 11:46" pubdate>
+          2024年1月16日 中午
         </time>
       </span>
     
@@ -209,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          779 字
+          3.9k 字
         
       </span>
     
@@ -220,7 +224,7 @@
         
         
         
-          7 分钟
+          33 分钟
         
       </span>
     
@@ -258,46 +262,283 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">自建RAG模型和Assistant对比</h1>
+            <h1 style="display: none">图片理解实验</h1>
             
             <div class="markdown-body">
               
-              <h2 id="一、RAG模型"><a href="#一、RAG模型" class="headerlink" title="一、RAG模型"></a>一、RAG模型</h2><p>RAG模型，基于检索的文档增强式问答，一般流程是:</p>
-<ol>
-<li>首先对文档进行分割，分割后的段落使用向量模型进行向量化，向量化之后保存到向量数据库。</li>
-<li>然后用户问问题的时候，问题也进行向量化，然后问题向量和段落向量计算相似度，找出topk个段落作为问答的参考。</li>
-<li>同时传入问题，参考段落给大预言模型LLM，生成答案。</li>
-</ol>
-<p>Assistant 指的是Openai的Assistant助手，主要有3大特点。</p>
-<ol>
-<li>可以上传文档，根据文档进行问答，例如某数据，产品库，说明书等。</li>
-<li>还可以根据的函数工具，自动调用工具，例如查询天气，订机票等工具。</li>
-<li>当涉及到代码问题时，可以生产代码，并执行，最终结果返回。例如计算数学题。</li>
-</ol>
-<h2 id="二、自建RAG和Assistant对比"><a href="#二、自建RAG和Assistant对比" class="headerlink" title="二、自建RAG和Assistant对比"></a>二、自建RAG和Assistant对比</h2><p>Assistant优点：</p>
-<ol>
-<li><p>简单，用户只需上传文档，然后就可以使用了，只需开发调用API和前端即可。</p>
-</li>
-<li><p>性能好，得益于Openai 的超大embedding模型和LLM，参考段落的召回率很高，回答效果可以做到行业前列。</p>
-</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>依赖性强，可定制化差，价格随着数据增多而变多。</li>
-<li>不稳定，网络不稳定和服务器计算能力不稳定。国外网络，需要梯子，其次OpenAI用户较多，算力经常耗尽。</li>
-<li>嵌入检索的时候，感觉有一个问题，排在前面的商品总是被优先检索到。即当标准答案不止一个的时候，排在靠前的总是优先被引用。</li>
-</ol>
-<p>自建RAG的优点：</p>
-<ol>
-<li>自建RAG可以自行选择LLM和embedding模型，灵活性更高。LLM和embedding可以进行训练和微调。</li>
-<li>自建RAG可以深度开发，可以设置不同的检索形式，例如混合检索（向量检索+关键字检索），使用本地的代码解释器和调用工具函数。</li>
-</ol>
-<p>缺点：</p>
-<ol>
-<li>自建的RAG比较复杂，需要算力较大，数据多，价格不会改变。</li>
-<li>如果自建RAG模型一般参数量不能很大，例如embedding模型和LLM模型的参数量都会与商业模型差1个量级，所以性能一般不能超越商业模型。</li>
-</ol>
+              <h1 id="图片理解"><a href="#图片理解" class="headerlink" title="图片理解"></a>图片理解</h1><p>前端： 基于vue3开发，可以输入图片地址，或上传本地图片，可以选择不同的模型，对预测结果进行显示。</p>
+<p>后端：后端API，启动时加载不同的模型，模型主要是ram-plus和blip。</p>
+<p>Ram-plus: <a target="_blank" rel="noopener" href="https://huggingface.co/xinyu1205/recognize-anything-plus-model/tree/main">xinyu1205&#x2F;recognize-anything-plus-model at main (huggingface.co)</a></p>
+<p>blip: <a target="_blank" rel="noopener" href="https://huggingface.co/Salesforce/blip-image-captioning-large/tree/main">Salesforce&#x2F;blip-image-captioning-large at main (huggingface.co)</a></p>
+<h1 id="前端效果"><a href="#前端效果" class="headerlink" title="前端效果"></a>前端效果</h1><img src="/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/image-20240116114512375.png" srcset="/img/loading.gif" lazyload class="">
 
+<img src="/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/image-20240116114523909.png" srcset="/img/loading.gif" lazyload class="">
+
+
+
+<h1 id="代码示例"><a href="#代码示例" class="headerlink" title="代码示例"></a>代码示例</h1><template>
+    <!-- <h1>图片理解</h1> -->
+    <div class="main">
+        <div class="operate">
+            <h3 class="tips">上传1张图片或者给定图片的url</h3>
+            <div class="upload">
+                <el-input class="urlInput" v-model="urlInput" placeholder="输入url" />
+                <el-upload class="fileUpload" :limit="1" :on-exceed="handleExceed" :on-success="UploadSuccess"
+                    :on-error="UploadError" action="http://192.168.50.209:6351/api/upload" method="POST"
+                    enctype="multipart/form-data">
+                    <el-button type="primary" :disabled="isButtonDisabled">上传图片</el-button>
+                </el-upload>
+            </div>
+            <div class="options">
+                <el-select v-model="modelName" class="selectModel" placeholder="选择模型" size="default" style="width: 250px">
+                    <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+                </el-select>
+                <el-button class="button" @click="submit" type="primary" :disabled="isButtonDisabled">确定</el-button>
+            </div>
+        </div>
+        <!-- 用于显示结果,结果分成模型，图片和预测结果 -->
+        <div class="display" v-for="(item, index) in predictItems" :key="index">
+            <div class="modelName"> </div>
+            <img class="image" :src="item.image" srcset="/img/loading.gif" lazyload alt="" />
+            <div class="result" :class="{ odd: index % 2 === 1, evenly: index % 2 === 0 }"></div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+import { ref, watch, onMounted } from 'vue'
+import { ElMessage, ElMessageBox, ElNotification } from 'element-plus'
+import axios from 'axios'
+const urlInput = ref('')
+const modelName = ref('ram_plus')
+const uploadedImage = ref('')
+const isButtonDisabled = ref(false);
+const options = [
+    {
+        value: 'ram_plus',
+        label: 'ramPlus',
+    },
+    {
+        value: 'blip',
+        label: 'blip',
+    },
+]
+
+watch(urlInput, async (newUrlInput) => {
+  console.log('输入的新url是',newUrlInput)
+  if (newUrlInput) {
+    isButtonDisabled.value = true;
+    axios
+        .post('http://192.168.50.209:6351/api/imgurl', {
+            url: newUrlInput,
+        })
+        .then(res => {
+            console.log(`statusCode: ${res.status}`)
+            console.log('返回的结果是', res)
+            const code = res.data.code
+            if (code === 0) {
+                ElNotification({
+                    message: `url图片上传成功`,
+                    type: 'info',
+                })
+                uploadedImage.value = res.data.data.name
+            } else {
+                ElNotification({
+                    message: `url图片上传失败，识别原因是: ${res.data.msg}`,
+                    type: 'error',
+                })
+            }
+        })
+        .catch(error => {
+            console.error(error)
+            ElMessage.error('图片链接错误,请检查链接是否正确')
+        })
+        .finally(() => {
+            isButtonDisabled.value = false;
+        })
+  }
+})
+
+const predictItems = ref([
+    // {
+    //     model: 'ram_plus',
+    //     image: 'http://192.168.50.209:6351/demo.jpg',
+    //     result: '预测结果1',
+    // },
+    // {
+    //     model: 'ram_plus',
+    //     image: 'http://192.168.50.209:6351/demo.jpg',
+    //     result: '预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2预测结果2',
+    // }
+])
+onMounted(async () => {
+   await axios
+        .post('http://192.168.50.209:6351/api/list')
+        .then(res => {
+            console.log(`statusCode: ${res.status}`)
+            console.log('返回的结果是', res)
+            const code = res.data.code
+            if (code !== 0) {
+                ElNotification({
+                    message: `获取已处理的图片失败，识别原因是: ${res.data.msg}`,
+                    type: 'error',
+                })
+                return
+            }
+            const data = res.data.data
+            data.forEach(element => {
+                predictItems.value.push({
+                    model: element.model,
+                    image: `http://192.168.50.209:6351/${element.image}`,
+                    result: element.result,
+                })
+                
+            });
+        })
+        .catch(error => {
+            console.error(error)
+            ElNotification({
+                    message: `后台服务器连接失败`,
+                    type: 'error',
+                })
+        })
+});
+
+const submit = () => {
+    if (!uploadedImage.value) {
+        ElNotification({
+            message: '您好像还么有上传图片呢！',
+            type: 'error',
+        })
+        return
+    }
+    isButtonDisabled.value = true;
+    console.log("上传了新图片，获取新的图片结果")
+    axios
+        .post('http://192.168.50.209:6351/api/predict', {
+            name: uploadedImage.value,
+            model: modelName.value
+        })
+        .then(res => {
+            console.log(`statusCode: ${res.status}`)
+            console.log('返回的结果是', res)
+            predictItems.value.push({
+                model: modelName.value,
+                image: `http://192.168.50.209:6351/${uploadedImage.value}`,
+                result: res.data.data,
+            })
+            const code = res.data.code
+            if (code === 0) {
+                ElNotification({
+                    message: `图片处理成功,共显示${predictItems.value.length}张图片`,
+                    type: 'info',
+                })
+            } else {
+                ElNotification({
+                    message: `图片处理失败，识别原因是: ${res.data.msg}`,
+                    type: 'error',
+                })
+            }
+        })
+        .catch(error => {
+            console.error(error)
+        })
+        .finally(() => {
+            isButtonDisabled.value = false;
+        })
+};
+
+const handleExceed = (files, uploadFiles) => {
+    ElMessage.warning(
+        `The limit is 3, you selected ${files.length} files this time, add up to ${files.length + uploadFiles.length
+        } totally`
+    )
+};
+
+// 上传错误提示
+const UploadError = () => {
+    ElNotification({
+        message: '图片上传失败，请联系管理员',
+        type: 'error',
+    })
+}
+
+// 上传成功提示
+const UploadSuccess = (param) => {
+    console.log('收到返回的信息', param)
+    const data = param.data
+    const image_name = data.name
+    uploadedImage.value = image_name
+}
+
+</script>
+
+<style lang="scss" scoped>
+.main {
+    margin-top: 60px;
+    width: 100vw;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+}
+
+.operate {
+    height: 150px;
+    width: 100%;
+    // border: 1px solid black;
+    background-image: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+
+​    .upload {
+​        width: 100%;
+​        display: flex;
+
+​        .urlInput {
+​            width: 250px;
+​            height: 32px;
+​        }
+
+​        .fileUpload {
+​            margin-left: 20px;
+​        }
+​    }
+
+​    .options {
+​        .button {
+​            margin-left: 20px;
+​        }
+​    }
+}
+
+.display {
+    width: 100%;
+    height: 240px;
+    display: flex;
+    border: 1px solid rgb(242, 164, 54);
+    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    justify-content: space-evenly;
+    align-items: center;
+
+​    .modelName {
+​        width: 50px;
+​        height: 200px;
+​    }
+
+​    .image {
+​        height: 200px;
+​    }
+
+​    .result {
+​        height: 200px;
+​        width: 800px;
+​        text-align: center;
+​    }
+
+​    .odd {
+​        background-color: #c3cfe2;
+​    }
+
+​    .evenly {
+​        background-color: antiquewhite;
+​    }
+}</style>
               
             </div>
             <hr/>
@@ -313,8 +554,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>自建RAG模型和Assistant对比</div>
-      <div>https://johnson7788.github.io/2023/12/19/%E8%87%AA%E5%BB%BARAG%E6%A8%A1%E5%9E%8B%E5%92%8CAssistant%E5%AF%B9%E6%AF%94/</div>
+      <div>图片理解实验</div>
+      <div>https://johnson7788.github.io/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/</div>
     </div>
     <div class="license-meta">
       
@@ -326,7 +567,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年12月19日</div>
+          <div>2024年1月16日</div>
         </div>
       
       
@@ -356,18 +597,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/" title="图片理解实验">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">图片理解实验</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/12/08/%E5%86%99%E5%A5%BDLLMprompt%E6%8F%90%E7%A4%BA%E7%9A%84%E6%80%BB%E7%BB%93/" title="写好LLMprompt提示的总结">
-                        <span class="hidden-mobile">写好LLMprompt提示的总结</span>
+                      <a href="/2023/12/19/%E8%87%AA%E5%BB%BARAG%E6%A8%A1%E5%9E%8B%E5%92%8CAssistant%E5%AF%B9%E6%AF%94/" title="自建RAG模型和Assistant对比">
+                        <span class="hidden-mobile">自建RAG模型和Assistant对比</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
