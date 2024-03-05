@@ -1,0 +1,718 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/starfish.webp">
+  <link rel="icon" href="/img/starfish.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Johnson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1. 目的利用AI闭环整个产品设计研发环节，根据用户问题提供不同的产品设计。 产品设计包括： 成分建议，香调建议，总得原理，包装设计。 2. 项目流程数据获取，数据处理，嵌入数据库，微调过的LLM，图片理解，comfyUI SDXL LCM模型， 前后端，vue+d3js+echarts 3. 数据获取获取xxx网站的基本数据和获取bing中对应香调和成分的图片，特点：使用playwidgth获取">
+<meta property="og:type" content="article">
+<meta property="og:title" content="香氛设计AI">
+<meta property="og:url" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/index.html">
+<meta property="og:site_name" content="Be With you">
+<meta property="og:description" content="1. 目的利用AI闭环整个产品设计研发环节，根据用户问题提供不同的产品设计。 产品设计包括： 成分建议，香调建议，总得原理，包装设计。 2. 项目流程数据获取，数据处理，嵌入数据库，微调过的LLM，图片理解，comfyUI SDXL LCM模型， 前后端，vue+d3js+echarts 3. 数据获取获取xxx网站的基本数据和获取bing中对应香调和成分的图片，特点：使用playwidgth获取">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111000665.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111033434.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111054555.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111133863.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111215506.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111337969.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111350321.png">
+<meta property="og:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111405956.png">
+<meta property="article:published_time" content="2024-03-05T03:15:39.000Z">
+<meta property="article:modified_time" content="2024-03-05T03:15:39.580Z">
+<meta property="article:author" content="Johnson">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111000665.png">
+  
+  
+  <title>香氛设计AI - Be With you</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"johnson7788.github.io","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+
+  
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>分享</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          <span id="subtitle" title="香氛设计AI">
+            
+          </span>
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-05 11:15" pubdate>
+          2024年3月5日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">香氛设计AI</h1>
+            
+            <div class="markdown-body">
+              
+              <h1 id="1-目的"><a href="#1-目的" class="headerlink" title="1. 目的"></a>1. 目的</h1><p>利用AI闭环整个产品设计研发环节，根据用户问题提供不同的产品设计。</p>
+<p>产品设计包括：</p>
+<p>成分建议，香调建议，总得原理，包装设计。</p>
+<h1 id="2-项目流程"><a href="#2-项目流程" class="headerlink" title="2. 项目流程"></a>2. 项目流程</h1><p>数据获取，数据处理，嵌入数据库，微调过的LLM，图片理解，comfyUI SDXL LCM模型， 前后端，vue+d3js+echarts</p>
+<h1 id="3-数据获取"><a href="#3-数据获取" class="headerlink" title="3. 数据获取"></a>3. 数据获取</h1><p>获取xxx网站的基本数据和获取bing中对应香调和成分的图片，特点：使用playwidgth获取香水基本信息，使用目标检测结合插件，保存网页元数据，可以一次爬取，避免重复爬取。</p>
+<p>设计表的结构如下：</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> `Product` (<br>  `id` <span class="hljs-type">int</span>(<span class="hljs-number">11</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span> AUTO_INCREMENT <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;商品id&#x27;</span>,<br>  `<span class="hljs-type">name</span>` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;商品名称&#x27;</span>,<br>  `english` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;商品英文名称&#x27;</span>,<br>  `brand` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;品牌&#x27;</span>,<br>  `<span class="hljs-keyword">alias</span>` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;别名&#x27;</span>,<br>  `specs` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;规格&#x27;</span>,<br>  `category` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;类别&#x27;</span>,<br>  `price` <span class="hljs-type">float</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;价格&#x27;</span>,<br>  `fragrance_degree` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香味浓烈&#x27;</span>,<br>  `gender` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;适用性别&#x27;</span>,<br>  `tone` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香调&#x27;</span>,<br>  `btone` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;前调&#x27;</span>,<br>  `mtone` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;中调&#x27;</span>,<br>  `atone` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;后调&#x27;</span>,<br>  `fragrance` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香味&#x27;</span>,<br>  `scene` <span class="hljs-type">varchar</span>(<span class="hljs-number">500</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;场景&#x27;</span>,<br>  `vision` <span class="hljs-type">varchar</span>(<span class="hljs-number">1000</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香味画面&#x27;</span>,<br>  `sentiment` <span class="hljs-type">varchar</span>(<span class="hljs-number">1000</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香味情绪&#x27;</span>,<br>  `feeling` <span class="hljs-type">varchar</span>(<span class="hljs-number">1000</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;香味感受&#x27;</span>,<br>  `distinct_smell` <span class="hljs-type">varchar</span>(<span class="hljs-number">500</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;明显的气味&#x27;</span>,<br>  `url` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;网页url&#x27;</span>,<br>  `shop_url` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;jd或tmall店铺的链接&#x27;</span>,<br>  `features` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;特点&#x27;</span>,<br>  `introduce` <span class="hljs-type">text</span> <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;简介&#x27;</span>,<br>  `image` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;商品图片路径&#x27;</span>,<br>  `mht` <span class="hljs-type">varchar</span>(<span class="hljs-number">255</span>) <span class="hljs-keyword">DEFAULT</span> <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;mhtml文件路径&#x27;</span>,<br>  `create_time` datetime <span class="hljs-keyword">DEFAULT</span> <span class="hljs-built_in">current_timestamp</span>() <span class="hljs-keyword">COMMENT</span> <span class="hljs-string">&#x27;创建时间&#x27;</span>,<br>  <span class="hljs-keyword">PRIMARY KEY</span> (`id`),<br>  <span class="hljs-keyword">UNIQUE</span> KEY `<span class="hljs-type">name</span>` (`<span class="hljs-type">name</span>`)<br>) ENGINE=InnoDB AUTO_INCREMENT=<span class="hljs-number">4556</span> <span class="hljs-keyword">DEFAULT</span> CHARSET=utf8mb4 <span class="hljs-keyword">COMMENT</span>=<span class="hljs-string">&#x27;香氛商品&#x27;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>一条具体数据</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">843</span>	潘海利根 玫瑰公爵小姐的望眼欲穿 狐狸  Penhaligon s The Coveted Duchess Rose  <span class="hljs-number">2016</span>	Penhaligon s The Coveted Duchess Rose	潘海利根	潘海利根玫瑰公爵小姐的望眼欲穿	<span class="hljs-number">75</span>ml	香水	<span class="hljs-number">2400</span>	浓香水EDP	女香	花香东方调	柑橘 莓果	玫瑰	麝香木	玫瑰 麝香 木质 柑橘	秋冬季节，喷香之后被问到没脾气、适合富家小姐、适合冒险乐观热情的射手座、浪漫清新的花果园中，平衡冬天的冷。	古堡，茶香。，无极乌龙，月光洒在身上、水果园、角落能闻到的幸福、古灵精怪的撩人感	自信、诱惑、冷感、温柔、撩人、浪漫、幸福，心情好。，平衡冬天的冷	清冷淡雅，清新，浓烈，奶味重，清新、甜美、花香、柔美、诱人、贵、温暖、霸气、美、爽，肥皂水。	玫瑰(<span class="hljs-number">37</span>%)木质香(<span class="hljs-number">16</span>%)橘子(<span class="hljs-number">12</span>%)荔枝(<span class="hljs-number">11</span>%)麝香(<span class="hljs-number">8</span>%)糖浆(<span class="hljs-number">5</span>%)杜松子酒(<span class="hljs-number">4</span>%)牛轧糖(<span class="hljs-number">3</span>%)焚香(<span class="hljs-number">2</span>%)水元素(<span class="hljs-number">1</span>%)大米(<span class="hljs-number">1</span>%)蜂蜜(<span class="hljs-number">0</span>.<span class="hljs-number">5</span>%)柠檬(<span class="hljs-number">0</span>.<span class="hljs-number">2</span>%)月桂花(<span class="hljs-number">0</span>.<span class="hljs-number">1</span>%)	https://www.nosetime.com/xiangshui/<span class="hljs-number">873643</span>-penhaligon-s-the-coveted-duchess-rose.html	https://detail.tmall.hk/hk/item.htm?abbucket=<span class="hljs-number">7</span>&amp;id=<span class="hljs-number">692242857747</span>&amp;ns=<span class="hljs-number">1</span>&amp;spm=a21n<span class="hljs-number">57.1.0.0</span>.<span class="hljs-number">13</span>d1523c0z34BQ&amp;skuId=<span class="hljs-number">5086319790757</span>	纯真烂漫的温柔陷阱，精致美艳摄人心魄。	Penhaligon s于<span class="hljs-number">1870</span>年由William Penhaligon创立 并拥有两个传承已久的英国皇家认证 Royal Warrants  分别由爱丁堡公爵于<span class="hljs-number">1956</span>年及威尔斯亲王于<span class="hljs-number">1988</span>年颁赠 品牌之所以与众不同 大概是店内为顾客提供贴心的香水配对服务 perfume profiling  PENHALIGON S 创办人 William Henry Penhaligon 生于英国 是熟识香料的调香师及理容师 <span class="hljs-number">1870</span> 年在伦敦开店 Penhaligon s 除了香水香精 还有沐浴油 爽身粉 刮须膏 香氛乳液等 Penhaligon s 还发表了全球第一套男士梳洗配件 连英国首相邱吉尔 大文豪王尔德都用它 	潘海利根玫瑰公爵小姐的望眼欲穿狐狸PenhaligonsTheCovetedDuchessRose2016.png	潘海利根玫瑰公爵小姐的望眼欲穿狐狸PenhaligonsTheCovetedDuchessRose2016_web.png	<span class="hljs-number">2023</span>-<span class="hljs-number">11</span>-<span class="hljs-number">18</span> <span class="hljs-number">20</span>:<span class="hljs-number">18</span>:<span class="hljs-number">34</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="4-数据预处理"><a href="#4-数据预处理" class="headerlink" title="4. 数据预处理"></a>4. 数据预处理</h1><p>需要对数据中的评论数据使用LLM进行分析，分析香味场景，香味画面，香味情绪,香味感受。使用ChatGPT进行快速处理。</p>
+<p>设计的Prompt如下：</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs makefile">你是一名香水消费者评论分析师，可以根据用户提供的香水产品和评论对评论内容进行分析。现在需要通过提供的评论分析消费者对香味的感受，消费者使用香 水时的情绪，使用香水时可以想象到的画面以及消费者使用时的场景。你要做的就是提取刚刚提到的消费者评论中提到这4个维度的关键词，例如香味感受的词有清新，妩媚，性感，醇厚。香味情绪的词有快乐、幸福、怀旧。香味画面的词包括森林、庙宇、男友的白衬衫，香味使用场景的词有约会，登山，睡前，送礼等。下面是一些示例。<br><span class="hljs-section">商品:祖玛珑英国梨与小苍兰香水</span><br>评论开始,每行是一个用户的评论，当一个用户提及多个商品时，注意分辨用户是否是在说目标商品的特点，如果没有在说，那么就不要提取：<br>1）相比之下，我更喜欢莱俪-墨恋，莱俪-墨恋的气味更柔和，更好闻。<br>2）前调，梨味很清新，点一点点酸。 后面就甜甜的，特别像初秋，一点点的温暖。<br>3）留香其实还蛮久的，喷在脖子很自然<br>4）我喜欢跑步的时候喷一点，这能让我兴奋<br>5）小白日记：还是没有很喜欢就是和正常版一样，区别不大，但是五步散还是五步散啊<br>6）一开始还挺好闻的，闻多了有点腻和晕。<br>7）感觉像是图书馆里围着围巾的格兰芬多女孩，勇敢阳光且温暖。<br>评论结束。<br>输出时注意每个维度用换行符分割，提取的每个词用逗号分割，上面的莱俪-墨恋商品和我们的目标商品祖玛珑英国梨与小苍兰香水不一致，所以描述莱俪-墨恋商品的柔和不应提取，最终输出为：<br><span class="hljs-section">香味感受:甜甜蜜蜜,一点点酸,清新,甜甜的,腻和晕,很自然, 梨味,蜂蜜味,好闻,阳光</span><br><span class="hljs-section">香味情绪:温暖,兴奋</span><br><span class="hljs-section">香味画面:初秋, 图书馆里围着围巾的格兰芬多女孩</span><br><span class="hljs-section">香味场景: 适合夏天,跑步</span><br>现在正式开始。<br><span class="hljs-section">商品: &#123;&#123;product&#125;&#125;</span><br><br><span class="hljs-section">评论开始:</span><br>&#123;&#123;comments&#125;&#125;<br>评论结束。<br><span class="hljs-section">输出为:</span><br></code></pre></td></tr></table></figure>
+
+<h1 id="5-数据嵌入"><a href="#5-数据嵌入" class="headerlink" title="5. 数据嵌入"></a>5. 数据嵌入</h1><pre><code class="hljs">上传Json数据，设定要进行向量话的字段，这里设定的字段是n个特点的拼接，当检索问答时，能够返回需要的meta数据，即原始数据对应的json字段
+</code></pre>
+<p>对Qanything进行二次开发，支持json格式，和多种prompt，以及Chatgpt的支持，向量数据库的表结构设计，能够根据保留原始数据的json信息，保存到meta中。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs routeros">@property<br>def fields(self):<br>    fields = [<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;chunk_id&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=64, <span class="hljs-attribute">is_primary</span>=<span class="hljs-literal">True</span>),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;file_id&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=64),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;file_name&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=640),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;file_path&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=640),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;timestamp&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=64),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;content&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=4000),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;content_id&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.VARCHAR, <span class="hljs-attribute">max_length</span>=128),<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;meta_info&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.JSON),  # 存储所有meta信息<br>        FieldSchema(<span class="hljs-attribute">name</span>=<span class="hljs-string">&#x27;embedding&#x27;</span>, <span class="hljs-attribute">dtype</span>=DataType.FLOAT_VECTOR, <span class="hljs-attribute">dim</span>=768),<br>    ]<br>    return fields<br></code></pre></td></tr></table></figure>
+
+<h1 id="6-LLM问答"><a href="#6-LLM问答" class="headerlink" title="6. LLM问答"></a>6. LLM问答</h1><p>针对不同的需求，使用不同的prompt，下面1个是初始设计的prompt，1个是后续设计的prompt</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">SURVEY_PROMPT= &quot;&quot;&quot;<br>We are designing a new scent for a consumer product such as detergents and body lotions. As Lavector&#x27;s fragrance design AI, given the context and survey requirements, your task is to summarize the optimal scent recommendations as follows:<span class="hljs-strong">****&quot;Considering the provided context data (refer to &#123;context&#125;) and insights from our market trend analysis, we propose that the ideal scent design for &#123;target audience&#125; should entail &#123;subject&#125;.**</span><span class="hljs-strong">**First, the top notes of &#123;name of fragrance&#125; will potentially evoke &#123;describe emotion or reactions&#125; and encapsulate various scents such as &#123;list of scents&#125;.**</span><span class="hljs-strong">**Second, the middle notes will transition into &#123;describe transition&#125; and, finally, the base notes will underline &#123;describe underlying scents&#125;.**</span><span class="hljs-strong">**The inclusion of &#123;specific ingredients&#125; adds unique tones to the fragrance that &#123;describe effect of the ingredients&#125;.**</span><span class="hljs-strong">**The generated visual imagery compellingly evokes feelings of &#123;describe imaginative visual impressions&#125;. This scent profile should stimulate a pleasant and memory olfactory experience in the target audience. .&quot;**</span>**Ensure all sections marked as &#123;xxx&#125; are adequately filled out with appropriate details. <br>Reference context：<br><span class="hljs-section">&#123;context&#125;</span><br><span class="hljs-section">---</span><br>Survey requirements：<br><span class="hljs-section">&#123;question&#125;</span><br><span class="hljs-section">---</span><br>Please reply in English.<br>&quot;&quot;&quot;<br><br>DESIGN_PROMPT= &quot;&quot;&quot;<br>You&#x27;re a fragrance design specialist at Lavector, focusing on designing various detergents and body lotions. You&#x27;re adept at capturing the sensory experience, emotional impact, visual imagery, scent scenes, fragrance characteristics, as well as the target audience of fragrances. Based on the retrieved context and user query, you provide corresponding answers.<br>Reference context：<br><span class="hljs-section">&#123;context&#125;</span><br><span class="hljs-section">---</span><br>User question：<br><span class="hljs-section">&#123;question&#125;</span><br><span class="hljs-section">---</span><br>Please reply in English.<br>&quot;&quot;&quot;<br></code></pre></td></tr></table></figure>
+
+<h1 id="7-效果"><a href="#7-效果" class="headerlink" title="7. 效果"></a>7. 效果</h1><p>初始页面：</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111000665.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>点击yes后开始设计：</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111033434.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>支持手动输入答案和预设答案，点击确定后开始设计。</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111054555.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>流式回答，调用后端的LLM，异步绘图</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111133863.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>前中后调的d3js绘图，前中后调结合LLM的回答和相似商品的前中后调获取。</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111215506.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>成分图类似前中后调的逻辑</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111337969.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>相似商品展示：</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111350321.png" srcset="/img/loading.gif" lazyload class="">
+
+<p>香水设计：</p>
+<p>LLM根据香调和成分设计的prompt：</p>
+<figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">You are a tool that generates Stable Diffusion drawing prompts. The drawing prompts should lead to imaginary</span> <span class="hljs-comment">or artistic images evoked in</span> <span class="hljs-comment">the</span> <span class="hljs-comment">minds</span> <span class="hljs-comment">of consumers when using a product described in a</span> <span class="hljs-comment">product</span> <span class="hljs-comment">brief</span><span class="hljs-string">.</span>  <span class="hljs-comment">Please write a Stable Diffusion drawing prompt for the</span> <span class="hljs-comment">package</span> <span class="hljs-comment">design</span><span class="hljs-string">,</span> <span class="hljs-comment">and then explain your rationale</span><span class="hljs-string">.</span>  <span class="hljs-comment">The</span> <span class="hljs-comment">product</span> <span class="hljs-comment">brief</span> <span class="hljs-comment">is:&#123;&#123;query&#125;&#125;</span><br><span class="hljs-comment">output</span> <span class="hljs-comment">format</span> <span class="hljs-comment">is:</span><br><span class="hljs-comment">Prompt:</span> <span class="hljs-comment">xxx</span><br><span class="hljs-comment">Explanation:</span> <span class="hljs-comment">yyy</span><br></code></pre></td></tr></table></figure>
+
+<p>生成的Prompt调用ComfyUI 绘图</p>
+<img src="/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/image-20240305111405956.png" srcset="/img/loading.gif" lazyload class="">
+
+              
+            </div>
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>香氛设计AI</div>
+      <div>https://johnson7788.github.io/2024/03/05/%E9%A6%99%E6%B0%9B%E8%AE%BE%E8%AE%A1AI/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Johnson</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月5日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/04/shapley%E8%AE%A1%E7%AE%97%E7%A4%BA%E4%BE%8B/" title="shapley计算示例">
+                        <span class="hidden-mobile">shapley计算示例</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var title = subtitle.title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script>
+  (function() {
+    var enableLang = CONFIG.code_language.enable && CONFIG.code_language.default;
+    var enableCopy = CONFIG.copy_btn;
+    if (!enableLang && !enableCopy) {
+      return;
+    }
+
+    function getBgClass(ele) {
+      return Fluid.utils.getBackgroundLightness(ele) >= 0 ? 'code-widget-light' : 'code-widget-dark';
+    }
+
+    var copyTmpl = '';
+    copyTmpl += '<div class="code-widget">';
+    copyTmpl += 'LANG';
+    copyTmpl += '</div>';
+    jQuery('.markdown-body pre').each(function() {
+      var $pre = jQuery(this);
+      if ($pre.find('code.mermaid').length > 0) {
+        return;
+      }
+      if ($pre.find('span.line').length > 0) {
+        return;
+      }
+
+      var lang = '';
+
+      if (enableLang) {
+        lang = CONFIG.code_language.default;
+        if ($pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2 && $pre.children().hasClass('hljs')) {
+          lang = $pre[0].children[0].classList[1];
+        } else if ($pre[0].getAttribute('data-language')) {
+          lang = $pre[0].getAttribute('data-language');
+        } else if ($pre.parent().hasClass('sourceCode') && $pre[0].children.length > 0 && $pre[0].children[0].classList.length >= 2) {
+          lang = $pre[0].children[0].classList[1];
+          $pre.parent().addClass('code-wrapper');
+        } else if ($pre.parent().hasClass('markdown-body') && $pre[0].classList.length === 0) {
+          $pre.wrap('<div class="code-wrapper"></div>');
+        }
+        lang = lang.toUpperCase().replace('NONE', CONFIG.code_language.default);
+      }
+      $pre.append(copyTmpl.replace('LANG', lang).replace('code-widget">',
+        getBgClass($pre[0]) + (enableCopy ? ' code-widget copy-btn" data-clipboard-snippet><i class="iconfont icon-copy"></i>' : ' code-widget">')));
+
+      if (enableCopy) {
+        Fluid.utils.createScript('https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js', function() {
+          var clipboard = new window.ClipboardJS('.copy-btn', {
+            target: function(trigger) {
+              var nodes = trigger.parentNode.childNodes;
+              for (var i = 0; i < nodes.length; i++) {
+                if (nodes[i].tagName === 'CODE') {
+                  return nodes[i];
+                }
+              }
+            }
+          });
+          clipboard.on('success', function(e) {
+            e.clearSelection();
+            e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-copy', 'icon-success');
+            setTimeout(function() {
+              e.trigger.innerHTML = e.trigger.innerHTML.replace('icon-success', 'icon-copy');
+            }, 2000);
+          });
+        });
+      }
+    });
+  })();
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
