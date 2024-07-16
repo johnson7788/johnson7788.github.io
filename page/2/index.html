@@ -214,6 +214,138 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2024/03/04/shapley%E8%AE%A1%E7%AE%97%E7%A4%BA%E4%BE%8B/" target="_self">
+          shapley计算示例
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/03/04/shapley%E8%AE%A1%E7%AE%97%E7%A4%BA%E4%BE%8B/" target="_self">
+          
+          目的我们设置1个模拟电量租户根据提供的电量，应该获取收益的计算。 1、电价和电量是满足一定的关系的，主要是市场提供的电量增多，电价下降。具体查看公式calculate_y。 2、租户（电厂）提供电量给电网，电网根据电量还有电价，按照shapley的计算方法，计算出每个租户应得到的利益。 3、函数calculate_shapley输入X是租户供给的电量，输出是每个租户应得利益。 1234567891
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-03-04 11:13" pubdate>
+              2024-03-04
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/02/06/%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%A8%A1%E5%9E%8B/" target="_self">
+          复杂问题的解决模型
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/02/06/%E5%A4%8D%E6%9D%82%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%A8%A1%E5%9E%8B/" target="_self">
+          
+          1.定义复杂问题和简单问题： 也可以说出复杂任务和简单任务，即回答问题的方式，例如RAG问答，即于检索的问答是简单任务，因为所有问题都是先经过相似度检索候选段落，然后调用LLM回答。但是当用户希望按照一定SOP进行问答时，或者当用户希望不同问题调用不同工具或者不同思考思路的时候，这就是复杂任务。 2. 复杂问解决方法复杂问题一般采用LLM的Agent进行解决，微调的Agent具有很多能力，可以调用
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-02-06 12:17" pubdate>
+              2024-02-06
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/" target="_self">
+          图片理解实验
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2024/01/16/%E5%9B%BE%E7%89%87%E7%90%86%E8%A7%A3%E5%AE%9E%E9%AA%8C/" target="_self">
+          
+          图片理解前端： 基于vue3开发，可以输入图片地址，或上传本地图片，可以选择不同的模型，对预测结果进行显示。 后端：后端API，启动时加载不同的模型，模型主要是ram-plus和blip。 Ram-plus: xinyu1205&#x2F;recognize-anything-plus-model at main (huggingface.co) blip: Salesforce&#x2F;bli
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-01-16 11:46" pubdate>
+              2024-01-16
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/12/19/%E8%87%AA%E5%BB%BARAG%E6%A8%A1%E5%9E%8B%E5%92%8CAssistant%E5%AF%B9%E6%AF%94/" target="_self">
+          自建RAG模型和Assistant对比
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/12/19/%E8%87%AA%E5%BB%BARAG%E6%A8%A1%E5%9E%8B%E5%92%8CAssistant%E5%AF%B9%E6%AF%94/" target="_self">
+          
+          一、RAG模型RAG模型，基于检索的文档增强式问答，一般流程是:  首先对文档进行分割，分割后的段落使用向量模型进行向量化，向量化之后保存到向量数据库。 然后用户问问题的时候，问题也进行向量化，然后问题向量和段落向量计算相似度，找出topk个段落作为问答的参考。 同时传入问题，参考段落给大预言模型LLM，生成答案。  Assistant 指的是Openai的Assistant助手，主要有3大特点。
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-12-19 13:21" pubdate>
+              2023-12-19
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/12/08/%E5%86%99%E5%A5%BDLLMprompt%E6%8F%90%E7%A4%BA%E7%9A%84%E6%80%BB%E7%BB%93/" target="_self">
           写好LLMprompt提示的总结
         </a>
@@ -397,138 +529,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-11-01 09:46" pubdate>
               2023-11-01
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/16/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%99%BA%E8%83%BD%E9%97%AE%E5%8D%B7%E8%B0%83%E6%9F%A5%E5%B7%A5%E5%85%B7/" target="_self">
-          开发一个智能问卷调查工具
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/10/16/%E5%BC%80%E5%8F%91%E4%B8%80%E4%B8%AA%E6%99%BA%E8%83%BD%E9%97%AE%E5%8D%B7%E8%B0%83%E6%9F%A5%E5%B7%A5%E5%85%B7/" target="_self">
-          
-          1. 目的开发一个根据用户的需求推荐合适的香氛的智能问卷调查产品。 2. 要求 用户作为问卷后还可以继续提问 可以显示推荐产品的图片 额外辅助人格测试，根据迈尔斯-布里格斯类型指标（Myers–Briggs Type Indicator，MBTI）是由美国作家伊莎贝尔·布里格斯·迈尔斯和她的母亲凯瑟琳·库克·布里格斯共同制定的一种人格类型理论模型。 流式输出，打字机模式  3. 方案制定方案1：使
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-16 12:51" pubdate>
-              2023-10-16
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/07/7%E7%A7%8D%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" target="_self">
-          7种模型测试情感分析
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/10/07/7%E7%A7%8D%E6%A8%A1%E5%9E%8B%E6%B5%8B%E8%AF%95%E6%83%85%E6%84%9F%E5%88%86%E6%9E%90/" target="_self">
-          
-          使用7种模型测试情感分析1. 目的为了优化我们的情感模型，我们准备测试以下7种模型，分别是openai,glm2_6B,baichuan13B,mtdnn,llama13B,llama2_7B,Anima-7B，我们目前没有一个训练集，先测试原始模型的效果。为我们选择一个合适的基座模型做好准备。 模型简介：  OpenAI：chatgpt3.5的模型。 GLM2-6B：清华大学的一个开源的双语对话
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-07 13:07" pubdate>
-              2023-10-07
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/28/flash-attention%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/" target="_self">
-          flash-attention包的安装
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/28/flash-attention%E5%8C%85%E7%9A%84%E5%AE%89%E8%A3%85/" target="_self">
-          
-          安装flash_attention包https:&#x2F;&#x2F;github.com&#x2F;Dao-AILab&#x2F;flash-attention 第1到3步安装比较容易 pip install torch packaging ninja ninja –version # 查看是否安装正常 由于中国下载github的文件太慢，造成了太多阻碍，如果按官方的方式安装，一定会报错, 报错如下 pip install -U f
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-28 11:22" pubdate>
-              2023-09-28
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/09/25/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E5%A4%A7%E6%AF%94%E6%8B%BC%E5%92%8C%E4%BC%98%E5%8C%96/" target="_self">
-          向量检索模型大比拼和优化
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/09/25/%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E5%A4%A7%E6%AF%94%E6%8B%BC%E5%92%8C%E4%BC%98%E5%8C%96/" target="_self">
-          
-          向量检索模型对比和优化一、测试模型我们此次对比以下几个向量检索模型: 12345678910&quot;BAAI&quot;: &quot;BAAI&#x2F;bge-large-zh&quot;,&quot;MiniLM&quot;: &quot;sentence-transformers&#x2F;all-MiniLM-L6-v2&quot;,&quot;m3e&quot;: &quot;moka-ai&#x2F;m3e-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-09-25 14:42" pubdate>
-              2023-09-25
             </time>
           </div>
         

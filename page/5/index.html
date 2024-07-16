@@ -214,6 +214,159 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/" target="_self">
+          gpt数据标注小知识
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/" target="_self">
+          
+          prompt，instruction, input, context, question,output,completion,history的区分instruction： 指令，这里是要求模型做的事情。基本上等价于question。input: 这里等价于context,就是上下文，例如根据下面的段落进行回答问题，这里的段落就是contextprompt: 就是提示，可以认为instruction
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-05 14:53" pubdate>
+              2023-06-05
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/31/%E4%BB%80%E4%B9%88%E6%98%AF%E6%80%9D%E7%BB%B4%E9%93%BE%E5%92%8C%E6%80%9D%E7%BB%B4%E6%A0%91/" target="_self">
+          什么是思维链和思维树
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/05/31/%E4%BB%80%E4%B9%88%E6%98%AF%E6%80%9D%E7%BB%B4%E9%93%BE%E5%92%8C%E6%80%9D%E7%BB%B4%E6%A0%91/" target="_self">
+          
+          思维链和思维树   普通模式：IO，input-output Prompting, 和LM进行交互，单次输入和输出的提示 思维链：CoT，Chain of Thought，指的是一个人思考问题时，从一个思想或概念出发，逐步发展、拓展和衍生出新的思想和概念的过程。这个过程类似于一个链条，每个新的思想都是前一个思想的延伸和扩展，构成了一条连续的思维链。思维链提示，输入被经过多次的中间提示，最终达到输出
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-31 09:08" pubdate>
+              2023-05-31
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/30/langchain-tools/" target="_self">
+          langchain-tools
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/05/30/langchain-tools/" target="_self">
+          
+          获取所有的agent支持的tools名称1234567import jsonimport langchainfrom langchain.agents import get_all_tool_namestools &#x3D; get_all_tool_names()print(f&quot;langchain的版本是&amp;#123;langchain.__version__&amp;#125;&quot;)print
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-30 10:41" pubdate>
+              2023-05-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/langchain/" class="category-chain-item">langchain</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/05/26/%E5%9B%BE%E7%89%87%E8%BF%87%E6%BB%A4%E5%92%8C%E8%81%9A%E7%B1%BB%E5%B7%A5%E5%85%B7%E8%AE%BE%E8%AE%A1/" target="_self">
+          图片过滤和聚类工具设计
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/05/26/%E5%9B%BE%E7%89%87%E8%BF%87%E6%BB%A4%E5%92%8C%E8%81%9A%E7%B1%BB%E5%B7%A5%E5%85%B7%E8%AE%BE%E8%AE%A1/" target="_self">
+          
+          对图片进行批量操作功能设计1.聚类，相似的图片分组，可以重复聚类，对聚类后的图片进行删除操作。 支持动态设定类别数量，支持选择图片进行删除，支持对类别整个删除   2.相似，支持按文字搜索图片，按选中的图片进行搜相似图片，支持图片按序号删除，支持单个图片删除，支持快捷键回车和delete操作    3.搜图，支持按图片url或用上传图片进行相似图片搜索     4.支持缓存向量和更换图库目录
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-05-26 12:43" pubdate>
+              2023-05-26
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/05/25/%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83%E7%9A%84%E7%BB%86%E8%8A%82/" target="_self">
           混合精度训练的细节
         </a>
@@ -397,138 +550,6 @@
             <i class="iconfont icon-date"></i>
             <time datetime="2023-05-19 19:55" pubdate>
               2023-05-19
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/" target="_self">
-          微软的Low-codeLLM解析
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/17/%E5%BE%AE%E8%BD%AF%E7%9A%84Low-codeLLM%E8%A7%A3%E6%9E%90/" target="_self">
-          
-          微软写了一个简单的低代码的LLM复杂任务控制流程，类似AutoGPT，对大的任务进行分解成多个子任务。一共分成3步：   用户问一个问题，ChatGPT作为规划LLM，出一个SOP的任务规划。    用户对ChatGPT返回的规划LLM进行修改，还可以对简单的逻辑进行修改，即if和else，类似Scratch编程。    用户可以对某个Step进一步扩展成subStep，方便更精细的子任务操作。
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-17 17:02" pubdate>
-              2023-05-17
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/16/transformers%E7%9A%84%E6%89%80%E6%9C%89%E6%A8%A1%E5%9E%8B%E5%90%8D%E7%A7%B0%E5%92%8C%E9%85%8D%E7%BD%AE%E7%9A%84%E6%98%A0%E5%B0%84%E8%AE%B0%E5%BD%95/" target="_self">
-          transformers的所有模型名称和配置的映射记录
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/16/transformers%E7%9A%84%E6%89%80%E6%9C%89%E6%A8%A1%E5%9E%8B%E5%90%8D%E7%A7%B0%E5%92%8C%E9%85%8D%E7%BD%AE%E7%9A%84%E6%98%A0%E5%B0%84%E8%AE%B0%E5%BD%95/" target="_self">
-          
-          方便查看transformers的所有模型12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-16 11:56" pubdate>
-              2023-05-16
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E5%B7%AE%E7%9A%84%E6%80%9D%E8%80%83/" target="_self">
-          为什么大模型的推理能力差的思考
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/11/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%8E%A8%E7%90%86%E8%83%BD%E5%8A%9B%E5%B7%AE%E7%9A%84%E6%80%9D%E8%80%83/" target="_self">
-          
-          1.首先思考人的大脑原理:左脑主要负责逻辑思考、语言、数学、分析、推理、顺序性等任务。右脑主要负责空间感知、图像处理、想象力、情感、直觉、创造性思维等任务。  目前大模型在在逻辑思考，推理，数学上都比较差，但是如果加上Chain-of-Thought，链式思考（CoT），例如Let’s think step by step，效果就会提升很高。另一个证据是现在的大模型都会加上github上的代码进行
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-11 12:06" pubdate>
-              2023-05-11
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/" target="_self">
-          Chatgpt分享
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/11/Chatgpt%E5%88%86%E4%BA%AB/" target="_self">
-          
-          ChatGPT运行原理大语言模型进化树:  一共三种方式： 编码器，解码器，编码器-解码器 编码器代表：Bert的训练方式:完形填空： ___________和阿里、腾讯一起并成为中国互联网 BAT 三巨头。随机地扣掉一部分字，形成上面例子的完形填空题型，不断地学习空格处到底该填写什么。所谓语言模型的训练和学习，就是从大量的数据中学习复杂的上下文联系。 解码器代表: GPT的训练方式:根据已有句子
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-11 09:15" pubdate>
-              2023-05-11
             </time>
           </div>
         

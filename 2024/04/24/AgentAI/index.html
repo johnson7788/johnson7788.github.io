@@ -16,18 +16,18 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目的我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。 交互界面设计选择我们的模型MistralAgent   聊天界面：   设置界面：   结果演示操作某个模型的启动，停止，状态，重启等">
+    <meta name="description" content="1.目的我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。 目前Agent不能够自适应环境，需要让Agent能够根据环境自动进行改变。 2.原理我们分成训练阶段和推理阶段。下面是收集数据和训练阶段。 Agent首先根据要求生成探索型工具,可以探索数据库和纯文本文件或者excel表格文件，根据探索型工具生成一堆问题。 根据问题生成解决型工具，并回答">
 <meta property="og:type" content="article">
 <meta property="og:title" content="AgentAI">
 <meta property="og:url" content="https://johnson7788.github.io/2024/04/24/AgentAI/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="目的我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。 交互界面设计选择我们的模型MistralAgent   聊天界面：   设置界面：   结果演示操作某个模型的启动，停止，状态，重启等">
+<meta property="og:description" content="1.目的我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。 目前Agent不能够自适应环境，需要让Agent能够根据环境自动进行改变。 2.原理我们分成训练阶段和推理阶段。下面是收集数据和训练阶段。 Agent首先根据要求生成探索型工具,可以探索数据库和纯文本文件或者excel表格文件，根据探索型工具生成一堆问题。 根据问题生成解决型工具，并回答">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://johnson7788.github.io/2024/04/24/AgentAI/image-20240424110941989.png">
 <meta property="og:image" content="https://johnson7788.github.io/2024/04/24/AgentAI/image-20240424111039550.png">
 <meta property="og:image" content="https://johnson7788.github.io/2024/04/24/AgentAI/image-20240424110837702.png">
 <meta property="article:published_time" content="2024-04-24T03:56:24.000Z">
-<meta property="article:modified_time" content="2024-04-24T03:56:24.469Z">
+<meta property="article:modified_time" content="2024-06-11T08:45:52.023Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://johnson7788.github.io/2024/04/24/AgentAI/image-20240424110941989.png">
@@ -213,7 +213,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          109 字
+          3.6k 字
         
       </span>
     
@@ -224,7 +224,7 @@
         
         
         
-          1 分钟
+          31 分钟
         
       </span>
     
@@ -266,8 +266,46 @@
             
             <div class="markdown-body">
               
-              <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。</p>
-<h1 id="交互界面设计"><a href="#交互界面设计" class="headerlink" title="交互界面设计"></a>交互界面设计</h1><p>选择我们的模型MistralAgent</p>
+              <h1 id="1-目的"><a href="#1-目的" class="headerlink" title="1.目的"></a>1.目的</h1><p>我们创建和测试Agent AI，用于解决复杂任务，主要使用Mistral 8*7B模型进行训练和测试。</p>
+<p>目前Agent不能够自适应环境，需要让Agent能够根据环境自动进行改变。</p>
+<h1 id="2-原理"><a href="#2-原理" class="headerlink" title="2.原理"></a>2.原理</h1><p>我们分成训练阶段和推理阶段。下面是收集数据和训练阶段。</p>
+<p>Agent首先根据要求生成探索型工具,可以探索数据库和纯文本文件或者excel表格文件，根据探索型工具生成一堆问题。</p>
+<p>根据问题生成解决型工具，并回答，解决型工具的好坏可以根据问题的正确率和多个LLM的投票，还有工具的长度进行筛选。</p>
+<p>数据探索APP –auto-plan模式 （谁来触发，用户开始进行提问吗？)</p>
+<p>发现问题Agent： 根据数据集提出问题，资源是数据集和LLM</p>
+<p>问题解决Agent:  根据问题，搜索数据集和LLM，回答问题, 这个Agent具有制造工具的能力，方便解决类似问题。</p>
+<p>工作流方式：</p>
+<p>Agent–&gt;生成工具–&gt;解析–&gt;执行工具–&gt;反馈</p>
+<p>Http-Triger (没有数据流出)</p>
+<p>自动化的Agent分为4个过程：经验获取、经验细化、更新和评估，整体的设计流程参考文章A Survey on Self-Evolution of Large Language Models。</p>
+<h2 id="2-1-经验获取和经验细化"><a href="#2-1-经验获取和经验细化" class="headerlink" title="2.1 经验获取和经验细化"></a>2.1 经验获取和经验细化</h2><p>这里我统一为命名为探索。</p>
+<h3 id="探索"><a href="#探索" class="headerlink" title="探索"></a>探索</h3><p>给定数据集，例如数据库，知识图谱，或者给定现实环境，例如webshop的购物的页面，或者预定义一些函数，模型能够自动探索已有的数据，页面，工具，形成一些轨迹，这些轨迹可以是成功的或者失败的。</p>
+<p>探索阶段，模型也可以用来丰富和拓展工具描述和知识图谱的文档说明，例如AppAgent: Multimodal Agents as Smartphone Users。</p>
+<p>首先是生成指令： 其中一个细节是如何发起探索，模型需要按人类的思维进行思考，如果给定数据，工具或者页面的时候，我该如何操作和使用，可以根据这些信息反推指令，即根据已有数据反向获取问题，参考Kun: Answer Polishment for Chinese Self-Alignment with Instruction Back-Translation， 获取到这些指令后还需要进行过滤，（即经验细化）。还有就是探索的角度一定要多样化，可以参考文章Self-Evolved Diverse Data Sampling for Efficient Instruction Tuning，这篇文章解释了为什么多样化很重要。指令的多样化的prompt可以参考Principle-Driven Self-Alignment of Language Models from Scratch with Minimal Human Supervision，里面有关于20个特定于主题的提示，我们可以想象一些特定角度的提示作为启发式思考。</p>
+<p>然后是复杂化指令，利用上面的方式生成的指令都是比较简单的，复杂的指令能够提高模型的性能，参考WizardLM: Empowering Large Language Models to Follow Complex Instructions，我们可以通过深度和广度扩充指令。深度进化包括五种操作：添加约束、深化、具体化、增加推理步骤、复杂化输入。广度进化是变异，即根据给定的指令生成全新的指令。</p>
+<p>指令生成后都需要进行一些过滤，挑选出优秀的指令。可以使用关键词过滤，聚类，LLM分类等方法。</p>
+<p>如果我们预设一些SOP，那么指令需要和SOP进行关联，即问题和问题的解决流程是关联的，方便后面的计划和执行。</p>
+<h3 id="计划和执行"><a href="#计划和执行" class="headerlink" title="计划和执行"></a>计划和执行</h3><p>根据收集到的优秀指令，模型开始尝试使用这些指令运行，如果已有工具，其中包括利用ReAct的思想，调用工具或者反思，Reflexion: Language Agents with Verbal Reinforcement Learning，收集运行成功和失败的结果，作为一条轨迹。收集失败案例的原因是来自Trial and Error: Exploration-Based Trajectory Optimization for LLM Agents</p>
+<p>有时候任务是比较复杂的，需要串联多个工具和操作，或者需要生成一些工具，在生成的工具确定是否可用的时候，可以参考LDB: A Large Language Model Debugger via Verifying Runtime Execution Step by Step，对生成的工具代码使用LLM进行debug，然后生成正确的工具。</p>
+<p>有时候的生成的计划不一定是文本，也可以是一个调用了多个工具的代码块，类似SWISSNYF: TOOL GROUNDED LLM AGENTS FOR BLACK BOX SETTING和Data Interpreter: An LLM Agent For Data Science也是一种不错的方法。</p>
+<p>如果任务需要最优解，需要使用toolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs，构建API 检索器: 该模块使用 Sentence-BERT 检索与指令相关的 API，减少了 LLM 的搜索空间，还有DFSDT 算法: 该算法采用深度优先的决策树策略，帮助 LLM 评估多个推理轨迹并扩展搜索空间，从而找到最有效的解决方案路径。</p>
+<p>制定计划时反向链也是不错的方案，可以参考Reverse Chain: A Generic-Rule for LLMs to Master Multi-API Planning。</p>
+<p>Todo： 先根据问题生成计划，然后根据计划选择所需要工具，还是根据问题，选择工具，然后根据问题和工具生成使用计划？？？</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>每个工具的信息可以参考：TaskMatrix.AI: Completing Tasks by Connecting Foundation Models with Millions of APIs，包括以下5个方面</p>
+<p><strong>API 名称</strong>：API 名称提供 API 的摘要。它帮助 MCFM 将用户指令链接到此 API，并用作操作执行器的条目。该名称应以自然语言清晰准确，并避免与其他 API 名称产生歧义。<br><strong>参数列表</strong>：API的参数列表包括输入参数和返回值，每个参数都有参数名称、参数描述、数据类型和默认值。此信息可以帮助 MCFM 以适当的格式正确填充相应位置的参数。<br><strong>API 描述</strong>：与 API 名称相比，API 描述包含有关 API 的功能、工作方式、输入和输出以及可能引发的任何潜在错误或异常的更多信息。<br><strong>使用示例</strong>（可选）：为复杂 API 提供使用示例有助于演示如何使用 API，而对于简单 API 可能不是必需的。<br><strong>组合说明</strong>（可选）：提供 API 包的开发人员可以提供组合说明。这可以作为模型的指导，指导如何组合多个 API 来完成复杂的用户指令。例如，在文件编辑场景中，模型可能需要在进行编辑之前打开目标文件，然后在完成编辑后保存文件。</p>
+<p>当工具很多时，也可以用分类思想，对工具进行分类，然后用分层思想，把计划中的每个任务逐个对应使用分层解决的方式，参考AnyTool: Self-Reflective, Hierarchical Agents for Large-Scale API Calls，例如添加：</p>
+<p><strong>API分组</strong>(可选): 例如食品领域的API分为一组，美妆领域分为一组。每个分组有一个说明，说明该组下api的作用和该组的数据说明，例如探索阶段的知识图谱说明文档。</p>
+<p>定期任务，需要定期对工具进行梳理，去掉过时，重复，错误工具，对工具进行整理，包括修改上面的那5个方面的信息，原因是来自On the Tool Manipulation Capability of Open-source Large Language Models和EASYTOOL: Enhancing LLM-based Agents with Concise Tool Instruction</p>
+<h2 id="整合"><a href="#整合" class="headerlink" title="整合"></a>整合</h2><p>为了完成上述的复杂任务，我们可以设置一个多Agent协作的模式，完成这些任务，每个Agent执行一部分，设置一个工作流去协调每个Agent。</p>
+<h2 id="2-2更新"><a href="#2-2更新" class="headerlink" title="2.2更新"></a>2.2更新</h2><p>更新就是训练模型，这里包括指令微调SFT和偏好微调。</p>
+<p>训练模型的时候要注意，按课程学习方法，参考Voyager: An Open-Ended Embodied Agent with Large Language Models，由易到难的方式。</p>
+<p>指令微调SFT可以参考Self-Play Fine-Tuning Converts Weak Language Models to Strong Language Models，同时代替了SFT和偏好微调，使用自我博弈的方法，期望LLM 与目标数据分布迭代对齐。</p>
+<h2 id="2-3-评估"><a href="#2-3-评估" class="headerlink" title="2.3 评估"></a>2.3 评估</h2><p>评估我们可以使用LLM进行评估和人工评估。</p>
+<h2 id="2-4-推理阶段"><a href="#2-4-推理阶段" class="headerlink" title="2.4 推理阶段"></a>2.4 推理阶段</h2><h1 id="3-功能设计"><a href="#3-功能设计" class="headerlink" title="3. 功能设计"></a>3. 功能设计</h1><ul>
+<li>可以根据用户上传图片或者提问，返回该物体或者概念的相关知识信息。</li>
+<li>用户可以自行设计API和工具，方便模型探索和使用。</li>
+</ul>
+<h1 id="4-交互界面设计"><a href="#4-交互界面设计" class="headerlink" title="4.交互界面设计"></a>4.交互界面设计</h1><p>选择我们的模型MistralAgent</p>
 <img src="/2024/04/24/AgentAI/image-20240424110941989.png" srcset="/img/loading.gif" lazyload class="">
 
 <p>聊天界面：</p>
@@ -276,7 +314,7 @@
 <p>设置界面：</p>
 <img src="/2024/04/24/AgentAI/image-20240424110837702.png" srcset="/img/loading.gif" lazyload class="">
 
-<h1 id="结果演示"><a href="#结果演示" class="headerlink" title="结果演示"></a>结果演示</h1><p>操作某个模型的启动，停止，状态，重启等</p>
+<h1 id="5-结果演示"><a href="#5-结果演示" class="headerlink" title="5.结果演示"></a>5.结果演示</h1><p>操作某个模型的启动，停止，状态，重启等</p>
 
               
             </div>
@@ -335,6 +373,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/04/30/%E5%9B%BE%E7%89%87%E6%90%9C%E7%B4%A2%E5%B0%8F%E5%B7%A5%E5%85%B7/" title="图片搜索小工具">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图片搜索小工具</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
