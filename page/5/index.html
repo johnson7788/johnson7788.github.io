@@ -214,6 +214,72 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/06/14/langchain-tools-example/" target="_self">
+          langchain-tools-example
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/06/14/langchain-tools-example/" target="_self">
+          
+          LangChain使用tools的示例测试代码如下，一个fib函数和一个查看discord的函数封装成工具，方便LLM使用，流程如下:  用户提问,给出所有可用工具，调用LLM 调用合适的工具和输入 返回工具的结果 根据工具的结果调用LLM产生最终答案优缺点： 工具很灵活，适合封装，缺点，LLM对根据描述能正常筛选工具，但是目前langchain的官方只支持1个参数的工具，如果工具需要的参数如果较
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-14 15:35" pubdate>
+              2023-06-14
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/06/13/langchain-APIChain/" target="_self">
+          langchain-APIChain
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/06/13/langchain-APIChain/" target="_self">
+          
+          使用LangChain的APIChain调用天气接口的API查询天气的示例思路：使用自己封装的LLM接口，确保最大长度不要太长，设定API的提示模板格式，防止太长时对prompt截断的时候只保留关键信息。一共调用2次LLM模型，第一次根据问题，生成API的请求，然后调用API获取结果，第二次根据API的结果和问题，生成最终的答案。代码: 123456789101112131415161718192
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-06-13 14:24" pubdate>
+              2023-06-13
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/06/05/gpt%E6%95%B0%E6%8D%AE%E6%A0%87%E6%B3%A8%E5%B0%8F%E7%9F%A5%E8%AF%86/" target="_self">
           gpt数据标注小知识
         </a>
@@ -493,77 +559,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/23/%E5%AE%89%E9%98%B2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BE%E8%AE%A1/" target="_self">
-          安防机器人设计
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/23/%E5%AE%89%E9%98%B2%E6%9C%BA%E5%99%A8%E4%BA%BA%E8%AE%BE%E8%AE%A1/" target="_self">
-          
-          安防项目方案计划书一、需求分析监控的区域、监控目标和实现的功能说明。1.1 监控区域该安防项目需要监控的区域是一个大楼内部和周围外部的场景，包括大楼的走廊、房间、楼梯、电梯、停车场等区域，以及大楼周围的室外场景，包括道路、人行道、花园、停车场等区域。 1.2 监控目标该安防项目需要监控的目标有三个：防火、防水和防盗。 a. 防火：机器人需要通过摄像头监控大楼内外的场景，及时发现任何可能的火灾状况，
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-23 09:10" pubdate>
-              2023-05-23
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/" target="_self">
-          图像标注系统工具开发
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/05/19/%E5%9B%BE%E5%83%8F%E6%A0%87%E6%B3%A8%E7%B3%BB%E7%BB%9F%E5%B7%A5%E5%85%B7%E5%BC%80%E5%8F%91/" target="_self">
-          
-          标注系统开发上一个标注系统是单张图片中的目标识别，我们有10万张图片，即使模型准确率较高，也需要10万次确认才能确认所有图片，这不是一个高效的方式。所以开发了这个标注系统。这个标注系统的原理是首先把所有数据进行目标检测，然后按某个商品的一个已标注样本搜索所有相似的项目，然后人为只需要确认哪些是同一商品即可，只需确认2万个商品即可。而且对同一商品的对比更方便观察和确认，效率更高。 界面效果  设计思
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-05-19 19:55" pubdate>
-              2023-05-19
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/4/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#board">6</a><a class="page-number" href="/page/7/#board">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/6/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

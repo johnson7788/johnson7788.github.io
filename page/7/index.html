@@ -214,6 +214,79 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/04/28/%E7%94%9F%E6%88%90%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8Btemperature-topp-topk%E8%A7%A3%E6%9E%90/" target="_self">
+          生成语言模型temperature_topp_topk解析
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/04/28/%E7%94%9F%E6%88%90%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8Btemperature-topp-topk%E8%A7%A3%E6%9E%90/" target="_self">
+          
+          在大型生成语言模型中，我们经常用到这些超参数temperature，topk，topp，下面根据源码进行分析在huggingface transformers中，这3个对分数的处理时串联的，先进行temperature，然后topk，最后topp,当然，如果用户自己定义了分数过滤器，用户的过滤器优先。 temperature越大，随机性越高，因为scores越接近 1234567891011121
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-28 12:11" pubdate>
+              2023-04-28
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/chatgpt/">#chatgpt</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/04/27/%E7%94%A8lavis%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E6%96%87%E5%85%B1%E5%90%8C%E6%A3%80%E7%B4%A2/" target="_self">
+          用lavis实现多模态图文共同检索
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/04/27/%E7%94%A8lavis%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E6%96%87%E5%85%B1%E5%90%8C%E6%A3%80%E7%B4%A2/" target="_self">
+          
+          多模态检索 我们平常常见的多模态检索是，图到文或文到图的检索, 方式如下:文本和图像之间的视觉-语义相似度任务1： 使用句子查询图像任务2：使用图像查询句子搜索关键字: image-text retrieval  图文共同检索，这个不太常见，主要是利用图片和单独的文本的特征没有一起使用的特征进行检索的效果好，所以图文共同检索，思路如下：图文匹配本质就是要对图像和文本这两个模态的样本分别或联合进行编
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-27 10:43" pubdate>
+              2023-04-27
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/04/25/%E5%BC%80%E5%8F%91bbox%E6%A0%87%E6%B3%A8%E5%B7%A5%E5%85%B7/" target="_self">
           开发bbox标注工具
         </a>
@@ -472,77 +545,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/12/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1/" target="_self">
-          多模态检索模型的设计
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/04/12/%E5%A4%9A%E6%A8%A1%E6%80%81%E6%A3%80%E7%B4%A2%E6%A8%A1%E5%9E%8B%E7%9A%84%E8%AE%BE%E8%AE%A1/" target="_self">
-          
-          设计了2种模型分支进行对比,基于VILT和BLIP2的商品相似度模型对比与分析本文将对比分析两种基于深度学习的商品相似度模型：基于VILT的模型和基于BLIP2的模型。这两种方法在商品相似度检测任务中具有不同的优缺点，我们将从训练、推理和实际应用等方面进行详细分析。 基于VILT的模型VILT模型通过结合图像和文本信息来学习商品特征。在训练过程中，模型使用了多个分类损失和正负样本的相似度损失。通过
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-12 14:59" pubdate>
-              2023-04-12
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/" target="_self">
-          安装cuda驱动报错
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/04/11/%E5%AE%89%E8%A3%85cuda%E9%A9%B1%E5%8A%A8%E6%8A%A5%E9%94%99/" target="_self">
-          
-          当安装cuda时报错如下sudo sh .&#x2F;cuda_11.7.1_515.65.01_linux.run 12345cat &#x2F;var&#x2F;log&#x2F;nvidia-installer.logUsing built-in stream user interface-&gt; Detected 12 CPUs online; setting concurrency level to 12.ERRO
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-11 17:42" pubdate>
-              2023-04-11
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

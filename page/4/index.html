@@ -214,6 +214,72 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2023/08/18/weaviate%E8%BF%9E%E6%8E%A5%E7%BC%93%E6%85%A2%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/" target="_self">
+          weaviate连接缓慢原因分析
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/08/18/weaviate%E8%BF%9E%E6%8E%A5%E7%BC%93%E6%85%A2%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/" target="_self">
+          
+          weaviate-client连接本地服务器缓慢原因分析我们使用python的weaviate-client客户端连接本地的weaviate时，经常会很慢，具体的代码如下，使用下面方法，可以使你的weaviate连接时提速99%。 1234import weaviateclient &#x3D; weaviate.Client(    url &#x3D; &quot;http:&#x2F;&#x2F;127.0.0.0:8080&amp;qu
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-18 15:18" pubdate>
+              2023-08-18
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2023/08/15/transformers%E7%9A%84llama2%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%80%E4%B8%AAbug/" target="_self">
+          transformers的llama2模型的一个bug
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2023/08/15/transformers%E7%9A%84llama2%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%80%E4%B8%AAbug/" target="_self">
+          
+          transformers的4.31.0版本的关于llama2模型的一个bug在使用llama2模型进行lora微调的时候，会报一个类似RuntimeError: expected scalar type Float but found Half这样的错误。本文是针对这个错误的解决。 模型加载加载lora模型的代码，注意我们使用了量化qlora的方式，nf4格式，量化到了4bit 123456789
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-08-15 15:12" pubdate>
+              2023-08-15
+            </time>
+          </div>
+        
+        
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2023/07/19/%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" target="_self">
           提示工程
         </a>
@@ -472,77 +538,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/14/langchain-tools-example/" target="_self">
-          langchain-tools-example
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/06/14/langchain-tools-example/" target="_self">
-          
-          LangChain使用tools的示例测试代码如下，一个fib函数和一个查看discord的函数封装成工具，方便LLM使用，流程如下:  用户提问,给出所有可用工具，调用LLM 调用合适的工具和输入 返回工具的结果 根据工具的结果调用LLM产生最终答案优缺点： 工具很灵活，适合封装，缺点，LLM对根据描述能正常筛选工具，但是目前langchain的官方只支持1个参数的工具，如果工具需要的参数如果较
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-14 15:35" pubdate>
-              2023-06-14
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/06/13/langchain-APIChain/" target="_self">
-          langchain-APIChain
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2023/06/13/langchain-APIChain/" target="_self">
-          
-          使用LangChain的APIChain调用天气接口的API查询天气的示例思路：使用自己封装的LLM接口，确保最大长度不要太长，设定API的提示模板格式，防止太长时对prompt截断的时候只保留关键信息。一共调用2次LLM模型，第一次根据问题，生成API的请求，然后调用API获取结果，第二次根据API的结果和问题，生成最终的答案。代码: 123456789101112131415161718192
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-06-13 14:24" pubdate>
-              2023-06-13
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/#board">10</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/3/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/#board">11</a><a class="extend next" rel="next" href="/page/5/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
