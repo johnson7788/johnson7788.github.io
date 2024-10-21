@@ -16,12 +16,12 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="目标我们利用多Agent进行访谈，访谈能够根据预设话题和时间，自动进行访谈提纲生成，访谈和统计汇总。     流程我们按照功能分成3个Agent，分别是interviewer_outline_agent, interviewer_interactive_agent, interviewer_summary_agent， 分别对应访谈的三个阶段。 每个Agent的主要promptinterviewe">
+    <meta name="description" content="目标我们利用多Agent进行访谈，访谈能够根据预设话题和时间，自动进行访谈提纲生成，访谈和统计汇总。     流程我们按照功能分成3个Agent，分别是interviewer_outline_agent, interviewer_interactive_agent, interviewer_summary_agent， 分别对应访谈的三个阶段。 每个Agent的主要prompt Prompt功能明">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MultiAgent进行访谈">
 <meta property="og:url" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="目标我们利用多Agent进行访谈，访谈能够根据预设话题和时间，自动进行访谈提纲生成，访谈和统计汇总。     流程我们按照功能分成3个Agent，分别是interviewer_outline_agent, interviewer_interactive_agent, interviewer_summary_agent， 分别对应访谈的三个阶段。 每个Agent的主要promptinterviewe">
+<meta property="og:description" content="目标我们利用多Agent进行访谈，访谈能够根据预设话题和时间，自动进行访谈提纲生成，访谈和统计汇总。     流程我们按照功能分成3个Agent，分别是interviewer_outline_agent, interviewer_interactive_agent, interviewer_summary_agent， 分别对应访谈的三个阶段。 每个Agent的主要prompt Prompt功能明">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/image-20240619154950729.png">
 <meta property="og:image" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/image-20240716112242985.png">
@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/image-20240619162733945.png">
 <meta property="og:image" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/image-20240619162744681.png">
 <meta property="article:published_time" content="2024-07-16T03:24:55.000Z">
-<meta property="article:modified_time" content="2024-07-16T03:24:55.292Z">
+<meta property="article:modified_time" content="2024-09-24T09:58:45.744Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://johnson7788.github.io/2024/07/16/MultiAgent%E8%BF%9B%E8%A1%8C%E8%AE%BF%E8%B0%88/image-20240619154950729.png">
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          5.9k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          15 分钟
+          50 分钟
         
       </span>
     
@@ -278,15 +278,29 @@
 
 
 <h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><p>我们按照功能分成3个Agent，分别是interviewer_outline_agent, interviewer_interactive_agent, interviewer_summary_agent， 分别对应访谈的三个阶段。</p>
-<h1 id="每个Agent的主要prompt"><a href="#每个Agent的主要prompt" class="headerlink" title="每个Agent的主要prompt"></a>每个Agent的主要prompt</h1><p>interviewer_outline_agent</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">Ask appropriate questions based <span class="hljs-keyword">on</span> the interview outline <span class="hljs-built_in">and</span> conduct the interview, <span class="hljs-keyword">with</span> the ability <span class="hljs-keyword">to</span> delve deeper <span class="hljs-keyword">into</span> the topics based <span class="hljs-keyword">on</span> the interviewee<span class="hljs-comment">&#x27;s responses.</span><br></code></pre></td></tr></table></figure>
-
-<p>interviewer_interactive_agent：</p>
-<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vbnet">Ask appropriate questions based <span class="hljs-keyword">on</span> the interview outline <span class="hljs-built_in">and</span> conduct the interview, <span class="hljs-keyword">with</span> the ability <span class="hljs-keyword">to</span> delve deeper <span class="hljs-keyword">into</span> the topics based <span class="hljs-keyword">on</span> the interviewee<span class="hljs-comment">&#x27;s responses.</span><br></code></pre></td></tr></table></figure>
-
-<p>interviewer_summary_agent：</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Able <span class="hljs-keyword">to</span> provide a brief <span class="hljs-keyword">summary</span> based <span class="hljs-keyword">on</span> the <span class="hljs-keyword">user</span><span class="hljs-string">&#x27;s interview transcript</span><br></code></pre></td></tr></table></figure>
-
+<h1 id="每个Agent的主要prompt"><a href="#每个Agent的主要prompt" class="headerlink" title="每个Agent的主要prompt"></a>每个Agent的主要prompt</h1><p> Prompt功能明细<br>一、润色和大纲</p>
+<ol>
+<li><p>touchup(背景润色)<br>Prompt:<br>Here is an interview background. Please complete it by adding details such as the purpose of the interview, the interviewee, the interview time, etc. The output language should match the language of the interview background.<br>interview background：{project_background}<br>参数解释：project_background是用户传入的项目背景</p>
+</li>
+<li><p>访谈大纲生成<br>Please write an appropriate interview outline based on the expected number of questions and topic of the interview. When designing an interview outline, it should progress from simple to difficult and from broad to specific, encouraging the interviewee to share their thoughts and feelings. please generate the outline language by {language}.<br>         Topic: {project_name}<br>         Interview requirements: {preset_requirement}<br>         {project_background}<br>         Output format should be markdown. Like this:<br>         # title<br>         ## subtitle<br>         - question<br>         - question<br>         ## subtitle<br>         - question<br>参数解释: project_name 项目名称,  preset_requirement一些预设，如果有的话. project_background访谈的背景</p>
+</li>
+</ol>
+<p>二、进行访谈<br>3. 访谈的开始(第1个问题)<br>Now, we’re about to begin an interview centered around the theme of {topic_name}.<br>The background of this interview is {topic_background}. {interview_style}.<br>Please introduce yourself name is Chikka, as an Interviewer, then describe the interview topic and background, and finally, following the interview style, pose the first question. Please ask in {language}.<br>Interview Tip: The current sub-topic is {next_question_title}. The question to be asked to the user is: {next_question_content}.<br>Output:<br>参数解释:topic_background访谈背景，interview_style: 访谈的风格, next_question_title: 生成大纲的子标题，next_question_content：子标题下具体的问题的内容<br>Tips: 访谈的不同阶段，使用不同的提示</p>
+<ol start="4">
+<li><p>访谈开始询问其他问题<br>We are about to begin an interview focused on {topic_name}. The background of this interview is {topic_background}. {interview_style}.Please ask in {language}.<br>Previous interview records: {history_context}<br>information: current is {current_topic_question_idx} question，talking subtitle is {next_question_title}, Question to be asked:{next_question_content}，<br>Output：<br>参数解释:topic_background访谈背景，interview_style: 访谈的风格, next_question_title: 生成大纲的子标题，next_question_content：子标题下具体的问题的内容, current_topic_question_idx：当前进行到了第几个问题</p>
+</li>
+<li><p>访谈的最后一个问题<br>We are about to begin an interview focused on {topic_name}. The background of this interview is {topic_background}. {interview_style},We are now in the final stage of the interview, and the interview is about to conclude. Please refer to the user’s previous interview records and the interview prompts below to ask the last interview question. Please ask in {language}.<br>Previous interview records: {history_context}<br>interview prompts: current is {current_topic_question_idx} question，talking subtitle is {next_question_title}, next question is about {next_question_content}，<br>The final interview question is：<br>参数解释:topic_background访谈背景，interview_style: 访谈的风格, next_question_title: 生成大纲的子标题，next_question_content：子标题下具体的问题的内容, current_topic_question_idx：当前进行到了第几个问题</p>
+</li>
+<li><p>深度追问时的prompt<br>We are about to begin an interview focused on {topic_name}. The background of this interview is {topic_background}. {interview_style},Please continue the in-depth interview based on the user’s previous interview records and ask the next question.Please ask in {language}.<br>Previous interview records: {history_context}<br>interview prompts: current is {current_topic_question_idx} question，talking subtitle is {next_question_title}，<br>Next Question：<br>参数解释:topic_background访谈背景，interview_style: 访谈的风格, next_question_title: 生成大纲的子标题，next_question_content：子标题下具体的问题的内容, current_topic_question_idx：当前进行到了第几个问题</p>
+</li>
+</ol>
+<p>三、报告生成<br>6.报告生成的Abstract开头部分<br>Below is a transcript of an interview. Please generate a summary for it, and output it in the following format, making sure to use a “Title:” and start with the word ‘Abstract:’.Please output by {language}<br>transcript: {context}<br>Title:<br>Abstract:</p>
+<p>参数解释：language是系统设置的语言，context，报告的所有中间部分的输出结果<br>Tips: 报告的开头和结尾都依赖报告的中间部分，中间的所有子主题都会被先总结。</p>
+<p>7.报告的中间部分，大纲的子主题的每个总结<br>Below is one aspect of an interview record. Now, the aspect dimension’s title, relevant interview questions, and all users’ responses to these questions are provided. Please output by {language}.<br>aspect dimension’s title: {dimension_title}<br>interview questions: {questions_text}<br>all users’ responses: {answers_text}<br>Please summarize efficiently in the following format,Use headings starting with “Title:” and “Summary:”.<br>Title:<br>Summary:<br>参数解释：dimension_title，大纲中的每个子主题，questions_text该主题下的所有问题，answers_text该主题下所有用户的回答</p>
+<p>8.报告的最后部分，报告的总结结果<br>Below is a transcript of an interview. Please generate a summary for it, Summarize as comprehensively as possible, with no fewer than three paragraphs, and output it in the following format, making sure to use a “Title:” and start with the word ‘Summary:’. Please output by {language}.<br>transcript: {context}<br>Title:<br>Summary:<br>参数解释：language，用户报告设定的语言，context，报告的所有中间部分的输出结果</p>
+<p>四、AI数字人的Prompt</p>
+<p><strong>Please read your previous historical conversations first, and then answer the user’s question. Please answer in {<strong>language</strong>}.</strong>        <strong>history_conversations: {<strong>history_context</strong>}</strong>        <strong>User’s Question: {<strong>user_question</strong>}</strong>        <strong>Answer the user’s question:</strong></p>
+<p>参数解释：language，用户报告设定的语言，history_context<strong>，2轮的对话历史记录， user_question被提出的问题</strong></p>
 <p>访谈的不同深度时的不同prompt</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">if</span> depth == <span class="hljs-number">0</span>:<br>    description = dedent(f<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Please formulate the &#123;already_asked_num + 1&#125;th question based on the interview outline below. &#123;question_style&#125;</span><br><span class="hljs-string">        &#123;questions_strategy&#125;</span><br><span class="hljs-string">        Outline: &#123;outline&#125;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>)<br><span class="hljs-keyword">else</span>:<br>    <span class="hljs-comment"># 构建QA_records，因为我们depth设置</span><br>    QA_records = <span class="hljs-string">&quot;&quot;</span><br>    <span class="hljs-comment"># 从后面倒数第depth个问题开始加入到问题库, 如果depth=2，那么就是加入2个问答对到历史记录</span><br>    <span class="hljs-keyword">for</span> record <span class="hljs-keyword">in</span> self.interview_records[user_id][-depth:]:<br>        QA_records += f<span class="hljs-string">&quot;Q: &#123;record[&#x27;question&#x27;]&#125; \nA:  &#123;record[&#x27;answer&#x27;]&#125;\n&quot;</span><br>    description = dedent(f<span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        Please formulate the &#123;already_asked_num + 1&#125;th question based on the interview outline below and the user&#x27;s history Q&amp;A. </span><br><span class="hljs-string">        You need to consider the historical Q&amp;A, decide whether to continue asking in-depth questions, or ask a new type of question according to the outline. In-depth questions should not exceed &#123;depth&#125; types.</span><br><span class="hljs-string">        &#123;question_style&#125;</span><br><span class="hljs-string">        &#123;questions_strategy&#125;</span><br><span class="hljs-string">        Outline: &#123;outline&#125;</span><br><span class="hljs-string">        history Q&amp;A: &#123;QA_records&#125;</span><br><span class="hljs-string">    &quot;&quot;&quot;</span>)<br></code></pre></td></tr></table></figure>
 
