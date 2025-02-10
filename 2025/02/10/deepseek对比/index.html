@@ -16,23 +16,20 @@
   <meta name="author" content="Johnson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="1.目的AI+设计创新，理清创新思路。 整体流程是： 原始数据—&gt;图谱数据–&gt;创新工具结果–&gt; 不同形式的呈现(报告，PPT等) 2. 功能1. 文件上传不同格式的文档，支持各种文档，如果包含图片，使用多模态模型识别。 2. URL识别用户上传的URL需要爬取下来，作为文本内容。    3. 图谱构建文本内容会自动按适合的token长度自动进行分割，使用LLM提取实体和关系，保存">
+    <meta name="description" content="对比DeepSeek, OpenAI, Gemini2.0   Model DeepSeek OpenAI Gemini 2.0    代表模型 DeepSeek-V3（通用）、DeepSeek-R1（思考过程推理优化） GPT-o1、o3-mini（竞争 DeepSeek R1） Gemini 2.0 Pro（旗舰）、Gemini 2.0 Flash（性价比）、Flash-Lite（最低价）">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GraphRAG用于设计创新">
-<meta property="og:url" content="https://johnson7788.github.io/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/index.html">
+<meta property="og:title" content="deepseek对比">
+<meta property="og:url" content="https://johnson7788.github.io/2025/02/10/deepseek%E5%AF%B9%E6%AF%94/index.html">
 <meta property="og:site_name" content="Be With you">
-<meta property="og:description" content="1.目的AI+设计创新，理清创新思路。 整体流程是： 原始数据—&gt;图谱数据–&gt;创新工具结果–&gt; 不同形式的呈现(报告，PPT等) 2. 功能1. 文件上传不同格式的文档，支持各种文档，如果包含图片，使用多模态模型识别。 2. URL识别用户上传的URL需要爬取下来，作为文本内容。    3. 图谱构建文本内容会自动按适合的token长度自动进行分割，使用LLM提取实体和关系，保存">
+<meta property="og:description" content="对比DeepSeek, OpenAI, Gemini2.0   Model DeepSeek OpenAI Gemini 2.0    代表模型 DeepSeek-V3（通用）、DeepSeek-R1（思考过程推理优化） GPT-o1、o3-mini（竞争 DeepSeek R1） Gemini 2.0 Pro（旗舰）、Gemini 2.0 Flash（性价比）、Flash-Lite（最低价）">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://johnson7788.github.io/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/image-20241225142709014.png">
-<meta property="og:image" content="https://johnson7788.github.io/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/image-20241225142844094.png">
-<meta property="article:published_time" content="2024-12-25T06:34:57.000Z">
-<meta property="article:modified_time" content="2024-12-25T06:36:42.737Z">
+<meta property="article:published_time" content="2025-02-10T02:53:29.000Z">
+<meta property="article:modified_time" content="2025-02-10T02:53:29.978Z">
 <meta property="article:author" content="Johnson">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://johnson7788.github.io/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/image-20241225142709014.png">
   
   
-  <title>GraphRAG用于设计创新 - Be With you</title>
+  <title>deepseek对比 - Be With you</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -188,7 +185,7 @@
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
-          <span id="subtitle" title="GraphRAG用于设计创新">
+          <span id="subtitle" title="deepseek对比">
             
           </span>
         </div>
@@ -200,8 +197,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-12-25 14:34" pubdate>
-          2024年12月25日 下午
+        <time datetime="2025-02-10 10:53" pubdate>
+          2025年2月10日 上午
         </time>
       </span>
     
@@ -212,7 +209,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          884 字
+          2.1k 字
         
       </span>
     
@@ -223,7 +220,7 @@
         
         
         
-          8 分钟
+          18 分钟
         
       </span>
     
@@ -261,27 +258,271 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">GraphRAG用于设计创新</h1>
+            <h1 style="display: none">deepseek对比</h1>
             
             <div class="markdown-body">
               
-              <h1 id="1-目的"><a href="#1-目的" class="headerlink" title="1.目的"></a>1.目的</h1><p>AI+设计创新，理清创新思路。</p>
-<p>整体流程是：</p>
-<p>原始数据—&gt;图谱数据–&gt;创新工具结果–&gt; 不同形式的呈现(报告，PPT等)</p>
-<h1 id="2-功能"><a href="#2-功能" class="headerlink" title="2. 功能"></a>2. 功能</h1><h2 id="1-文件上传"><a href="#1-文件上传" class="headerlink" title="1. 文件上传"></a>1. 文件上传</h2><p>不同格式的文档，支持各种文档，如果包含图片，使用多模态模型识别。</p>
-<h2 id="2-URL识别"><a href="#2-URL识别" class="headerlink" title="2. URL识别"></a>2. URL识别</h2><p>用户上传的URL需要爬取下来，作为文本内容。</p>
-<img src="/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/image-20241225142709014.png" srcset="/img/loading.gif" lazyload class="">
-
-
-<h2 id="3-图谱构建"><a href="#3-图谱构建" class="headerlink" title="3. 图谱构建"></a>3. 图谱构建</h2><p>文本内容会自动按适合的token长度自动进行分割，使用LLM提取实体和关系，保存到知识图谱中，图谱构建时分为高阶+低阶，高阶是抽象概念实体，低级是文本中的原始实体，对应LightRAG中的Global和Local的概念。</p>
-<h2 id="4-图谱问答"><a href="#4-图谱问答" class="headerlink" title="4. 图谱问答"></a>4. 图谱问答</h2><p>构建后的知识图谱使用RAG的方式，根据相关问题，收集相关实体，关系，和内容作为上下文，生成图谱答案。</p>
-<img src="/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/image-20241225142844094.png" srcset="/img/loading.gif" lazyload class="">
-
-<h2 id="5-创新方法的总结"><a href="#5-创新方法的总结" class="headerlink" title="5. 创新方法的总结"></a>5. 创新方法的总结</h2><p>由于有多种创新方法，例如下面的SWOT分析，每种创新方法之间又相关关联，所以总结时要考虑工具之间的关联性，这是难点。知识图谱直接生成工具的结果效果并不好，如何利用好知识图谱，这个可能需要和Agent去探索，需要多个步骤去生成工具的结果，要想好的效果，必须借助Agent+知识图谱，单纯的GraphRAG不行。</p>
-<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs clean"># <span class="hljs-number">1.</span> SWOT分析 ✅<br><br>## 工具介绍和适用场景<br><br>### 一种常用的战略规划工具，用于分析项目对象的内部优劣势及外部环境中的机会与威胁，为制定目标提供策略性支持。<br><br>## 优势<br><br>### 指组织内部的资源和能力，这些可以为组织带来竞争优势。<br><br>## 劣势<br><br>### 指组织内部的限制或不足，这些可能会阻碍组织实现其目标。<br><br>## 机会<br><br>### 指组织外部环境中存在的可以利用的有利条件。<br><br>## 威胁<br><br>### 指组织外部环境中可能对组织造成不利影响的因素。<br><br></code></pre></td></tr></table></figure>
-
-<h2 id="6-多Agent的设计"><a href="#6-多Agent的设计" class="headerlink" title="6. 多Agent的设计"></a>6. 多Agent的设计</h2><p>分层结构的Agent，每个Agent可以使用1个或者1组工具，总的Agent负责规划和哪些Agent进行通信，获取每个Agent的相应输出。</p>
-<h1 id="3-参考代码"><a href="#3-参考代码" class="headerlink" title="3.参考代码"></a>3.参考代码</h1><p><a target="_blank" rel="noopener" href="https://github.com/HKUDS/LightRAG">HKUDS&#x2F;LightRAG: “LightRAG: Simple and Fast Retrieval-Augmented Generation” (github.com)</a></p>
+              <h1 id="对比DeepSeek-OpenAI-Gemini2-0"><a href="#对比DeepSeek-OpenAI-Gemini2-0" class="headerlink" title="对比DeepSeek, OpenAI, Gemini2.0"></a>对比DeepSeek, OpenAI, Gemini2.0</h1><table>
+<thead>
+<tr>
+<th>Model</th>
+<th>DeepSeek</th>
+<th>OpenAI</th>
+<th>Gemini 2.0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>代表模型</strong></td>
+<td>DeepSeek-V3（通用）、DeepSeek-R1（思考过程推理优化）</td>
+<td>GPT-o1、o3-mini（竞争 DeepSeek R1）</td>
+<td>Gemini 2.0 Pro（旗舰）、Gemini 2.0 Flash（性价比）、Flash-Lite（最低价）</td>
+</tr>
+<tr>
+<td><strong>国家</strong></td>
+<td>中国</td>
+<td>美国</td>
+<td>美国</td>
+</tr>
+<tr>
+<td><strong>特点</strong></td>
+<td>高性价比，开源，强化学习代表</td>
+<td>商业模型，成熟</td>
+<td>多模态模型系列，强调长上下文处理和多模态交互</td>
+</tr>
+<tr>
+<td><strong>开源</strong></td>
+<td>是</td>
+<td>否</td>
+<td>否</td>
+</tr>
+<tr>
+<td><strong>价格</strong></td>
+<td>Cheaper (百万输出 $0.5)</td>
+<td>贵 (百万输出 $4.4)</td>
+<td>Cheaper (百万输出 $0.5)</td>
+</tr>
+<tr>
+<td><strong>上下文窗口</strong></td>
+<td>128K tokens（R1）</td>
+<td>128K tokens（GPT-o1）</td>
+<td>200 万 tokens（Pro）</td>
+</tr>
+<tr>
+<td><strong>Hugging Face 模型中心</strong></td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1">DeepSeek-R1</a></td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>论文</strong></td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 研究论文</a></td>
+<td><a target="_blank" rel="noopener" href="https://openai.com/index/openai-o3-mini/">GPT-o3 介绍</a></td>
+<td><a target="_blank" rel="noopener" href="https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/">Gemini 2.0 介绍</a></td>
+</tr>
+<tr>
+<td><strong>应用集成</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/awesome-deepseek-integration/blob/main/README_cn.md">DeepSeek Integration</a></td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>多模态能力</strong></td>
+<td>不支持</td>
+<td>主要为文本（部分支持声音或图片）</td>
+<td>全模态支持（文本、图像、音频、视频）</td>
+</tr>
+<tr>
+<td><strong>推理速度</strong></td>
+<td>慢</td>
+<td>中等</td>
+<td>中等</td>
+</tr>
+<tr>
+<td><strong>编程能力</strong></td>
+<td>优秀</td>
+<td>中等</td>
+<td>优秀</td>
+</tr>
+<tr>
+<td><strong>数学能力</strong></td>
+<td>强</td>
+<td>中等</td>
+<td>强</td>
+</tr>
+<tr>
+<td><strong>综合能力排行</strong></td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard">第二名</a></td>
+<td>第三名</td>
+<td>第一名</td>
+</tr>
+<tr>
+<td><strong>特色应用场景</strong></td>
+<td>企业级定制：本地部署、低能耗、隐私保护</td>
+<td>通用</td>
+<td>视频分析、视频对话</td>
+</tr>
+<tr>
+<td><strong>Chat 页面</strong></td>
+<td><a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek Chat</a></td>
+<td><a target="_blank" rel="noopener" href="https://chatgpt.com/">ChatGPT</a></td>
+<td><a target="_blank" rel="noopener" href="https://gemini.google.com/">Gemini Chat</a></td>
+</tr>
+<tr>
+<td><strong>API 页面</strong></td>
+<td><a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/">DeepSeek API</a></td>
+<td><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/text-generation">OpenAI API</a></td>
+<td><a target="_blank" rel="noopener" href="https://ai.google.dev/gemini-api">Gemini API</a></td>
+</tr>
+<tr>
+<td><strong>API 兼容性</strong></td>
+<td>兼容 OpenAI</td>
+<td>OpenAI</td>
+<td>不兼容 OpenAI</td>
+</tr>
+<tr>
+<td><strong>参数量</strong></td>
+<td>671B</td>
+<td>175B</td>
+<td>1000B</td>
+</tr>
+<tr>
+<td><strong>训练方法</strong></td>
+<td>预训练 + 后训练，GRPO 强化学习后训练</td>
+<td>RLHF</td>
+<td>多模态训练</td>
+</tr>
+</tbody></table>
+<p>英文：</p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>DeepSeek</th>
+<th>OpenAI</th>
+<th>Gemini 2.0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Representative Models</strong></td>
+<td>DeepSeek-V3 (General), DeepSeek-R1 (Optimized for Reasoning)</td>
+<td>GPT-o1, o3-mini (Competitor to DeepSeek R1)</td>
+<td>Gemini 2.0 Pro (Flagship), Gemini 2.0 Flash (Cost-effective), Flash-Lite (Lowest cost)</td>
+</tr>
+<tr>
+<td><strong>Country</strong></td>
+<td>China</td>
+<td>USA</td>
+<td>USA</td>
+</tr>
+<tr>
+<td><strong>Key Features</strong></td>
+<td>High cost-efficiency, open-source, reinforcement learning representative</td>
+<td>Commercial model, mature technology</td>
+<td>Multimodal model series, enhanced long-context processing and multimodal interaction</td>
+</tr>
+<tr>
+<td><strong>Open Source</strong></td>
+<td>Yes</td>
+<td>No</td>
+<td>No</td>
+</tr>
+<tr>
+<td><strong>Pricing</strong></td>
+<td>Cheaper ($0.5 per million tokens)</td>
+<td>Expensive ($4.4 per million tokens)</td>
+<td>Cheaper ($0.5 per million tokens)</td>
+</tr>
+<tr>
+<td><strong>Context Window</strong></td>
+<td>128K tokens (R1)</td>
+<td>128K tokens (GPT-o1)</td>
+<td>2 million tokens (Pro)</td>
+</tr>
+<tr>
+<td><strong>Hugging Face Model Hub</strong></td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/deepseek-ai/DeepSeek-R1">DeepSeek-R1</a></td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Research Paper</strong></td>
+<td><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2501.12948">DeepSeek-R1 Research</a></td>
+<td><a target="_blank" rel="noopener" href="https://openai.com/index/openai-o3-mini/">GPT-o3 Overview</a></td>
+<td><a target="_blank" rel="noopener" href="https://blog.google/technology/google-deepmind/google-gemini-ai-update-december-2024/">Gemini 2.0 Overview</a></td>
+</tr>
+<tr>
+<td><strong>Integration &amp; Applications</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/deepseek-ai/awesome-deepseek-integration/blob/main/README_cn.md">DeepSeek Integration</a></td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr>
+<td><strong>Multimodal Capabilities</strong></td>
+<td>Not supported</td>
+<td>Primarily text (some image&#x2F;audio support)</td>
+<td>Fully multimodal (text, images, audio, video)</td>
+</tr>
+<tr>
+<td><strong>Inference Speed</strong></td>
+<td>Slow</td>
+<td>Moderate</td>
+<td>Moderate</td>
+</tr>
+<tr>
+<td><strong>Programming Ability</strong></td>
+<td>Excellent</td>
+<td>Moderate</td>
+<td>Excellent</td>
+</tr>
+<tr>
+<td><strong>Mathematical Ability</strong></td>
+<td>Strong</td>
+<td>Moderate</td>
+<td>Strong</td>
+</tr>
+<tr>
+<td><strong>Overall Ranking</strong></td>
+<td><a target="_blank" rel="noopener" href="https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard">2nd Place</a></td>
+<td>3rd Place</td>
+<td>1st Place</td>
+</tr>
+<tr>
+<td><strong>Primary Use Cases</strong></td>
+<td>Enterprise-level customization: on-premise deployment, low energy consumption, privacy protection</td>
+<td>General-purpose</td>
+<td>Video analysis, video conversation</td>
+</tr>
+<tr>
+<td><strong>Chat Interface</strong></td>
+<td><a target="_blank" rel="noopener" href="https://chat.deepseek.com/">DeepSeek Chat</a></td>
+<td><a target="_blank" rel="noopener" href="https://chatgpt.com/">ChatGPT</a></td>
+<td><a target="_blank" rel="noopener" href="https://gemini.google.com/">Gemini Chat</a></td>
+</tr>
+<tr>
+<td><strong>API Documentation</strong></td>
+<td><a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/">DeepSeek API</a></td>
+<td><a target="_blank" rel="noopener" href="https://platform.openai.com/docs/guides/text-generation">OpenAI API</a></td>
+<td><a target="_blank" rel="noopener" href="https://ai.google.dev/gemini-api">Gemini API</a></td>
+</tr>
+<tr>
+<td><strong>API Compatibility</strong></td>
+<td>Compatible with OpenAI</td>
+<td>OpenAI-native</td>
+<td>Not compatible with OpenAI</td>
+</tr>
+<tr>
+<td><strong>Model Parameters</strong></td>
+<td>671B</td>
+<td>175B</td>
+<td>1000B</td>
+</tr>
+<tr>
+<td><strong>Training Method</strong></td>
+<td>Pre-training + Post-training, GRPO Reinforcement Learning</td>
+<td>RLHF</td>
+<td>Multimodal training</td>
+</tr>
+</tbody></table>
 
               
             </div>
@@ -298,8 +539,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>GraphRAG用于设计创新</div>
-      <div>https://johnson7788.github.io/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/</div>
+      <div>deepseek对比</div>
+      <div>https://johnson7788.github.io/2025/02/10/deepseek%E5%AF%B9%E6%AF%94/</div>
     </div>
     <div class="license-meta">
       
@@ -311,7 +552,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年12月25日</div>
+          <div>2025年2月10日</div>
         </div>
       
       
@@ -341,18 +582,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2025/02/10/deepseek%E5%AF%B9%E6%AF%94/" title="deepseek对比">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">deepseek对比</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/21/%E8%AE%BF%E8%B0%88%E7%9A%84%E5%BA%94%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E6%B5%8B%E8%AF%95/" title="访谈的应用的并发测试">
-                        <span class="hidden-mobile">访谈的应用的并发测试</span>
+                      <a href="/2024/12/25/GraphRAG%E7%94%A8%E4%BA%8E%E8%AE%BE%E8%AE%A1%E5%88%9B%E6%96%B0/" title="GraphRAG用于设计创新">
+                        <span class="hidden-mobile">GraphRAG用于设计创新</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
